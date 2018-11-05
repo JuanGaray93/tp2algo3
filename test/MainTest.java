@@ -7,4 +7,10 @@ public class MainTest {
     public void testMain(){
         Assert.assertTrue(true);
     }
+
+    @Test
+    public void testFail(){
+        Assert.assertFalse(false);
+    }
+
 }
