@@ -4,11 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
 
 public class MyFxApp extends Application {
-
-    Logger logger;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
