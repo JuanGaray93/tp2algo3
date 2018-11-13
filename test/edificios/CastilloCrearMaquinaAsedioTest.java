@@ -15,7 +15,7 @@ class CastilloCrearMaquinaAsedioTest {
 		x = maquina_asedio.posicionX
 		y = maquina_asedio.posicionY
 		
-		assertTrue(mapa.estaOcupado(x,y))
+		assertTrue(terreno.estaOcupado(x,y))
 	}
 
 }

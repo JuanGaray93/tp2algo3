@@ -5,7 +5,7 @@
 Trabajo práctico 2 de Algoritmos 3, cátedra Fontela, Universidad de Buenos Aires.
 
 
-Mapa: singleton. Le pedimos a una clase estática que nos pase el mapa.
+Mapa: singleton. Le pedimos a una clase estática que nos pase el terreno.
 
 
 Supuestos entrega 1:

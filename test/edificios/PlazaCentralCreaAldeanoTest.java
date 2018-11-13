@@ -18,7 +18,7 @@ class PlazaCentralCreaAldeanoTest {
 		Integer x = aldeano.posicionX;
 		Integer y = aldeano.posicionY;
 		
-		assertTrue(mapa.estaOcupado(x,y));
+		assertTrue(terreno.estaOcupado(x,y));
 	}
 
 }

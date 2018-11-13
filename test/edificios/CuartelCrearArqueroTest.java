@@ -15,7 +15,7 @@ class CuartelCrearArqueroTest {
 		x = arquero.posicionX
 		y = arquero.posicionY
 		
-		assertTrue(mapa.estaOcupado(x,y))
+		assertTrue(terreno.estaOcupado(x,y))
 	}
 
 }
