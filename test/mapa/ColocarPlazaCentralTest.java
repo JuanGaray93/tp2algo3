@@ -8,7 +8,6 @@ class ColocarPlazaCentralTest {
 
 	@Test
 	void testColocarPlazaCentral() {
-		Junit test = new Junit();
 		Mapa mapa = new mapa(10, 12);
 		PlazaCentral plaza_central = new PlazaCentral;
 		mapa.colocarEdificio(2, 2, 3, 3 , plaza_central);

@@ -2,13 +2,13 @@ package test.unidades;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Test;
 
 class MoverAldeanoTest {
 
 	@Test
 	void testMoverAldeano() {
-		Junit test = new Junit();
 		Aldeano aldeano = new Aldeano();
 		Posicion posicion_inicial = aldeano.posicion();
 		aldeano.moverNorte();

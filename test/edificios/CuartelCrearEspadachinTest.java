@@ -1,19 +1,20 @@
 package test.edificios;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 class CuartelCrearEspadachinTest {
 
 	@Test
 	void testCuartelCrearEspadachin() {
-
-		Junit test = new Junit();
 		Cuartel cuartel = new Cuartel(8,12);
+		/*
+		En el constructor de las unidades se llama el mapa
+		y se inserta en la posicion dada la unidad
+		 */
 		Espadachin espadachin = cuartel.crearEspadachin();
-		x = espadachin.posicionX
-		y = espadachin.posicionY
+		Integer x = espadachin.posicionX;
+		Integer y = espadachin.posicionY;
 		
 		assertTrue(mapa.estaOcupado(x,y))
 	}

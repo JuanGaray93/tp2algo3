@@ -1,9 +1,9 @@
 package unidades;
 
-public class Aldeano {
+import com.company.modelo.unidades.Unidad;
 
-	private int posicionX;
-	private int posicionY;
+public class Aldeano extends Actor {
+
 	private int vida;
 	
 	public void construirPlazaCentral() {

@@ -1,10 +1,10 @@
 package modelo;
 
-public class Position {
+public class Posicion {
 
 	private int row, column;
 	
-	public boolean itIsFree(Position pos) {
+	public boolean itIsFree(Posicion pos) {
 		
 		return pos.withRow(this.row) & pos.withColumn(this.column);
 	}
