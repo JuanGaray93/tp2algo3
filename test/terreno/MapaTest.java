@@ -2,8 +2,8 @@ package terreno;
 
 import com.company.modelo.terreno.Casillero;
 import com.company.modelo.terreno.Mapa;
+import com.company.modelo.unidades.Unidad;
 import edificios.PlazaCentral;
-import modelo.Posicionable;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -27,18 +27,19 @@ public class MapaTest {
     }
 
     @Test
-    void colocarAldeanoOcupaElLugarTest() {
+    void colocarUnidadOcupaElLugarTest() {
         Aldeano aldeano = new Aldeano();
-        aldeano.nacerEn(10, 10);
+        // El aldeano llama al singleton Mapa y se coloca en esa posicion
+        Mapa.ubicar(aldeano, 10, 10);
         assertTrue(mapa.estaOcupado(10, 10));
     }
 
     @Test
-    void colocarPlazaCentralOcupaElEjeDeLaPlazaTest() {
+    void colocarUnidadPermiteRecuperarla() {
         PlazaCentral plazaCentral = new PlazaCentral();
         plazaCentral.colocarEn(10, 10);
-        // los segundos dos numeros los pense como la posicion desde donde se construye
-        assertTrue(mapa.estaOcupado(10, 10));
+        Unidad unidadRecuperada = Mapa.conseguirOcupante(10, 10);
+        assertTrue("Se recupera la unidad puesta en el mapa",unidadRecuperada.getClass() == PlazaCentral.class);
     }
 
 

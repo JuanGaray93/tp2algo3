@@ -14,7 +14,8 @@ public class Mapa {
 	private Mapa() {}
 
 
-	public void ubicar(Posicionable posicionable, Casillero casillero) {
+	public void ubicar(Posicionable posicionable, Integer posicionVertical, Integer posicionHorizontal) {
+		// TODO
 	}
 
 	public static Mapa getMapa(){
