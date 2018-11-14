@@ -1,8 +1,4 @@
-package test.mapa;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+package terreno;
 
 class ColocarPlazaCentralTest {
 

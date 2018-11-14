@@ -1,7 +1,21 @@
 package unidades;
 
+import modelo.terreno.Mapa;
+import modelo.unidades.Aldeano;
+
 public class AldeanoTest {
-    /*
+	
+	public void moverAldeano() {
+			
+		Mapa terreno = Mapa.getMapa();
+		
+		Aldeano aldeano = new Aldeano(5,6);
+		
+		aldeano.moverDerecha(terreno);
+		
+	}
+    
+	/*
     Pruebas de movimiento y dirección
     (1 casillero por turno en las 8 posibles direcciones,
     siempre y cuando no intenten ir más allá del terreno)
