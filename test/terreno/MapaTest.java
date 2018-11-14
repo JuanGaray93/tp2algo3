@@ -26,7 +26,7 @@ public class MapaTest {
         instance.set(null, null);
     }
 
-    @Test
+    @Test9
     void colocarUnidadOcupaElLugarTest() {
         Aldeano aldeano = new Aldeano();
         // El aldeano llama al singleton Mapa y se coloca en esa posicion
