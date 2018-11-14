@@ -3,44 +3,42 @@ package terreno;
 import com.company.modelo.terreno.Casillero;
 import com.company.modelo.terreno.Mapa;
 import edificios.PlazaCentral;
-import modelo.Posicion;
+import modelo.Posicionable;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import unidades.Aldeano;
+
+import java.lang.reflect.Field;
 
 import static org.junit.Assert.assertTrue;
 
 public class MapaTest {
 
-    @Mock
-    private Casillero casilleroLibre;
+    private Mapa mapa =  Mapa.getMapa();
 
     @Before
-    private void setup(){
-        Mockito.when(casilleroLibre.estaLibre()).thenReturn(true);
+    public void resetMapa() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+        Field instance = Mapa.class.getDeclaredField("instancia");
+        instance.setAccessible(true);
+        instance.set(null, null);
     }
 
     @Test
-    void colocarAldeanoTest() {
-        Mapa mapa = Mapa.getMapa();
+    void colocarAldeanoOcupaElLugarTest() {
         Aldeano aldeano = new Aldeano();
-        modelo.Posicion posicion = new Posicion();
-        mapa.colocarUnidad(aldeano, posicion);
-        assertTrue(mapa.estaOcupado(posicion));
+        aldeano.nacerEn(10, 10);
+        assertTrue(mapa.estaOcupado(10, 10));
     }
 
     @Test
-    void colocarPlazaCentralTest() {
-        Mapa mapa = new mapa(10, 12);
-        PlazaCentral plaza_central = new PlazaCentral;
-        mapa.colocarEdificio(2, 2, 3, 3 , plaza_central);
+    void colocarPlazaCentralOcupaElEjeDeLaPlazaTest() {
+        PlazaCentral plazaCentral = new PlazaCentral();
+        plazaCentral.colocarEn(10, 10);
         // los segundos dos numeros los pense como la posicion desde donde se construye
-        assertTrue(mapa.ocupado(1, 1))
-        assertTrue(mapa.ocupado(1, 2))
-        assertTrue(mapa.ocupado(2, 2))
-        assertTrue(mapa.ocupado(2, 1))
+        assertTrue(mapa.estaOcupado(10, 10));
     }
 
 

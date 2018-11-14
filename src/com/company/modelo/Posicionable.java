@@ -1,7 +1,10 @@
 package modelo;
 
+import com.company.modelo.terreno.Casillero;
+
 public interface Posicionable {
 	
-	void position(modelo.Posicion pos);
+	Casillero posicion(Casillero casillero);
 
+	}
 }
