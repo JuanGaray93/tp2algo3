@@ -23,17 +23,16 @@ public class MapaTest {
     }
 
     @Test
-    void colocarUnidadOcupaElLugarTest() {
+    void colocarPosicionableOcupaElLugarTest() {
         Aldeano aldeano = new Aldeano();
-        // El aldeano llama al singleton Mapa y se coloca en esa posicion
-        Mapa.ubicar(aldeano, 10, 10);
+        mapa.ubicar(aldeano, 10, 10);
         assertTrue(mapa.estaOcupado(10, 10));
     }
 
     @Test
-    void colocarUnidadPermiteRecuperarla() {
+    void colocarPosicionablePermiteRecuperarla() {
         PlazaCentral plazaCentral = new PlazaCentral();
-        plazaCentral.colocarEn(10, 10);
+        mapa.ubicar(plazaCentral, 10, 10);
         Unidad unidadRecuperada = Mapa.conseguirOcupante(10, 10);
         assertTrue("Se recupera la unidad puesta en el mapa",unidadRecuperada.getClass() == PlazaCentral.class);
     }

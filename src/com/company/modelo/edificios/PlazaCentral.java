@@ -1,6 +1,6 @@
 package edificios;
 
-public class PlazaCentral {
+public class PlazaCentral extends Edificio{
 	
 	private int vida;
 	
