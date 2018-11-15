@@ -1,20 +1,27 @@
-package edificios;
+package com.company.modelo.edificios;
 
-public class Cuartel {
+import com.company.modelo.terreno.Mapa;
+import com.company.modelo.unidades.Espadachin;
+import com.company.modelo.unidades.Arquero;
+
+public class Cuartel extends Edificio {
 	
-	private int vida;
-	
-	public Cuartel(x, y) {
-		
+	public Cuartel(int posicionHorizontal, int posicionVertical) {
+		super(posicionHorizontal, posicionVertical);
+		this.vida = 250;
+		this.costo = 50;
 	}
 	
-	public Espadachin crearEspadachin() {
-		Espadachin espadachin = new Espadachin;
+	public Espadachin crearEspadachin(int posicionHorizontal, int posicionVertical) {
+		Espadachin espadachin = new Espadachin(posicionHorizontal, posicionVertical);
+		espadachin.nacer();
+		return espadachin;
 	}
 	
-	public Arquero crearArquero() {
-		Arquero arquero = new Arquero;
-		
+	public Arquero crearArquero(int posicionHorizontal, int posicionVertical) {
+		Arquero arquero = new Arquero(posicionHorizontal, posicionVertical);
+		arquero.nacer();
+		return arquero;
 	}
 
 }
