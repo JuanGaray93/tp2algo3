@@ -1,14 +1,10 @@
 package terreno;
 
-import com.company.modelo.terreno.Casillero;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Unidad;
 import edificios.PlazaCentral;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import unidades.Aldeano;
 
 import java.lang.reflect.Field;
@@ -26,7 +22,7 @@ public class MapaTest {
         instance.set(null, null);
     }
 
-    @Test9
+    @Test
     void colocarUnidadOcupaElLugarTest() {
         Aldeano aldeano = new Aldeano();
         // El aldeano llama al singleton Mapa y se coloca en esa posicion
