@@ -13,6 +13,7 @@ class RepararPlazaCentralTest {
 
 	@Test
 	void testRepararPlazaCentral() {
+		Junit test = new Junit();
 		PlazaCentral plaza_central = new PlazaCentral;
 		Aldeano aldeano = new Aldeano();
 		plaza_central.vida = 425;
