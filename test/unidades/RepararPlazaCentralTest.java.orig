@@ -1,0 +1,39 @@
+package unidades;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+<<<<<<< HEAD
+import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import pruebasReparacion.Aldeano;
+import pruebasReparacion.Junit;
+import pruebasReparacion.PlazaCentral;
+=======
+import modelo.edificios.PlazaCentral;
+import modelo.unidades.Aldeano;
+>>>>>>> adc8b467244b813363b65482a5f22028e484bc74
+
+class RepararPlazaCentralTest {
+
+	@Test
+	void testRepararPlazaCentral() {
+<<<<<<< HEAD
+		PlazaCentral plaza_central = new PlazaCentral;
+=======
+		
+		PlazaCentral plaza_central = new PlazaCentral(10,10);
+>>>>>>> adc8b467244b813363b65482a5f22028e484bc74
+		Aldeano aldeano = new Aldeano();
+		
+		plaza_central.reducirVida(25);
+		
+		Assert.assertEquals(plaza_central.getVida(),425);
+		
+		aldeano.reparar(plaza_central);
+		Assert.assertEquals(plaza_central.getVida(), 450);
+		Assert.assertNotEquals(plaza_central.getVida(), 425);
+	}
+
+}

@@ -1,5 +1,6 @@
 package unidades;
 
+import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Unidad;
 
 public class Aldeano extends Unidad {
@@ -20,6 +21,11 @@ public class Aldeano extends Unidad {
 	
 	public void recolectarOro() {
 		
+	}
+
+	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical){
+		Mapa mapa = Mapa.getMapa();
+		mapa.colocarUnidad(self, posicionHorizontal, posicionVertical );
 	}
 
 }

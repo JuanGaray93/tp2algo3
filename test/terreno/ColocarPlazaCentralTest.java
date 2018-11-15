@@ -1,7 +1,0 @@
-package terreno;
-
-class ColocarPlazaCentralTest {
-
-
-
-}

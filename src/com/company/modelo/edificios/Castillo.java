@@ -9,8 +9,8 @@ public class Castillo {
 	}
 	
 	public MaquinaAsedio crearMaquinaAsedio() {
-		MaquinaAsedio maquina_asedio = new MaquinaAsedio;
+		MaquinaAsedio maquinaAsedio = new MaquinaAsedio;
 	}
-	
+
 
 }
