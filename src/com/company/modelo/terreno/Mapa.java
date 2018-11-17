@@ -36,7 +36,7 @@ public class Mapa {
         }
     }
     /*Listo*/
-	private Casillero obtenerCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
+	protected Casillero obtenerCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
 	    if(!esParteDelMapa(posicionHorizontal, posicionVertical)){
 	        throw new CasilleroNoExistenteException("Error al intentar obtener casillero: El casillero " + posicionHorizontal + ", " + posicionVertical + "esta fuera del mapa.");
         }
@@ -63,7 +63,19 @@ public class Mapa {
         Integer iteradorVertical = posicionVertical;
         Casillero candidato = null;
         Integer numeroDeIteracion = 0;
+
+
+        /*************
+        Reptador reptador = new Reptador(posicionHorizontal, posicionVertical);
+        while(candidato == null){
+            candidato = reptador.buscar();
+        }
+        return candidato;
+        *************/
+
+
         while(numeroDeIteracion < numeroDeCasillerosHorizontales || numeroDeIteracion < numeroDeCasillerosVerticales) {
+
             direccion = numeroDeSegmento % 4;
             for (Integer i = 0; i <= numeroDeSegmento; i++) {
 
@@ -108,5 +120,9 @@ public class Mapa {
 
     public void destruir(){
 	    instancia = null;
+    }
+
+    public Integer obtenerTamanio(){
+	    return (this.numeroDeCasillerosHorizontales * this.numeroDeCasillerosVerticales);
     }
 }
