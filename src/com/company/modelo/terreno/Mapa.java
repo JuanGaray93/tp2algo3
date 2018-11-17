@@ -22,12 +22,11 @@ public class Mapa {
         }
 	}
 
-	/*Listo*/
 	public void ubicar(Posicionable posicionable, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
         Casillero destino = obtenerCasillero(posicionHorizontal, posicionVertical);
         destino.agregarPosicionable(posicionable);
     }
-    /*Listo*/
+
     public Boolean estaOcupado(Integer posicionHorizontal, Integer posicionVertical) {
         try {
             Casillero casilleroAConsultar = obtenerCasillero(posicionHorizontal, posicionVertical);
@@ -43,11 +42,11 @@ public class Mapa {
         }
         return casilleros[posicionHorizontal][posicionVertical];
     }
-    /*listo*/
+
     private Boolean esParteDelMapa(Integer posicionHorizontal, Integer posicionVertical){
         return (posicionHorizontal >= 0 && posicionHorizontal < numeroDeCasillerosHorizontales && posicionVertical >= 0 && posicionVertical < numeroDeCasillerosVerticales);
     }
-    /*Listo*/
+
 	public static Mapa getMapa(){
         if (instancia == null) instancia = new Mapa();
 		return instancia;

@@ -17,7 +17,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void casilleroVacioPermiteInsercion(){
+    public void casilleroVacioPermiteInsercionTest(){
         Casillero casillero = new Casillero();
         Aldeano aldeano = new Aldeano();
 
@@ -30,7 +30,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void casilleroEstaLlenoLuegoDeInsercion(){
+    public void casilleroEstaLlenoLuegoDeInsercionTest(){
         Casillero casillero = new Casillero();
         Aldeano aldeano = new Aldeano();
 
@@ -43,7 +43,7 @@ public class CasilleroTest {
     }
 
     @Test
-    public void luegoDeQuitarPosicionableElCasilleroEstaVacioNuevamente(){
+    public void luegoDeQuitarPosicionableElCasilleroEstaVacioNuevamenteTest(){
         Casillero casillero = new Casillero();
         Aldeano aldeano = new Aldeano();
 
