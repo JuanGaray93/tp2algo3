@@ -14,18 +14,19 @@ public class Mapa {
 	private Casillero[][] casilleros;
 
 	private Mapa() {
-		casilleros = new Casillero[this.numeroDeCasillerosVerticales][this.numeroDeCasillerosHorizontales];
+	    casilleros = new Casillero[numeroDeCasillerosVerticales][numeroDeCasillerosHorizontales];
+	    for(Integer i = 0; i < numeroDeCasillerosVerticales; i++){
+	        for(Integer j = 0; j < numeroDeCasillerosHorizontales; j++){
+	            casilleros[i][j] = new Casillero();
+            }
+        }
 	}
 
 	/*Listo*/
-	public void ubicar(Posicionable posicionable, Integer posicionHorizontal, Integer posicionVertical) throws Exception {
-	    try {
-            Casillero destino = obtenerCasillero(posicionHorizontal, posicionVertical);
-            destino.agregarPosicionable(posicionable);
-        } catch (Exception e){
-            throw e;
-        }
-	}
+	public void ubicar(Posicionable posicionable, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        Casillero destino = obtenerCasillero(posicionHorizontal, posicionVertical);
+        destino.agregarPosicionable(posicionable);
+    }
     /*Listo*/
     public Boolean estaOcupado(Integer posicionHorizontal, Integer posicionVertical) {
         try {
@@ -48,6 +49,7 @@ public class Mapa {
     }
     /*Listo*/
 	public static Mapa getMapa(){
+        if (instancia == null) instancia = new Mapa();
 		return instancia;
 	}
 
@@ -89,16 +91,18 @@ public class Mapa {
         throw new MapaLlenoException("No se puede colocar una unidad en este momento porque el mapa está lleno");
 	}
 
-	public void colocarUnidad(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical){
+	public void colocarUnidad(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroLlenoException {
 		try {
 			Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(posicionHorizontal, posicionVertical);
 			casilleroDisponible.agregarPosicionable(nuevaUnidad);
 		} catch (MapaLlenoException e) {
 			e.printStackTrace();
-		}
+		} catch (CasilleroLlenoException e){
+            throw e;
+        }
 	}
 
-	public Posicionable conseguirOcupante(Integer posicionHorizontal, Integer posicionVertical ){
+	public Posicionable conseguirOcupante(Integer posicionHorizontal, Integer posicionVertical ) throws CasilleroNoExistenteException {
         Casillero contenedor = obtenerCasillero(posicionHorizontal, posicionVertical);
         return contenedor.obtenerPosicionable();
     }

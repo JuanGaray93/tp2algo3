@@ -1,6 +1,8 @@
 package com.company.modelo.unidades;
 
-public abstract class Movil extends modelo.Posicionable {
+import com.company.modelo.terreno.Casillero;
+
+public abstract class Movil implements modelo.Posicionable {
 
     public Movil(){
 

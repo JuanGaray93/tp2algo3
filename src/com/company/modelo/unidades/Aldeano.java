@@ -1,5 +1,6 @@
 package unidades;
 
+import com.company.excepciones.CasilleroLlenoException;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Unidad;
 
@@ -23,9 +24,9 @@ public class Aldeano extends Unidad {
 		
 	}
 
-	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical){
+	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroLlenoException {
 		Mapa mapa = Mapa.getMapa();
-		mapa.colocarUnidad(self, posicionHorizontal, posicionVertical );
+		mapa.colocarUnidad(this, posicionHorizontal, posicionVertical );
 	}
 
 }

@@ -25,4 +25,8 @@ public class Casillero {
     public Posicionable obtenerPosicionable(){
         return habitante;
     }
+
+    public void quitarPosicionable(){
+        habitante = null;
+    }
 }
