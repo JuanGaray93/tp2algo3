@@ -101,7 +101,7 @@ public class Mapa {
         throw new MapaLlenoException("No se puede colocar una unidad en este momento porque el mapa está lleno");
 	}
 
-	public void colocarUnidad(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
+	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
 		try {
 			Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(posicionHorizontal, posicionVertical);
 			casilleroDisponible.agregarPosicionable(nuevaUnidad);

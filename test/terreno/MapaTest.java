@@ -6,7 +6,6 @@ import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.PlazaCentral;
-import com.company.modelo.terreno.Casillero;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
 import org.junit.Before;
@@ -68,7 +67,7 @@ public class MapaTest {
     @Test
     public void colocarUnidadOcupaCasilleroVacioMasCercano(){
         /** El Reptador no se puede testear directamente por ser un objeto al que sólo puede acceder Mapa.
-         *  Sin embargo, colocarUnidad es el único método que delega responsabilidades a Reptador.
+         *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único método que delega responsabilidades a Reptador.
          *  Que funcione bien ese método es que funcione bien el Reptador.
          *  Este test prueba entonces que funcione correctamente.
          * */
@@ -118,7 +117,7 @@ public class MapaTest {
             mapa.ubicar(new Aldeano(), 14, 13);
             mapa.ubicar(new Aldeano(), 14, 14);
 
-            mapa.colocarUnidad(aColocar, 12, 12);
+            mapa.colocarEnCasilleroLibreMasCercano(aColocar, 12, 12);
             obtenido = mapa.conseguirOcupante(11, 10);
 
         } catch (CasilleroNoExistenteException e) {

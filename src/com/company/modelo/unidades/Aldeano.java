@@ -21,7 +21,7 @@ public class Aldeano extends Unidad {
 
 	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
 		Mapa mapa = Mapa.getMapa();
-		mapa.colocarUnidad(this, posicionHorizontal, posicionVertical );
+		mapa.colocarEnCasilleroLibreMasCercano(this, posicionHorizontal, posicionVertical );
 	}
 
 }
