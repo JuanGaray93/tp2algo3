@@ -106,4 +106,8 @@ public class Mapa {
         Casillero contenedor = obtenerCasillero(posicionHorizontal, posicionVertical);
         return contenedor.obtenerPosicionable();
     }
+
+    public void destruir(){
+	    instancia = null;
+    }
 }
