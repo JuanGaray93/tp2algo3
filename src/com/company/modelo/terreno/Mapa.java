@@ -3,8 +3,8 @@ package com.company.modelo.terreno;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
+import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.Unidad;
-import modelo.Posicionable;
 
 public class Mapa {
 
@@ -70,8 +70,7 @@ public class Mapa {
         while(candidato == null){
             candidato = reptador.buscar();
         }
-        return candidato;
-        *************/
+        return candidato;*************/
 
 
         while(numeroDeIteracion < numeroDeCasillerosHorizontales || numeroDeIteracion < numeroDeCasillerosVerticales) {
@@ -102,14 +101,12 @@ public class Mapa {
         throw new MapaLlenoException("No se puede colocar una unidad en este momento porque el mapa está lleno");
 	}
 
-	public void colocarUnidad(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroLlenoException {
+	public void colocarUnidad(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
 		try {
 			Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(posicionHorizontal, posicionVertical);
 			casilleroDisponible.agregarPosicionable(nuevaUnidad);
-		} catch (MapaLlenoException e) {
-			e.printStackTrace();
 		} catch (CasilleroLlenoException e){
-            throw e;
+            e.printStackTrace();
         }
 	}
 

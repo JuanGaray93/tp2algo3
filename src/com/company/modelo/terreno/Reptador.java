@@ -1,7 +1,6 @@
 package com.company.modelo.terreno;
 
 import com.company.excepciones.MapaLlenoException;
-import com.company.modelo.unidades.Unidad;
 
 /** El Reptador es una entidad que se encarga de buscar en el mapa el casillero vacío
  * más cercano a un punto de origen que se indique. Se le pasan las coordenadas
@@ -17,14 +16,14 @@ public class Reptador {
     private Integer casillerosMirados = 0;
 
 
-    public Reptador(Integer posicionHorizontal, Integer posicionVertical){
+    protected Reptador(Integer posicionHorizontal, Integer posicionVertical){
         this.posicionHorizontal = posicionHorizontal;
         this.posicionVertical = posicionVertical;
     }
 
     /* Devuelve un Casillero si encuentra uno vacío, null si no. Avanza el Reptador.
      */
-    public Casillero buscar() throws MapaLlenoException{
+    protected Casillero buscar() throws MapaLlenoException{
 
         if(casillerosMirados > mapa.obtenerTamanio()){
             throw new MapaLlenoException("No se encontró un casillero vacío en el mapa");

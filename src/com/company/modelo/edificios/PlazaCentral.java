@@ -1,6 +1,6 @@
-package edificios;
+package com.company.modelo.edificios;
 
-import modelo.Posicionable;
+import com.company.modelo.Posicionable;
 
 public class PlazaCentral implements Posicionable {
 	

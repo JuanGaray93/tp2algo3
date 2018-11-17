@@ -1,6 +1,6 @@
 package com.company.modelo.terreno;
 import com.company.excepciones.CasilleroLlenoException;
-import modelo.Posicionable;
+import com.company.modelo.Posicionable;
 
 public class Casillero {
 

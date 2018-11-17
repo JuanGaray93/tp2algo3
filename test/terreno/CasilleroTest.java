@@ -2,8 +2,8 @@ package terreno;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.modelo.terreno.Casillero;
+import com.company.modelo.unidades.Aldeano;
 import org.junit.Test;
-import unidades.Aldeano;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
