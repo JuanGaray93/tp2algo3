@@ -15,6 +15,9 @@ public class Reptador {
     private Mapa mapa = Mapa.getMapa();
     private Integer casillerosMirados = 0;
 
+    private Integer iteracionSobreEstaLongitud = 0;
+    private Integer indiceSobreEstaLongitud = 0;
+
 
     protected Reptador(Integer posicionHorizontal, Integer posicionVertical){
         this.posicionHorizontal = posicionHorizontal;
@@ -47,7 +50,7 @@ public class Reptador {
     }
 
     private void avanzarPosicion(){
-        // TODO: Hay que sumarle una Direccion a este objeto para su movimiento
+        posicionHorizontal++;
     }
 
 }
