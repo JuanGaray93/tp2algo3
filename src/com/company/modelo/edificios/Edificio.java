@@ -1,36 +1,50 @@
 package com.company.modelo.edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.modelo.Posicion;
 import com.company.modelo.terreno.Mapa;
-import modelo.Posicionable;
+import com.company.modelo.Posicionable;
+import com.company.modelo.unidades.Unidad;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Edificio implements Posicionable {
 
-    protected int vida, costo, x, y;
-    private Posicionable self;
+    protected int vida, costo, tamanio;
+    protected boolean enConstruccion;
+    protected List<Posicion> posiciones = new ArrayList<>();
 
-    public Edificio(int posicionHorizontal, int posicionVertical) {
-        this.x = posicionHorizontal;
-        this.y = posicionVertical;
-    }
-
-    public void construir() throws CasilleroLlenoException {
+    public void construirEn(int posicionHorizontal, int posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
         Mapa mapa = Mapa.getMapa();
-        this.verificarCasilleros(mapa);
-        mapa.ubicar(self, this.x, this.y);
+        this.ubicar(mapa, posicionHorizontal, posicionVertical);
     }
 
-    private void verificarCasilleros(Mapa mapa) throws CasilleroLlenoException {
+    private void ubicar(Mapa mapa, int posicionHorizontal, int posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        int lado = tamanio / 2;
 
-        for( int i = 0; i < this.x; i++){
+        for( int i = posicionHorizontal; i < ( posicionHorizontal + lado ); i++){
 
-            for( int j = 0; j < this.y; j++){
-
-                if( mapa.estaOcupado(i, j) ){
-                    throw new CasilleroLlenoException("Error al construir el edificio seleccionado: la posicion " + i " y " + j + " esta ocupada.")
-                }
+            for( int j = posicionVertical; j < ( posicionVertical + lado ); j++){
+                Posicion posicion = new Posicion(i, j);
+                posicion.posicionarEdificio(this, mapa);
+                posiciones.add(posicion);
             }
+
         }
 
+    }
+
+    public void recibirDanio(int unDanio) {
+        vida -= unDanio;
+    }
+
+    public void reparar(int unIncremento) {
+        vida += unIncremento;
+    }
+
+    public void eliminar() {
+        // TODO implementar el borrar del mapa
     }
 }
