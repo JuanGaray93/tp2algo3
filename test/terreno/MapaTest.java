@@ -137,8 +137,17 @@ public class MapaTest {
 
         assertEquals(aColocar, obtenido);
     }
-
-
-
+    
+    @Test
+    public void quitarPosicionableDesocupaElLugarTest() {
+        Aldeano aldeano = new Aldeano();
+        try {
+            mapa.ubicar(aldeano, 10, 11);
+            mapa.quitar(10, 11);
+        } catch (Exception e) {
+            assertTrue( e.getMessage(),false);
+        }
+        assertFalse(mapa.estaOcupado(10, 11));
+    }
 
 }

@@ -90,4 +90,9 @@ public class Mapa {
     public Integer obtenerTamanio(){
 	    return (this.numeroDeCasillerosHorizontales * this.numeroDeCasillerosVerticales);
     }
+
+    public void quitar(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
+	    Casillero aModificar = obtenerCasillero(posicionHorizontal,posicionVertical);
+	    aModificar.quitarPosicionable();
+    }
 }
