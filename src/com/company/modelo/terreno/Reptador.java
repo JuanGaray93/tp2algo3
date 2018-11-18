@@ -12,16 +12,16 @@ public class Reptador {
 
     private Integer posicionHorizontal;
     private Integer posicionVertical;
-    private Mapa mapa = Mapa.getMapa();
+    private Mapa mapa;
     private Integer casillerosMirados = 0;
 
-    private Integer iteracionSobreEstaLongitud = 0;
-    private Integer indiceSobreEstaLongitud = 0;
+    private Integer direccionX = 1;
 
 
-    protected Reptador(Integer posicionHorizontal, Integer posicionVertical){
+    protected Reptador(Integer posicionHorizontal, Integer posicionVertical, Mapa mapa){
         this.posicionHorizontal = posicionHorizontal;
         this.posicionVertical = posicionVertical;
+        this.mapa = mapa;
     }
 
     /* Devuelve un Casillero si encuentra uno vacío, null si no. Avanza el Reptador.
@@ -32,25 +32,23 @@ public class Reptador {
             throw new MapaLlenoException("No se encontró un casillero vacío en el mapa");
         }
 
-        Casillero aDevolver;
         try{
-            Casillero corriente = mapa.obtenerCasillero(posicionHorizontal, posicionVertical );
+            Casillero lugar = mapa.obtenerCasillero(posicionHorizontal, posicionVertical );
             casillerosMirados++;
-            if(!corriente.estaOcupado()){
-                aDevolver = corriente;
-            } else {
-                aDevolver = null;
+            if(! lugar.estaOcupado()){
+                return lugar;
             }
         } catch (Exception e){
-            aDevolver = null;
+            //Se da vuelta si no encuentra en esa direccion
+            direccionX *= -1;
         }
 
         avanzarPosicion();
-        return aDevolver;
+        return null;
     }
 
     private void avanzarPosicion(){
-        posicionHorizontal++;
+        posicionHorizontal += direccionX;
     }
 
 }

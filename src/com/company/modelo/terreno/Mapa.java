@@ -48,7 +48,9 @@ public class Mapa {
     }
 
 	public static Mapa getMapa(){
-        if (instancia == null) instancia = new Mapa();
+        if (instancia == null){
+            instancia = new Mapa();
+        }
 		return instancia;
 	}
 
@@ -57,48 +59,14 @@ public class Mapa {
 	 * Ya sé que está recontra estructurado esto pero es una forma preliminar de encontrar el espacio vacío
 	 */
 	private Casillero encontrarCasilleroDisponibleEnTornoA (Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
-	    Integer numeroDeSegmento = 1;
-        Integer direccion;
-        Integer iteradorHorizontal = posicionHorizontal;
-        Integer iteradorVertical = posicionVertical;
+
         Casillero candidato = null;
-        Integer numeroDeIteracion = 0;
 
-
-        /*************
-        Reptador reptador = new Reptador(posicionHorizontal, posicionVertical);
+        Reptador reptador = new Reptador(posicionHorizontal, posicionVertical, this);
         while(candidato == null){
             candidato = reptador.buscar();
         }
-        return candidato;*************/
-
-
-        while(numeroDeIteracion < numeroDeCasillerosHorizontales || numeroDeIteracion < numeroDeCasillerosVerticales) {
-
-            direccion = numeroDeSegmento % 4;
-            for (Integer i = 0; i <= numeroDeSegmento; i++) {
-
-                try {
-                    candidato = obtenerCasillero(iteradorHorizontal, iteradorVertical);
-                } catch (CasilleroNoExistenteException e) {
-                    // Nada
-                }
-                if (!candidato.estaOcupado()) {
-                    return candidato;
-                }
-                if (direccion == 0) {
-                    iteradorHorizontal++;
-                } else if (direccion == 1) {
-                    iteradorVertical++;
-                } else if (direccion == 2) {
-                    iteradorHorizontal--;
-                } else {
-                    iteradorVertical--;
-                }
-            }
-            numeroDeSegmento++;
-        }
-        throw new MapaLlenoException("No se puede colocar una unidad en este momento porque el mapa está lleno");
+        return candidato;
 	}
 
 	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
