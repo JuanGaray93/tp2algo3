@@ -4,7 +4,7 @@ import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.unidades.Unidad;
-import modelo.Posicionable;
+import com.company.modelo.Posicionable;
 
 public class Mapa {
 
@@ -15,16 +15,22 @@ public class Mapa {
 
 	private Mapa() {
 		casilleros = new Casillero[this.numeroDeCasillerosVerticales][this.numeroDeCasillerosHorizontales];
+
+        for(Integer i = 0; i < numeroDeCasillerosVerticales; i++){
+
+            for(Integer j = 0; j < numeroDeCasillerosHorizontales; j++){
+                casilleros[i][j] = new Casillero();
+            }
+
+        }
+
 	}
 
 	/*Listo*/
-	public void ubicar(Posicionable posicionable, Integer posicionHorizontal, Integer posicionVertical) throws Exception {
-	    try {
-            Casillero destino = obtenerCasillero(posicionHorizontal, posicionVertical);
-            destino.agregarPosicionable(posicionable);
-        } catch (Exception e){
-            throw e;
-        }
+	public void ubicar(Posicionable posicionable, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+	    Casillero destino = obtenerCasillero(posicionHorizontal, posicionVertical);
+	    destino.agregarPosicionable(posicionable);
+
 	}
     /*Listo*/
     public Boolean estaOcupado(Integer posicionHorizontal, Integer posicionVertical) {
@@ -48,7 +54,10 @@ public class Mapa {
     }
     /*Listo*/
 	public static Mapa getMapa(){
-		return instancia;
+
+        if (instancia == null) instancia = new Mapa();
+
+	    return instancia;
 	}
 
 	/* Ubica a la unidad en un casillero
@@ -62,8 +71,10 @@ public class Mapa {
         Integer iteradorVertical = posicionVertical;
         Casillero candidato = null;
         Integer numeroDeIteracion = 0;
+
         while(numeroDeIteracion < numeroDeCasillerosHorizontales || numeroDeIteracion < numeroDeCasillerosVerticales) {
             direccion = numeroDeSegmento % 4;
+
             for (Integer i = 0; i <= numeroDeSegmento; i++) {
 
                 try {
@@ -84,22 +95,35 @@ public class Mapa {
                     iteradorVertical--;
                 }
             }
+
             numeroDeSegmento++;
         }
+
         throw new MapaLlenoException("No se puede colocar una unidad en este momento porque el mapa está lleno");
 	}
 
-	public void colocarUnidad(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical){
+	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroLlenoException{
 		try {
 			Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(posicionHorizontal, posicionVertical);
 			casilleroDisponible.agregarPosicionable(nuevaUnidad);
-		} catch (MapaLlenoException e) {
-			e.printStackTrace();
 		}
+		catch (MapaLlenoException e) {
+		    e.printStackTrace();
+		}
+
 	}
 
-	public Posicionable conseguirOcupante(Integer posicionHorizontal, Integer posicionVertical ){
+	public Posicionable conseguirOcupante(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
         Casillero contenedor = obtenerCasillero(posicionHorizontal, posicionVertical);
         return contenedor.obtenerPosicionable();
     }
+
+    public void destruir(){
+        instancia = null;
+    }
+
+    public Integer obtenerTamanio(){
+        return (this.numeroDeCasillerosHorizontales * this.numeroDeCasillerosVerticales);
+    }
+
 }

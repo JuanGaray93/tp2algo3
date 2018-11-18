@@ -1,6 +1,7 @@
 package com.company.modelo.terreno;
+
 import com.company.excepciones.CasilleroLlenoException;
-import modelo.Posicionable;
+import com.company.modelo.Posicionable;
 
 public class Casillero {
 
@@ -11,18 +12,29 @@ public class Casillero {
     }
 
     public Boolean estaOcupado() {
+
         return ( habitante != null );
     }
 
     public void agregarPosicionable(Posicionable entidadNueva) throws CasilleroLlenoException {
+
         if(!this.estaOcupado()){
             habitante = entidadNueva;
-        } else {
+        }
+
+        else {
             throw new CasilleroLlenoException("Se intentó llenar un casillero ocupado");
         }
+
     }
 
     public Posicionable obtenerPosicionable(){
+
         return habitante;
     }
+
+    public void quitarPosicionable(){
+        habitante = null;
+    }
+
 }
