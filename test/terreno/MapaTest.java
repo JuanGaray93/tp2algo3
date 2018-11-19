@@ -1,15 +1,17 @@
-package test.terreno;
+package terreno;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
+import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Aldeano;
 
+import com.company.modelo.unidades.Aldeano;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -18,11 +20,18 @@ import static org.junit.Assert.assertTrue;
 public class MapaTest {
 
     private Mapa mapa = Mapa.getMapa();
+    private Jugador jugador = null;
 
     @Before
     public void resetMapa() {
         mapa.destruir();
         mapa = Mapa.getMapa();
+
+        try {
+            jugador = new Jugador(mapa);
+        } catch (CasilleroLlenoException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -40,7 +49,7 @@ public class MapaTest {
 
     @Test
     public void colocarPosicionableOcupaElLugarTest() {
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano(jugador);
         try {
             mapa.ubicar(aldeano, 10, 10);
         } catch (Exception e) {
@@ -51,7 +60,7 @@ public class MapaTest {
 
     @Test
     public void colocarPosicionableNoOcupaOtroLugarTest() {
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano(jugador);
         try {
             mapa.ubicar(aldeano, 10, 10);
         } catch (Exception e) {
@@ -62,7 +71,7 @@ public class MapaTest {
 
     @Test
     public void colocarPosicionablePermiteRecuperarloTest() {
-        PlazaCentral plazaCentral = new PlazaCentral();
+        PlazaCentral plazaCentral = new PlazaCentral(jugador);
         Posicionable unidadRecuperada = null;
         try {
             mapa.ubicar(plazaCentral, 10, 10);
@@ -75,8 +84,8 @@ public class MapaTest {
 
     @Test
     public void colocarDosPosicionablesPermiteRecuperarlosTest(){
-        Aldeano aldeano1 = new Aldeano();
-        Aldeano aldeano2 = new Aldeano();
+        Aldeano aldeano1 = new Aldeano(jugador);
+        Aldeano aldeano2 = new Aldeano(jugador);
         Posicionable unidadRecuperada1 = null;
         Posicionable unidadRecuperada2 = null;
         try {
@@ -103,7 +112,7 @@ public class MapaTest {
          */
 
         Posicionable obtenido = null;
-        Aldeano aColocar = new Aldeano();
+        Aldeano aColocar = new Aldeano(jugador);
 
         try {
             /* El 1! representa el lugar donde se empieza la búsqueda. El 0 el lugar vacío más cercano.
@@ -116,10 +125,10 @@ public class MapaTest {
              *     10  11 12 13 14
              */
 
-            mapa.ubicar(new Aldeano(), 10, 12);
-            mapa.ubicar(new Aldeano(), 11, 12);
-            mapa.ubicar(new Aldeano(), 12, 12);
-            mapa.ubicar(new Aldeano(), 13, 12);
+            mapa.ubicar(new Aldeano(jugador), 10, 12);
+            mapa.ubicar(new Aldeano(jugador), 11, 12);
+            mapa.ubicar(new Aldeano(jugador), 12, 12);
+            mapa.ubicar(new Aldeano(jugador), 13, 12);
 
             assertTrue(mapa.estaOcupado(10,12));
             assertTrue(mapa.estaOcupado(11,12));
@@ -142,7 +151,7 @@ public class MapaTest {
 
     @Test
     public void quitarPosicionableDesocupaElLugarTest() {
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano(jugador);
         try {
             mapa.ubicar(aldeano, 10, 11);
             mapa.quitar(10, 11);

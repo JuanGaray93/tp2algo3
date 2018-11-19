@@ -1,8 +1,9 @@
-package edificios;
+package test.edificios;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.company.excepciones.CasilleroLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.terreno.Mapa;
@@ -10,8 +11,7 @@ import com.company.modelo.unidades.MaquinaAsedio;
 
 public class CastilloTest {
 	@Test
-	void testCastilloCrearMaquinaAsedio() {
-		
+	void testCastilloCrearMaquinaAsedio() throws CasilleroLlenoException {
 		
 		Castillo castillo = new Castillo(new Jugador(Mapa.getMapa()));
 		Mapa terreno = Mapa.getMapa();
@@ -26,7 +26,7 @@ public class CastilloTest {
 		}
 		
 		try {
-			castillo.crearMaquinaAsedio();
+			castillo.crear(new MaquinaAsedio(new Jugador(Mapa.getMapa())));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}

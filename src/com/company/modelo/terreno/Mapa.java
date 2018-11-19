@@ -5,7 +5,6 @@ import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.Unidad;
-import modelo.Posicionable;
 
 public class Mapa {
 
@@ -63,9 +62,6 @@ public class Mapa {
 
         Casillero candidato = null;
         Integer numeroDeIteracion = 0;
-        while(numeroDeIteracion < numeroDeCasillerosHorizontales || numeroDeIteracion < numeroDeCasillerosVerticales) {
-            direccion = numeroDeSegmento % 4;
-            for (Integer i = 0; i <= numeroDeSegmento; i++) {
 
         Reptador reptador = new Reptador(posicionHorizontal, posicionVertical, this);
         while(candidato == null){

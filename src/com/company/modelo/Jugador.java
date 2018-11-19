@@ -18,36 +18,7 @@ public class Jugador {
 	private int oro;
 
 	public Jugador(Mapa mapa) throws CasilleroLlenoException {
-		
 		this.oro = 100;
-		//Le pasa el mapa a los edificios para permitirles ubicar unidades con su posicion
-		
-		Castillo castillo = new Castillo(this);
-		
-		try {
-			castillo.construirEn(1, 1);
-		} catch (CasilleroNoExistenteException e1) {
-	
-		} 
-		edificios.add(castillo);
-		
-		PlazaCentral plaza = new PlazaCentral(this);
-	
-		try {
-			plaza.construirEn(5, 0);
-		} catch (CasilleroNoExistenteException e) {
-			//
-		} 
-		edificios.add(plaza);
-		
-		poblacion.add(new Aldeano(this));
-		poblacion.add(new Aldeano(this));
-		poblacion.add(new Aldeano(this));
-		
-		poblacion.get(0).naciEn(5,3);
-		poblacion.get(1).naciEn(6,3);
-		poblacion.get(2).naciEn(7,0);
-		
 	}
 	
 	public void mover(int x, int y, Unidad unidad) throws CasilleroNoExistenteException {
@@ -80,5 +51,39 @@ public class Jugador {
 	
 	public void actualizar() {
 		
+	}
+
+	public void crearEntidadesIniciales(){
+		//Le pasa el mapa a los edificios para permitirles ubicar unidades con su posicion
+
+		Castillo castillo = new Castillo(this);
+
+		try {
+			castillo.construirEn(1, 1);
+		} catch (CasilleroNoExistenteException e1) {
+
+		} catch (CasilleroLlenoException e) {
+			e.printStackTrace();
+		}
+		edificios.add(castillo);
+
+		PlazaCentral plaza = new PlazaCentral(this);
+
+		try {
+			plaza.construirEn(5, 0);
+		} catch (CasilleroNoExistenteException e) {
+			//
+		} catch (CasilleroLlenoException e) {
+			e.printStackTrace();
+		}
+		edificios.add(plaza);
+
+		poblacion.add(new Aldeano(this));
+		poblacion.add(new Aldeano(this));
+		poblacion.add(new Aldeano(this));
+
+		poblacion.get(0).naciEn(5,3);
+		poblacion.get(1).naciEn(6,3);
+		poblacion.get(2).naciEn(7,0);
 	}
 }

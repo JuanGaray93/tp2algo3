@@ -3,7 +3,6 @@ package com.company.modelo.edificios;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
-import com.company.modelo.unidades.Espadachin;*/
 import com.company.modelo.unidades.Unidad;
 
 public class Cuartel extends Edificio {

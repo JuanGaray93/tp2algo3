@@ -1,13 +1,9 @@
-package unidades;
+package com.company.modelo.unidades;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.EdificioEnReparacionException;
-import com.company.excepciones.UnidadOcupadaException;
+import com.company.excepciones.*;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Unidad;
 
 public class Aldeano extends Unidad {
 

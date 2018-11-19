@@ -1,61 +1,11 @@
-package edificios;
-
-<<<<<<< HEAD
-import org.junit.Assert;
-import org.junit.Test;
+package test.edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.modelo.Jugador;
-import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.terreno.Mapa;
+import com.company.modelo.unidades.Arquero;
 import com.company.modelo.unidades.Espadachin;
-
-public class CuartelTest {
-	
-	@Test
-	void testCuartelCrearEspadachin() throws CasilleroNoExistenteException, CasilleroLlenoException {
-		Mapa terreno = Mapa.getMapa();
-		Cuartel cuartel = new Cuartel(new Jugador(terreno));
-		
-		//Terreno no esta ocupado en este momento
-		Assert.assertFalse(terreno.estaOcupado(20,5));
-		try {
-			terreno.ubicar(cuartel, 5, 5);
-		}catch(CasilleroLlenoException e) {
-			
-		}
-		cuartel.crear(new Espadachin(new Jugador(terreno)));
-		
-		//Ahora terreno esta ocupado en posicion cercana de cuartel y en cuartel
-		//La posicion donde se crea espadachin es random en el cuartel
-		// TODO probar mas casos borde!
-		Assert.assertTrue(terreno.estaOcupado(21,6));
-		Assert.assertTrue(terreno.estaOcupado(21,4));
-		Assert.assertTrue(terreno.estaOcupado(20,7));
-	}
-	
-	@Test
-	void testCuartelCrearArquero() throws CasilleroNoExistenteException, CasilleroLlenoException {
-		
-		Mapa terreno = Mapa.getMapa();
-		Cuartel cuartel = new Cuartel(new Jugador(terreno));
-		
-		//Terreno no esta ocupado en este momento
-		Assert.assertFalse(terreno.estaOcupado(20,5));
-	
-		try {
-			terreno.ubicar(cuartel, 5, 5);
-		}catch(CasilleroLlenoException e) {
-			//
-		}
-		cuartel.crearArquero();
-		
-		//Ahora terreno esta ocupado en posicion cercana de cuartel y en cuartel
-=======
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.modelo.terreno.Mapa;
+import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Cuartel;
 
 import org.junit.Before;
@@ -67,17 +17,20 @@ import static org.junit.Assert.assertTrue;
 public class CuartelTest {
 
 	Mapa mapa = Mapa.getMapa();
-
+	Jugador jugador;
+	
 	@Before
 	public void resetMapa() {
 		mapa.destruir();
 		mapa = Mapa.getMapa();
+		
 	}
 
 	@Test
-	public void testCuartelCrearArquero() {
-
-		Cuartel cuartel = new Cuartel();
+	public void testCuartelCrearArquero() throws CasilleroLlenoException {
+		
+		 jugador  = new Jugador(mapa);
+		Cuartel cuartel = new Cuartel(jugador);
 
 		assertFalse( mapa.estaOcupado(3,5) );
 
@@ -96,35 +49,26 @@ public class CuartelTest {
 		assertTrue( mapa.estaOcupado(4, 5) );
 		assertTrue( mapa.estaOcupado(4, 6) );
 
-		try {
-			cuartel.crearArquero();
-		}
-		catch ( CasilleroLlenoException e ) {
-			e.printStackTrace();
-		}
+		cuartel.crear(new Arquero(jugador));
 
 		assertTrue( mapa.estaOcupado(3, 7) );
 		assertFalse( mapa.estaOcupado(4, 7) );
 		assertFalse( mapa.estaOcupado(3, 4) );
 
 		/*//Ahora terreno esta ocupado en posicion cercana de cuartel y en cuartel
->>>>>>> ff287a0a0fe96e4909f11c6720a62a9ba5c75786
 		//La posicion donde se crea espadachin es random en el cuartel
 		// TODO probar mas casos borde!
 		Assert.assertTrue(terreno.estaOcupado(21,6));
 		Assert.assertTrue(terreno.estaOcupado(21,4));
 		Assert.assertTrue(terreno.estaOcupado(20,7));
-<<<<<<< HEAD
-	
-	}
-	
-=======
 		Assert.assertTrue(terreno.estaOcupado());*/
 	}
 
     @Test
-    public void testCuartelCrearEspadachin(){
-        Cuartel cuartel = new Cuartel();
+    public void testCuartelCrearEspadachin() throws CasilleroLlenoException{
+    	
+    	jugador  = new Jugador(mapa);
+        Cuartel cuartel = new Cuartel(jugador);
 
         assertFalse( mapa.estaOcupado(20,20) );
 
@@ -143,15 +87,9 @@ public class CuartelTest {
 		assertTrue( mapa.estaOcupado(21, 20) );
 		assertTrue( mapa.estaOcupado(21, 21) );
 
-        try {
-            cuartel.crearEspadachin();
-        }
-        catch ( CasilleroLlenoException e ) {
-            e.printStackTrace();
-        }
+        cuartel.crear(new Espadachin(jugador));
 
         assertTrue( mapa.estaOcupado(21, 20) );
     }
 
->>>>>>> ff287a0a0fe96e4909f11c6720a62a9ba5c75786
 }

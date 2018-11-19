@@ -1,7 +1,8 @@
-package unidades;
+package test.unidades;
 
-import com.company.Posicion;
+import com.company.excepciones.CasilleroLlenoException;
 import com.company.modelo.Jugador;
+import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.edificios.PlazaCentral;
@@ -15,9 +16,16 @@ import org.junit.Assert;
 
 public class AldeanoTest {
     
+	Mapa mapa = Mapa.getMapa();
+	
     public void verificarQueSumaOroSinoEstaOcupadoTest() {
     	
-    	Jugador jugador = new Jugador();
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
@@ -37,7 +45,12 @@ public class AldeanoTest {
 
     public void verificarQueSumaOroUnaVezPorTurnoTest() {
     	
-    	Jugador jugador = new Jugador();
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
@@ -61,11 +74,16 @@ public class AldeanoTest {
     
     public void verificarQueMientrasReparaNoSumaOroTest() {
     	
-    	Jugador jugador = new Jugador();
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
-    	PlazaCentral plaza = new PlazaCentral();
+    	PlazaCentral plaza = new PlazaCentral(jugador);
     	
     	plaza.recibirDanio(25);
     	
@@ -83,13 +101,22 @@ public class AldeanoTest {
     
     public void verificarQueMientrasConstruyeNoSumaOroTest() {
     	
-    	Jugador jugador = new Jugador();
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
-    	PlazaCentral plaza = new PlazaCentral();
+    	PlazaCentral plaza = new PlazaCentral(jugador);
     	
-    	aldeano.construir(plaza,new Posicion(Mapa.getMapa(), 5,5));
+    	try {
+			aldeano.construir(plaza,5,5);
+		} catch (CasilleroLlenoException e) {
+			// TODO Auto-generated catch block
+		}
     	
     	//no suma oro por 3 turnos: el actual + los dos siguientes
     	
@@ -112,13 +139,18 @@ public class AldeanoTest {
     
     public void verificarQueAldeanoAunHeridoSumaOroTest() {
     	
-    	Jugador jugador = new Jugador();
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
     	
     	Aldeano aldeano = new Aldeano(jugador);
     
     	Assert.assertTrue(jugador.tieneOro(100));
     	
-    	aldeano.recibirDanio(new Espadachin());
+    	aldeano.recibirDanio(20);
     	
     	aldeano.actualizar();
     	
@@ -128,11 +160,18 @@ public class AldeanoTest {
     
     public void verificarQueAldeanoRecibeDanioAlSerAtacadoPorEspadachin() {
     	
-    	Aldeano aldeano = new Aldeano(new Jugador());
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+    	
+    	Aldeano aldeano = new Aldeano(jugador);
     	
     	Assert.assertTrue(aldeano.saludable());
     	
-    	aldeano.recibirDanio(new Espadachin());
+    	aldeano.recibirDanio(15);
     	
     	Assert.assertFalse(aldeano.saludable());
     	
@@ -140,11 +179,18 @@ public class AldeanoTest {
     
     public void verificarQueAldeanoRecibeDanioAlSerAtacadoPorArquero() {
     	
-    	Aldeano aldeano = new Aldeano(new Jugador());
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+    	
+    	Aldeano aldeano = new Aldeano(jugador);
     	
     	Assert.assertTrue(aldeano.saludable());
     	
-    	aldeano.recibirDanio(new Arquero());
+    	aldeano.recibirDanio(15);
     	
     	Assert.assertFalse(aldeano.saludable());
     	
@@ -152,11 +198,20 @@ public class AldeanoTest {
     
     public void verificarQueAldeanoNORecibeDanioAlSerAtacadoPorArmaAsedio() {
     	
-    	Aldeano aldeano = new Aldeano(new Jugador());
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+    	
+    	Aldeano aldeano = new Aldeano(jugador);
     	
     	Assert.assertTrue(aldeano.saludable());
     	
-    	aldeano.recibirDanio(new MaquinaAsedio());
+    	MaquinaAsedio armaAsedio = new MaquinaAsedio(jugador);
+    	
+    	armaAsedio.atacar(aldeano);
     	
     	Assert.assertTrue(aldeano.saludable());
     	
@@ -164,13 +219,24 @@ public class AldeanoTest {
     
 	void ConstruirCuartelYVerificarConstruccionTest() {
 		
-		Aldeano aldeano = new Aldeano(new Jugador());
+		Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
 		
-		Posicion posicion = new Posicion(Mapa.getMapa(), 5, 5);
+		Aldeano aldeano = new Aldeano(jugador);
 		
-		Cuartel cuartel = new Cuartel();
+		Posicion posicion = new Posicion( 5, 5);
+		
+		Cuartel cuartel = new Cuartel(jugador);
 	
-		aldeano.construir(cuartel,posicion);
+		try {
+			aldeano.construir(cuartel,5,5);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
 		
 		aldeano.actualizar();
 		
@@ -192,14 +258,25 @@ public class AldeanoTest {
 	}
 	
 	void ConstruirPlazaCentralTestYVerificarConstruccionTest() {
+		
+		Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
 
-		Aldeano aldeano = new Aldeano(new Jugador());
+		Aldeano aldeano = new Aldeano(jugador);
 		
-		Posicion posicion = new Posicion(Mapa.getMapa(), 5, 5);
+		Posicion posicion = new Posicion( 5, 5);
 		
-		PlazaCentral plazaCentral = new PlazaCentral();
+		PlazaCentral plazaCentral = new PlazaCentral(jugador);
 	
-		aldeano.construir(plazaCentral,posicion);
+		try {
+			aldeano.construir(plazaCentral,5,5);
+		} catch (CasilleroLlenoException e) {
+			//
+		}
 		
 		aldeano.actualizar();
 		
@@ -223,8 +300,15 @@ public class AldeanoTest {
 	
 	void RepararCastilloTest() {
 		
-		Castillo castillo = new Castillo();
-		Aldeano aldeano = new Aldeano(new Jugador());
+		Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+		
+		Castillo castillo = new Castillo(jugador);
+		Aldeano aldeano = new Aldeano(jugador);
 		
 		/*danio Total= 15, vida Castillo inicial = 1000
 		recupera 15 de vida por turno*/
@@ -246,8 +330,15 @@ public class AldeanoTest {
 	
 	void RepararCuartelTest() {
 		
-		Cuartel cuartel = new Cuartel();
-		Aldeano aldeano = new Aldeano(new Jugador());
+		Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+		
+		Cuartel cuartel = new Cuartel(jugador);
+		Aldeano aldeano = new Aldeano(jugador);
 		
 		/*danio Total= 15, vida Cuartel inicial = 75
 		se cura con 50 de vida por turno*/
@@ -269,8 +360,16 @@ public class AldeanoTest {
 	
 	
 	void RepararPlazaCentralTest() {
-		PlazaCentral plaza = new PlazaCentral();
-		Aldeano aldeano = new Aldeano(new Jugador());
+		
+		Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+		
+		PlazaCentral plaza = new PlazaCentral(jugador);
+		Aldeano aldeano = new Aldeano(jugador);
 		
 		/*danio Total= 15, vida Plaza inicial = 450
 		  se cura con +25  de vida por turno*/

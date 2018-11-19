@@ -1,4 +1,4 @@
-package test.unidades;
+package unidades;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.modelo.Jugador;
@@ -8,16 +8,26 @@ import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
-import com.company.modelo.unidades.Arquero;
-import com.company.modelo.unidades.Espadachin;
 import com.company.modelo.unidades.MaquinaAsedio;
 
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class AldeanoTest {
     
 	Mapa mapa = Mapa.getMapa();
-	
+
+	@Before
+	public void resetMapa() {
+		mapa.destruir();
+		mapa = Mapa.getMapa();
+	}
+
+		@Test
     public void verificarQueSumaOroSinoEstaOcupadoTest() {
     	
     	Jugador jugador = null;
@@ -29,20 +39,21 @@ public class AldeanoTest {
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
-    	Assert.assertTrue(jugador.tieneOro(100));
+    	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.actualizar();
     	
-    	Assert.assertTrue(jugador.tieneOro(120));
+    	assertTrue(jugador.tieneOro(120));
     	
-    	Assert.assertFalse(jugador.tieneOro(110));
+    	assertFalse(jugador.tieneOro(110));
     	
     	aldeano.actualizar();
     	
-    	Assert.assertTrue(jugador.tieneOro(140));
+    	assertTrue(jugador.tieneOro(140));
     	
     }
 
+	@Test
     public void verificarQueSumaOroUnaVezPorTurnoTest() {
     	
     	Jugador jugador = null;
@@ -54,11 +65,11 @@ public class AldeanoTest {
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
-    	Assert.assertTrue(jugador.tieneOro(100));
+    	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.actualizar();
     	
-    	Assert.assertTrue(jugador.tieneOro(120));
+    	assertTrue(jugador.tieneOro(120));
     	
     	//Actualizo el turno 4 veces e incrementa jugador su oro 4 veces
     	aldeano.actualizar();
@@ -66,12 +77,13 @@ public class AldeanoTest {
     	aldeano.actualizar();
     	aldeano.actualizar();
     	
-    	Assert.assertTrue(jugador.tieneOro(200));
+    	assertTrue(jugador.tieneOro(200));
     	
-    	Assert.assertFalse(jugador.tieneOro(120));
+    	assertFalse(jugador.tieneOro(120));
     	
     }
-    
+
+	@Test
     public void verificarQueMientrasReparaNoSumaOroTest() {
     	
     	Jugador jugador = null;
@@ -90,15 +102,16 @@ public class AldeanoTest {
     	aldeano.reparar(plaza);
     	
     	//no suma oro por estar reparando la plaza
-    	Assert.assertTrue(jugador.tieneOro(100));
+    	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.actualizar();
     	//se libera y suma oro nuevamente
-    	Assert.assertTrue(jugador.tieneOro(120));
+    	assertTrue(jugador.tieneOro(120));
     	
     	
     }
-    
+
+	@Test
     public void verificarQueMientrasConstruyeNoSumaOroTest() {
     	
     	Jugador jugador = null;
@@ -120,23 +133,24 @@ public class AldeanoTest {
     	
     	//no suma oro por 3 turnos: el actual + los dos siguientes
     	
-    	Assert.assertTrue(jugador.tieneOro(100));
+    	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.actualizar();
     	
-    	Assert.assertTrue(jugador.tieneOro(100));
+    	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.actualizar();
     	
-    	Assert.assertTrue(jugador.tieneOro(100));
+    	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.actualizar();
     	
     	//Se libera y suma oro de nuevo
-    	Assert.assertTrue(jugador.tieneOro(120));
+    	assertTrue(jugador.tieneOro(120));
     	
     }
-    
+
+	@Test
     public void verificarQueAldeanoAunHeridoSumaOroTest() {
     	
     	Jugador jugador = null;
@@ -148,16 +162,17 @@ public class AldeanoTest {
     	
     	Aldeano aldeano = new Aldeano(jugador);
     
-    	Assert.assertTrue(jugador.tieneOro(100));
+    	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.recibirDanio(20);
     	
     	aldeano.actualizar();
     	
-    	Assert.assertTrue(jugador.tieneOro(100));
+    	assertTrue(jugador.tieneOro(100));
     	
     }
-    
+
+	@Test
     public void verificarQueAldeanoRecibeDanioAlSerAtacadoPorEspadachin() {
     	
     	Jugador jugador = null;
@@ -169,14 +184,15 @@ public class AldeanoTest {
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
-    	Assert.assertTrue(aldeano.saludable());
+    	assertTrue(aldeano.saludable());
     	
     	aldeano.recibirDanio(15);
     	
-    	Assert.assertFalse(aldeano.saludable());
+    	assertFalse(aldeano.saludable());
     	
     }
-    
+
+	@Test
     public void verificarQueAldeanoRecibeDanioAlSerAtacadoPorArquero() {
     	
     	Jugador jugador = null;
@@ -188,14 +204,15 @@ public class AldeanoTest {
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
-    	Assert.assertTrue(aldeano.saludable());
+    	assertTrue(aldeano.saludable());
     	
     	aldeano.recibirDanio(15);
     	
-    	Assert.assertFalse(aldeano.saludable());
+    	assertFalse(aldeano.saludable());
     	
     }
-    
+
+	@Test
     public void verificarQueAldeanoNORecibeDanioAlSerAtacadoPorArmaAsedio() {
     	
     	Jugador jugador = null;
@@ -207,17 +224,18 @@ public class AldeanoTest {
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
-    	Assert.assertTrue(aldeano.saludable());
+    	assertTrue(aldeano.saludable());
     	
     	MaquinaAsedio armaAsedio = new MaquinaAsedio(jugador);
     	
     	armaAsedio.atacar(aldeano);
     	
-    	Assert.assertTrue(aldeano.saludable());
+    	assertTrue(aldeano.saludable());
     	
     }
-    
-	void ConstruirCuartelYVerificarConstruccionTest() {
+
+	@Test
+	public void construirCuartelYVerificarConstruccionTest() {
 		
 		Jugador jugador = null;
 		try {
@@ -240,24 +258,25 @@ public class AldeanoTest {
 		
 		aldeano.actualizar();
 		
-		Assert.assertFalse(aldeano.estaLibre());
+		assertFalse(aldeano.estaLibre());
 		
-		Assert.assertFalse(posicion.contiene(cuartel));
-		
-		aldeano.actualizar();
-		
-		Assert.assertFalse(aldeano.estaLibre());
-		
-		Assert.assertFalse(posicion.contiene(cuartel));
+		assertFalse(posicion.contiene(cuartel));
 		
 		aldeano.actualizar();
 		
-		Assert.assertTrue(aldeano.estaLibre());
+		assertFalse(aldeano.estaLibre());
 		
-		Assert.assertTrue(posicion.contiene(cuartel));
+		assertFalse(posicion.contiene(cuartel));
+		
+		aldeano.actualizar();
+		
+		assertTrue(aldeano.estaLibre());
+		
+		assertTrue(posicion.contiene(cuartel));
 	}
-	
-	void ConstruirPlazaCentralTestYVerificarConstruccionTest() {
+
+	@Test
+	public void construirPlazaCentralTestYVerificarConstruccionTest() {
 		
 		Jugador jugador = null;
 		try {
@@ -280,25 +299,26 @@ public class AldeanoTest {
 		
 		aldeano.actualizar();
 		
-		Assert.assertFalse(aldeano.estaLibre());
+		assertFalse(aldeano.estaLibre());
 		
-		Assert.assertFalse(posicion.contiene(plazaCentral));
-		
-		aldeano.actualizar();
-		
-		Assert.assertFalse(aldeano.estaLibre());
-		
-		Assert.assertFalse(posicion.contiene(plazaCentral));
+		assertFalse(posicion.contiene(plazaCentral));
 		
 		aldeano.actualizar();
 		
-		Assert.assertTrue(aldeano.estaLibre());
+		assertFalse(aldeano.estaLibre());
 		
-		Assert.assertTrue(posicion.contiene(plazaCentral));
+		assertFalse(posicion.contiene(plazaCentral));
+		
+		aldeano.actualizar();
+		
+		assertTrue(aldeano.estaLibre());
+		
+		assertTrue(posicion.contiene(plazaCentral));
 		
 	}
-	
-	void RepararCastilloTest() {
+
+	@Test
+	public void repararCastilloTest() {
 		
 		Jugador jugador = null;
 		try {
@@ -315,20 +335,21 @@ public class AldeanoTest {
 		
 		castillo.recibirDanio(15);
 		
-		Assert.assertFalse(castillo.comoNuevo());
+		assertFalse(castillo.comoNuevo());
 		
-		Assert.assertTrue(aldeano.estaLibre());
+		assertTrue(aldeano.estaLibre());
 		
 		aldeano.reparar(castillo);
 		
 		castillo.actualizar();
 		aldeano.actualizar();
 		
-		Assert.assertTrue(aldeano.estaLibre());
-		Assert.assertTrue(castillo.comoNuevo());
+		assertTrue(aldeano.estaLibre());
+		assertTrue(castillo.comoNuevo());
 	}
-	
-	void RepararCuartelTest() {
+
+	@Test
+	public void repararCuartelTest() {
 		
 		Jugador jugador = null;
 		try {
@@ -345,21 +366,21 @@ public class AldeanoTest {
 		
 		cuartel.recibirDanio(15);
 		
-		Assert.assertFalse(cuartel.comoNuevo());
+		assertFalse(cuartel.comoNuevo());
 		
-		Assert.assertTrue(aldeano.estaLibre());
+		assertTrue(aldeano.estaLibre());
 		
 		aldeano.reparar(cuartel);
 		
 		cuartel.actualizar();
 		aldeano.actualizar();
 		
-		Assert.assertTrue(aldeano.estaLibre());
-		Assert.assertTrue(cuartel.comoNuevo());
+		assertTrue(aldeano.estaLibre());
+		assertTrue(cuartel.comoNuevo());
 	}
-	
-	
-	void RepararPlazaCentralTest() {
+
+	@Test
+	public void repararPlazaCentralTest() {
 		
 		Jugador jugador = null;
 		try {
@@ -376,17 +397,17 @@ public class AldeanoTest {
 		
 		plaza.recibirDanio(15);
 		
-		Assert.assertFalse(plaza.comoNuevo());
+		assertFalse(plaza.comoNuevo());
 		
-		Assert.assertTrue(aldeano.estaLibre());
+		assertTrue(aldeano.estaLibre());
 		
 		aldeano.reparar(plaza);
 		
 		plaza.actualizar();
 		aldeano.actualizar();
 		
-		Assert.assertTrue(aldeano.estaLibre());
-		Assert.assertTrue(plaza.comoNuevo());
+		assertTrue(aldeano.estaLibre());
+		assertTrue(plaza.comoNuevo());
 	}
 
 }
