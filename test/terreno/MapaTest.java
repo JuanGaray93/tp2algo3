@@ -1,6 +1,5 @@
 package terreno;
 
-
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
@@ -8,12 +7,13 @@ import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
+
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 
 public class MapaTest {
 
@@ -22,6 +22,7 @@ public class MapaTest {
     @Before
     public void resetMapa() {
         mapa.destruir();
+        mapa = Mapa.getMapa();
     }
 
     @Test
@@ -33,6 +34,7 @@ public class MapaTest {
 
     @Test
     public void elMapaTieneCasillerosVaciosTest(){
+
         assertFalse(mapa.estaOcupado(10, 10));
     }
 
@@ -40,11 +42,11 @@ public class MapaTest {
     public void colocarPosicionableOcupaElLugarTest() {
         Aldeano aldeano = new Aldeano();
         try {
-            mapa.ubicar(aldeano, 10, 11);
+            mapa.ubicar(aldeano, 10, 10);
         } catch (Exception e) {
             assertTrue( e.getMessage(),false);
         }
-        assertTrue(mapa.estaOcupado(10, 11));
+        assertTrue(mapa.estaOcupado(10, 10));
     }
 
     @Test
@@ -63,8 +65,8 @@ public class MapaTest {
         PlazaCentral plazaCentral = new PlazaCentral();
         Posicionable unidadRecuperada = null;
         try {
-            mapa.ubicar(plazaCentral, 10, 11);
-            unidadRecuperada = mapa.conseguirOcupante(10, 11);
+            mapa.ubicar(plazaCentral, 10, 10);
+            unidadRecuperada = mapa.conseguirOcupante(10, 10);
         } catch (Exception e) {
             assertTrue( e.getMessage(),false);
         }
@@ -98,7 +100,7 @@ public class MapaTest {
          *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único método que delega responsabilidades a Reptador.
          *  Que funcione bien ese método es que funcione bien el Reptador.
          *  Este test prueba entonces que funcione correctamente.
-         * */
+         */
 
         Posicionable obtenido = null;
         Aldeano aColocar = new Aldeano();
@@ -106,13 +108,13 @@ public class MapaTest {
         try {
             /* El 1! representa el lugar donde se empieza la búsqueda. El 0 el lugar vacío más cercano.
              *     _______________
-             * 10  |0 |0 |0 |0 |0 |
-             * 11  |0 |0 |0 |0 |0 |
-             * 12  |1!|1 |1 |1 |0 |
-             * 13  |0 |0 |0 |0 |0 |
-             * 14  |0 |0 |0 |0 |0 |
+             * 10  |1 |0 |1 |1 |1 |
+             * 11  |1 |1 |1 |1 |1 |
+             * 12  |1 |1 |1!|1 |1 |
+             * 13  |1 |1 |1 |1 |1 |
+             * 14  |1_|1_|1_|1_|1_|
              *     10  11 12 13 14
-             * */
+             */
 
             mapa.ubicar(new Aldeano(), 10, 12);
             mapa.ubicar(new Aldeano(), 11, 12);
@@ -131,13 +133,11 @@ public class MapaTest {
             e.printStackTrace();
         } catch (CasilleroLlenoException e) {
             e.printStackTrace();
-        } catch (MapaLlenoException e) {
-            e.printStackTrace();
         }
 
         assertEquals(aColocar, obtenido);
     }
-    
+
     @Test
     public void quitarPosicionableDesocupaElLugarTest() {
         Aldeano aldeano = new Aldeano();
