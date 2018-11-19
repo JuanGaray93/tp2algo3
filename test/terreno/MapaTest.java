@@ -133,6 +133,8 @@ public class MapaTest {
             e.printStackTrace();
         } catch (CasilleroLlenoException e) {
             e.printStackTrace();
+        } catch (MapaLlenoException e) {
+            e.printStackTrace();
         }
 
         assertEquals(aColocar, obtenido);
