@@ -1,6 +1,7 @@
 package com.company.modelo.edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
+import com.company.modelo.Posicion;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Espadachin;
 import com.company.modelo.unidades.Arquero;
@@ -13,15 +14,17 @@ public class Cuartel extends Edificio {
 		this.tamanio = 4;
 	}
 	
-	public Espadachin crearEspadachin(int posicionHorizontal, int posicionVertical) throws CasilleroLlenoException {
+	public Espadachin crearEspadachin() throws CasilleroLlenoException {
+		Posicion posicion = posiciones.get(0);
 		Espadachin espadachin = new Espadachin();
-		espadachin.nacerEn(posicionHorizontal, posicionVertical);
+		posicion.posicionarUnidad(espadachin);
 		return espadachin;
 	}
 	
-	public Arquero crearArquero(int posicionHorizontal, int posicionVertical) throws CasilleroLlenoException {
+	public Arquero crearArquero() throws CasilleroLlenoException {
+		Posicion posicion = posiciones.get(0);
 		Arquero arquero = new Arquero();
-		arquero.nacerEn(posicionHorizontal, posicionVertical);
+		posicion.posicionarUnidad(arquero);
 		return arquero;
 	}
 

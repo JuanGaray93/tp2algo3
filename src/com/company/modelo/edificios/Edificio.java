@@ -17,18 +17,17 @@ public abstract class Edificio implements Posicionable {
     protected List<Posicion> posiciones = new ArrayList<>();
 
     public void construirEn(int posicionHorizontal, int posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        Mapa mapa = Mapa.getMapa();
-        this.ubicar(mapa, posicionHorizontal, posicionVertical);
+        this.ubicar(posicionHorizontal, posicionVertical);
     }
 
-    private void ubicar(Mapa mapa, int posicionHorizontal, int posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+    private void ubicar(int posicionHorizontal, int posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
         int lado = tamanio / 2;
 
         for( int i = posicionHorizontal; i < ( posicionHorizontal + lado ); i++){
 
             for( int j = posicionVertical; j < ( posicionVertical + lado ); j++){
                 Posicion posicion = new Posicion(i, j);
-                posicion.posicionarEdificio(this, mapa);
+                posicion.posicionarEdificio(this);
                 posiciones.add(posicion);
             }
 
@@ -37,14 +36,22 @@ public abstract class Edificio implements Posicionable {
     }
 
     public void recibirDanio(int unDanio) {
+
         vida -= unDanio;
     }
 
     public void reparar(int unIncremento) {
+
         vida += unIncremento;
     }
 
-    public void eliminar() {
-        // TODO implementar el borrar del mapa
+    public void eliminar() throws CasilleroNoExistenteException {
+        int longitud = posiciones.size();
+
+        for (int i = longitud - 1; i >= 0; i--) {
+            Posicion posicion = posiciones.remove(i);
+            posicion.eliminar();
+        }
+
     }
 }
