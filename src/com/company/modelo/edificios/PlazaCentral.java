@@ -6,14 +6,14 @@ public class PlazaCentral extends Edificio {
 
 	private static final int VIDA_MAXIMA = 0;
 	
-	public PlazaCentral(Jugador jugador) {
-		super(jugador);
-		this.estado = new EstadoEdificio(1000,0,0);
+	private int vida;
+	
+	public PlazaCentral(x,y) {
+		
 	}
-
-	@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
+	
+	public Aldeano crearAldeano() {
+		Aldeano aldeano = new Aldeano;
 		
 	}
 

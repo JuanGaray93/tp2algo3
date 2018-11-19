@@ -1,4 +1,4 @@
-package com.company.modelo.unidades;
+package unidades;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
@@ -7,6 +7,7 @@ import com.company.excepciones.UnidadOcupadaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.terreno.Mapa;
+import com.company.modelo.unidades.Unidad;
 
 public class Aldeano extends Unidad {
 
@@ -65,6 +66,11 @@ public class Aldeano extends Unidad {
 			this.jugador.eliminarDePoblacion(this);
 		}
 		
+	}
+
+	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
+		Mapa mapa = Mapa.getMapa();
+		mapa.colocarEnCasilleroLibreMasCercano(this, posicionHorizontal, posicionVertical );
 	}
 
 	public boolean estaLibre() {

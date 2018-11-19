@@ -9,11 +9,12 @@ import com.company.modelo.unidades.Unidad;
 
 public class Posicion {
 
-    private int x, y;
+    private Integer posicionHorizontal;
+    private Integer posicionVertical;
 
     public Posicion(int posicionHorizontal, int posicionVertical) {
-        this.x = posicionHorizontal;
-        this.y = posicionVertical;
+        this.posicionHorizontal = posicionHorizontal;
+        this.posicionVertical = posicionVertical;
     }
 
 	/*public boolean contiene(Posicionable posicionable) {
@@ -22,7 +23,7 @@ public class Posicion {
 	}*/
 
     public int obtenerPosicionHorizontal(){
-        return this.x;
+        return this.posicionHorizontal;
     }
 
 	/*public ArrayList<Posicion> encontrarAreaLibre(int dimension) {
@@ -31,7 +32,7 @@ public class Posicion {
 	}*/
 
     public int obtenerPosicionVertical(){
-        return this.y;
+        return this.posicionVertical;
     }
 
     public void posicionarUnidad(Unidad unaUnidad) throws CasilleroLlenoException {
@@ -40,7 +41,7 @@ public class Posicion {
     }
 
     public void posicionarEdificio(Edificio unEdificio, Mapa mapa) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        mapa.ubicar(unEdificio, this.x, this.y);
+        mapa.ubicar(unEdificio, this.posicionHorizontal, this.posicionVertical);
     }
 
     public void eliminar(){

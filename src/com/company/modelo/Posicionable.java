@@ -1,4 +1,4 @@
-package com.company.modelo;
+package modelo;
 
 public interface Posicionable {
 
