@@ -30,7 +30,6 @@ public class Mapa {
 	public void ubicar(Posicionable posicionable, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
 	    Casillero destino = obtenerCasillero(posicionHorizontal, posicionVertical);
 	    destino.agregarPosicionable(posicionable);
-
 	}
     /*Listo*/
     public Boolean estaOcupado(Integer posicionHorizontal, Integer posicionVertical) {
@@ -60,11 +59,11 @@ public class Mapa {
 	    return instancia;
 	}
 
-	/* Ubica a la unidad en un casillero
+	/* Ubica a la unidad en un casillero, por ende le debe decir a la unidad en dónde nació.
 	 * Si no hay ningún lugar disponible en toddo el mapa, lanza una excepcion
 	 * Ya sé que está recontra estructurado esto pero es una forma preliminar de encontrar el espacio vacío
 	 */
-	private Casillero encontrarCasilleroDisponibleEnTornoA (Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
+	private Casillero encontrarCasilleroDisponibleEnTornoA(Integer posicionHorizontal, Integer posicionVertical, Unidad unaUnidad) throws MapaLlenoException {
 	    Integer numeroDeSegmento = 1;
         Integer direccion;
         Integer iteradorHorizontal = posicionHorizontal;
@@ -83,6 +82,9 @@ public class Mapa {
                     // Nada
                 }
                 if (!candidato.estaOcupado()) {
+                    System.out.println(iteradorHorizontal);
+                    System.out.println(iteradorVertical);
+                    unaUnidad.naciEn(iteradorHorizontal, iteradorVertical);
                     return candidato;
                 }
                 if (direccion == 0) {
@@ -104,7 +106,7 @@ public class Mapa {
 
 	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroLlenoException{
 		try {
-			Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(posicionHorizontal, posicionVertical);
+			Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(posicionHorizontal, posicionVertical, nuevaUnidad);
 			casilleroDisponible.agregarPosicionable(nuevaUnidad);
 		}
 		catch (MapaLlenoException e) {
@@ -124,6 +126,11 @@ public class Mapa {
 
     public Integer obtenerTamanio(){
         return (this.numeroDeCasillerosHorizontales * this.numeroDeCasillerosVerticales);
+    }
+
+    public void quitar(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
+        Casillero aModificar = obtenerCasillero(posicionHorizontal,posicionVertical);
+        aModificar.quitarPosicionable();
     }
 
 }
