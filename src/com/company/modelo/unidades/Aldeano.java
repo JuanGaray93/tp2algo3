@@ -1,11 +1,11 @@
-package unidades;
+package com.company.modelo.unidades;
 
+import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Unidad;
 
 public class Aldeano extends Unidad {
 
-	private int vida;
+
 	
 	public void construirPlazaCentral() {
 		
@@ -18,14 +18,10 @@ public class Aldeano extends Unidad {
 	public void repararEdificio() {
 		
 	}
-	
-	public void recolectarOro() {
-		
-	}
 
-	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical){
+	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
 		Mapa mapa = Mapa.getMapa();
-		mapa.colocarUnidad(self, posicionHorizontal, posicionVertical );
+		mapa.colocarEnCasilleroLibreMasCercano(this, posicionHorizontal, posicionVertical );
 	}
 
 }

@@ -1,15 +1,12 @@
-package edificios;
+package com.company.modelo.edificios;
 
-public class PlazaCentral extends Edificio{
+import com.company.modelo.Posicionable;
+
+public class PlazaCentral implements Posicionable {
 	
 	private int vida;
 	
-	public PlazaCentral(x,y) {
-		
-	}
-	
-	public Aldeano crearAldeano() {
-		Aldeano aldeano = new Aldeano;
+	public PlazaCentral() {
 		
 	}
 

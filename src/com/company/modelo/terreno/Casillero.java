@@ -1,6 +1,6 @@
 package com.company.modelo.terreno;
 import com.company.excepciones.CasilleroLlenoException;
-import modelo.Posicionable;
+import com.company.modelo.Posicionable;
 
 public class Casillero {
 
@@ -24,5 +24,9 @@ public class Casillero {
 
     public Posicionable obtenerPosicionable(){
         return habitante;
+    }
+
+    public void quitarPosicionable(){
+        habitante = null;
     }
 }

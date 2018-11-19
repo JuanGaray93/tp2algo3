@@ -4,17 +4,62 @@
 
 Trabajo práctico 2 de Algoritmos 3, cátedra Fontela, Universidad de Buenos Aires.
 
-
-Mapa: singleton. Le pedimos a una clase estática que nos pase el terreno.
-
-
 Supuestos entrega 1:
+
+  
+Unidades:
   ·Las unidades creadas se crean instantáneamente en el casillero vacío más cercano al edificio que las crea y no se pueden mover hasta el siguiente turno.
+  · La búsqueda del casillero vacío cercano es responsabilidad del Mapa.
+  · 
+
+
+Mapa:
+  · Es un singleton. Para conseguir el mapa y pedirle que haga esto o aquello le decimos Mapa mapa = Mapa.getMapa();.
+
+
+Posición:
+  · Se encarga de interaccionar con Mapa para operaciones de movimiento y ubicación.
+  · 
+
+Posicionable: 
+  · Son todos los edificios y unidades. El mapa sólo sabe que está colocando Posicionables.
+
+Edificios:
+  · Edificio: 
+    · Tiene almacenadas sus coordenadas iniciales.
+    · Tiene una colección de posiciones. Cuando se coloca en el mapa, le asigna a esas posiciones sus coordenadas una por una, de acuerdo a su coordenada "central" (la que se le pasa por parámetro al armarlo) y su tamaño. Cuando se muere, sea por falta de vida o por eliminación del Jugador, le indica a todas sus posiciones que se destruyan. Las posiciones entonces eliminan la referencia al edificio de todos los casilleros donde está ubicado.
+    · Tiene un state que indica si está siendo construido o si ya fue construido. El state "EnConstruccion" además podra tener un state que indique en qué nivel de construcción está, o alternativamente (y hay que ver si es suficientemente OO) un porcentaje de completado.
+    · De su coordenada eje va a calcularse dónde surgen las unidades que produce y qué lugar ocupa.
+    · Cuando está en construcción, almacena una referencia al aldeano que lo está construyendo en su state enConstrucción.
+    
+  · Cuartel:
+  · PlazaCentral:
+  · Castillo:
+
+  
+Unidades: 
+  · Unidad:
+  · Aldeano: 
+  · Espadachin: 
+  · Arquero: 
+  · ArmaDeAsedio:
+	
 
 
 
-Los edificios tienen un state que indican si están siendo construidos o si ya fueron construidos. El state "EnConstruccion" además podra tener un state que indique en qué nivel de construcción está.
-Además, los edificios tienen una coordenada eje de la que va a calcularse dónde surgen las unidades que produce y qué lugar ocupa. 
 
-Nota: Eliminamos clase Casillero, sólo necesitamos un mapa con un arreglo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
