@@ -82,8 +82,6 @@ public class Mapa {
                     // Nada
                 }
                 if (!candidato.estaOcupado()) {
-                    System.out.println(iteradorHorizontal);
-                    System.out.println(iteradorVertical);
                     unaUnidad.naciEn(iteradorHorizontal, iteradorVertical);
                     return candidato;
                 }
