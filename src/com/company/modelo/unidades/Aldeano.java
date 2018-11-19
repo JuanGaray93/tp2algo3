@@ -14,6 +14,7 @@ public class Aldeano extends Unidad {
 	private Integer vida;
 	
 	private boolean trabajando;
+	private Mapa mapa = Mapa.getMapa();
 
 	public Aldeano(Jugador jugador) {
 		super(jugador);
@@ -23,21 +24,20 @@ public class Aldeano extends Unidad {
 		this.vida = VIDA_MAXIMA;
 	}
 
-	public void construir(Edificio edificio,int x, int y) throws CasilleroLlenoException, CasilleroNoExistenteException {
+	public void construir(Edificio edificio,Integer x, Integer y) throws CasilleroLlenoException, CasilleroNoExistenteException {
 		if(trabajando){
 			throw new UnidadOcupadaException("Tal vez mas tarde...");
 		}
 
-		posicion.posicionarEdificio(edificio, Mapa.getMapa());
+		posicion.posicionarEdificio(edificio, mapa);
 			
 		this.trabajando = !trabajando;
 	}
 
 	private void recolectarOro() {
-		if(trabajando){
-			throw new UnidadOcupadaException("Tal vez mas tarde...");
+		if(! trabajando) {
+			jugador.sumarOro(PRODUCCION_ORO);
 		}
-		jugador.sumarOro(PRODUCCION_ORO);
 	}
 
 	public void reparar(Edificio edificio) {
@@ -48,13 +48,15 @@ public class Aldeano extends Unidad {
 		try {
 			edificio.reparar();
 		}catch(EdificioEnReparacionException e) {
-			// Cambiar estado
-		}	
+			liberar();
+		} catch (EdificioReparadoException e) {
+			liberar();
+		}
 	}
 
 	public void actualizar() {
 		if(this.vida > 0) {
-			jugador.sumarOro(PRODUCCION_ORO);
+			recolectarOro();
 		}
 	}
 
@@ -66,6 +68,10 @@ public class Aldeano extends Unidad {
 	public boolean estaLibre() {
 		return trabajando;
 		
+	}
+
+	public void liberar(){
+		trabajando = false;
 	}
 
 }

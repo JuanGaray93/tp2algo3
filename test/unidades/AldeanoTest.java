@@ -67,19 +67,13 @@ public class AldeanoTest {
 
 	@Test
     public void verificarQueMientrasConstruyeNoSumaOroTest() {
-    	
-    	Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-    	
+
     	Aldeano aldeano = new Aldeano(jugador);
     	
     	PlazaCentral plaza = new PlazaCentral(jugador);
     	
     	try {
+    		// TODO FALLA PORQUE NO TIENE POSICION!!
 			aldeano.construir(plaza,5,5);
 		} catch (CasilleroLlenoException e) {
 			// TODO Auto-generated catch block
@@ -88,7 +82,8 @@ public class AldeanoTest {
 		}
 
 		//no suma oro por 3 turnos: el actual + los dos siguientes
-    	
+
+		// ELIMINAR LOS ASSERTS QUE NO CORRESPONDAN AL NOMBRE DEL TEST, TIENE QUE SER UN SOLO ASSERT
     	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.actualizar();
@@ -108,17 +103,8 @@ public class AldeanoTest {
 
 	@Test
     public void verificarQueAldeanoAunHeridoSumaOroTest() {
-    	
-    	Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-    	
+
     	Aldeano aldeano = new Aldeano(jugador);
-    
-    	assertTrue(jugador.tieneOro(100));
     	
     	aldeano.recibirDanio(20);
     	
@@ -131,18 +117,9 @@ public class AldeanoTest {
 	@Test
     public void verificarQueAldeanoRecibeDanioAlSerAtacadoPorEspadachin() {
     	
-    	Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-    	
     	Aldeano aldeano = new Aldeano(jugador);
     	
-    	assertTrue(aldeano.saludable());
-    	
-    	aldeano.recibirDanio(15);
+    	aldeano.recibirDanio(15); // TODO: POR ESPADACHIN?
     	
     	assertFalse(aldeano.saludable());
     	
@@ -151,32 +128,26 @@ public class AldeanoTest {
 	@Test
     public void verificarQueAldeanoRecibeDanioAlSerAtacadoPorArquero() {
     	
-    	Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-    	
     	Aldeano aldeano = new Aldeano(jugador);
-    	
-    	assertTrue(aldeano.saludable());
     	
     	aldeano.recibirDanio(15);
     	
     	assertFalse(aldeano.saludable());
     	
     }
-
+/**
+ *
+ * 		NO TENEMOS QUE TESTEAR UN ATAQUE DE CADA UNIDAD. TESTEAMOS EL ALDEANO EN ALDEANOTEST
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * */
 	@Test
     public void verificarQueAldeanoNORecibeDanioAlSerAtacadoPorArmaAsedio() {
-    	
-    	Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
@@ -193,13 +164,6 @@ public class AldeanoTest {
 	@Test
 	public void construirCuartelYVerificarConstruccionTest() {
 		
-		Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-		
 		Aldeano aldeano = new Aldeano(jugador);
 		
 		Posicion posicion = new Posicion( 5, 5);
@@ -207,6 +171,10 @@ public class AldeanoTest {
 		Cuartel cuartel = new Cuartel(jugador);
 	
 		try {
+
+			/* FALLA PORQUE NO TIENE POSICION
+			*
+			* */
 			aldeano.construir(cuartel,5,5);
 		} catch (CasilleroLlenoException e) {
 			// 
@@ -235,13 +203,6 @@ public class AldeanoTest {
 
 	@Test
 	public void construirPlazaCentralTestYVerificarConstruccionTest() {
-		
-		Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
 
 		Aldeano aldeano = new Aldeano(jugador);
 		
@@ -279,14 +240,6 @@ public class AldeanoTest {
 
 	@Test
 	public void repararCastilloTest() {
-		
-		Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-		
 		Castillo castillo = new Castillo(jugador);
 		Aldeano aldeano = new Aldeano(jugador);
 		
@@ -301,7 +254,7 @@ public class AldeanoTest {
 		
 		aldeano.reparar(castillo);
 		
-		castillo.actualizar();
+		castillo.actualizar(); // INNECESARIO
 		aldeano.actualizar();
 		
 		assertTrue(aldeano.estaLibre());
@@ -310,13 +263,6 @@ public class AldeanoTest {
 
 	@Test
 	public void repararCuartelTest() {
-		
-		Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
 		
 		Cuartel cuartel = new Cuartel(jugador);
 		Aldeano aldeano = new Aldeano(jugador);
@@ -341,13 +287,6 @@ public class AldeanoTest {
 
 	@Test
 	public void repararPlazaCentralTest() {
-		
-		Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
 		
 		PlazaCentral plaza = new PlazaCentral(jugador);
 		Aldeano aldeano = new Aldeano(jugador);

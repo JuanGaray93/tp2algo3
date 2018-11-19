@@ -1,10 +1,14 @@
 package com.company.modelo.edificios;
 
+import com.company.excepciones.EdificioEnReparacionException;
+import com.company.excepciones.EdificioReparadoException;
+
 public class EstadoEdificio {
 
 	private final int VIDA_MAXIMA;
 	private final int PORCENTAJE_REPARACION;
 	private int vidaActual;
+	private Boolean enReparacion = false;
 	private final Integer COSTO;
 	
 	public EstadoEdificio(Integer vida,Integer costo, Integer porcentajeReparacion) {
@@ -29,8 +33,16 @@ public class EstadoEdificio {
 		this.vidaActual -= unDanio;
 	}
 	
-	public void reparar() {
+	public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
+
+		if(this.comoNuevo()){
+			throw new EdificioReparadoException();
+		} if(this.enReparacion){
+			throw new EdificioEnReparacionException("");
+		}
+
 		this.vidaActual += PORCENTAJE_REPARACION;
+
 	}
 	
 }

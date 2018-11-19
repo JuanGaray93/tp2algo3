@@ -1,11 +1,9 @@
 package test.edificios;
 
+import com.company.excepciones.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.EdificioOcupadoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
@@ -123,9 +121,15 @@ public class PlazaCentralTest{
 		PlazaCentral plaza = new PlazaCentral(jugador);
 		
 		plaza.recibirDanio(50);
-		
-		plaza.reparar();
-		
+
+		try {
+			plaza.reparar();
+		} catch (EdificioReparadoException e) {
+			e.printStackTrace();
+		} catch (EdificioEnReparacionException e) {
+			e.printStackTrace();
+		}
+
 		Assert.assertFalse(plaza.comoNuevo());
 		
 		plaza.actualizar();
@@ -138,7 +142,7 @@ public class PlazaCentralTest{
 		
 	}
 	
-	public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest() {
+	public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest() throws EdificioReparadoException, EdificioEnReparacionException {
 		
 		try {
 			jugador = new Jugador(terreno);

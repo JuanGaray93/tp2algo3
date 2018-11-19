@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.EdificioEnReparacionException;
+import com.company.excepciones.EdificioReparadoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
@@ -56,7 +58,7 @@ public abstract class Edificio implements Posicionable {
     	
     }
     
-    public void reparar() {
+    public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
     	this.estado.reparar();
     }
     
