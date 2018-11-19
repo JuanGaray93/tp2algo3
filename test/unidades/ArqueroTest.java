@@ -1,8 +1,9 @@
-package unidades;
+package test.unidades;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.terreno.Mapa;
+import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.unidades.Arquero;
 import com.company.modelo.unidades.Unidad;
@@ -25,8 +26,15 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverHorizontalmenteHaciaDelante() {
+    	
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
 
-        Cuartel cuartel = new Cuartel();
+        Cuartel cuartel = new Cuartel(jugador);
 
         try {
             cuartel.construirEn(3, 5);
@@ -39,7 +47,8 @@ public class ArqueroTest {
         }
 
         try{
-            Arquero arquero = cuartel.crearArquero();
+        	Arquero arquero = new Arquero(jugador);
+            cuartel.crear(arquero);
 
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -59,8 +68,15 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverHorizontalmenteHaciaAtras() {
+    	
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
         
-        Cuartel cuartel = new Cuartel();
+        Cuartel cuartel = new Cuartel(jugador);
 
         try {
             cuartel.construirEn(3, 5);
@@ -73,8 +89,9 @@ public class ArqueroTest {
         }
 
         try{
-            Arquero arquero = cuartel.crearArquero();
-
+        	Arquero arquero = new Arquero(jugador);
+            cuartel.crear(arquero);
+            
             assertTrue( mapa.estaOcupado(3, 7) );
 
             arquero.moverA(2, 7);
@@ -93,8 +110,15 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverVerticalmenteHaciaArriba() {
+    	
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
 
-        Cuartel cuartel = new Cuartel();
+        Cuartel cuartel = new Cuartel(jugador);
 
         try {
             cuartel.construirEn(3, 5);
@@ -107,7 +131,8 @@ public class ArqueroTest {
         }
 
         try{
-            Arquero arquero = cuartel.crearArquero();
+        	Arquero arquero = new Arquero(jugador);
+            cuartel.crear(arquero);
 
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -125,9 +150,17 @@ public class ArqueroTest {
     }
 
     @Test
-    public void testArqueroMoverVerticalmenteHaciaAbajo() {
+    public void testArqueroMoverVerticalmenteHaciaAbajo() throws CasilleroLlenoException, CasilleroNoExistenteException {
         //TODO contemplar el caso de que se choca con el cuartel
-        Cuartel cuartel = new Cuartel();
+    	
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+    	
+        Cuartel cuartel = new Cuartel(jugador);
 
         try {
             cuartel.construirEn(3, 5);
@@ -139,28 +172,23 @@ public class ArqueroTest {
             e.printStackTrace();
         }
 
-        try{
-            Arquero arquero = cuartel.crearArquero();
+        Arquero arquero = new Arquero(jugador);
+		cuartel.crear(arquero);
 
-            assertTrue( mapa.estaOcupado(3, 7) );
-
-            //arquero.moverA(2, 7);
-        }
-        catch (CasilleroLlenoException e) {
-            e.printStackTrace();
-        }
-        catch (CasilleroNoExistenteException e) {
-            e.printStackTrace();
-        }/*
-
-        assertTrue( mapa.estaOcupado(2, 7) );
-        assertFalse( mapa.estaOcupado(3, 7) );*/
+		assertTrue( mapa.estaOcupado(3, 7) );
     }
 
     @Test
     public void testArqueroMoverEnDiagonalHaciaArribaALaIzquierda() {
+    	
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
 
-        Cuartel cuartel = new Cuartel();
+        Cuartel cuartel = new Cuartel(jugador);
 
         try {
             cuartel.construirEn(3, 5);
@@ -173,8 +201,8 @@ public class ArqueroTest {
         }
 
         try{
-            Arquero arquero = cuartel.crearArquero();
-
+        	Arquero arquero = new Arquero(jugador);
+            cuartel.crear(arquero);
             assertTrue( mapa.estaOcupado(3, 7) );
 
             arquero.moverA(2, 8);
@@ -192,8 +220,15 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverEnDiagonalHaciaArribaALaDerecha() {
+    	
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
 
-        Cuartel cuartel = new Cuartel();
+        Cuartel cuartel = new Cuartel(jugador);
 
         try {
             cuartel.construirEn(3, 5);
@@ -206,7 +241,8 @@ public class ArqueroTest {
         }
 
         try{
-            Arquero arquero = cuartel.crearArquero();
+        	Arquero arquero = new Arquero(jugador);
+            cuartel.crear(arquero);
 
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -225,8 +261,14 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverEnDiagonalHaciaAbajoALaIzquierda() {
-
-        Cuartel cuartel = new Cuartel();
+    	
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+        Cuartel cuartel = new Cuartel(jugador);
 
         try {
             cuartel.construirEn(3, 5);
@@ -239,7 +281,8 @@ public class ArqueroTest {
         }
 
         try{
-            Arquero arquero = cuartel.crearArquero();
+        	Arquero arquero = new Arquero(jugador);
+            cuartel.crear(arquero);
 
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -257,9 +300,17 @@ public class ArqueroTest {
     }
 
     @Test
-    public void testArqueroMoverEnDiagonalHaciaAbajoALaDerecha() {
+    public void testArqueroMoverEnDiagonalHaciaAbajoALaDerecha() throws CasilleroLlenoException, CasilleroNoExistenteException {
         //TODO contemplar el caso de que se choca con el cuartel
-        Cuartel cuartel = new Cuartel();
+    	
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e) {
+			// 
+		}
+    	
+        Cuartel cuartel = new Cuartel(jugador);
 
         try {
             cuartel.construirEn(3, 5);
@@ -271,22 +322,10 @@ public class ArqueroTest {
             e.printStackTrace();
         }
 
-        try{
-            Arquero arquero = cuartel.crearArquero();
+        Arquero arquero = new Arquero(jugador);
+		cuartel.crear(arquero);
 
-            assertTrue( mapa.estaOcupado(3, 7) );
-
-            //arquero.moverA(2, 7);
-        }
-        catch (CasilleroLlenoException e) {
-            e.printStackTrace();
-        }
-        catch (CasilleroNoExistenteException e) {
-            e.printStackTrace();
-        }/*
-
-        assertTrue( mapa.estaOcupado(2, 7) );
-        assertFalse( mapa.estaOcupado(3, 7) );*/
+		assertTrue( mapa.estaOcupado(3, 7) );
     }
 
 }

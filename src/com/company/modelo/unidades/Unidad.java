@@ -2,17 +2,24 @@ package com.company.modelo.unidades;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.modelo.Posicionable;
-import com.company.modelo.edificios.Edificio;
-import com.company.modelo.terreno.Mapa;
+import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
+import com.company.modelo.Posicionable;
 
 public abstract class Unidad implements Posicionable {
 
-	protected int vida, costo;
 	protected Posicion posicion;
 	protected Boolean atacando;
-	protected Boolean construyendo;
+	private Jugador jugador;
+	protected EstadoUnidad estado;
+	
+	public Unidad(Jugador jugador) {
+		this.jugador = jugador;
+	}
+	
+	public boolean saludable() {
+		return estado.saludable();
+	}
 
 	public void naciEn(int posicionHorizontal, int posicionVertical) {
 		posicion = new Posicion(posicionHorizontal, posicionVertical);
@@ -25,14 +32,11 @@ public abstract class Unidad implements Posicionable {
 	}
 
 	public void recibirDanio(int unDanio){
-		vida -= unDanio;
+		estado.recibirDanio(unDanio);
 	}
 
-	public void eliminar() throws CasilleroNoExistenteException {
+	private void eliminar() throws CasilleroNoExistenteException {
 		posicion.eliminar();
 	}
 
-	public abstract void atacarEdificio(Edificio unEdificio);
-
-	public abstract void atacarUnidad(Unidad unaUnidad);
 }

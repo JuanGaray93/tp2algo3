@@ -1,8 +1,11 @@
-package edificios;
+package test.edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.terreno.Mapa;
+import com.company.modelo.unidades.Arquero;
+import com.company.modelo.unidades.Espadachin;
+import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Cuartel;
 
 import org.junit.Before;
@@ -14,17 +17,20 @@ import static org.junit.Assert.assertTrue;
 public class CuartelTest {
 
 	Mapa mapa = Mapa.getMapa();
-
+	Jugador jugador;
+	
 	@Before
 	public void resetMapa() {
 		mapa.destruir();
 		mapa = Mapa.getMapa();
+		
 	}
 
 	@Test
-	public void testCuartelCrearArquero() {
-
-		Cuartel cuartel = new Cuartel();
+	public void testCuartelCrearArquero() throws CasilleroLlenoException {
+		
+		 jugador  = new Jugador(mapa);
+		Cuartel cuartel = new Cuartel(jugador);
 
 		assertFalse( mapa.estaOcupado(3,5) );
 
@@ -43,12 +49,7 @@ public class CuartelTest {
 		assertTrue( mapa.estaOcupado(4, 5) );
 		assertTrue( mapa.estaOcupado(4, 6) );
 
-		try {
-			cuartel.crearArquero();
-		}
-		catch ( CasilleroLlenoException e ) {
-			e.printStackTrace();
-		}
+		cuartel.crear(new Arquero(jugador));
 
 		assertTrue( mapa.estaOcupado(3, 7) );
 		assertFalse( mapa.estaOcupado(4, 7) );
@@ -64,8 +65,10 @@ public class CuartelTest {
 	}
 
     @Test
-    public void testCuartelCrearEspadachin(){
-        Cuartel cuartel = new Cuartel();
+    public void testCuartelCrearEspadachin() throws CasilleroLlenoException{
+    	
+    	jugador  = new Jugador(mapa);
+        Cuartel cuartel = new Cuartel(jugador);
 
         assertFalse( mapa.estaOcupado(20,20) );
 
@@ -84,12 +87,7 @@ public class CuartelTest {
 		assertTrue( mapa.estaOcupado(21, 20) );
 		assertTrue( mapa.estaOcupado(21, 21) );
 
-        try {
-            cuartel.crearEspadachin();
-        }
-        catch ( CasilleroLlenoException e ) {
-            e.printStackTrace();
-        }
+        cuartel.crear(new Espadachin(jugador));
 
         assertTrue( mapa.estaOcupado(21, 20) );
     }

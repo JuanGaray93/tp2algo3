@@ -1,22 +1,31 @@
 package com.company.modelo.unidades;
 
+import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.Unidad;
 
 public class Espadachin extends Unidad {
+	
+	private Ataque ataque;
 
-    public Espadachin(){
-        this.vida = 100;
-        this.costo = 25;
+	public Espadachin(Jugador jugador) {
+		super(jugador);
+		this.estado =  new EstadoUnidad(100,25);
+		ataque = new Ataque(15,25);
+		
+	}
+
+    public void atacar(Edificio enemigo) {
+        ataque.atacar(enemigo);
     }
 
-    @Override
-    public void atacarEdificio(Edificio unEdificio) {
-        unEdificio.recibirDanio(15);
+    public void atacar(Unidad enemigo) {
+    	ataque.atacar(enemigo);
     }
 
-    @Override
-    public void atacarUnidad(Unidad unaUnidad) {
-        unaUnidad.recibirDanio(25);
-    }
+	@Override
+	public void actualizar() {
+		// TODO Auto-generated method stub
+		
+	}
+  
 }

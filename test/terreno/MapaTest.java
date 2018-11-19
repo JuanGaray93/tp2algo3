@@ -1,40 +1,82 @@
-package terreno;
+package test.terreno;
 
+
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.modelo.Jugador;
+import com.company.modelo.Posicionable;
+import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Unidad;
-import edificios.PlazaCentral;
+import com.company.modelo.unidades.Aldeano;
+
 import org.junit.Before;
 import org.junit.Test;
-import unidades.Aldeano;
-
-import java.lang.reflect.Field;
-
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class MapaTest {
 
-    private Mapa mapa =  Mapa.getMapa();
+    Mapa mapa = Mapa.getMapa();
 
     @Before
-    public void resetMapa() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        Field instance = Mapa.class.getDeclaredField("instancia");
-        instance.setAccessible(true);
-        instance.set(null, null);
+    public void resetMapa() {
+        mapa.destruir();
     }
 
     @Test
-    void colocarPosicionableOcupaElLugarTest() {
-        Aldeano aldeano = new Aldeano();
-        mapa.ubicar(aldeano, 10, 10);
+    public void elMapaTieneCasillerosVaciosTest(){
+        assertFalse(mapa.estaOcupado(10, 10));
+    }
+
+    @Test
+    public void colocarPosicionableOcupaElLugarTest() {
+        Aldeano aldeano = null;
+		try {
+			aldeano = new Aldeano(new Jugador(mapa));
+		} catch (CasilleroLlenoException e1) {
+			//
+		}
+        try {
+            mapa.ubicar(aldeano, 10, 10);
+        } catch (Exception e) {
+            assertTrue( e.getMessage(),false);
+        }
         assertTrue(mapa.estaOcupado(10, 10));
     }
 
     @Test
-    void colocarPosicionablePermiteRecuperarla() {
-        PlazaCentral plazaCentral = new PlazaCentral();
-        mapa.ubicar(plazaCentral, 10, 10);
-        Unidad unidadRecuperada = Mapa.conseguirOcupante(10, 10);
-        assertTrue("Se recupera la unidad puesta en el mapa",unidadRecuperada.getClass() == PlazaCentral.class);
+    public void colocarPosicionableNoOcupaOtroLugarTest() {
+        Aldeano aldeano = null;
+		try {
+			aldeano = new Aldeano(new Jugador(mapa));
+		} catch (CasilleroLlenoException e1) {
+			// 
+		}
+        try {
+            mapa.ubicar(aldeano, 10, 10);
+        } catch (Exception e) {
+            assertTrue( e.getMessage(),false);
+        }
+        assertFalse(mapa.estaOcupado(11, 10));
+    }
+
+    @Test
+    public void colocarPosicionablePermiteRecuperarloTest() {
+    	Jugador jugador = null;
+		try {
+			jugador = new Jugador(mapa);
+		} catch (CasilleroLlenoException e1) {
+			// 
+		}
+        PlazaCentral plazaCentral = new PlazaCentral(jugador);
+       
+       Posicionable unidadRecuperada = null;
+        try {
+            mapa.ubicar(plazaCentral, 10, 10);
+            unidadRecuperada = mapa.conseguirOcupante(10, 10);
+        } catch (Exception e) {
+            assertTrue( e.getMessage(),false);
+        }
+        assertTrue("Se recupera la unidad puesta en el mapa",unidadRecuperada == plazaCentral);
     }
 
 

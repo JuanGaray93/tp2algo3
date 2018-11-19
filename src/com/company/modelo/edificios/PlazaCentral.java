@@ -1,15 +1,19 @@
-package edificios;
+package com.company.modelo.edificios;
 
-public class PlazaCentral extends Edificio{
+import com.company.modelo.Jugador;
+
+public class PlazaCentral extends Edificio {
+
+	private static final int VIDA_MAXIMA = 0;
 	
-	private int vida;
-	
-	public PlazaCentral(x,y) {
-		
+	public PlazaCentral(Jugador jugador) {
+		super(jugador);
+		this.estado = new EstadoEdificio(1000,0,0);
 	}
-	
-	public Aldeano crearAldeano() {
-		Aldeano aldeano = new Aldeano;
+
+	@Override
+	public void actualizar() {
+		// TODO Auto-generated method stub
 		
 	}
 

@@ -1,0 +1,293 @@
+package unidades;
+
+import com.company.Posicion;
+import com.company.modelo.Jugador;
+import com.company.modelo.edificios.Castillo;
+import com.company.modelo.edificios.Cuartel;
+import com.company.modelo.edificios.PlazaCentral;
+import com.company.modelo.terreno.Mapa;
+import com.company.modelo.unidades.Aldeano;
+import com.company.modelo.unidades.Arquero;
+import com.company.modelo.unidades.Espadachin;
+import com.company.modelo.unidades.MaquinaAsedio;
+
+import org.junit.Assert;
+
+public class AldeanoTest {
+    
+    public void verificarQueSumaOroSinoEstaOcupadoTest() {
+    	
+    	Jugador jugador = new Jugador();
+    	
+    	Aldeano aldeano = new Aldeano(jugador);
+    	
+    	Assert.assertTrue(jugador.tieneOro(100));
+    	
+    	aldeano.actualizar();
+    	
+    	Assert.assertTrue(jugador.tieneOro(120));
+    	
+    	Assert.assertFalse(jugador.tieneOro(110));
+    	
+    	aldeano.actualizar();
+    	
+    	Assert.assertTrue(jugador.tieneOro(140));
+    	
+    }
+
+    public void verificarQueSumaOroUnaVezPorTurnoTest() {
+    	
+    	Jugador jugador = new Jugador();
+    	
+    	Aldeano aldeano = new Aldeano(jugador);
+    	
+    	Assert.assertTrue(jugador.tieneOro(100));
+    	
+    	aldeano.actualizar();
+    	
+    	Assert.assertTrue(jugador.tieneOro(120));
+    	
+    	//Actualizo el turno 4 veces e incrementa jugador su oro 4 veces
+    	aldeano.actualizar();
+    	aldeano.actualizar();
+    	aldeano.actualizar();
+    	aldeano.actualizar();
+    	
+    	Assert.assertTrue(jugador.tieneOro(200));
+    	
+    	Assert.assertFalse(jugador.tieneOro(120));
+    	
+    }
+    
+    public void verificarQueMientrasReparaNoSumaOroTest() {
+    	
+    	Jugador jugador = new Jugador();
+    	
+    	Aldeano aldeano = new Aldeano(jugador);
+    	
+    	PlazaCentral plaza = new PlazaCentral();
+    	
+    	plaza.recibirDanio(25);
+    	
+    	aldeano.reparar(plaza);
+    	
+    	//no suma oro por estar reparando la plaza
+    	Assert.assertTrue(jugador.tieneOro(100));
+    	
+    	aldeano.actualizar();
+    	//se libera y suma oro nuevamente
+    	Assert.assertTrue(jugador.tieneOro(120));
+    	
+    	
+    }
+    
+    public void verificarQueMientrasConstruyeNoSumaOroTest() {
+    	
+    	Jugador jugador = new Jugador();
+    	
+    	Aldeano aldeano = new Aldeano(jugador);
+    	
+    	PlazaCentral plaza = new PlazaCentral();
+    	
+    	aldeano.construir(plaza,new Posicion(Mapa.getMapa(), 5,5));
+    	
+    	//no suma oro por 3 turnos: el actual + los dos siguientes
+    	
+    	Assert.assertTrue(jugador.tieneOro(100));
+    	
+    	aldeano.actualizar();
+    	
+    	Assert.assertTrue(jugador.tieneOro(100));
+    	
+    	aldeano.actualizar();
+    	
+    	Assert.assertTrue(jugador.tieneOro(100));
+    	
+    	aldeano.actualizar();
+    	
+    	//Se libera y suma oro de nuevo
+    	Assert.assertTrue(jugador.tieneOro(120));
+    	
+    }
+    
+    public void verificarQueAldeanoAunHeridoSumaOroTest() {
+    	
+    	Jugador jugador = new Jugador();
+    	
+    	Aldeano aldeano = new Aldeano(jugador);
+    
+    	Assert.assertTrue(jugador.tieneOro(100));
+    	
+    	aldeano.recibirDanio(new Espadachin());
+    	
+    	aldeano.actualizar();
+    	
+    	Assert.assertTrue(jugador.tieneOro(100));
+    	
+    }
+    
+    public void verificarQueAldeanoRecibeDanioAlSerAtacadoPorEspadachin() {
+    	
+    	Aldeano aldeano = new Aldeano(new Jugador());
+    	
+    	Assert.assertTrue(aldeano.saludable());
+    	
+    	aldeano.recibirDanio(new Espadachin());
+    	
+    	Assert.assertFalse(aldeano.saludable());
+    	
+    }
+    
+    public void verificarQueAldeanoRecibeDanioAlSerAtacadoPorArquero() {
+    	
+    	Aldeano aldeano = new Aldeano(new Jugador());
+    	
+    	Assert.assertTrue(aldeano.saludable());
+    	
+    	aldeano.recibirDanio(new Arquero());
+    	
+    	Assert.assertFalse(aldeano.saludable());
+    	
+    }
+    
+    public void verificarQueAldeanoNORecibeDanioAlSerAtacadoPorArmaAsedio() {
+    	
+    	Aldeano aldeano = new Aldeano(new Jugador());
+    	
+    	Assert.assertTrue(aldeano.saludable());
+    	
+    	aldeano.recibirDanio(new MaquinaAsedio());
+    	
+    	Assert.assertTrue(aldeano.saludable());
+    	
+    }
+    
+	void ConstruirCuartelYVerificarConstruccionTest() {
+		
+		Aldeano aldeano = new Aldeano(new Jugador());
+		
+		Posicion posicion = new Posicion(Mapa.getMapa(), 5, 5);
+		
+		Cuartel cuartel = new Cuartel();
+	
+		aldeano.construir(cuartel,posicion);
+		
+		aldeano.actualizar();
+		
+		Assert.assertFalse(aldeano.estaLibre());
+		
+		Assert.assertFalse(posicion.contiene(cuartel));
+		
+		aldeano.actualizar();
+		
+		Assert.assertFalse(aldeano.estaLibre());
+		
+		Assert.assertFalse(posicion.contiene(cuartel));
+		
+		aldeano.actualizar();
+		
+		Assert.assertTrue(aldeano.estaLibre());
+		
+		Assert.assertTrue(posicion.contiene(cuartel));
+	}
+	
+	void ConstruirPlazaCentralTestYVerificarConstruccionTest() {
+
+		Aldeano aldeano = new Aldeano(new Jugador());
+		
+		Posicion posicion = new Posicion(Mapa.getMapa(), 5, 5);
+		
+		PlazaCentral plazaCentral = new PlazaCentral();
+	
+		aldeano.construir(plazaCentral,posicion);
+		
+		aldeano.actualizar();
+		
+		Assert.assertFalse(aldeano.estaLibre());
+		
+		Assert.assertFalse(posicion.contiene(plazaCentral));
+		
+		aldeano.actualizar();
+		
+		Assert.assertFalse(aldeano.estaLibre());
+		
+		Assert.assertFalse(posicion.contiene(plazaCentral));
+		
+		aldeano.actualizar();
+		
+		Assert.assertTrue(aldeano.estaLibre());
+		
+		Assert.assertTrue(posicion.contiene(plazaCentral));
+		
+	}
+	
+	void RepararCastilloTest() {
+		
+		Castillo castillo = new Castillo();
+		Aldeano aldeano = new Aldeano(new Jugador());
+		
+		/*danio Total= 15, vida Castillo inicial = 1000
+		recupera 15 de vida por turno*/
+		
+		castillo.recibirDanio(15);
+		
+		Assert.assertFalse(castillo.comoNuevo());
+		
+		Assert.assertTrue(aldeano.estaLibre());
+		
+		aldeano.reparar(castillo);
+		
+		castillo.actualizar();
+		aldeano.actualizar();
+		
+		Assert.assertTrue(aldeano.estaLibre());
+		Assert.assertTrue(castillo.comoNuevo());
+	}
+	
+	void RepararCuartelTest() {
+		
+		Cuartel cuartel = new Cuartel();
+		Aldeano aldeano = new Aldeano(new Jugador());
+		
+		/*danio Total= 15, vida Cuartel inicial = 75
+		se cura con 50 de vida por turno*/
+		
+		cuartel.recibirDanio(15);
+		
+		Assert.assertFalse(cuartel.comoNuevo());
+		
+		Assert.assertTrue(aldeano.estaLibre());
+		
+		aldeano.reparar(cuartel);
+		
+		cuartel.actualizar();
+		aldeano.actualizar();
+		
+		Assert.assertTrue(aldeano.estaLibre());
+		Assert.assertTrue(cuartel.comoNuevo());
+	}
+	
+	
+	void RepararPlazaCentralTest() {
+		PlazaCentral plaza = new PlazaCentral();
+		Aldeano aldeano = new Aldeano(new Jugador());
+		
+		/*danio Total= 15, vida Plaza inicial = 450
+		  se cura con +25  de vida por turno*/
+		
+		plaza.recibirDanio(15);
+		
+		Assert.assertFalse(plaza.comoNuevo());
+		
+		Assert.assertTrue(aldeano.estaLibre());
+		
+		aldeano.reparar(plaza);
+		
+		plaza.actualizar();
+		aldeano.actualizar();
+		
+		Assert.assertTrue(aldeano.estaLibre());
+		Assert.assertTrue(plaza.comoNuevo());
+	}
+
+}

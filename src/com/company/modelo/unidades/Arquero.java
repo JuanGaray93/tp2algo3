@@ -1,24 +1,32 @@
 package com.company.modelo.unidades;
 
+import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.Unidad;
 
 public class Arquero extends Unidad {
+	
+	private Ataque ataque;
 
-    public Arquero(){
-        this.vida = 75;
-        this.costo = 75;
+	public Arquero(Jugador jugador) {
+		super(jugador);
+		this.estado =  new EstadoUnidad(75,75);
+		ataque = new Ataque(10,15);
+		
+	}
+
+    public void atacar(Edificio enemigo) {
+    	ataque.atacar(enemigo);
     }
 
-    @Override
-    public void atacarEdificio(Edificio unEdificio) {
-
-        unEdificio.recibirDanio(10);
+    
+    public void atacarUnidad(Unidad enemigo) {
+    	ataque.atacar(enemigo);
     }
 
-    @Override
-    public void atacarUnidad(Unidad unaUnidad) {
+	@Override
+	public void actualizar() {
+		// TODO Auto-generated method stub
+		
+	}
 
-        unaUnidad.recibirDanio(15);
-    }
 }
