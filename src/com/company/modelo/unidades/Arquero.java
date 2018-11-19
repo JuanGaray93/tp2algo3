@@ -12,11 +12,13 @@ public class Arquero extends Unidad {
 
     @Override
     public void atacarEdificio(Edificio unEdificio) {
+
         unEdificio.recibirDanio(10);
     }
 
     @Override
     public void atacarUnidad(Unidad unaUnidad) {
+
         unaUnidad.recibirDanio(15);
     }
 }
