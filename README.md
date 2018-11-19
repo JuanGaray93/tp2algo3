@@ -45,6 +45,24 @@ Unidades:
   · ArmaDeAsedio:
 	
 
+# Entrega 2
+
+### TODO
+
+## JUGADOR
+Distribución de los jugadores en el mapa
+	· Dónde empiezan las unidades iniciales de cada jugador (3 aldeanos y 100 de oro)
+	· Qué jugador empieza primero (azar)
+	·  
+
+
+Pruebas de inicio del juego, posición, edificios, aldeanos y oro necesarios.
+Reglas de población
+Crear unidades => sube la población
+Matar unidades => baja población
+Matar aldeanos => baja población y baja producción de oro
+Verificar tope poblacional
+Pruebas de distancia y ataques (tanto para las unidades como para el castillo)
 
 
 
