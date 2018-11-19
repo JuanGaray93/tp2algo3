@@ -40,8 +40,7 @@ public class Jugador {
 	}
 
 	public boolean tieneOro(int i) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.oro >= i;
 	}
 
 	public void sumarOro(int produccionOro) {

@@ -1,6 +1,7 @@
 package unidades;
 
 import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Castillo;
@@ -10,7 +11,6 @@ import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.MaquinaAsedio;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,58 +19,28 @@ import static org.junit.Assert.assertTrue;
 
 public class AldeanoTest {
     
-	Mapa mapa = Mapa.getMapa();
+	private Mapa mapa = Mapa.getMapa();
+	private Jugador jugador = null;
 
 	@Before
-	public void resetMapa() {
+	public void resetMapa() throws CasilleroLlenoException {
 		mapa.destruir();
 		mapa = Mapa.getMapa();
+		jugador = new Jugador(mapa);
 	}
 
-		@Test
-    public void verificarQueSumaOroSinoEstaOcupadoTest() {
-    	
-    	Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-    	
+	@Test
+    public void verificarQueSumaOroSiNoEstaOcupadoTest() {
     	Aldeano aldeano = new Aldeano(jugador);
-    	
-    	assertTrue(jugador.tieneOro(100));
-    	
     	aldeano.actualizar();
-    	
     	assertTrue(jugador.tieneOro(120));
-    	
-    	assertFalse(jugador.tieneOro(110));
-    	
-    	aldeano.actualizar();
-    	
-    	assertTrue(jugador.tieneOro(140));
-    	
     }
 
 	@Test
     public void verificarQueSumaOroUnaVezPorTurnoTest() {
-    	
-    	Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-    	
+
     	Aldeano aldeano = new Aldeano(jugador);
-    	
-    	assertTrue(jugador.tieneOro(100));
-    	
     	aldeano.actualizar();
-    	
-    	assertTrue(jugador.tieneOro(120));
-    	
     	//Actualizo el turno 4 veces e incrementa jugador su oro 4 veces
     	aldeano.actualizar();
     	aldeano.actualizar();
@@ -78,20 +48,10 @@ public class AldeanoTest {
     	aldeano.actualizar();
     	
     	assertTrue(jugador.tieneOro(200));
-    	
-    	assertFalse(jugador.tieneOro(120));
-    	
     }
 
 	@Test
     public void verificarQueMientrasReparaNoSumaOroTest() {
-    	
-    	Jugador jugador = null;
-		try {
-			jugador = new Jugador(mapa);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
     	
     	Aldeano aldeano = new Aldeano(jugador);
     	
@@ -100,15 +60,9 @@ public class AldeanoTest {
     	plaza.recibirDanio(25);
     	
     	aldeano.reparar(plaza);
-    	
+		aldeano.actualizar();
     	//no suma oro por estar reparando la plaza
     	assertTrue(jugador.tieneOro(100));
-    	
-    	aldeano.actualizar();
-    	//se libera y suma oro nuevamente
-    	assertTrue(jugador.tieneOro(120));
-    	
-    	
     }
 
 	@Test
@@ -129,9 +83,11 @@ public class AldeanoTest {
 			aldeano.construir(plaza,5,5);
 		} catch (CasilleroLlenoException e) {
 			// TODO Auto-generated catch block
+		} catch (CasilleroNoExistenteException e) {
+			e.printStackTrace();
 		}
-    	
-    	//no suma oro por 3 turnos: el actual + los dos siguientes
+
+		//no suma oro por 3 turnos: el actual + los dos siguientes
     	
     	assertTrue(jugador.tieneOro(100));
     	
@@ -254,8 +210,10 @@ public class AldeanoTest {
 			aldeano.construir(cuartel,5,5);
 		} catch (CasilleroLlenoException e) {
 			// 
+		} catch (CasilleroNoExistenteException e) {
+			e.printStackTrace();
 		}
-		
+
 		aldeano.actualizar();
 		
 		assertFalse(aldeano.estaLibre());
@@ -295,8 +253,10 @@ public class AldeanoTest {
 			aldeano.construir(plazaCentral,5,5);
 		} catch (CasilleroLlenoException e) {
 			//
+		} catch (CasilleroNoExistenteException e) {
+			e.printStackTrace();
 		}
-		
+
 		aldeano.actualizar();
 		
 		assertFalse(aldeano.estaLibre());

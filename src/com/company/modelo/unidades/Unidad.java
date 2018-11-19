@@ -10,7 +10,7 @@ public abstract class Unidad implements Posicionable {
 
 	protected Posicion posicion;
 	protected Boolean atacando;
-	private Jugador jugador;
+	protected Jugador jugador;
 	protected EstadoUnidad estado;
 	
 	public Unidad(Jugador jugador) {

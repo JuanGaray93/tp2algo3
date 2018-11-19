@@ -4,11 +4,11 @@ import com.company.modelo.Jugador;
 
 public class PlazaCentral extends Edificio {
 
-	private static final int VIDA_MAXIMA = 0;
+	private static final Integer VIDA_MAXIMA = 1000;
 
 	public PlazaCentral(Jugador jugador) {
 		super(jugador);
-		this.estado = new EstadoEdificio(1000,0,0);
+		this.estado = new EstadoEdificio(VIDA_MAXIMA,0,0);
 	}
 
 	@Override
