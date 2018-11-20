@@ -89,6 +89,7 @@ public class Posicion {
         }
     }
 
-    public boolean contiene(Posicionable posicionable) {
+    public boolean estaOcupado(int i, int j) {
+        return mapa.estaOcupado(i,j);
     }
 }

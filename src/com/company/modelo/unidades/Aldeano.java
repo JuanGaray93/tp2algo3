@@ -9,11 +9,9 @@ import com.company.modelo.unidades.estados.EstadoAldeano;
 public class Aldeano extends Unidad {
 
 	final private static Integer PRODUCCION_ORO = 20;
-	final private static Integer VIDA_MAXIMA = 50;
-	private int turnosOcupado;
-	Jugador jug;
 
-	private Mapa mapa = Mapa.getMapa();
+	private int turnosOcupado;
+
 	Edificio edificioATrabajar;
 
 	public Aldeano(Jugador jugador) {
@@ -49,8 +47,8 @@ public class Aldeano extends Unidad {
 
 			edificioATrabajar = edificio;
 			turnosOcupado = edificioATrabajar.calcularTiempoReparacion();
+			System.out.println(turnosOcupado);
 			edificio.reparar();
-
 
 		}catch(EdificioEnReparacionException | EdificioReparadoException e) {
 			liberar();
@@ -61,6 +59,7 @@ public class Aldeano extends Unidad {
 
                  if(turnosOcupado>0){
                      turnosOcupado = edificioATrabajar.actualizar();
+
                  }else
                  	if(turnosOcupado == 0 ){
 
@@ -68,13 +67,6 @@ public class Aldeano extends Unidad {
                     	recolectarOro();
                 }
 
-	}
-
-	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
-		naciEn(posicionHorizontal,posicionVertical);
-		try {
-			posicion.posicionar(this);
-		} catch (CasilleroLlenoException e) {}
 	}
 
 	public boolean estaLibre() {

@@ -2,15 +2,13 @@ package com.company.modelo.edificios;
 
 import com.company.excepciones.EdificioEnReparacionException;
 import com.company.excepciones.EdificioReparadoException;
-import com.company.modelo.unidades.Aldeano;
-
 
 public class EstadoEdificio {
 
 	private final Integer TURNOS_CONSTRUCCION;
-	private final Integer VIDA_MAXIMA;
+	private final int VIDA_MAXIMA;
 	private final Integer PORCENTAJE_REPARACION;
-	private Integer vidaActual;
+	public Integer vidaActual;
 	private final Integer COSTO;
 	private final Integer TAMANIO;
 	private boolean enReparacion;
@@ -21,7 +19,7 @@ public class EstadoEdificio {
 	public EstadoEdificio(int vida,int costo, int porcentajeReparacion,int tamanio, int turnosConst) {
 		
 		this.VIDA_MAXIMA = vida;
-		vidaActual = VIDA_MAXIMA;
+		vidaActual = vida;
 		this.COSTO =  costo;
 		this.PORCENTAJE_REPARACION = porcentajeReparacion;
 		this.TAMANIO = tamanio;
@@ -32,13 +30,20 @@ public class EstadoEdificio {
 
 	}
 
+	public int getVida(){
+		return vidaActual;
+	}
 
     public boolean comoNuevo() {
-		return VIDA_MAXIMA == vidaActual;
+
+		return (vidaActual == VIDA_MAXIMA);
+
 	}
 
 	public void recibirDanio(Integer unDanio) {
-		this.vidaActual -= unDanio;
+
+			this.vidaActual -= unDanio;
+
 	}
 	
 	public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
@@ -50,9 +55,14 @@ public class EstadoEdificio {
 
 			throw new EdificioEnReparacionException("");
 		}
+
 			this.vidaActual += PORCENTAJE_REPARACION;
-			reloj = calcularTiempoReparacion();
+		System.out.println("porc " + PORCENTAJE_REPARACION);
+		reloj = calcularTiempoReparacion();
+		System.out.println("reloj " + reloj);
+		if(reloj > 0){
 			enReparacion = true;
+		}
 	}
 
 	public void construir(){
@@ -71,9 +81,12 @@ public class EstadoEdificio {
 
 			if (reloj == 0) {
 				enReparacion = false;
+				return reloj;
+			}
+			if(vidaActual >= VIDA_MAXIMA){
+				vidaActual = VIDA_MAXIMA;
 				return 0;
 			}
-
             this.vidaActual += PORCENTAJE_REPARACION;
             reloj = ((VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION)  ;
 
@@ -95,7 +108,7 @@ public class EstadoEdificio {
     }
 
     public int calcularTiempoReparacion() {
-        return (VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION;
+        return ((VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION) + (1);
     }
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine

@@ -4,6 +4,7 @@ import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
+import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
@@ -168,6 +169,8 @@ public class AldeanoTest {
 
         Cuartel cuartel = new Cuartel(jugador);
 
+        assertFalse(posicion.estaOcupado(5,5));
+
         try {
 
             aldeano.construir(cuartel,5,5);
@@ -177,15 +180,16 @@ public class AldeanoTest {
             e.printStackTrace();
         }
 
-        aldeano.actualizar();
 
         aldeano.actualizar();
 
         aldeano.actualizar();
 
-        assertFalse(posicion.contiene(cuartel));
+        aldeano.actualizar();
+
+        assertTrue(posicion.estaOcupado(5,5));
     }
-/*
+
     @Test
     public void construirPlazaCentralTestYVerificarConstruccionTest() {
 
@@ -194,6 +198,8 @@ public class AldeanoTest {
         Posicion posicion = new Posicion( 5, 5);
 
         PlazaCentral plazaCentral = new PlazaCentral(jugador);
+
+        assertFalse(posicion.estaOcupado(5,5));
 
         try {
             aldeano.construir(plazaCentral,5,5);
@@ -205,21 +211,11 @@ public class AldeanoTest {
 
         aldeano.actualizar();
 
-        assertFalse(aldeano.estaLibre());
-
-        assertFalse(posicion.contiene(plazaCentral));
+        aldeano.actualizar();
 
         aldeano.actualizar();
 
-        assertFalse(aldeano.estaLibre());
-
-        assertFalse(posicion.contiene(plazaCentral));
-
-        aldeano.actualizar();
-
-        assertTrue(aldeano.estaLibre());
-
-        assertTrue(posicion.contiene(plazaCentral));
+        assertTrue(posicion.estaOcupado(5,5));
 
     }
 
@@ -232,14 +228,10 @@ public class AldeanoTest {
 
         assertFalse(castillo.comoNuevo());
 
-        assertTrue(aldeano.estaLibre());
-
         aldeano.reparar(castillo);
 
-        castillo.actualizar(); // INNECESARIO
         aldeano.actualizar();
 
-        assertTrue(aldeano.estaLibre());
         assertTrue(castillo.comoNuevo());
     }
 
@@ -249,8 +241,7 @@ public class AldeanoTest {
         Cuartel cuartel = new Cuartel(jugador);
         Aldeano aldeano = new Aldeano(jugador);
 
-
-        cuartel.recibirDanio(15);
+        cuartel.recibirDanio(60);
 
         assertFalse(cuartel.comoNuevo());
 
@@ -258,13 +249,10 @@ public class AldeanoTest {
 
         aldeano.reparar(cuartel);
 
-        cuartel.actualizar();
-        aldeano.actualizar();
-
-        assertTrue(aldeano.estaLibre());
+        //assertTrue(aldeano.estaLibre());
         assertTrue(cuartel.comoNuevo());
     }
-
+/*
     @Test
     public void repararPlazaCentralTest() {
 

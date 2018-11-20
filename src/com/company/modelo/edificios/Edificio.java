@@ -1,9 +1,5 @@
 package com.company.modelo.edificios;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.EdificioEnReparacionException;
@@ -11,8 +7,6 @@ import com.company.excepciones.EdificioReparadoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
-import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
 public abstract class Edificio implements Posicionable {
@@ -20,9 +14,7 @@ public abstract class Edificio implements Posicionable {
     protected EstadoEdificio estado;
     Jugador jugador;
 
-    protected boolean construyendo;
     protected Posicion posicion;
-	private Mapa mapa;
 
     public Edificio(Jugador jugador){
 		this.jugador = jugador;
@@ -61,6 +53,10 @@ public abstract class Edificio implements Posicionable {
 	public boolean comoNuevo() {
 		return this.estado.comoNuevo();
 	}
+
+	public int getVida(){
+        return estado.getVida();
+    }
 
     public void eliminar() throws CasilleroNoExistenteException{
         posicion.eliminar(this);
