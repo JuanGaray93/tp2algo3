@@ -3,6 +3,7 @@ package com.company.modelo;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
+import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
@@ -22,11 +23,6 @@ public class Posicion {
     public int obtenerPosicionHorizontal(){
         return this.posicionHorizontal;
     }
-
-	/*public ArrayList<Posicion> encontrarAreaLibre(int dimension) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
     public int obtenerPosicionVertical(){
         return this.posicionVertical;
@@ -93,4 +89,6 @@ public class Posicion {
         }
     }
 
+    public boolean contiene(Posicionable posicionable) {
+    }
 }

@@ -117,15 +117,13 @@ public class PlazaCentralTest{
 		} catch (CasilleroLlenoException e) {
 			// 
 		}
-
-		Aldeano peon = new Aldeano(jugador);
 		
 		PlazaCentral plaza = new PlazaCentral(jugador);
 		
 		plaza.recibirDanio(50);
 
 		try {
-			plaza.reparar(peon);
+			plaza.reparar();
 		} catch (EdificioReparadoException e) {
 			e.printStackTrace();
 		} catch (EdificioEnReparacionException e) {
@@ -152,13 +150,11 @@ public class PlazaCentralTest{
 			// 
 		}
 
-		Aldeano peon = new Aldeano(jugador);
-
 		PlazaCentral plaza = new PlazaCentral(jugador);
 		
 		plaza.recibirDanio(50);
 		
-		plaza.reparar(peon);
+		plaza.reparar();
 		
 		Assert.assertFalse(plaza.comoNuevo());
 		

@@ -36,7 +36,7 @@ public abstract class Edificio implements Posicionable {
 		return estado.estaLibre();
 	}
 	
-    public void construirEn(Aldeano peon, int posicionHorizontal, int posicionVertical)
+    public void construirEn(int posicionHorizontal, int posicionVertical)
                             throws CasilleroLlenoException {
          estado.construir();
          this.posicion = new Posicion(posicionHorizontal, posicionVertical);
@@ -53,9 +53,9 @@ public abstract class Edificio implements Posicionable {
     	
     }
     
-    public void reparar(Aldeano peon) throws EdificioReparadoException, EdificioEnReparacionException {
+    public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
 
-        this.estado.reparar(peon);
+        this.estado.reparar();
     }
     
 	public boolean comoNuevo() {
@@ -70,4 +70,8 @@ public abstract class Edificio implements Posicionable {
     public int actualizar(){
         return this.estado.actualizar();
      }
+
+    public int calcularTiempoReparacion(){
+        return this.estado.calcularTiempoReparacion();
+    }
 }

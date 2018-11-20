@@ -27,6 +27,7 @@ public class EstadoEdificio {
 		this.TAMANIO = tamanio;
 		TURNOS_CONSTRUCCION = turnosConst;
 		enReparacion = false;
+		enConstruccion = false;
 		reloj = 0;
 
 	}
@@ -40,7 +41,8 @@ public class EstadoEdificio {
 		this.vidaActual -= unDanio;
 	}
 	
-	public void reparar(Aldeano peon) throws EdificioReparadoException, EdificioEnReparacionException {
+	public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
+
       //Deberia ser edificioocupadoException, considerar el caso de construyendose
 		if(this.comoNuevo()){
 			throw new EdificioReparadoException();
@@ -49,7 +51,7 @@ public class EstadoEdificio {
 			throw new EdificioEnReparacionException("");
 		}
 			this.vidaActual += PORCENTAJE_REPARACION;
-			reloj = (VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION;
+			reloj = calcularTiempoReparacion();
 			enReparacion = true;
 	}
 
@@ -67,17 +69,22 @@ public class EstadoEdificio {
 
 		if(enReparacion) {
 
-			this.vidaActual += PORCENTAJE_REPARACION;
-			reloj = (VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION;
-			if (vidaActual == VIDA_MAXIMA) {
+			if (reloj == 0) {
 				enReparacion = false;
+				return 0;
 			}
+
+            this.vidaActual += PORCENTAJE_REPARACION;
+            reloj = ((VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION)  ;
+
 		}else
 			if(enConstruccion){
-				reloj --;
-				if (vidaActual == VIDA_MAXIMA) {
+
+				if (reloj == 0) {
 					enConstruccion = false;
+					return reloj;
 				}
+                reloj --;
 		}
 
 		return	reloj;
@@ -85,6 +92,10 @@ public class EstadoEdificio {
 
 	public boolean estaLibre() {
 	    return reloj == 0;
+    }
+
+    public int calcularTiempoReparacion() {
+        return (VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION;
     }
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine

@@ -11,6 +11,7 @@ public class Aldeano extends Unidad {
 	final private static Integer PRODUCCION_ORO = 20;
 	final private static Integer VIDA_MAXIMA = 50;
 	private int turnosOcupado;
+	Jugador jug;
 
 	private Mapa mapa = Mapa.getMapa();
 	Edificio edificioATrabajar;
@@ -19,6 +20,7 @@ public class Aldeano extends Unidad {
 		super(jugador);
 		estado = new EstadoUnidad(50,25);
         edificioATrabajar= null;
+		turnosOcupado = 0;
 	}
 
 	public void construir(Edificio edificio,Integer x, Integer y) throws CasilleroLlenoException, CasilleroNoExistenteException {
@@ -26,11 +28,14 @@ public class Aldeano extends Unidad {
 			throw new UnidadOcupadaException("Tal vez mas tarde...");
 		}
 		edificioATrabajar = edificio;
-		edificio.construirEn(this,x,y);
+		turnosOcupado = 3;
+		edificio.construirEn(x,y);
 	}
 
 	private void recolectarOro() {
+
 		if(estado.vivo()) {
+
 			jugador.sumarOro(PRODUCCION_ORO);
 		}
 	}
@@ -43,7 +48,9 @@ public class Aldeano extends Unidad {
 		try {
 
 			edificioATrabajar = edificio;
-			edificio.reparar(this);
+			turnosOcupado = edificioATrabajar.calcularTiempoReparacion();
+			edificio.reparar();
+
 
 		}catch(EdificioEnReparacionException | EdificioReparadoException e) {
 			liberar();
@@ -51,20 +58,15 @@ public class Aldeano extends Unidad {
 	}
 
 	public void actualizar() {
-                 System.out.println("hola "+edificioATrabajar);
-                 if(edificioATrabajar!=null){
+
+                 if(turnosOcupado>0){
                      turnosOcupado = edificioATrabajar.actualizar();
-                 }
+                 }else
+                 	if(turnosOcupado == 0 ){
 
-				System.out.println("hola "+turnosOcupado);
-				if(turnosOcupado == 0){
-				    edificioATrabajar = null;
-                    recolectarOro();
+				    	edificioATrabajar = null;
+                    	recolectarOro();
                 }
-
-
-
-				//System.out.println(jugador.oro);
 
 	}
 

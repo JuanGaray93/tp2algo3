@@ -39,13 +39,13 @@ public class Jugador {
 		poblacion.remove(unidad);
 	}
 
-	public boolean tieneOro(int i) {
-		return this.oro >= i;
+	public boolean tieneOro(int oro) {
+		return this.oro == oro;
 	}
 
 	public void sumarOro(int produccionOro) {
 		this.oro += produccionOro;
-		
+
 	}
 	
 	public void actualizar() {
@@ -56,10 +56,9 @@ public class Jugador {
 		//Le pasa el mapa a los edificios para permitirles ubicar unidades con su posicion
 
 		Castillo castillo = new Castillo(this);
-		Aldeano constructor =  new Aldeano(this);
 
 		try {
-			castillo.construirEn(constructor,1, 1);
+			castillo.construirEn(1, 1);
 		} catch (CasilleroLlenoException e) {
 			e.printStackTrace();
 		}
@@ -68,7 +67,7 @@ public class Jugador {
 		PlazaCentral plaza = new PlazaCentral(this);
 
 		try {
-			plaza.construirEn(constructor,5, 0);
+			plaza.construirEn(5, 0);
 		} catch (CasilleroLlenoException e) {
 			e.printStackTrace();
 		}

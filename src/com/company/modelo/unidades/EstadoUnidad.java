@@ -13,8 +13,6 @@ public class EstadoUnidad {
 		this.COSTO =  costo;
 	
 	}
-
-
 	
 	public void recibirDanio(int unDanio) {
 		this.vidaActual -= unDanio;
