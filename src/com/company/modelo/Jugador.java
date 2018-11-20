@@ -77,9 +77,9 @@ public class Jugador {
 		poblacion.add(new Aldeano(this));
 		poblacion.add(new Aldeano(this));
 
-		poblacion.get(0).naciEn(5,3);
-		poblacion.get(1).naciEn(6,3);
-		poblacion.get(2).naciEn(7,0);
+		poblacion.get(0).establecerCoordenadasDeNacimiento(5,3);
+		poblacion.get(1).establecerCoordenadasDeNacimiento(6,3);
+		poblacion.get(2).establecerCoordenadasDeNacimiento(7,0);
 	}
 
 	public void eliminarDeConstrucciones(Edificio edificio) {

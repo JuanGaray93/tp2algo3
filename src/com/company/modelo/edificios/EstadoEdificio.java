@@ -1,20 +1,24 @@
 package com.company.modelo.edificios;
 
 import com.company.excepciones.EdificioEnReparacionException;
+import com.company.excepciones.EdificioOcupadoException;
 import com.company.excepciones.EdificioReparadoException;
+import com.company.modelo.unidades.Aldeano;
 
-public class EstadoEdificio {
+public abstract class EstadoEdificio {
 
-	private final Integer TURNOS_CONSTRUCCION;
 	private final int VIDA_MAXIMA;
-	private final Integer PORCENTAJE_REPARACION;
-	private final Integer COSTO;
 	private final Integer TAMANIO;
 
 	private Integer vidaActual;
 	private boolean enReparacion;
 	private boolean enConstruccion;
 	private int reloj;
+
+
+	private Aldeano trabajadorActual;
+
+
 
 	public EstadoEdificio(int vida,int costo, int porcentajeReparacion,int tamanio, int turnosConst) {
 		
@@ -57,7 +61,15 @@ public class EstadoEdificio {
 		}
 	}
 
-	public void construir(){
+	public void construir(Aldeano quienLoConstruye){
+
+		if(trabajadorActual == null){
+			trabajadorActual = quienLoConstruye;
+		} else if( trabajadorActual != quienLoConstruye){
+			throw new EdificioOcupadoException("No se puede construir este edificio, hay otro aldeano construyendolo!");
+		}
+
+
 
 		reloj = TURNOS_CONSTRUCCION;
 		enConstruccion = true;

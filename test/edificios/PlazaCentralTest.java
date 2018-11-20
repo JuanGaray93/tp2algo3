@@ -26,19 +26,25 @@ public class PlazaCentralTest{
 
 	
 	@Test
-	public void PlazaCentralCrearAldeanoTest() throws CasilleroNoExistenteException, CasilleroLlenoException{
+	public void puedeSerConstruida(){
+		PlazaCentral central = new PlazaCentral(jugador);
+		central.construirEn();
+	}
+
+	@Test
+	public void plazaCentralCrearAldeanoTest() throws CasilleroNoExistenteException, CasilleroLlenoException{
 
 		PlazaCentral central = new PlazaCentral(jugador);
-		
+
 		//Terreno no esta ocupado en este momento
 		Assert.assertFalse(mapa.estaOcupado(16,22));
 		try {
 			mapa.ubicar(central, 5, 5);
-			
+
 		}catch(CasilleroLlenoException e) {
-			
+
 		}
-		
+
 		central.crear(new Aldeano(jugador));
 		//Ahora terreno esta ocupado en posicion cercana de castillo y en castillo
 		//La posicion donde se crea la maquina de asedio es random en el castillo
@@ -50,7 +56,6 @@ public class PlazaCentralTest{
 
 	@Test
 	public void recibirDanioDeEspadachinYVerificarDanioTest() {
-
 		Espadachin espadachin = new Espadachin(jugador);
 		
 		PlazaCentral plaza = new PlazaCentral(jugador);
@@ -60,7 +65,6 @@ public class PlazaCentralTest{
 		espadachin.atacar(plaza);
 		
 		Assert.assertFalse(plaza.comoNuevo());
-		
 	}
 
 	@Test
@@ -153,7 +157,7 @@ public class PlazaCentralTest{
 		
 		plaza.crear(new Aldeano(jugador));
 		
-		Assert.assertFalse(plaza.libre());
+		Assert.assertFalse(plaza.estaLibre());
 		try {
 			plaza.crear(new Aldeano(jugador));
 		}catch(EdificioOcupadoException e) {
@@ -162,7 +166,7 @@ public class PlazaCentralTest{
 		
 		plaza.actualizar();
 		
-		Assert.assertTrue(plaza.libre());
+		Assert.assertTrue(plaza.estaLibre());
 		
 		plaza.crear(new Aldeano(jugador));
 		

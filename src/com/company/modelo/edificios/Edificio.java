@@ -7,12 +7,13 @@ import com.company.excepciones.EdificioReparadoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
+import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
 public abstract class Edificio implements Posicionable {
 
     protected EstadoEdificio estado;
-    Jugador jugador;
+
 
     protected Posicion posicion;
 
@@ -24,13 +25,13 @@ public abstract class Edificio implements Posicionable {
 		estado.recibirDanio(unDanio);
 	}
 
-	public boolean libre() {
+	public boolean estaLibre() {
 		return estado.estaLibre();
 	}
 	
-    public void construirEn(int posicionHorizontal, int posicionVertical)
+    public void construir(Aldeano quienLoConstruye, int posicionHorizontal, int posicionVertical)
                             throws CasilleroLlenoException {
-         estado.construir();
+         estado.construir(quienLoConstruye);
          this.posicion = new Posicion(posicionHorizontal, posicionVertical);
          posicion.posicionar(this);
 

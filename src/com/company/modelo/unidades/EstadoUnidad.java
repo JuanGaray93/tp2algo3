@@ -34,7 +34,7 @@ public class EstadoUnidad {
 		return COSTO;
 	}
 
-	public boolean saludable() {
+	public boolean estaSaludable() {
 		return VIDA_MAXIMA == vidaActual;
 	}
 

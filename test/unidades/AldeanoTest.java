@@ -123,7 +123,7 @@ public class AldeanoTest {
 
 		aldeano.recibirDanio(15); //
 
-		assertFalse(aldeano.saludable());
+		assertFalse(aldeano.estaSaludable());
 
 	}
 
@@ -134,7 +134,7 @@ public class AldeanoTest {
 
 		aldeano.recibirDanio(15);
 
-		assertFalse(aldeano.saludable());
+		assertFalse(aldeano.estaSaludable());
 	}
 
     @Test

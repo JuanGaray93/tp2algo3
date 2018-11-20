@@ -17,11 +17,11 @@ public abstract class Unidad implements Posicionable {
 		this.jugador = jugador;
 	}
 	
-	public boolean saludable() {
-		return estado.saludable();
+	public boolean estaSaludable() {
+		return estado.estaSaludable();
 	}
 
-	public void naciEn(int posicionHorizontal, int posicionVertical) {
+	public void establecerCoordenadasDeNacimiento(int posicionHorizontal, int posicionVertical) {
 		posicion = new Posicion(posicionHorizontal, posicionVertical);
 	}
 

@@ -24,7 +24,7 @@ public class PosicionTest {
 		
 		Posicion posicion = new Posicion(3,4);
 		
-		aldeano.naciEn(3,4);
+		aldeano.establecerCoordenadasDeNacimiento(3,4);
 		
 		Assert.assertTrue(posicion.contiene(aldeano));
 		
