@@ -54,10 +54,6 @@ public abstract class Edificio implements Posicionable {
 		return this.estado.comoNuevo();
 	}
 
-	public int getVida(){
-        return estado.getVida();
-    }
-
     public void eliminar() throws CasilleroNoExistenteException{
         posicion.eliminar(this);
         this.jugador.eliminarDeConstrucciones(this);

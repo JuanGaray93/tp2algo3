@@ -27,6 +27,7 @@ public class AldeanoTest {
 
 	}
 
+
 	@Test
     public void verificarQueSumaOroSiNoEstaOcupadoTest() {
         try {
@@ -228,7 +229,7 @@ public class AldeanoTest {
 
         assertFalse(castillo.comoNuevo());
 
-        aldeano.reparar(castillo);
+        aldeano.reparar(castillo);//
 
         aldeano.actualizar();
 
@@ -249,18 +250,21 @@ public class AldeanoTest {
 
         aldeano.reparar(cuartel);
 
-        //assertTrue(aldeano.estaLibre());
+        aldeano.actualizar();
+
+        aldeano.actualizar();
+
+        assertTrue(aldeano.estaLibre());
         assertTrue(cuartel.comoNuevo());
     }
-/*
+
     @Test
     public void repararPlazaCentralTest() {
 
         PlazaCentral plaza = new PlazaCentral(jugador);
         Aldeano aldeano = new Aldeano(jugador);
 
-
-        plaza.recibirDanio(15);
+        plaza.recibirDanio(10);
 
         assertFalse(plaza.comoNuevo());
 
@@ -268,12 +272,11 @@ public class AldeanoTest {
 
         aldeano.reparar(plaza);
 
-        plaza.actualizar();
         aldeano.actualizar();
 
         assertTrue(aldeano.estaLibre());
         assertTrue(plaza.comoNuevo());
-    }*/
+    }
 
 
 }

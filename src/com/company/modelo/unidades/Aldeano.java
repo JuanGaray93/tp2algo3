@@ -14,11 +14,13 @@ public class Aldeano extends Unidad {
 
 	Edificio edificioATrabajar;
 
+	boolean trabajando;
+
 	public Aldeano(Jugador jugador) {
 		super(jugador);
 		estado = new EstadoUnidad(50,25);
         edificioATrabajar= null;
-		turnosOcupado = 0;
+		trabajando  = false;
 	}
 
 	public void construir(Edificio edificio,Integer x, Integer y) throws CasilleroLlenoException, CasilleroNoExistenteException {
@@ -47,7 +49,7 @@ public class Aldeano extends Unidad {
 
 			edificioATrabajar = edificio;
 			turnosOcupado = edificioATrabajar.calcularTiempoReparacion();
-			System.out.println(turnosOcupado);
+
 			edificio.reparar();
 
 		}catch(EdificioEnReparacionException | EdificioReparadoException e) {
@@ -57,7 +59,8 @@ public class Aldeano extends Unidad {
 
 	public void actualizar() {
 
-                 if(turnosOcupado>0){
+                 if(turnosOcupado>1){
+
                      turnosOcupado = edificioATrabajar.actualizar();
 
                  }else
@@ -65,7 +68,11 @@ public class Aldeano extends Unidad {
 
 				    	edificioATrabajar = null;
                     	recolectarOro();
-                }
+                }else
+                	if(	turnosOcupado == 1){
+						turnosOcupado = edificioATrabajar.actualizar();
+                		this.liberar();
+					}
 
 	}
 

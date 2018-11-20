@@ -8,13 +8,12 @@ public class EstadoEdificio {
 	private final Integer TURNOS_CONSTRUCCION;
 	private final int VIDA_MAXIMA;
 	private final Integer PORCENTAJE_REPARACION;
-	public Integer vidaActual;
+	private Integer vidaActual;
 	private final Integer COSTO;
 	private final Integer TAMANIO;
 	private boolean enReparacion;
 	private boolean enConstruccion;
 	private int reloj;
-
 
 	public EstadoEdificio(int vida,int costo, int porcentajeReparacion,int tamanio, int turnosConst) {
 		
@@ -28,10 +27,6 @@ public class EstadoEdificio {
 		enConstruccion = false;
 		reloj = 0;
 
-	}
-
-	public int getVida(){
-		return vidaActual;
 	}
 
     public boolean comoNuevo() {
@@ -56,10 +51,10 @@ public class EstadoEdificio {
 			throw new EdificioEnReparacionException("");
 		}
 
-			this.vidaActual += PORCENTAJE_REPARACION;
-		System.out.println("porc " + PORCENTAJE_REPARACION);
 		reloj = calcularTiempoReparacion();
-		System.out.println("reloj " + reloj);
+
+		this.vidaActual += PORCENTAJE_REPARACION;
+
 		if(reloj > 0){
 			enReparacion = true;
 		}
@@ -81,15 +76,18 @@ public class EstadoEdificio {
 
 			if (reloj == 0) {
 				enReparacion = false;
+				vidaActual = VIDA_MAXIMA;
+				return reloj;
+
+			}
+			if(vidaActual >= VIDA_MAXIMA && reloj>0){
+
+				vidaActual = VIDA_MAXIMA;
+				reloj = 0;
 				return reloj;
 			}
-			if(vidaActual >= VIDA_MAXIMA){
-				vidaActual = VIDA_MAXIMA;
-				return 0;
-			}
             this.vidaActual += PORCENTAJE_REPARACION;
-            reloj = ((VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION)  ;
-
+            reloj = calcularTiempoReparacion() ;
 		}else
 			if(enConstruccion){
 
@@ -108,7 +106,11 @@ public class EstadoEdificio {
     }
 
     public int calcularTiempoReparacion() {
-        return ((VIDA_MAXIMA - vidaActual)/PORCENTAJE_REPARACION) + (1);
+		int danio = VIDA_MAXIMA - vidaActual;
+		if(danio > PORCENTAJE_REPARACION){
+			return ((danio)/PORCENTAJE_REPARACION) +1;
+		}
+        return (danio)/PORCENTAJE_REPARACION;
     }
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine
