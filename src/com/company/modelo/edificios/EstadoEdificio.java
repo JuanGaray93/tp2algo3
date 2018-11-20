@@ -8,9 +8,10 @@ public class EstadoEdificio {
 	private final Integer TURNOS_CONSTRUCCION;
 	private final int VIDA_MAXIMA;
 	private final Integer PORCENTAJE_REPARACION;
-	private Integer vidaActual;
 	private final Integer COSTO;
 	private final Integer TAMANIO;
+
+	private Integer vidaActual;
 	private boolean enReparacion;
 	private boolean enConstruccion;
 	private int reloj;
@@ -30,15 +31,11 @@ public class EstadoEdificio {
 	}
 
     public boolean comoNuevo() {
-
 		return (vidaActual == VIDA_MAXIMA);
-
 	}
 
 	public void recibirDanio(Integer unDanio) {
-
 			this.vidaActual -= unDanio;
-
 	}
 	
 	public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
@@ -88,14 +85,13 @@ public class EstadoEdificio {
 			}
             this.vidaActual += PORCENTAJE_REPARACION;
             reloj = calcularTiempoReparacion() ;
-		}else
-			if(enConstruccion){
+		} else if(enConstruccion){
 
-				if (reloj == 0) {
-					enConstruccion = false;
-					return reloj;
-				}
-                reloj --;
+			if (reloj == 0) {
+				enConstruccion = false;
+				return reloj;
+			}
+            reloj --;
 		}
 
 		return	reloj;

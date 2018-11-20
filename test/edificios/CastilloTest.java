@@ -10,6 +10,7 @@ import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.MaquinaAsedio;
 
 public class CastilloTest {
+
 	@Test
 	void testCastilloCrearMaquinaAsedio() throws CasilleroLlenoException {
 		

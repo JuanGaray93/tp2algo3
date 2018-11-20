@@ -24,29 +24,20 @@ public class AldeanoTest {
 	public void resetMapa() throws CasilleroLlenoException {
 		mapa.destruir();
 		mapa = Mapa.getMapa();
-
+        jugador = new Jugador(mapa);
 	}
 
 
 	@Test
     public void verificarQueSumaOroSiNoEstaOcupadoTest() {
-        try {
-            jugador = new Jugador(mapa);
-        } catch (CasilleroLlenoException e) { }
 
         Aldeano aldeano = new Aldeano(jugador);
     	aldeano.actualizar();
-
-
     	assertTrue(jugador.tieneOro(120));
     }
 
 	@Test
     public void verificarQueSumaOroUnaVezPorTurnoTest() {
-
-        try {
-            jugador = new Jugador(mapa);
-        } catch (CasilleroLlenoException e) { }
 
     	Aldeano aldeano = new Aldeano(jugador);
     	//100
@@ -68,10 +59,6 @@ public class AldeanoTest {
 	@Test
 	public void verificarQueMientrasReparaNoSumaOroTest() {
 
-        try {
-            jugador = new Jugador(mapa);
-        } catch (CasilleroLlenoException e) { }
-
 		Aldeano aldeano = new Aldeano(jugador);
 
 		PlazaCentral plaza = new PlazaCentral(jugador);
@@ -86,10 +73,6 @@ public class AldeanoTest {
 
 	@Test
 	public void verificarQueMientrasConstruyeNoSumaOroTest() {
-
-        try {
-            jugador = new Jugador(mapa);
-        } catch (CasilleroLlenoException e) { }
 
 		Aldeano aldeano = new Aldeano(jugador);
 
@@ -123,12 +106,6 @@ public class AldeanoTest {
 	@Test
 	public void verificarQueAldeanoAunHeridoSumaOroTest() {
 
-        try {
-            jugador = new Jugador(mapa);
-        } catch (CasilleroLlenoException e) {
-
-        }
-
         Aldeano aldeano = new Aldeano(jugador);
 
 		aldeano.recibirDanio(20);
@@ -158,7 +135,6 @@ public class AldeanoTest {
 		aldeano.recibirDanio(15);
 
 		assertFalse(aldeano.saludable());
-
 	}
 
     @Test

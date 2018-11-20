@@ -2,6 +2,7 @@ package edificios;
 
 import com.company.excepciones.*;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.company.modelo.Jugador;
@@ -12,24 +13,27 @@ import com.company.modelo.unidades.Arquero;
 import com.company.modelo.unidades.Espadachin;
 
 public class PlazaCentralTest{
-	
-	Mapa terreno = Mapa.getMapa();
-	Jugador jugador ;
+
+	private Mapa mapa;
+	private Jugador jugador;
+
+	@Before
+	public void resetMapa() throws CasilleroLlenoException {
+		mapa.destruir();
+		mapa = Mapa.getMapa();
+		jugador = new Jugador(mapa);
+	}
+
 	
 	@Test
 	public void PlazaCentralCrearAldeanoTest() throws CasilleroNoExistenteException, CasilleroLlenoException{
-		
-		try {
-			jugador = new Jugador(terreno);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-		
+
 		PlazaCentral central = new PlazaCentral(jugador);
+		
 		//Terreno no esta ocupado en este momento
-		Assert.assertFalse(terreno.estaOcupado(16,22));
+		Assert.assertFalse(mapa.estaOcupado(16,22));
 		try {
-			terreno.ubicar(central, 5, 5);
+			mapa.ubicar(central, 5, 5);
 			
 		}catch(CasilleroLlenoException e) {
 			
@@ -40,19 +44,12 @@ public class PlazaCentralTest{
 		//La posicion donde se crea la maquina de asedio es random en el castillo
 		// TODO probar mas casos borde!
 		//Assert.assertTrue(terreno.estaOcupado(16,22));
-		Assert.assertTrue(terreno.estaOcupado(15,21));
-		Assert.assertTrue(terreno.estaOcupado(16,20));
+		Assert.assertTrue(mapa.estaOcupado(15,21));
+		Assert.assertTrue(mapa.estaOcupado(16,20));
 	}
-	
+
+	@Test
 	public void recibirDanioDeEspadachinYVerificarDanioTest() {
-		
-		try {
-			jugador = new Jugador(terreno);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-		
-		Mapa terreno = Mapa.getMapa();
 
 		Espadachin espadachin = new Espadachin(jugador);
 		
@@ -65,15 +62,10 @@ public class PlazaCentralTest{
 		Assert.assertFalse(plaza.comoNuevo());
 		
 	}
-	
+
+	@Test
 	public void recibirDanioDeArqueroYVerificarDanioTest() {
 		
-		try {
-			jugador = new Jugador(terreno);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-		
 		Mapa terreno = Mapa.getMapa();
 		
 		Arquero archer = new Arquero(jugador);
@@ -87,15 +79,10 @@ public class PlazaCentralTest{
 		Assert.assertFalse(plaza.comoNuevo());
 		
 	}
-	
+
+	@Test
 	public void recibirDanioDeArmaAsedioYVerificarDanioTest() {
 		
-		try {
-			jugador = new Jugador(terreno);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-		
 		Mapa terreno = Mapa.getMapa();
 		
 		Arquero archer = new Arquero(jugador);
@@ -109,14 +96,9 @@ public class PlazaCentralTest{
 		Assert.assertFalse(plaza.comoNuevo());
 		
 	}
-	
+
+	@Test
 	public void verificarReparacionEnTiempoIndicadoTest() {
-		
-		try {
-			jugador = new Jugador(terreno);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
 		
 		PlazaCentral plaza = new PlazaCentral(jugador);
 		
@@ -141,14 +123,9 @@ public class PlazaCentralTest{
 		Assert.assertTrue(plaza.comoNuevo());
 		
 	}
-	
+
+	@Test
 	public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest() throws EdificioReparadoException, EdificioEnReparacionException {
-		
-		try {
-			jugador = new Jugador(terreno);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
 
 		PlazaCentral plaza = new PlazaCentral(jugador);
 		
@@ -169,13 +146,8 @@ public class PlazaCentralTest{
 	}
 	
 	//por simplicidad dura un turno la creacion de aldeano, es decir queda disponible en el sig. turno
+	@Test
 	public void verificarQueNoCreaAldeanoHastaTerminarActual() {
-		
-		try {
-			jugador = new Jugador(terreno);
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
 		
 		PlazaCentral plaza = new PlazaCentral(jugador);
 		
