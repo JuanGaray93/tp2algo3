@@ -10,68 +10,79 @@ public class Aldeano extends Unidad {
 
 	final private static Integer PRODUCCION_ORO = 20;
 	final private static Integer VIDA_MAXIMA = 50;
+	private int turnosOcupado;
 
-	private Integer vida;
-	
-	private boolean trabajando;
 	private Mapa mapa = Mapa.getMapa();
+	Edificio edificioATrabajar;
 
 	public Aldeano(Jugador jugador) {
 		super(jugador);
-		trabajando = false;
-		estado = new EstadoAldeano(VIDA_MAXIMA,25);
-
-		this.vida = VIDA_MAXIMA;
+		estado = new EstadoUnidad(50,25);
+        edificioATrabajar= null;
 	}
 
 	public void construir(Edificio edificio,Integer x, Integer y) throws CasilleroLlenoException, CasilleroNoExistenteException {
-		if(trabajando){
+		if(edificioATrabajar!=null){
 			throw new UnidadOcupadaException("Tal vez mas tarde...");
 		}
-
-		posicion.posicionarEdificio(edificio, mapa);
-			
-		this.trabajando = !trabajando;
+		edificioATrabajar = edificio;
+		edificio.construirEn(this,x,y);
 	}
 
 	private void recolectarOro() {
-		if(! trabajando) {
+		if(estado.vivo()) {
 			jugador.sumarOro(PRODUCCION_ORO);
 		}
 	}
 
 	public void reparar(Edificio edificio) {
 			
-		if (trabajando) {
+		if (edificioATrabajar != null) {
 			throw new UnidadOcupadaException("Tal vez mas tarde...");
 		}
 		try {
-			edificio.reparar();
-		}catch(EdificioEnReparacionException e) {
-			liberar();
-		} catch (EdificioReparadoException e) {
+
+			edificioATrabajar = edificio;
+			edificio.reparar(this);
+
+		}catch(EdificioEnReparacionException | EdificioReparadoException e) {
 			liberar();
 		}
 	}
 
 	public void actualizar() {
-		if(this.vida > 0) {
-			recolectarOro();
-		}
+                 System.out.println("hola "+edificioATrabajar);
+                 if(edificioATrabajar!=null){
+                     turnosOcupado = edificioATrabajar.actualizar();
+                 }
+
+				System.out.println("hola "+turnosOcupado);
+				if(turnosOcupado == 0){
+				    edificioATrabajar = null;
+                    recolectarOro();
+                }
+
+
+
+				//System.out.println(jugador.oro);
+
 	}
 
 	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
-		Mapa mapa = Mapa.getMapa();
-		mapa.colocarEnCasilleroLibreMasCercano(this, posicionHorizontal, posicionVertical );
+		naciEn(posicionHorizontal,posicionVertical);
+		try {
+			posicion.posicionar(this);
+		} catch (CasilleroLlenoException e) {}
 	}
 
 	public boolean estaLibre() {
-		return trabajando;
+		return edificioATrabajar == null;
 		
 	}
 
 	public void liberar(){
-		trabajando = false;
+        edificioATrabajar = null;
+
 	}
 
 }

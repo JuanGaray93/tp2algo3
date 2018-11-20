@@ -1,4 +1,4 @@
-package test.unidades;
+package unidades;
 
 public class EspadachinTest {
      /*

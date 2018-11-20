@@ -13,6 +13,8 @@ public class EstadoUnidad {
 		this.COSTO =  costo;
 	
 	}
+
+
 	
 	public void recibirDanio(int unDanio) {
 		this.vidaActual -= unDanio;
@@ -38,4 +40,7 @@ public class EstadoUnidad {
 		return VIDA_MAXIMA == vidaActual;
 	}
 
+	public boolean vivo() {
+		return this.vidaActual>0;
+	}
 }

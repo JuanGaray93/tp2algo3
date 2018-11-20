@@ -1,5 +1,4 @@
-package test;
-
+import org.junit.Test;
 import org.junit.Assert;
 
 import com.company.excepciones.CasilleroLlenoException;
@@ -14,6 +13,7 @@ import com.company.modelo.unidades.Aldeano;
 
 public class PosicionTest {
 
+	/*@Test
 	public void nacerAldeanoYVerificarQueSePosicionaEnPosicionIndicadaTest() {
 		Aldeano aldeano = null;
 		try {
@@ -29,7 +29,8 @@ public class PosicionTest {
 		Assert.assertTrue(posicion.contiene(aldeano));
 		
 	}
-	
+*/
+	/*@Test
 	public void crearPlazaCentralYVerificarQueSePosicionaEnPosicionIndicadaTest() throws CasilleroLlenoException {
 		
 		PlazaCentral plazaCentral = new PlazaCentral(new Jugador(Mapa.getMapa()));
@@ -45,6 +46,6 @@ public class PosicionTest {
 		
 		Assert.assertTrue(posicion.contiene(plazaCentral));
 		
-	}
+	}*/
 	
 }

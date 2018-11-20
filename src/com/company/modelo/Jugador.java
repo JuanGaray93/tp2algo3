@@ -15,7 +15,7 @@ public class Jugador {
 	
 	ArrayList <Unidad> poblacion;
 	ArrayList <Edificio> edificios;
-	private int oro;
+	public int oro;
 
 	public Jugador(Mapa mapa) throws CasilleroLlenoException {
 		this.oro = 100;
@@ -56,11 +56,10 @@ public class Jugador {
 		//Le pasa el mapa a los edificios para permitirles ubicar unidades con su posicion
 
 		Castillo castillo = new Castillo(this);
+		Aldeano constructor =  new Aldeano(this);
 
 		try {
-			castillo.construirEn(1, 1);
-		} catch (CasilleroNoExistenteException e1) {
-
+			castillo.construirEn(constructor,1, 1);
 		} catch (CasilleroLlenoException e) {
 			e.printStackTrace();
 		}
@@ -69,9 +68,7 @@ public class Jugador {
 		PlazaCentral plaza = new PlazaCentral(this);
 
 		try {
-			plaza.construirEn(5, 0);
-		} catch (CasilleroNoExistenteException e) {
-			//
+			plaza.construirEn(constructor,5, 0);
 		} catch (CasilleroLlenoException e) {
 			e.printStackTrace();
 		}
@@ -84,5 +81,9 @@ public class Jugador {
 		poblacion.get(0).naciEn(5,3);
 		poblacion.get(1).naciEn(6,3);
 		poblacion.get(2).naciEn(7,0);
+	}
+
+	public void eliminarDeConstrucciones(Edificio edificio) {
+		edificios.remove(edificio);
 	}
 }

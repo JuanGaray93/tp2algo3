@@ -1,4 +1,4 @@
-package test.terreno;
+package terreno;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.modelo.Jugador;

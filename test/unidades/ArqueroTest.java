@@ -1,10 +1,11 @@
-package test.unidades;
+package unidades;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Cuartel;
+import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Arquero;
 import com.company.modelo.unidades.Unidad;
 
@@ -34,15 +35,13 @@ public class ArqueroTest {
 			// 
 		}
 
+       Aldeano peon = new Aldeano(jugador);
+
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,3, 5);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 
@@ -75,16 +74,14 @@ public class ArqueroTest {
 		} catch (CasilleroLlenoException e) {
 			// 
 		}
+
+        Aldeano peon = new Aldeano(jugador);
         
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,3, 5);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 
@@ -118,15 +115,13 @@ public class ArqueroTest {
 			// 
 		}
 
+        Aldeano peon = new Aldeano(jugador);
+
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,3, 5);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 
@@ -159,16 +154,14 @@ public class ArqueroTest {
 		} catch (CasilleroLlenoException e) {
 			// 
 		}
+
+        Aldeano peon = new Aldeano(jugador);
     	
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,3, 5);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 
@@ -188,15 +181,13 @@ public class ArqueroTest {
 			// 
 		}
 
+        Aldeano peon = new Aldeano(jugador);
+
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,3, 5);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 
@@ -228,15 +219,13 @@ public class ArqueroTest {
 			// 
 		}
 
+        Aldeano peon = new Aldeano(jugador);
+
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,3, 5);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 
@@ -268,15 +257,14 @@ public class ArqueroTest {
 		} catch (CasilleroLlenoException e) {
 			// 
 		}
+
+        Aldeano peon = new Aldeano(jugador);
+
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,3, 5);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 
@@ -309,16 +297,14 @@ public class ArqueroTest {
 		} catch (CasilleroLlenoException e) {
 			// 
 		}
+
+        Aldeano peon = new Aldeano(jugador);
     	
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,3, 5);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 

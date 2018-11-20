@@ -2,6 +2,7 @@ package com.company.modelo;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
@@ -11,16 +12,12 @@ public class Posicion {
 
     private Integer posicionHorizontal;
     private Integer posicionVertical;
-
+    Mapa mapa = Mapa.getMapa();
+;
     public Posicion(int posicionHorizontal, int posicionVertical) {
         this.posicionHorizontal = posicionHorizontal;
         this.posicionVertical = posicionVertical;
     }
-
-	/*public boolean contiene(Posicionable posicionable) {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
 
     public int obtenerPosicionHorizontal(){
         return this.posicionHorizontal;
@@ -35,22 +32,65 @@ public class Posicion {
         return this.posicionVertical;
     }
 
-    public void posicionarUnidad(Unidad unaUnidad) throws CasilleroLlenoException {
-        Mapa mapa = Mapa.getMapa();
-        //mapa.colocarEnCasilleroLibreMasCercano(unaUnidad, this.x, this.y);
+    public void posicionar(Unidad unaUnidad) throws CasilleroLlenoException {
+
+        try {
+            mapa.colocarEnCasilleroLibreMasCercano(unaUnidad, this.posicionHorizontal, this.posicionVertical);
+        } catch (MapaLlenoException e) {
+
+        }
     }
 
-    public void posicionarEdificio(Edificio unEdificio, Mapa mapa) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        mapa.ubicar(unEdificio, this.posicionHorizontal, this.posicionVertical);
+    public void posicionar(Edificio edificio) throws CasilleroLlenoException {
+
+        int lado = edificio.getTamanio() / 2;
+
+        for( int i = this.posicionHorizontal; i < ( this.posicionHorizontal + lado ); i++){
+
+            for( int j = this.posicionVertical; j < ( this.posicionVertical + lado ); j++){
+                try {
+                    mapa.ubicar(edificio,i,j);
+                } catch (CasilleroNoExistenteException e) {
+
+                }
+
+            }
+
+        }
+
     }
 
     public void eliminar(){
-        //TODO implementar el borrar del mapa
+        try {
+            mapa.quitar(posicionHorizontal,posicionVertical);
+        } catch (CasilleroNoExistenteException e) {
+            e.printStackTrace();
+        }
     }
 
-	public boolean contiene(Posicionable posicionable) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public void eliminar(Edificio edificio){
+
+        int lado = edificio.getTamanio() / 2;
+
+        for( int i = posicionHorizontal; i < ( posicionHorizontal + lado ); i++){
+
+            for( int j = posicionVertical; j < ( posicionVertical + lado ); j++){
+                try {
+                    mapa.quitar(i,j);
+                } catch (CasilleroNoExistenteException e) {
+
+                }
+
+            }
+
+        }
+
+        Mapa mapa = Mapa.getMapa();
+        try {
+            mapa.quitar(posicionHorizontal,posicionVertical);
+        } catch (CasilleroNoExistenteException e) {
+
+        }
+    }
 
 }

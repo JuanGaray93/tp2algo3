@@ -22,10 +22,10 @@ public class MaquinaAsedio  extends Unidad {
 		ataque.atacar(enemigo);
 	}
 
-	@Override
+	//@Override
 	public void actualizar() {
 		// TODO Auto-generated method stub
-		
+
 	}
 	
 }

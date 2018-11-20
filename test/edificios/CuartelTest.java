@@ -1,8 +1,9 @@
-package test.edificios;
+package edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.terreno.Mapa;
+import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Arquero;
 import com.company.modelo.unidades.Espadachin;
 import com.company.modelo.Jugador;
@@ -32,15 +33,13 @@ public class CuartelTest {
 		 jugador  = new Jugador(mapa);
 		Cuartel cuartel = new Cuartel(jugador);
 
+		Aldeano peon = new Aldeano(jugador);
+
 		assertFalse( mapa.estaOcupado(3,5) );
 
 		try {
-			cuartel.construirEn(3, 5);
-		}
-		catch ( CasilleroNoExistenteException e){
-			e.printStackTrace();
-		}
-		catch ( CasilleroLlenoException e) {
+			cuartel.construirEn(peon,3, 5);
+		} catch ( CasilleroLlenoException e) {
 			e.printStackTrace();
 		}
 
@@ -70,15 +69,13 @@ public class CuartelTest {
     	jugador  = new Jugador(mapa);
         Cuartel cuartel = new Cuartel(jugador);
 
+		Aldeano peon = new Aldeano(jugador);
+
         assertFalse( mapa.estaOcupado(20,20) );
 
         try {
-            cuartel.construirEn(20, 20);
-        }
-        catch ( CasilleroNoExistenteException e){
-            e.printStackTrace();
-        }
-        catch ( CasilleroLlenoException e) {
+            cuartel.construirEn(peon,20, 20);
+        } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
 

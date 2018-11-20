@@ -28,7 +28,7 @@ public abstract class Unidad implements Posicionable {
 	public void moverA(int posicionHorizontal, int posicionVertical) throws CasilleroLlenoException, CasilleroNoExistenteException {
 		this.eliminar();
 		posicion = new Posicion(posicionHorizontal, posicionVertical);
-		posicion.posicionarUnidad(this);
+		posicion.posicionar(this);
 	}
 
 	public void recibirDanio(int unDanio){

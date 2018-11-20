@@ -1,21 +1,19 @@
 package com.company.modelo.unidades.estados;
 
 import com.company.modelo.unidades.EstadoUnidad;
+import com.company.modelo.unidades.Aldeano;
 
 public class EstadoAldeano extends EstadoUnidad {
 
-    private Integer vida;
+  /*  private Integer vida;
+    private final Integer turnosConstruccion;
 
-    public EstadoAldeano(int vida, int costo) {
-        super(vida, costo);
+    */public EstadoAldeano() {
+        super(50, 25);
 
     }
 
+   // public void actualizar(Aldeano aldeano, Integer vidaEdificio);
 
-    //Esto se debería hacer con polimorfismo y varios estados.
-    public void recolectarOro(){
-        if(this.vida > 0){
-            
-        }
-    }
+
 }

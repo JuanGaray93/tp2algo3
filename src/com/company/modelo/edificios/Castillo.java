@@ -10,7 +10,7 @@ private Ataque ataque;
 
 	public Castillo(Jugador jugador) {
 		super(jugador);
-		this.estado = new EstadoEdificio(1000,0,0);
+		this.estado = new EstadoEdificio(1000,0,0,16,0);
 	}
 
 	/*public void crearMaquinaAsedio() throws Exception {
@@ -26,10 +26,5 @@ private Ataque ataque;
 		ataque.atacar(enemigo);
 	}
 
-	@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
