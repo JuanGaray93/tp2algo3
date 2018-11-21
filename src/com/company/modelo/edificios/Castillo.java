@@ -21,14 +21,14 @@ public class Castillo extends Edificio {
 
     private Ataque ataque;
 
-    EstadoCastillo estado;
+    //EstadoCastillo estado;
 
     public Castillo(Jugador jugador) {
         super(jugador);
-        VIDA_MAXIMA = 1000;
-        vidaActual = 1000;
-        MONTO_REPARACION = 15;
-        estado = new EstadoCastillo(VIDA_MAXIMA);
+        //VIDA_MAXIMA = 1000;
+        //vidaActual = 1000;
+        //estado = new EstadoCastillo(VIDA_MAXIMA);
+        this.estado = new EstadoEdificio(1000,0,15,16, 0);
 		ataque = new Ataque(20,20);
     }
     
