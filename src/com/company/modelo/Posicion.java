@@ -37,4 +37,16 @@ public class Posicion {
     public boolean estaOcupado(int i, int j) {
         return mapa.estaOcupado(i, j);
     }
+
+	public ArrayList buscarEnemigosEnRadio(Integer radio) {
+		ArrayList <Posicionable> posicionables = new ArrayList <>()
+		for(Integer i = posicionHorizontal - radio; i <= poscionHorizontal + radio; i++) {
+			for (Integer j = posicionVertical - radio; j <= posicionVertical + radio; j++) {
+				if (mapa.estaOcupado(i,j)) {
+					posicionables.add(mapa.conseguirOcupante(i,j));
+				}
+			}
+		}
+		return posicionables;
+	}
 }

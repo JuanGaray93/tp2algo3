@@ -7,25 +7,31 @@ import com.company.modelo.unidades.estados.EstadoUnidad;
 import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedio;
 import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioDesmontada;
 
+import unidades.EstadoMaquinaAsedioDesmontada;
+import unidades.PosicionableEsAliadoException;
+
 public class MaquinaAsedio extends Unidad {
 	
-	//private Ataque ataque;
+	
 
 	public MaquinaAsedio(Jugador jugador) {
+		
 		super(jugador);
-		this.estado =  new EstadoArmaAsedioDesmontada();
-		//ataque = new Ataque(75,0);
+		this.estado =  new EstadoMaquinaAsedioDesmontada(150,200, this);
+	   	this.montada = false;
 		
 	}
 	
-	/*public void atacar(Unidad enemigo) {
-		ataque.atacar(enemigo);
-	}*/
-	
-	/*public void atacar(Edificio enemigo) {
-		ataque.atacar(enemigo);
-	}*/
-
+	//solo ataca edificios por 75 daño y hasta distancia 5.
+    public void atacar(Edificio enemigo) throws PosicionableEsAliadoException {
+    	if(this.verificarAlianza(enemigo.jugador)) {
+    		throw new PosicionableEsAliadoException("la unidad que quiere atacar es propia");
+    	}
+    	else {
+    		this.estado.atacar(enemigo);
+    	}
+    }
+    
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
@@ -45,6 +51,20 @@ public class MaquinaAsedio extends Unidad {
 	@Override
 	public Boolean verificarAlianza(Jugador otroJugador) {
 		return null;
+	}
+	
+	//toma 1 turno montar/desmontar, si esta montada puede atacar pero no moverse.
+	
+	public void montar() {
+		this.estado = estado.montar();
+	}
+
+	public void desmontar() {
+		this.estado.desmontar();
+	}
+	
+	public void moverA(Integer posicionHorizontal, Integer posicionVertical) {
+		super.moverA(posicionHorizontal, posicionVertical);
 	}
 
 }

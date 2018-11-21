@@ -11,18 +11,38 @@ import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Ataque;
 import com.company.modelo.unidades.Unidad;
 
+import edificios.ArrayList;
+import edificios.CasilleroLlenoException;
+import edificios.MaquinaAsedio;
+import edificios.Posicion;
+import edificios.PosicionableEsAliadoException;
+
 public class Castillo extends Edificio {
 
     private Ataque ataque;
 
-    EstadoCastillo estado;
+    //EstadoCastillo estado;
 
     public Castillo(Jugador jugador) {
         super(jugador);
-        VIDA_MAXIMA = 1000;
-        vidaActual = 1000;
-        estado = new EstadoCastillo(VIDA_MAXIMA);
+        //VIDA_MAXIMA = 1000;
+        //vidaActual = 1000;
+        //estado = new EstadoCastillo(VIDA_MAXIMA);
+        this.estado = new EstadoEdificio(1000,0,15,16, 0);
+		ataque = new Ataque(20,20);
     }
+    
+    public void construirArmaAsedio(){
+		
+		MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador)
+		Posicion posicion = posiciones.get(0);
+		try {
+			posicion.posicionar(maquinaAsedio);
+		} catch (CasilleroLlenoException e) {
+			
+		}
+		jugador.agregarAPoblacion(maquinaAsedio);
+	}
 
     @Override
     public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
@@ -42,18 +62,25 @@ public class Castillo extends Edificio {
     public Boolean verificarAlianza(Jugador otroJugador) {
         return null;
     }
-
-	/*public void crearMaquinaAsedio() throws Exception {
-		try {
-			posiciones.get(1).ubicar(new MaquinaAsedio(this.jugador));
-		} catch (CasilleroLlenoException e) {
-			// 
+    
+    public void ataque() throws PosicionableEsAliadoException {
+		
+		ArrayList <Posicionable> posicionablesCercanos = new ArrayList <>();
+		for(Posicion posicion: this.posiciones) {
+			posicionablesCercanos.addAll(posicion.buscarEnemigosEnRadio(3));
 		}
-	}*/
+		for(Posicionable cercano: posicionablesCercanos) {
+			if(this.verificarAlianza(cercano.jugador)) {
+	    		throw new PosicionableEsAliadoException("la unidad que quiere atacar es propia");
+	    	}
+	    	else {
+	    		ataque.atacar(cercano);
+	    	}
+		
+		}
+		
+	}
 
-    public void atacar(Unidad enemigo) {
-        ataque.atacar(enemigo);
-    }
-
+	
 
 }

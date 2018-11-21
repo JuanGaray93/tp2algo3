@@ -7,6 +7,8 @@ import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.estados.EstadoUnidad;
 
+import unidades.Unidad;
+
 public abstract class Unidad implements Posicionable {
 
 	protected Posicion posicion;
@@ -35,4 +37,13 @@ public abstract class Unidad implements Posicionable {
 	private void eliminar() throws CasilleroNoExistenteException {
 		posicion.eliminar();
 	}
+	
+	public Boolean verificarAlianza(Unidad unidad1){
+	    return(unidad1.verificarAlianza(this.jugador));
+	}
+	
+	public Boolean verificarAlianza(Jugador jugador2) {
+		return (jugador == jugador2);
+	}
 }
+
