@@ -14,8 +14,8 @@ public class EstadoUnidad {
 	
 	}
 	
-	public void recibirDanio(int unDanio) {
-		this.vidaActual -= unDanio;
+	public void recibirDanio(Integer montoDeDanio) {
+		this.vidaActual -= montoDeDanio;
 	}
 	
 	public int getVIDAMAXIMA() {

@@ -32,8 +32,8 @@ public abstract class Unidad implements Posicionable {
 	}
 
 	@Override
-	public void recibirDanio(int unDanio){
-		estado.recibirDanio(unDanio);
+	public void recibirDanio(Integer montoDeDanio){
+		estado.recibirDanio(montoDeDanio);
 	}
 
 	private void eliminar() throws CasilleroNoExistenteException {
