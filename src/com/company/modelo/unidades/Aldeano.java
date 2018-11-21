@@ -3,86 +3,67 @@ package com.company.modelo.unidades;
 import com.company.excepciones.*;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.estados.EstadoAldeano;
-import com.company.modelo.unidades.estados.EstadoUnidad;
+import com.company.modelo.unidades.estados.*;
 
 public class Aldeano extends Unidad {
 
 	private final Integer VIDA = 50;
 	private final Integer COSTO = 25;
 
-	Edificio edificioATrabajar;
-
 	EstadoAldeano estadoActual;
 
+	//LISTO
 	public Aldeano(Jugador jugador) {
 		super(jugador);
-		estado = new EstadoUnidad(VIDA,COSTO);
-       estadoActual = new Inactivo();
+		estadoActual = new EstadoAldeanoInactivo();
 	}
-
+	//LISTO
 	public void construir(Edificio edificio,Integer x, Integer y) throws CasilleroLlenoException, CasilleroNoExistenteException {
-		
+		estadoActual = new EstadoAldeanoConstruyendo();
 		edificio.construir(this,x,y);
 	}
-
+	//LISTO
 	private void recolectarOro() {
 
 		if(estado.vivo()) {
 
-			jugador.sumarOro(PRODUCCION_ORO);
+			jugador.sumarOro(estadoActual.getGanancia());
 		}
 	}
-
+	//LISTO
 	public void reparar(Edificio edificio) {
-		
-			edificioATrabajar = edificio;
-			turnosOcupado = edificioATrabajar.calcularTiempoReparacion();
 
-			edificio.reparar();
+			try {
+				edificio.reparar();
+				estadoActual = new EstadoAldeanoReparando();
+			} catch (EdificioReparadoException e) {
+				//manejar
+			} catch (EdificioEnReparacionException e) {
+				//manejar
+			}
 
-		}catch(EdificioEnReparacionException | EdificioReparadoException e) {
-			liberar();
-		}
 	}
-
+	//???
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-
+		//this.estadoActual = ;
 	}
 
 	public void actualizar() {
-
-                 if(turnosOcupado>1){
-
-                     turnosOcupado = edificioATrabajar.actualizar();
-
-                 }else
-                 	if(turnosOcupado == 0 ){
-
-				    	edificioATrabajar = null;
-                    	recolectarOro();
-                }else
-                	if(	turnosOcupado == 1){
-						turnosOcupado = edificioATrabajar.actualizar();
-                		this.liberar();
-					}
 
 	}
 
 	@Override
 	public void recibirDanio(Integer montoDeDanio) {
-
+		this.estadoActual.recibirDanio(montoDeDanio);
 	}
 
 	public boolean estaLibre() {
-		return edificioATrabajar == null;
-		
+		return this.estadoActual.tieneEstado("INACTIVO");
 	}
 
 	public void liberar(){
-        edificioATrabajar = null;
-
+		estadoActual = new EstadoAldeanoInactivo();
 	}
 
 }

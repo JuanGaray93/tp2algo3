@@ -1,16 +1,24 @@
 package com.company.modelo.unidades.estados;
 
-public class EstadoAldeano extends EstadoUnidad {
+public abstract class EstadoAldeano extends EstadoUnidad {
 
-  /*  private Integer vida;
-    private final Integer turnosConstruccion;
+    protected final static Integer PRODUCCION_ORO = 20;
 
-    */public EstadoAldeano() {
+    protected static String nombreEstado;
+
+    public EstadoAldeano() {
         super(50, 25);
 
     }
 
-   // public void actualizar(Aldeano aldeano, Integer vidaEdificio);
+    public abstract EstadoAldeano ejecutarAccion();
 
+    public abstract Integer getGanancia();
+
+    public boolean tieneEstado(String estado){
+        return this.nombreEstado == estado;
+    }
+
+    //public void actualizar(Aldeano aldeano, Integer vidaEdificio);
 
 }
