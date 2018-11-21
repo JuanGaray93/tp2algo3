@@ -16,13 +16,13 @@ public class Jugador {
 	
 	ArrayList <Unidad> poblacion;
 	ArrayList <Edificio> edificios;
-	public int oro;
+	public Integer oro;
 
 	public Jugador(Mapa mapa) throws CasilleroLlenoException {
 		this.oro = 100;
 	}
 	
-	public void mover(int x, int y, Unidad unidad) throws CasilleroNoExistenteException {
+	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException {
 		try {
 			unidad.moverA(x,y);
 		} catch (CasilleroLlenoException e) {
@@ -40,11 +40,11 @@ public class Jugador {
 		poblacion.remove(unidad);
 	}
 
-	public boolean tieneOro(int oro) {
+	public boolean tieneOro(Integer oro) {
 		return this.oro == oro;
 	}
 
-	public void sumarOro(int produccionOro) {
+	public void sumarOro(Integer produccionOro) {
 		this.oro += produccionOro;
 
 	}
