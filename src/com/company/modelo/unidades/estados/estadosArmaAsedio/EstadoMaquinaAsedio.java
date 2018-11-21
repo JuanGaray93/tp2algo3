@@ -1,32 +1,27 @@
 package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
-import com.company.excepciones.MaquinaMontadaException;
-import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.ArmaAsedio;
-import com.company.modelo.unidades.Ataque;
-import com.company.modelo.unidades.estados.EstadoUnidad;
-
-public abstract class EstadoMaquinaAsedio extends EstadoUnidad {
-
-    protected Boolean montada;
-    ArmaAsedio maquinaAsedio;
-    protected Ataque ataque;
-    protected static Integer DISTANCIA_MAX_ATQ = 5;
-    protected static Integer VIDA_MAXIMA;
-    protected static Integer vidaActual;
-    protected static Integer COSTO;
-
-    public EstadoMaquinaAsedio(ArmaAsedio maquinaAsedio) {
-        ataque = new Ataque(75, 0);
-        this.maquinaAsedio = maquinaAsedio;
-    }
-
-    public abstract void moverA(Integer x, Integer y) throws MaquinaMontadaException;
-
-    public abstract void atacar(Edificio enemigo) throws Exception;
-
-    public boolean estaMontada() {
-        return montada;
-    }
+public class EstadoMaquinaAsedio extends EstadoUnidad{
+		
+		private Boolean montada;
+		MaquinaAsedio maquinaAsedio;
+		private Ataque ataque;
+		
+	
+		public EstadoMaquinaAsedio(int vida,int costo,MaquinaAsedio maquinaAsedio) {
+			
+			this.VIDA_MAXIMA = vida;
+			this.setVidaActual(VIDA_MAXIMA);
+			this.COSTO =  costo;
+			this.montada = false;
+			this.maquinaAsedio = maquinaAsedio;
+			ataque = new Ataque(75,0);
+		
+		}
+		
+		public boolean estaMontada() {
+			return montada;
+		}
+		
+		
 
 }

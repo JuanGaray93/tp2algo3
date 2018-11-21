@@ -10,11 +10,11 @@ import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioDes
 import unidades.EstadoMaquinaAsedioDesmontada;
 import unidades.PosicionableEsAliadoException;
 
-public class ArmaAsedio extends Unidad {
+public class MaquinaAsedio extends Unidad {
 	
 	
 
-	public ArmaAsedio(Jugador jugador) {
+	public MaquinaAsedio(Jugador jugador) {
 		
 		super(jugador);
 		this.estado =  new EstadoMaquinaAsedioDesmontada(150,200, this);
@@ -22,7 +22,7 @@ public class ArmaAsedio extends Unidad {
 		
 	}
 	
-	//solo ataca edificios por 75 daï¿½o y hasta distancia 5.
+	//solo ataca edificios por 75 daño y hasta distancia 5.
     public void atacar(Edificio enemigo) throws PosicionableEsAliadoException {
     	if(this.verificarAlianza(enemigo.jugador)) {
     		throw new PosicionableEsAliadoException("la unidad que quiere atacar es propia");

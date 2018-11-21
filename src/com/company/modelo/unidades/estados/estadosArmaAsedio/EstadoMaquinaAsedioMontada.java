@@ -1,37 +1,32 @@
 package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
-import com.company.excepciones.MaquinaMontadaException;
-import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.ArmaAsedio;
-
 public class EstadoMaquinaAsedioMontada extends EstadoMaquinaAsedio {
 
-    public EstadoMaquinaAsedioMontada(ArmaAsedio armaAsedio) {
-        super(armaAsedio);
-        VIDA_MAXIMA = 150;
-        vidaActual = 150;
-        EstadoMaquinaAsedio.COSTO = 200;
-        montada = true;
-
-    }
-
-    public EstadoMaquinaAsedioDesmontada desmontar() {
-        return new EstadoMaquinaAsedioDesmontada(maquinaAsedio);
-    }
-
-    public void montar() throws MaquinaMontadaException {
-        throw new MaquinaMontadaException("la maquina de asedio ya esta montada");
-
-    }
-
-    @Override
-    public void moverA(Integer x, Integer y) throws MaquinaMontadaException {
-        throw new MaquinaMontadaException("la maquina de asedio no se puede mover porque esta montada");
-    }
-
-    @Override
-    public void atacar(Edificio enemigo) throws Exception {
-        ataque.atacar(enemigo);
-    }
+	public EstadoMaquinaAsedioMontada(int vida,int costo, MaquinaAsedio maquinaAsedio) {
+		
+		this.VIDA_MAXIMA = vida;
+		this.setVidaActual(VIDA_MAXIMA);
+		this.COSTO =  costo;
+		this.montada = true;
+		this.maquinaAsedio = maquinaAsedio;
+		ataque = new Ataque(75,0);
+	
+	}
+	
+	public EstadoMaquinaAsedioDesmontada desmontar() {
+		return new EstadoMaquinaAsedioDesmontada(maquinaAsedio.getVidaActual(), COSTO , maquinaAsedio);
+	}
+	
+	public EstadoMaquinaAsedioMontada montar()  throws MaquinaMontadaException {
+		throw new MaquinaMontadaException("la maquina de asedio ya esta montada");
+	}
+	
+	public void moverA() throws MaquinaMontadaException {
+		throw new MaquinaMontadaException("la maquina de asedio no se puede mover porque esta montada");
+	}
+	
+	public void atacar(Edificio enemigo){
+		ataque.atacar(enemigo);
+	}
 
 }

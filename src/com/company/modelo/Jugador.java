@@ -1,7 +1,9 @@
 package com.company.modelo;
 
-import com.company.excepciones.*;
-import com.company.excepciones.MontoErroneoException;
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.MontoErroneoError;
+import com.company.excepciones.OroInsuficienteException;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.edificios.PlazaCentral;
@@ -16,12 +18,10 @@ public class Jugador {
     private final Integer LIMITE_POBLACIONAL = 50;
 
     ArrayList<Unidad> poblacion;
-    ArrayList<Edificio> edificios;
+    ArrayList <Edificio> edificios;
     private static Integer oro;
-    Mapa mapa = Mapa.getMapa();
 
-    public Jugador(Jugador otroJugador) throws CasilleroLlenoException {
-
+    public Jugador(Mapa mapa) throws CasilleroLlenoException {
         this.oro = 100;
     }
 
@@ -34,14 +34,13 @@ public class Jugador {
         }
     }
 
-    public Integer getOro() {
+    public Integer getOro(){
         return this.oro;
     }
 
     public void agregarAPoblacion(Unidad unidad) {
 
-        if (poblacion.size() == LIMITE_POBLACIONAL) {
-
+        if(poblacion.size() == LIMITE_POBLACIONAL) {
             throw new LimitePoblacionalException("Alcanzaste el limite permitido de unidades");
         }
 
@@ -50,7 +49,7 @@ public class Jugador {
 
     public void eliminarDePoblacion(Unidad unidad) {
 
-        if (!poblacion.contains(unidad)) {
+        if(!poblacion.contains(unidad)){
             throw new UnidadInexistenteEnPoblacionException("Disculpe, la unidad no existe en la poblacion");
         }
 
@@ -66,13 +65,13 @@ public class Jugador {
 
     }
 
-    public void cobrar(Integer monto) throws OroInsuficienteException, MontoErroneoException {
+    public void cobrar(Integer monto) throws OroInsuficienteException, MontoErroneoError {
 
-        if (monto < 0) {
-            throw new MontoErroneoException("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
+        if(monto < 0){
+            throw new MontoErroneoError("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
         }
 
-        if (oro - monto < 0) {
+        if (oro - monto < 0){
             throw new OroInsuficienteException("El monto es mayor que los fondos actuales");
         }
 
@@ -83,13 +82,16 @@ public class Jugador {
 
     }
 
-    public void crearEntidadesIniciales(Posicion posCastillo, Posicion posPlaza, Posicion posPriAldeano, Posicion posSegAldeano, Posicion posTerAldeano) {
+    public void crearEntidadesIniciales(Posicion posCastillo, Posicion posPlaza, Posicion posPriAldeano, Posicion posSegAldeano, Posicion posTerAldeano){
         //Le pasa el mapa a los edificios para permitirles ubicar unidades con su posicion
 
         Castillo castillo = new Castillo(this);
 
-        castillo.construir(posCastillo.obtenerPosicionHorizontal(), posCastillo.obtenerPosicionVertical());
-
+        try {
+            castillo.construir(posCastillo.obtenerPosicionHorizontal(), posCastillo.obtenerPosicionVertical());
+        } catch (CasilleroLlenoException e) {
+            e.printStackTrace();
+        }
         edificios.add(castillo);
 
         PlazaCentral plaza = new PlazaCentral(this);
@@ -112,12 +114,10 @@ public class Jugador {
 
     public void eliminarDeConstrucciones(Edificio edificio) {
 
-        if (!edificios.contains(edificio)) {
+        if(!edificios.contains(edificio)){
             throw new EdificioInexistenteEnConstruccionesException("No existe tal edificio");
         }
 
         edificios.remove(edificio);
     }
-
-
 }

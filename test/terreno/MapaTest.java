@@ -134,8 +134,6 @@ public class MapaTest {
             mapa.colocarEnCasilleroLibreMasCercano(aColocar, 10, 12);
             obtenido = mapa.conseguirOcupante(14, 12);
 
-            System.out.println();
-
         } catch (CasilleroNoExistenteException e) {
             e.printStackTrace();
         } catch (CasilleroLlenoException e) {
