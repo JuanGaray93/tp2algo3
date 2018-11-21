@@ -1,76 +1,43 @@
 package edificios;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Jugador;
-import com.company.modelo.edificios.Cuartel;
+import com.company.modelo.edificios.Castillo;
 import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Espadachin;
-
-import edificios.Before;
+import com.company.modelo.unidades.MaquinaAsedio;
 
 public class CastilloTest {
-	
-	Mapa mapa = Mapa.getMapa();
-	Jugador jugador;
-	
-	@Before
-	public void resetMapa() {
-		mapa.destruir();
-		mapa = Mapa.getMapa();
-		
-	}
-	
-	@Test
-	void CastilloColocacionTest() {
-		
-		jugador  = new Jugador(mapa);
-		Castillo castillo = new Castillo(jugador);
 
+	@Test
+	void testCastilloCrearMaquinaAsedio() throws CasilleroLlenoException {
+		
+		Castillo castillo = new Castillo(new Jugador());
+		Mapa terreno = Mapa.getMapa();
+		
+		//Terreno no esta ocupado en este momento
+		Assert.assertFalse(terreno.estaOcupado(1, 2));
+		
 		try {
-			castillo.construirEn(3, 5);
+			terreno.ubicar(castillo, 5, 5);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 		}
-		catch ( CasilleroNoExistenteException e){
-			e.printStackTrace();
+		
+		try {
+			castillo.crearUnidad(new MaquinaAsedio(new Jugador()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 		}
-		catch ( CasilleroLlenoException e) {
-			e.printStackTrace();
-		}
-
-		assertTrue( mapa.estaOcupado(3, 5) );
-		assertTrue( mapa.estaOcupado(3, 6) );
-		assertTrue( mapa.estaOcupado(4, 5) );
-		assertTrue( mapa.estaOcupado(4, 6) );
-		assertTrue( mapa.estaOcupado(5, 6) );
-		assertTrue( mapa.estaOcupado(5, 7) );
-		assertTrue( mapa.estaOcupado(6, 7) );
-		assertTrue( mapa.estaOcupado(6, 8) );
-		assertTrue( mapa.estaOcupado(7, 8) );
-		assertTrue( mapa.estaOcupado(7, 9) );
-		assertTrue( mapa.estaOcupado(8, 9) );
-		assertTrue( mapa.estaOcupado(8, 10) );
-		assertTrue( mapa.estaOcupado(9, 10) );
-		assertTrue( mapa.estaOcupado(9, 11) );
-		assertTrue( mapa.estaOcupado(10, 11) );
-		assertTrue( mapa.estaOcupado(11, 12) );
+		
+		//Ahora terreno esta ocupado en posicion cercana de castillo y en castillo
+		//La posicion donde se crea la maquina de asedio es random en el castillo
+		// TODO probar mas casos borde!
+		Assert.assertTrue(terreno.estaOcupado(16,22));
+		Assert.assertTrue(terreno.estaOcupado(15,21));
+		Assert.assertTrue(terreno.estaOcupado(16,20));
+		Assert.assertTrue(terreno.estaOcupado(4,5));
 	}
-
-	@Test
-	void CastilloCrearMaquinaAsedioTest() {
-		
-		
-		jugador  = new Jugador(mapa);
-		Castillo castillo = new Castillo(jugador);
-		
-		castillo.construirEn(3, 5);
-		MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador)
-		castillo.crear(maquinaAsedio);
-		
-		assertTrue(jugador.estaEnPoblacion(maquinaAsedio))
-	}
-
 }
