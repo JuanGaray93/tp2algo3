@@ -29,14 +29,8 @@ public abstract class Edificio implements Posicionable {
 		return estado.estaLibre();
 	}
 	
-    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
-                            throws CasilleroLlenoException {
-         estado.construir(quienLoConstruye);
-         this.posicion = new Posicion(posicionHorizontal, posicionVertical);
-         posicion.posicionar(this);
-
-
-    }
+    public abstract void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
+                            throws CasilleroLlenoException;
 
     public void crearUnidad(Unidad unidad) throws CasilleroLlenoException {
     	posiciones[1].posicionar(unidad);
