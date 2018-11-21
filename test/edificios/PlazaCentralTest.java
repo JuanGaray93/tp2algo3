@@ -1,6 +1,8 @@
 package edificios;
 
 import com.company.excepciones.*;
+import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

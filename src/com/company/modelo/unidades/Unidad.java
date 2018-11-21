@@ -10,7 +10,6 @@ import com.company.modelo.unidades.estados.EstadoUnidad;
 public abstract class Unidad implements Posicionable {
 
 	protected Posicion posicion;
-	protected Boolean atacando;
 	protected Jugador jugador;
 	protected EstadoUnidad estado;
 	
@@ -32,8 +31,9 @@ public abstract class Unidad implements Posicionable {
 		posicion.posicionar(this);
 	}
 
-	public void recibirDanio(int unDanio){
-		estado.recibirDanio(unDanio);
+	@Override
+	public void recibirDanio(Integer montoDeDanio){
+		estado.recibirDanio(montoDeDanio);
 	}
 
 	private void eliminar() throws CasilleroNoExistenteException {

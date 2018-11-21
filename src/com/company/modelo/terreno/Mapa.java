@@ -71,12 +71,9 @@ public class Mapa {
 	}
 
 	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
-		try {
-			Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(posicionHorizontal, posicionVertical);
-			casilleroDisponible.agregarPosicionable(nuevaUnidad);
-		} catch (CasilleroLlenoException e){
-            e.printStackTrace();
-        }
+        // TODO: SOLUCIONAR POSICION DE UNIDAD EN MAPA
+        //Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(nuevaUnidad, posicionHorizontal, posicionVertical);
+        //casilleroDisponible.agregarPosicionable(nuevaUnidad);
 	}
 
 	public Posicionable conseguirOcupante(Integer posicionHorizontal, Integer posicionVertical ) throws CasilleroNoExistenteException {
