@@ -1,6 +1,7 @@
 package com.company.modelo.edificios;
 
 import com.company.modelo.Jugador;
+import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.Unidad;
 
 public class Cuartel extends Edificio {
@@ -22,6 +23,26 @@ public class Cuartel extends Edificio {
 			//
 		}*/
 		jugador.agregarAPoblacion(unidad);
+	}
+
+	@Override
+	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
+
+	}
+
+	@Override
+	public void actualizar() {
+
+	}
+
+	@Override
+	public Boolean verificarAlianza(Posicionable otroPosicionable) {
+		return null;
+	}
+
+	@Override
+	public Boolean verificarAlianza(Jugador otroJugador) {
+		return null;
 	}
 
 }

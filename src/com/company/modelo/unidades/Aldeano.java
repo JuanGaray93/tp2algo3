@@ -20,9 +20,13 @@ public class Aldeano extends Unidad {
 		estadoActual = new EstadoAldeanoInactivo();
 	}
 	//LISTO
-	public void construir(Edificio edificio,Integer x, Integer y) throws CasilleroLlenoException, CasilleroNoExistenteException {
+	public void construir(Edificio edificio,Integer x, Integer y) throws OroInsuficienteException {
 		estadoActual = new EstadoAldeanoConstruyendo();
-		edificio.construir(this,x,y);
+		try {
+			edificio.construir(this,x,y);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	//LISTO
 	private void recolectarOro() {
@@ -36,7 +40,7 @@ public class Aldeano extends Unidad {
 	public void reparar(Edificio edificio) {
 
 			try {
-				edificio.reparar();
+				edificio.reparar(edificio);
 				estadoActual = new EstadoAldeanoReparando();
 			} catch (EdificioReparadoException e) {
 				//manejar

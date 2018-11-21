@@ -7,7 +7,7 @@ public class EstadoEnConstruccion extends EstadoEdificio {
 
 
     public EstadoEnConstruccion(Integer vida, Integer montoDeReparacion) {
-        super(vida, costoDeConstruccion, montoDeReparacion);
+        super(vida,, montoDeReparacion);
     }
 
     @Override
