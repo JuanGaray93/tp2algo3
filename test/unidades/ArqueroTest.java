@@ -39,7 +39,7 @@ public class ArqueroTest {
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
+            cuartel.construir(3, 5);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
@@ -79,7 +79,7 @@ public class ArqueroTest {
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
+            cuartel.construir(3, 5);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
@@ -119,7 +119,7 @@ public class ArqueroTest {
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
+            cuartel.construir(3, 5);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
@@ -159,7 +159,7 @@ public class ArqueroTest {
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
+            cuartel.construir(3, 5);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
@@ -185,7 +185,7 @@ public class ArqueroTest {
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
+            cuartel.construir(3, 5);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
@@ -223,7 +223,7 @@ public class ArqueroTest {
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
+            cuartel.construir(3, 5);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
@@ -262,7 +262,7 @@ public class ArqueroTest {
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
+            cuartel.construir(3, 5);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }
@@ -302,7 +302,7 @@ public class ArqueroTest {
         Cuartel cuartel = new Cuartel(jugador);
 
         try {
-            cuartel.construirEn(3, 5);
+            cuartel.construir(3, 5);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }

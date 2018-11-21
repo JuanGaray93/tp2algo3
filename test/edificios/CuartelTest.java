@@ -37,7 +37,7 @@ public class CuartelTest {
 		assertFalse( mapa.estaOcupado(3,5) );
 
 		try {
-			cuartel.construirEn(3, 5);
+			cuartel.construir(3, 5);
 		} catch ( CasilleroLlenoException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +73,7 @@ public class CuartelTest {
         assertFalse( mapa.estaOcupado(20,20) );
 
         try {
-            cuartel.construirEn(20, 20);
+            cuartel.construir(20, 20);
         } catch ( CasilleroLlenoException e) {
             e.printStackTrace();
         }

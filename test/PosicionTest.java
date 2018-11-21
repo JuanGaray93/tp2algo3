@@ -38,7 +38,7 @@ public class PosicionTest {
 		Posicion posicion = new Posicion(3,4);
 		
 		try {
-			plazaCentral.construirEn(3,4);
+			plazaCentral.construir(3,4);
 		} catch (CasilleroNoExistenteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

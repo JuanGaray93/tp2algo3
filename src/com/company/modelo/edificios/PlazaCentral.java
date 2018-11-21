@@ -11,4 +11,9 @@ public class PlazaCentral extends Edificio {
 		this.estado = new EstadoInactivo(VIDA_MAXIMA,100,25,4 ,3);
 	}
 
+	@Override
+	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
+
+	}
+
 }

@@ -22,12 +22,8 @@ public class Aldeano extends Unidad {
 	}
 
 	public void construir(Edificio edificio,Integer x, Integer y) throws CasilleroLlenoException, CasilleroNoExistenteException {
-		if(edificioATrabajar!=null){
-			throw new UnidadOcupadaException("Tal vez mas tarde...");
-		}
-		edificioATrabajar = edificio;
-		turnosOcupado = 3;
-		edificio.construirEn(x,y);
+		
+		edificio.construir(this,x,y);
 	}
 
 	private void recolectarOro() {
@@ -39,12 +35,7 @@ public class Aldeano extends Unidad {
 	}
 
 	public void reparar(Edificio edificio) {
-			
-		if (edificioATrabajar != null) {
-			throw new UnidadOcupadaException("Tal vez mas tarde...");
-		}
-		try {
-
+		
 			edificioATrabajar = edificio;
 			turnosOcupado = edificioATrabajar.calcularTiempoReparacion();
 

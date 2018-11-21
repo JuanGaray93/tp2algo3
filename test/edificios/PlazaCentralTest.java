@@ -24,12 +24,15 @@ public class PlazaCentralTest{
 		jugador = new Jugador(mapa);
 	}
 
-	
+
+	/* ESTO DEBERIA SER UN TEST EN ALDEANO
 	@Test
 	public void puedeSerConstruida(){
 		PlazaCentral central = new PlazaCentral(jugador);
-		central.construirEn();
+		Aldeano aldea
+		central.construir();
 	}
+	*/
 
 	@Test
 	public void plazaCentralCrearAldeanoTest() throws CasilleroNoExistenteException, CasilleroLlenoException{
