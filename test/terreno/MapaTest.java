@@ -113,9 +113,9 @@ public class MapaTest {
         try {
             /* El 1! representa el lugar donde se empieza la búsqueda. El 0 el lugar vacío más cercano.
              *     _______________
-             * 10  |1 |0 |1 |1 |1 |
+             * 10  |1 |1 |1 |1 |1 |
              * 11  |1 |1 |1 |1 |1 |
-             * 12  |1 |1 |1!|1 |1 |
+             * 12  |1!|1 |1 |1 |0 |
              * 13  |1 |1 |1 |1 |1 |
              * 14  |1_|1_|1_|1_|1_|
              *     10  11 12 13 14
@@ -129,12 +129,8 @@ public class MapaTest {
             mapa.colocarEnCasilleroLibreMasCercano(aColocar, 10, 12);
             obtenido = mapa.conseguirOcupante(14, 12);
 
-        } catch (CasilleroNoExistenteException e) {
-            e.printStackTrace();
-        } catch (CasilleroLlenoException e) {
-            e.printStackTrace();
-        } catch (MapaLlenoException e) {
-            e.printStackTrace();
+        } catch (Exception e){
+            assertTrue(false);
         }
 
         assertEquals(aColocar, obtenido);
