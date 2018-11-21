@@ -35,6 +35,7 @@ public abstract class Edificio implements Posicionable {
 
 
         /*TODO: manejo de posiciones.*/
+
         jugador.cobrar(this.COSTO);
         estado.construir(quienLoConstruye);
 

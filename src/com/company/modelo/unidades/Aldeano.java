@@ -50,7 +50,7 @@ public class Aldeano extends Unidad {
 	}
 
 	public void actualizar() {
-
+		this.estadoActual =  estadoActual.ejecutarAccion();
 	}
 
 	@Override

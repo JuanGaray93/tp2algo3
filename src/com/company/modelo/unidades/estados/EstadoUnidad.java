@@ -2,9 +2,9 @@ package com.company.modelo.unidades.estados;
 
 public class EstadoUnidad {
 
-	private final int VIDA_MAXIMA;
-	private int vidaActual;
-	private final int COSTO;
+	private final Integer VIDA_MAXIMA;
+	private Integer vidaActual;
+	private final Integer COSTO;
 	
 	public EstadoUnidad(int vida,int costo) {
 		
