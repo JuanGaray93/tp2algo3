@@ -17,8 +17,8 @@ public class Partida {
 	
 	public Partida() throws CasilleroLlenoException {
 	
-		jugadores.add(0,new Jugador(Mapa.getMapa()));
-		jugadores.add(1,new Jugador(Mapa.getMapa()));
+		jugadores.add(0,new Jugador());
+		jugadores.add(1,new Jugador());
 		
 		this.comenzar();
 		

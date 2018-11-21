@@ -1,62 +1,68 @@
 package com.company.modelo.unidades;
 
 import com.company.excepciones.*;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.modelo.Jugador;
+import com.company.modelo.Posicion;
+import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.estados.*;
+import com.company.modelo.edificios.estados.EstadoEdificio;
+import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeano;
+import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoConstruyendo;
+import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoRecolectandoOro;
+import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoReparando;
 
 public class Aldeano extends Unidad {
-
-	private final Integer VIDA = 50;
-	private final Integer COSTO = 25;
 
 	EstadoAldeano estadoActual;
 
 	//LISTO
 	public Aldeano(Jugador jugador) {
 		super(jugador);
-		estadoActual = new EstadoAldeanoInactivo();
+		estadoActual = new EstadoAldeanoRecolectandoOro();
 	}
 	//LISTO
 	public void construir(Edificio edificio,Integer x, Integer y) throws OroInsuficienteException {
 		estadoActual = new EstadoAldeanoConstruyendo();
 		try {
+
 			edificio.construir(this,x,y);
-		} catch (Exception e) {
+		} catch (EdificioEnConstruccionException e) {
+			e.printStackTrace();
+		} catch (CasilleroLlenoException e) {
+			e.printStackTrace();
+		} catch (CasilleroNoExistenteException e) {
 			e.printStackTrace();
 		}
 	}
-	//LISTO
-	private void recolectarOro() {
 
-		if(estado.vivo()) {
-
-			jugador.sumarOro(estadoActual.getGanancia());
-		}
-	}
 	//LISTO
-	public void reparar(Edificio edificio) {
+	public void reparar(Edificio edificio) throws Exception {
 
 			try {
-				edificio.reparar(edificio);
+				edificio.reparar(this);
 				estadoActual = new EstadoAldeanoReparando();
+
 			} catch (EdificioReparadoException e) {
-				//manejar
+				//
 			} catch (EdificioEnReparacionException e) {
-				//manejar
+				//
 			}
 
 	}
-	//???
+
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 		//this.estadoActual = ;
 	}
 
-	public void actualizar() {
-		this.estadoActual =  estadoActual.ejecutarAccion();
+
+	public void actualizar(EstadoAldeano estado) {
+
+		this.estadoActual =  estado;
+		estadoActual.otorgarGanancia(jugador);
 	}
 
 	@Override
@@ -64,12 +70,14 @@ public class Aldeano extends Unidad {
 		this.estadoActual.recibirDanio(montoDeDanio);
 	}
 
-	public boolean estaLibre() {
-		return this.estadoActual.tieneEstado("INACTIVO");
+
+	@Override
+	public Boolean verificarAlianza(Posicionable otroPosicionable) {
+		return null;
 	}
 
-	public void liberar(){
-		estadoActual = new EstadoAldeanoInactivo();
+	@Override
+	public Boolean verificarAlianza(Jugador otroJugador) {
+		return null;
 	}
-
 }

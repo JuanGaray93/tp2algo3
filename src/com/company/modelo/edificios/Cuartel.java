@@ -2,19 +2,24 @@ package com.company.modelo.edificios;
 
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
+import com.company.modelo.edificios.estados.EstadoEnConstruccion;
+import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Unidad;
 
 public class Cuartel extends Edificio {
 
-	private static Integer VIDA = 250;
-	private static Integer COSTO = 50;
-	
 	public Cuartel(Jugador jugador) {
+
 		super(jugador);
-	
-		this.estado = new EstadoEdificio(VIDA,COSTO,50,4, 3);
+		COSTO = 50;
+		MONTO_DE_REPARACION = 50;
+		BLOQUES_DE_ANCHO = 2;
+		BLOQUES_DE_ALTO = 2;
+		VIDA_MAXIMA = 250;
+		vidaActual = VIDA_MAXIMA;
+		this.estado = new EstadoPorConstruir(VIDA_MAXIMA,MONTO_DE_REPARACION);
 	}
-	
+
 	public void crearUnidad(Unidad unidad){
 		/*Posicion posicion = posiciones.get(0);
 		try {
@@ -27,11 +32,6 @@ public class Cuartel extends Edificio {
 
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-
-	}
-
-	@Override
-	public void actualizar() {
 
 	}
 

@@ -1,6 +1,7 @@
-package com.company.modelo.unidades.estados;
+package com.company.modelo.unidades.estados.estadosAldeano;
 
 import com.company.excepciones.AldeanoOcupadoException;
+import com.company.modelo.Jugador;
 
 public class EstadoAldeanoReparando extends EstadoAldeano {
 
@@ -13,8 +14,9 @@ public class EstadoAldeanoReparando extends EstadoAldeano {
         }
 
     @Override
-    public Integer getGanancia(){
-        throw new AldeanoOcupadoException("Ahora no!, estoy ocupado");
+    public void otorgarGanancia(Jugador jugador) {
+        throw new AldeanoOcupadoException("... reparando");
     }
+
 
 }

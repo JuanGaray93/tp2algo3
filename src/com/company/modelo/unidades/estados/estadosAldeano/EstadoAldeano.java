@@ -1,4 +1,7 @@
-package com.company.modelo.unidades.estados;
+package com.company.modelo.unidades.estados.estadosAldeano;
+
+import com.company.modelo.Jugador;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public abstract class EstadoAldeano extends EstadoUnidad {
 
@@ -7,17 +10,18 @@ public abstract class EstadoAldeano extends EstadoUnidad {
     protected static String nombreEstado;
 
     public EstadoAldeano() {
-        super(50, 25);
-
+        VIDA_MAXIMA = 50;
+        COSTO =  25;
+        vidaActual = 50;
     }
 
     public abstract EstadoAldeano ejecutarAccion();
 
-    public abstract Integer getGanancia();
-
-    public boolean tieneEstado(String estado){
+    protected boolean tieneEstado(String estado){
         return this.nombreEstado == estado;
     }
+
+    public abstract void otorgarGanancia(Jugador jugador);
 
     //public void actualizar(Aldeano aldeano, Integer vidaEdificio);
 

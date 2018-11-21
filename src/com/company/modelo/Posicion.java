@@ -18,8 +18,8 @@ public class Posicion {
         this.posicionVertical = posicionVertical;
     }
 
-    public void posicionar(Unidad unaUnidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        mapa.ubicar(unaUnidad, posicionHorizontal, posicionVertical);
+    public void posicionar(Posicionable posicionable) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        mapa.ubicar(posicionable, posicionHorizontal, posicionVertical);
     }
 
     public void colocarEnCasilleroLibreMasCercano(Unidad unaUnidad) throws MapaLlenoException {
@@ -32,10 +32,6 @@ public class Posicion {
         } catch (CasilleroNoExistenteException e) {
             e.printStackTrace();
         }
-    }
-
-    public void eliminar(Edificio edificio) throws CasilleroNoExistenteException {
-        mapa.quitar(posicionHorizontal, posicionVertical);
     }
 
     public boolean estaOcupado(int i, int j) {

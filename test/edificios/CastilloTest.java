@@ -14,7 +14,7 @@ public class CastilloTest {
 	@Test
 	void testCastilloCrearMaquinaAsedio() throws CasilleroLlenoException {
 		
-		Castillo castillo = new Castillo(new Jugador(Mapa.getMapa()));
+		Castillo castillo = new Castillo(new Jugador());
 		Mapa terreno = Mapa.getMapa();
 		
 		//Terreno no esta ocupado en este momento
@@ -27,7 +27,7 @@ public class CastilloTest {
 		}
 		
 		try {
-			castillo.crearUnidad(new MaquinaAsedio(new Jugador(Mapa.getMapa())));
+			castillo.crearUnidad(new MaquinaAsedio(new Jugador()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}

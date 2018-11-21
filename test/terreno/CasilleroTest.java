@@ -22,14 +22,10 @@ public class CasilleroTest {
     }
 
     @Test
-    public void casilleroVacioPermiteInsercionTest(){
+    public void casilleroVacioPermiteInsercionTest() throws CasilleroLlenoException {
         Casillero casillero = new Casillero();
         Aldeano aldeano = null;
-		try {
-			aldeano = new Aldeano(new Jugador(mapa));
-		} catch (CasilleroLlenoException e1) {
-			
-		}
+        aldeano = new Aldeano(new Jugador());
 
         try {
             casillero.agregarPosicionable(aldeano);
@@ -40,14 +36,10 @@ public class CasilleroTest {
     }
 
     @Test
-    public void casilleroEstaLlenoLuegoDeInsercionTest(){
+    public void casilleroEstaLlenoLuegoDeInsercionTest() throws CasilleroLlenoException {
         Casillero casillero = new Casillero();
         Aldeano aldeano = null;
-		try {
-			aldeano = new Aldeano(new Jugador(mapa));
-		} catch (CasilleroLlenoException e1) {
-			
-		}
+        aldeano = new Aldeano(new Jugador());
 
         try {
             casillero.agregarPosicionable(aldeano);
@@ -58,14 +50,10 @@ public class CasilleroTest {
     }
 
     @Test
-    public void luegoDeQuitarPosicionableElCasilleroEstaVacioNuevamenteTest(){
+    public void luegoDeQuitarPosicionableElCasilleroEstaVacioNuevamenteTest() throws CasilleroLlenoException {
         Casillero casillero = new Casillero();
         Aldeano aldeano = null;
-		try {
-			aldeano = new Aldeano(new Jugador(mapa));
-		} catch (CasilleroLlenoException e1) {
-			
-		}
+        aldeano = new Aldeano(new Jugador());
 
         try {
             casillero.agregarPosicionable(aldeano);

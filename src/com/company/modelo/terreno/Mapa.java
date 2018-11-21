@@ -30,6 +30,7 @@ public class Mapa {
     public Boolean estaOcupado(Integer posicionHorizontal, Integer posicionVertical) {
         try {
             Casillero casilleroAConsultar = obtenerCasillero(posicionHorizontal, posicionVertical);
+
             return casilleroAConsultar.estaOcupado();
         } catch (CasilleroNoExistenteException e) {
             return true;
@@ -38,8 +39,10 @@ public class Mapa {
     /*Listo*/
 	protected Casillero obtenerCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
 	    if(!esParteDelMapa(posicionHorizontal, posicionVertical)){
+
 	        throw new CasilleroNoExistenteException("Error al intentar obtener casillero: El casillero " + posicionHorizontal + ", " + posicionVertical + "esta fuera del mapa.");
         }
+
         return casilleros[posicionHorizontal][posicionVertical];
     }
 

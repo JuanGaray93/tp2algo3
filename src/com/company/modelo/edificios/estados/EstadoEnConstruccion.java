@@ -1,4 +1,4 @@
-package com.company.modelo.edificios;
+package com.company.modelo.edificios.estados;
 
 import com.company.excepciones.Edificio.EdificioOcupadoException;
 import com.company.modelo.unidades.Aldeano;
@@ -6,18 +6,22 @@ import com.company.modelo.unidades.Aldeano;
 public class EstadoEnConstruccion extends EstadoEdificio {
 
 
-    public EstadoEnConstruccion(Integer vida, Integer montoDeReparacion) {
-        super(vida,, montoDeReparacion);
+    public EstadoEnConstruccion(Integer vidaMax,Integer reparacion) {
+        super(vidaMax,reparacion);
     }
 
     @Override
-    public EstadoEdificio construir(Aldeano quienLoConstruye) {
+    public EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion) throws Exception {
+        return null;
+    }
+
+    @Override
+    public EstadoEnConstruccion construir(Aldeano quienLoConstruye) {
         if(trabajadorActual == null){
             trabajadorActual = quienLoConstruye;
         } else if( trabajadorActual != quienLoConstruye){
             throw new EdificioOcupadoException("No se puede construir este edificio, hay otro aldeano construyendolo!");
         }
-
-
+        return this;
     }
 }

@@ -12,13 +12,9 @@ public abstract class Unidad implements Posicionable {
 	protected Posicion posicion;
 	protected Jugador jugador;
 	protected EstadoUnidad estado;
-	
+
 	public Unidad(Jugador jugador) {
 		this.jugador = jugador;
-	}
-	
-	public boolean estaSaludable() {
-		return estado.estaSaludable();
 	}
 
 	public void establecerCoordenadasDeNacimiento(int posicionHorizontal, int posicionVertical) {
@@ -32,12 +28,11 @@ public abstract class Unidad implements Posicionable {
 	}
 
 	@Override
-	public void recibirDanio(Integer montoDeDanio){
+	public void recibirDanio(Integer montoDeDanio) {
 		estado.recibirDanio(montoDeDanio);
 	}
 
 	private void eliminar() throws CasilleroNoExistenteException {
 		posicion.eliminar();
 	}
-
 }

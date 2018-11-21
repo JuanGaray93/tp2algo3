@@ -17,7 +17,7 @@ public class Ataque {
 		enemigo.recibirDanio(ATAQUE_UNIDAD);
 	}
 	
-	public void atacar(Edificio enemigo) {
+	public void atacar(Edificio enemigo) throws Exception {
 		enemigo.recibirDanio(ATAQUE_EDIFICIO);
 	}
 }

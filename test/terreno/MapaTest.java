@@ -23,15 +23,11 @@ public class MapaTest {
     private Jugador jugador = null;
 
     @Before
-    public void resetMapa() {
+    public void resetMapa() throws CasilleroLlenoException {
         mapa.destruir();
         mapa = Mapa.getMapa();
 
-        try {
-            jugador = new Jugador(mapa);
-        } catch (CasilleroLlenoException e) {
-            e.printStackTrace();
-        }
+        jugador = new Jugador();
     }
 
     @Test
