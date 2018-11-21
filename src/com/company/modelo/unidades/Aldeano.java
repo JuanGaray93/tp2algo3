@@ -47,13 +47,18 @@ public class Aldeano extends Unidad {
 		try {
 
 			edificioATrabajar = edificio;
-			turnosOcupado = edificioATrabajar.calcularTiempoReparacion();
+			// NO! El state lo tiene que manejar  turnosOcupado = edificioATrabajar.calcularTiempoReparacion();
 
 			edificio.reparar();
 
 		}catch(EdificioEnReparacionException | EdificioReparadoException e) {
 			liberar();
 		}
+	}
+
+	@Override
+	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
+		// TODO
 	}
 
 	public void actualizar() {
@@ -74,6 +79,7 @@ public class Aldeano extends Unidad {
 					}
 
 	}
+
 
 	public boolean estaLibre() {
 		return edificioATrabajar == null;

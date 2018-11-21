@@ -3,6 +3,7 @@ package com.company.modelo.edificios;
 import com.company.excepciones.EdificioEnReparacionException;
 import com.company.excepciones.EdificioOcupadoException;
 import com.company.excepciones.EdificioReparadoException;
+import com.company.modelo.Jugador;
 import com.company.modelo.unidades.Aldeano;
 
 public abstract class EstadoEdificio {
@@ -24,7 +25,6 @@ public abstract class EstadoEdificio {
 		
 		this.VIDA_MAXIMA = vida;
 		vidaActual = vida;
-		this.COSTO =  costo;
 		this.PORCENTAJE_REPARACION = porcentajeReparacion;
 		this.TAMANIO = tamanio;
 		TURNOS_CONSTRUCCION = turnosConst;
@@ -42,7 +42,7 @@ public abstract class EstadoEdificio {
 			this.vidaActual -= unDanio;
 	}
 	
-	public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
+	public void reparar(Aldeano reparador, Integer porcentaje) throws EdificioReparadoException, EdificioEnReparacionException {
 
       //Deberia ser edificioocupadoException, considerar el caso de construyendose
 		if(this.comoNuevo()){

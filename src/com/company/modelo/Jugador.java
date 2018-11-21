@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.OroInsuficienteException;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.edificios.PlazaCentral;
@@ -46,6 +47,17 @@ public class Jugador {
 	public void sumarOro(int produccionOro) {
 		this.oro += produccionOro;
 
+	}
+
+	public void cobrar(Integer monto) throws OroInsuficienteException, Exception {
+		if(monto < 0){
+			throw new Exception("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
+		}
+		if (oro - monto < 0){
+			throw new OroInsuficienteException();
+		}
+
+		oro -= monto;
 	}
 	
 	public void actualizar() {

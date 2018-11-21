@@ -16,29 +16,36 @@ public abstract class Edificio implements Posicionable {
     protected EstadoEdificio estado;
     protected Jugador jugador;
     protected Posicion[] posiciones;
+    protected final Integer COSTO;
+    protected final Integer PORCENTAJE_DE_REPARACION;
 
-    public Edificio(Jugador jugador){
-		this.jugador = jugador;
+    public Edificio(Jugador jugador, Integer costo, Integer porcentajeDeReparacion){
+
+        this.jugador = jugador;
+        this.COSTO = costo;
+        this.PORCENTAJE_DE_REPARACION = porcentajeDeReparacion;
 	}
 	
 	public void recibirDanio(int unDanio) {
 		estado.recibirDanio(unDanio);
 	}
-
-	public boolean estaLibre() {
-		return estado.estaLibre();
-	}
 	
-    public abstract void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
-                            throws CasilleroLlenoException;
+    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
+                            throws CasilleroLlenoException{
+
+
+        /*TODO: manejo de posiciones.*/
+        jugador.cobrar(this.COSTO);
+        estado.construir(quienLoConstruye);
+
+    }
 
     public void crearUnidad(Unidad unidad) throws CasilleroLlenoException {
     	posiciones[1].posicionar(unidad);
     }
     
     public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
-
-        this.estado.reparar();
+        this.estado.reparar(PORCENTAJE_DE_REPARACION);
     }
     
 	public boolean comoNuevo() {
@@ -56,8 +63,8 @@ public abstract class Edificio implements Posicionable {
     public void actualizar(){
         estado.actualizar();
      }
+     
+    public void construirEn(){
 
-    public int calcularTiempoReparacion(){
-        return this.estado.calcularTiempoReparacion();
     }
 }
