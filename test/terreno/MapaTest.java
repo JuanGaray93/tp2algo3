@@ -126,11 +126,6 @@ public class MapaTest {
             mapa.ubicar(new Aldeano(jugador), 12, 12);
             mapa.ubicar(new Aldeano(jugador), 13, 12);
 
-            assertTrue(mapa.estaOcupado(10,12));
-            assertTrue(mapa.estaOcupado(11,12));
-            assertTrue(mapa.estaOcupado(12,12));
-            assertTrue(mapa.estaOcupado(13,12));
-
             mapa.colocarEnCasilleroLibreMasCercano(aColocar, 10, 12);
             obtenido = mapa.conseguirOcupante(14, 12);
 

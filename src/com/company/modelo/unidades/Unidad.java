@@ -22,7 +22,7 @@ public abstract class Unidad implements Posicionable {
 	}
 
 	public void moverA(int posicionHorizontal, int posicionVertical) throws CasilleroLlenoException, CasilleroNoExistenteException {
-		this.eliminar();
+		this.eliminarDePosicion();
 		posicion = new Posicion(posicionHorizontal, posicionVertical);
 		posicion.posicionar(this);
 	}
@@ -32,7 +32,9 @@ public abstract class Unidad implements Posicionable {
 		estado.recibirDanio(montoDeDanio);
 	}
 
-	private void eliminar() throws CasilleroNoExistenteException {
-		posicion.eliminar();
+	private void eliminarDePosicion() throws CasilleroNoExistenteException {
+		if(posicion != null){
+			posicion.eliminar();
+		}
 	}
 }

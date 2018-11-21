@@ -57,26 +57,15 @@ public class Mapa {
 		return instancia;
 	}
 
-	/* Ubica a la unidad en un casillero
-	 * Si no hay ningún lugar disponible en toddo el mapa, lanza una excepcion
-	 * Ya sé que está recontra estructurado esto pero es una forma preliminar de encontrar el espacio vacío
-	 */
-	private Casillero encontrarCasilleroDisponibleEnTornoA (Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
-
-        Casillero candidato = null;
-        Integer numeroDeIteracion = 0;
-
-        Reptador reptador = new Reptador(posicionHorizontal, posicionVertical, this);
-        while(candidato == null){
-            candidato = reptador.buscar();
-        }
-        return candidato;
-	}
-
-	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
+	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException, CasilleroNoExistenteException, CasilleroLlenoException {
         // TODO: SOLUCIONAR POSICION DE UNIDAD EN MAPA
-        //Casillero casilleroDisponible = encontrarCasilleroDisponibleEnTornoA(nuevaUnidad, posicionHorizontal, posicionVertical);
-        //casilleroDisponible.agregarPosicionable(nuevaUnidad);
+        Reptador reptador = new Reptador(posicionHorizontal, posicionVertical);
+
+        Boolean encontrado = false;
+        while(! encontrado){
+            encontrado = reptador.buscar();
+        }
+        reptador.ubicarUnidad(nuevaUnidad);
 	}
 
 	public Posicionable conseguirOcupante(Integer posicionHorizontal, Integer posicionVertical ) throws CasilleroNoExistenteException {
