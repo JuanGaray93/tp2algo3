@@ -1,8 +1,5 @@
 package com.company.modelo.unidades.estados;
 
-import com.company.modelo.unidades.EstadoUnidad;
-import com.company.modelo.unidades.Aldeano;
-
 public class EstadoAldeano extends EstadoUnidad {
 
   /*  private Integer vida;

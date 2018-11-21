@@ -2,8 +2,9 @@ package com.company.modelo.unidades;
 
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
-public class MaquinaAsedio  extends Unidad {
+public class MaquinaAsedio extends Unidad {
 	
 	private Ataque ataque;
 

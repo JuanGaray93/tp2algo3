@@ -5,6 +5,7 @@ import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public abstract class Unidad implements Posicionable {
 

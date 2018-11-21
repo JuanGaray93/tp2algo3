@@ -14,7 +14,7 @@ public class Cuartel extends Edificio {
 		this.estado = new EstadoEdificio(VIDA,COSTO,50,4, 3);
 	}
 	
-	public void crear(Unidad unidad){
+	public void crearUnidad(Unidad unidad){
 		/*Posicion posicion = posiciones.get(0);
 		try {
 			posicion.posicionarUnidad(unidad);

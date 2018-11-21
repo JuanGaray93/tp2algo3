@@ -1,4 +1,4 @@
-package com.company.modelo.unidades;
+package com.company.modelo.unidades.estados;
 
 public class EstadoUnidad {
 

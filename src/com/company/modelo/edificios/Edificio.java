@@ -7,15 +7,15 @@ import com.company.excepciones.EdificioReparadoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
+import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
 public abstract class Edificio implements Posicionable {
 
     protected EstadoEdificio estado;
-
-
-    protected Posicion posicion;
+    protected Jugador jugador;
+    protected Posicion[] posiciones;
 
     public Edificio(Jugador jugador){
 		this.jugador = jugador;
@@ -29,7 +29,7 @@ public abstract class Edificio implements Posicionable {
 		return estado.estaLibre();
 	}
 	
-    public void construir(Aldeano quienLoConstruye, int posicionHorizontal, int posicionVertical)
+    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
                             throws CasilleroLlenoException {
          estado.construir(quienLoConstruye);
          this.posicion = new Posicion(posicionHorizontal, posicionVertical);
@@ -38,12 +38,8 @@ public abstract class Edificio implements Posicionable {
 
     }
 
-    public int getTamanio(){
-	    return estado.getTamanio();
-    }
-
-    public void crear(Unidad unidad) {
-    	
+    public void crearUnidad(Unidad unidad) throws CasilleroLlenoException {
+    	posiciones[1].posicionar(unidad);
     }
     
     public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
@@ -56,12 +52,15 @@ public abstract class Edificio implements Posicionable {
 	}
 
     public void eliminar() throws CasilleroNoExistenteException{
-        posicion.eliminar(this);
+        for(Posicion posicion: posiciones){
+            posicion.eliminar(this);
+        }
+
         this.jugador.eliminarDeConstrucciones(this);
     }
 
-    public int actualizar(){
-        return this.estado.actualizar();
+    public void actualizar(){
+        estado.actualizar();
      }
 
     public int calcularTiempoReparacion(){

@@ -45,7 +45,7 @@ public class PlazaCentralTest{
 
 		}
 
-		central.crear(new Aldeano(jugador));
+		central.crearUnidad(new Aldeano(jugador));
 		//Ahora terreno esta ocupado en posicion cercana de castillo y en castillo
 		//La posicion donde se crea la maquina de asedio es random en el castillo
 		// TODO probar mas casos borde!
@@ -155,11 +155,11 @@ public class PlazaCentralTest{
 		
 		PlazaCentral plaza = new PlazaCentral(jugador);
 		
-		plaza.crear(new Aldeano(jugador));
+		plaza.crearUnidad(new Aldeano(jugador));
 		
 		Assert.assertFalse(plaza.estaLibre());
 		try {
-			plaza.crear(new Aldeano(jugador));
+			plaza.crearUnidad(new Aldeano(jugador));
 		}catch(EdificioOcupadoException e) {
 			//
 		}
@@ -168,7 +168,7 @@ public class PlazaCentralTest{
 		
 		Assert.assertTrue(plaza.estaLibre());
 		
-		plaza.crear(new Aldeano(jugador));
+		plaza.crearUnidad(new Aldeano(jugador));
 		
 	}
 	

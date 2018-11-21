@@ -4,4 +4,5 @@ public interface Posicionable {
 
     void ubicar(Integer posicionHorizontal, Integer posicionVertical);
     void actualizar();
+    void recibirDanio(Integer montoDeDanio);
 }

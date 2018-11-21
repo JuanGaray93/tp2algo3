@@ -2,6 +2,7 @@ package com.company.modelo.unidades;
 
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class Espadachin extends Unidad {
 	

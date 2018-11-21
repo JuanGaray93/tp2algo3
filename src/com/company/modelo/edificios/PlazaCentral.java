@@ -8,7 +8,7 @@ public class PlazaCentral extends Edificio {
 
 	public PlazaCentral(Jugador jugador) {
 		super(jugador);
-		this.estado = new EstadoEdificio(VIDA_MAXIMA,100,25,4 ,3);
+		this.estado = new EstadoInactivo(VIDA_MAXIMA,100,25,4 ,3);
 	}
 
 }

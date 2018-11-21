@@ -7,7 +7,6 @@ import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Arquero;
-import com.company.modelo.unidades.Unidad;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +46,7 @@ public class ArqueroTest {
 
         try{
         	Arquero arquero = new Arquero(jugador);
-            cuartel.crear(arquero);
+            cuartel.crearUnidad(arquero);
 
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -87,7 +86,7 @@ public class ArqueroTest {
 
         try{
         	Arquero arquero = new Arquero(jugador);
-            cuartel.crear(arquero);
+            cuartel.crearUnidad(arquero);
             
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -127,7 +126,7 @@ public class ArqueroTest {
 
         try{
         	Arquero arquero = new Arquero(jugador);
-            cuartel.crear(arquero);
+            cuartel.crearUnidad(arquero);
 
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -166,7 +165,7 @@ public class ArqueroTest {
         }
 
         Arquero arquero = new Arquero(jugador);
-		cuartel.crear(arquero);
+		cuartel.crearUnidad(arquero);
 
 		assertTrue( mapa.estaOcupado(3, 7) );
     }
@@ -193,7 +192,7 @@ public class ArqueroTest {
 
         try{
         	Arquero arquero = new Arquero(jugador);
-            cuartel.crear(arquero);
+            cuartel.crearUnidad(arquero);
             assertTrue( mapa.estaOcupado(3, 7) );
 
             arquero.moverA(2, 8);
@@ -231,7 +230,7 @@ public class ArqueroTest {
 
         try{
         	Arquero arquero = new Arquero(jugador);
-            cuartel.crear(arquero);
+            cuartel.crearUnidad(arquero);
 
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -270,7 +269,7 @@ public class ArqueroTest {
 
         try{
         	Arquero arquero = new Arquero(jugador);
-            cuartel.crear(arquero);
+            cuartel.crearUnidad(arquero);
 
             assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -309,7 +308,7 @@ public class ArqueroTest {
         }
 
         Arquero arquero = new Arquero(jugador);
-		cuartel.crear(arquero);
+		cuartel.crearUnidad(arquero);
 
 		assertTrue( mapa.estaOcupado(3, 7) );
     }

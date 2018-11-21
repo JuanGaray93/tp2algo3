@@ -27,7 +27,7 @@ public class CastilloTest {
 		}
 		
 		try {
-			castillo.crear(new MaquinaAsedio(new Jugador(Mapa.getMapa())));
+			castillo.crearUnidad(new MaquinaAsedio(new Jugador(Mapa.getMapa())));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}

@@ -1,7 +1,6 @@
 package edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Arquero;
@@ -48,7 +47,7 @@ public class CuartelTest {
 		assertTrue( mapa.estaOcupado(4, 5) );
 		assertTrue( mapa.estaOcupado(4, 6) );
 
-		cuartel.crear(new Arquero(jugador));
+		cuartel.crearUnidad(new Arquero(jugador));
 
 		assertTrue( mapa.estaOcupado(3, 7) );
 		assertFalse( mapa.estaOcupado(4, 7) );
@@ -84,7 +83,7 @@ public class CuartelTest {
 		assertTrue( mapa.estaOcupado(21, 20) );
 		assertTrue( mapa.estaOcupado(21, 21) );
 
-        cuartel.crear(new Espadachin(jugador));
+        cuartel.crearUnidad(new Espadachin(jugador));
 
         assertTrue( mapa.estaOcupado(21, 20) );
     }
