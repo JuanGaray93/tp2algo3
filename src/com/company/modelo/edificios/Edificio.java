@@ -63,8 +63,4 @@ public abstract class Edificio implements Posicionable {
     public void actualizar(){
         estado.actualizar();
      }
-     
-    public void construirEn(){
-
-    }
 }

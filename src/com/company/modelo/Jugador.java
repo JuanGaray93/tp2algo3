@@ -70,7 +70,7 @@ public class Jugador {
 		Castillo castillo = new Castillo(this);
 
 		try {
-			castillo.construirEn(1, 1);
+			castillo.construir(1, 1);
 		} catch (CasilleroLlenoException e) {
 			e.printStackTrace();
 		}
@@ -79,7 +79,7 @@ public class Jugador {
 		PlazaCentral plaza = new PlazaCentral(this);
 
 		try {
-			plaza.construirEn(5, 0);
+			plaza.construir(5, 0);
 		} catch (CasilleroLlenoException e) {
 			e.printStackTrace();
 		}

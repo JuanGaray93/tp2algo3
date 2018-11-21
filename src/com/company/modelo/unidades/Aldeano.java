@@ -28,7 +28,7 @@ public class Aldeano extends Unidad {
 		}
 		edificioATrabajar = edificio;
 		turnosOcupado = 3;
-		edificio.construirEn(x,y);
+		edificio.construir(x,y);
 	}
 
 	private void recolectarOro() {
