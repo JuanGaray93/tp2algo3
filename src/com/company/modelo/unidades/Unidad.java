@@ -7,8 +7,6 @@ import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.estados.EstadoUnidad;
 
-import unidades.Unidad;
-
 public abstract class Unidad implements Posicionable {
 
 	protected Posicion posicion;

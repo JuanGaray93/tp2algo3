@@ -5,7 +5,7 @@ import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.MaquinaAsedio;
+import com.company.modelo.unidades.ArmaAsedio;
 
 import unidades.Before;
 import unidades.Test;
@@ -43,7 +43,7 @@ public class AsedioTest {
 	        }
 
 	        try{
-	        	MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+	        	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 	            castillo.crear(maquinaAsedio);
 
 	            assertTrue( mapa.estaOcupado(3, 7) );
@@ -85,7 +85,7 @@ public class AsedioTest {
 		     }
 
 		     try{
-		    	 MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+		    	 ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 		         castillo.crear(maquinaAsedio);
 
 		         assertTrue( mapa.estaOcupado(3, 7) );
@@ -127,7 +127,7 @@ public class AsedioTest {
 		    }
 
 		    try{
-		    	MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 		        castillo.crear(maquinaAsedio);
 
 		        assertTrue( mapa.estaOcupado(3, 7) );
@@ -167,7 +167,7 @@ public class AsedioTest {
 		    }
 
 		    try{
-		    	MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 		        castillo.crear(maquinaAsedio);
 
 		        assertTrue( mapa.estaOcupado(3, 7) );
@@ -208,7 +208,7 @@ public class AsedioTest {
 	        }
 
 	        try{
-	        	MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+	        	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 	            castillo.crear(maquinaAsedio);
 
 	            assertTrue( mapa.estaOcupado(3, 7) );
@@ -249,7 +249,7 @@ public class AsedioTest {
 		    }
 
 		    try{
-		    	MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 		        castillo.crear(maquinaAsedio);
 
 		        assertTrue( mapa.estaOcupado(3, 7) );
@@ -289,7 +289,7 @@ public class AsedioTest {
 		    }
 
 		    try{
-		    	MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 		        castillo.crear(maquinaAsedio);
 
 		        assertTrue( mapa.estaOcupado(3, 7) );
@@ -330,7 +330,7 @@ public class AsedioTest {
 		    }
 
 		    try{
-		    	MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 		        castillo.crear(maquinaAsedio);
 
 		        assertTrue( mapa.estaOcupado(3, 7) );
@@ -371,7 +371,7 @@ public class AsedioTest {
 		    }
 
 		    try{
-		    	MaquinaAsedio maquinaAsedio = new MaquinaAsedio(jugador);
+		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 		        castillo.crear(maquinaAsedio);
 
 		        assertTrue( mapa.estaOcupado(3, 7) );
