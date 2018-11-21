@@ -10,7 +10,6 @@ import com.company.modelo.unidades.estados.EstadoUnidad;
 public abstract class Unidad implements Posicionable {
 
 	protected Posicion posicion;
-	protected Boolean atacando;
 	protected Jugador jugador;
 	protected EstadoUnidad estado;
 	
@@ -32,6 +31,7 @@ public abstract class Unidad implements Posicionable {
 		posicion.posicionar(this);
 	}
 
+	@Override
 	public void recibirDanio(int unDanio){
 		estado.recibirDanio(unDanio);
 	}

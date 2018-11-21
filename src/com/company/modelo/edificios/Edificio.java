@@ -1,9 +1,6 @@
 package com.company.modelo.edificios;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.EdificioEnReparacionException;
-import com.company.excepciones.EdificioReparadoException;
+import com.company.excepciones.*;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
@@ -31,12 +28,16 @@ public abstract class Edificio implements Posicionable {
 	}
 	
     public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
-                            throws CasilleroLlenoException{
-
+            throws Exception, OroInsuficienteException {
 
         /*TODO: manejo de posiciones.*/
+
         jugador.cobrar(this.COSTO);
         estado.construir(quienLoConstruye);
+
+    }
+
+    public void ubicar(){
 
     }
 
@@ -44,8 +45,8 @@ public abstract class Edificio implements Posicionable {
     	posiciones[1].posicionar(unidad);
     }
     
-    public void reparar() throws EdificioReparadoException, EdificioEnReparacionException {
-        this.estado.reparar(PORCENTAJE_DE_REPARACION);
+    public void reparar(Aldeano reparador) throws EdificioReparadoException, EdificioEnReparacionException {
+        this.estado.reparar(reparador, PORCENTAJE_DE_REPARACION);
     }
     
 	public boolean comoNuevo() {
