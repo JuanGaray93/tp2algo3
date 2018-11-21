@@ -3,23 +3,22 @@ package com.company.modelo.unidades;
 import com.company.excepciones.*;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.EstadoAldeano;
 import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class Aldeano extends Unidad {
 
-	final private static Integer PRODUCCION_ORO = 20;
-
-	private int turnosOcupado;
+	private final Integer VIDA = 50;
+	private final Integer COSTO = 25;
 
 	Edificio edificioATrabajar;
 
-	boolean trabajando;
+	EstadoAldeano estadoActual;
 
 	public Aldeano(Jugador jugador) {
 		super(jugador);
-		estado = new EstadoUnidad(50,25);
-        edificioATrabajar= null;
-		trabajando  = false;
+		estado = new EstadoUnidad(VIDA,COSTO);
+       estadoActual = new Inactivo();
 	}
 
 	public void construir(Edificio edificio,Integer x, Integer y) throws CasilleroLlenoException, CasilleroNoExistenteException {
@@ -56,6 +55,11 @@ public class Aldeano extends Unidad {
 		}
 	}
 
+	@Override
+	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
+
+	}
+
 	public void actualizar() {
 
                  if(turnosOcupado>1){
@@ -72,6 +76,11 @@ public class Aldeano extends Unidad {
 						turnosOcupado = edificioATrabajar.actualizar();
                 		this.liberar();
 					}
+
+	}
+
+	@Override
+	public void recibirDanio(Integer montoDeDanio) {
 
 	}
 
