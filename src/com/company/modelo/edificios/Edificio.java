@@ -8,6 +8,7 @@ import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoEdificio;
 import com.company.modelo.edificios.estados.EstadoEdificioEnConstruccion;
+import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
@@ -31,7 +32,9 @@ public abstract class Edificio extends Posicionable {
         posiciones = new ArrayList<>();
 
         this.jugador = jugador;
-	}
+
+        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,COSTO);
+    }
 
 	@Override
 	public void recibirDanio(Integer unDanio) throws Exception {
@@ -44,12 +47,15 @@ public abstract class Edificio extends Posicionable {
         /*TODO: manejo de posiciones.*/
 
         jugador.cobrar(this.COSTO);
-        ubicar(posicionHorizontal,posicionVertical);
+
+        this.ubicar(posicionHorizontal,posicionVertical);
+
+
         estado = estado.construir(quienLoConstruye);
     }
 
-    public void suspenderConstruccion(Aldeano quienLoConstruye) throws Exception {
-        estado = estado.suspenderConstruccion(quienLoConstruye);
+    public void suspender(Aldeano quienLoConstruye) throws Exception {
+        estado = estado.suspender(quienLoConstruye);
     }
 
     @Override
@@ -59,6 +65,7 @@ public abstract class Edificio extends Posicionable {
         for( int i = posicionHorizontal; i < ( posicionHorizontal + BLOQUES_DE_ANCHO ); i++)
             for (int j = posicionVertical; j < (posicionVertical + BLOQUES_DE_ALTO); j++) {
                 Posicion posicion = new Posicion(i, j);
+
                 posicion.posicionar(this);
                 posiciones.add(posicion);
             }
@@ -69,9 +76,7 @@ public abstract class Edificio extends Posicionable {
         return this.vidaActual;
     }
 
-    public void crearUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
-    	posiciones.get(1).posicionar(unidad);
-    }
+    public abstract void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException;
     
     public void reparar(Aldeano reparador) throws Exception {
        this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);

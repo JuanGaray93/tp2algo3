@@ -11,6 +11,7 @@ public class Espadachin extends UnidadAtacante {
 
 		/*this.estado =  new EstadoUnidad(100,25);
 		ataque = new Ataque(15,25);*/
+		this.nombre = "ESPADACHIN";
 		
 	}
 
@@ -32,16 +33,6 @@ public class Espadachin extends UnidadAtacante {
 	//@Override
 	public void actualizar() {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public Boolean verificarAlianza(Posicionable otroPosicionable) {
-		return null;
-	}
-
-	@Override
-	public Boolean verificarAlianza(Jugador otroJugador) {
-		return null;
 	}
 
 }

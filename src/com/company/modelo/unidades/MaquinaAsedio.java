@@ -10,6 +10,7 @@ public class MaquinaAsedio extends UnidadAtacante {
 	public MaquinaAsedio(Jugador jugador) {
 		super(jugador);
 		this.estado =  new EstadoArmaAsedioDesmontada();
+		this.nombre = "ARMA_ASEDIO";
 	}
 
 	@Override

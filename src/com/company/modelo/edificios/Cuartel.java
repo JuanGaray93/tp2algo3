@@ -1,5 +1,8 @@
 package com.company.modelo.edificios;
 
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
@@ -19,29 +22,23 @@ public class Cuartel extends Edificio {
 		this.estado = new EstadoPorConstruir(VIDA_MAXIMA,MONTO_DE_REPARACION);
 	}
 
-	public void crearUnidad(Unidad unidad){
-		/*Posicion posicion = posiciones.get(0);
-		try {
-			posicion.posicionarUnidad(unidad);
-		} catch (CasilleroLlenoException e) {
-			//
-		}*/
-		jugador.agregarAPoblacion(unidad);
-	}
-
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
 	}
 
 	@Override
-	public Boolean verificarAlianza(Posicionable otroPosicionable) {
-		return null;
+	public void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
+		 if(!unidad.seLlama("ARQUERO") || !unidad.seLlama("ESPADACHIN")){
+		 	throw new UnidadErroneaException("Imposible crear ese tipo de unidad");
+		 }
+		 posiciones.get(1).posicionar(unidad);
+
 	}
 
 	@Override
-	public Boolean verificarAlianza(Jugador otroJugador) {
-		return null;
+	public void actualizar() {
+
 	}
 
 }

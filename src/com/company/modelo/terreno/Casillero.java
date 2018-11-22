@@ -18,6 +18,8 @@ public class Casillero {
     public void agregarPosicionable(Posicionable entidadNueva) throws CasilleroLlenoException {
         if(!this.estaOcupado()){
             habitante = entidadNueva;
+
+            System.out.println(entidadNueva);
         } else {
             throw new CasilleroLlenoException("Se intentó llenar un casillero ocupado");
         }

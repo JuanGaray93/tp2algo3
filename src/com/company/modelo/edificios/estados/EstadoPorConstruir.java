@@ -16,7 +16,7 @@ public class EstadoPorConstruir extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio suspenderConstruccion(Aldeano quienLoConstruye) throws Exception {
+    public EstadoEdificio suspender(Aldeano quienLoConstruye) throws Exception {
         return this;
     }
 

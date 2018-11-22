@@ -100,6 +100,18 @@ public class MapaTest {
     }
 
     @Test
+    public void quitarPosicionableDesocupaElLugarTest() {
+        Aldeano aldeano = new Aldeano(jugador);
+        try {
+            mapa.ubicar(aldeano, 10, 11);
+            mapa.quitar(10, 11);
+        } catch (Exception e) {
+            assertTrue( e.getMessage(),false);
+        }
+        assertFalse(mapa.estaOcupado(10, 11));
+    }
+
+    @Test
     public void colocarUnidadOcupaCasilleroVacioMasCercano(){
         /** El Reptador no se puede testear directamente por ser un objeto al que sólo puede acceder Mapa.
          *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único método que delega responsabilidades a Reptador.
@@ -130,22 +142,11 @@ public class MapaTest {
             obtenido = mapa.conseguirOcupante(14, 12);
 
         } catch (Exception e){
-            assertTrue(false);
+
         }
 
         assertEquals(aColocar, obtenido);
     }
 
-    @Test
-    public void quitarPosicionableDesocupaElLugarTest() {
-        Aldeano aldeano = new Aldeano(jugador);
-        try {
-            mapa.ubicar(aldeano, 10, 11);
-            mapa.quitar(10, 11);
-        } catch (Exception e) {
-            assertTrue( e.getMessage(),false);
-        }
-        assertFalse(mapa.estaOcupado(10, 11));
-    }
 
 }

@@ -42,6 +42,7 @@ public class Reptador {
 
         try{
             Casillero lugar = mapa.obtenerCasillero(posicionHorizontal, posicionVertical );
+
             casillerosMirados++;
             encontrado = (! lugar.estaOcupado());
 
@@ -56,7 +57,9 @@ public class Reptador {
     }
 
     protected void ubicarUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        unidad.moverA(posicionHorizontal, posicionVertical);
+
+        unidad.establecerCoordenadasDeNacimiento(posicionHorizontal,posicionHorizontal);
+        mapa.ubicar(unidad,posicionHorizontal, posicionVertical);
     }
 
     private void avanzarPosicion(){

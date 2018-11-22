@@ -37,7 +37,7 @@ public abstract class EstadoEdificio {
 
     public abstract EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) throws EdificioEnConstruccionException, Exception;
 
-    public abstract EstadoEdificio suspenderConstruccion(Aldeano quienLoConstruye) throws Exception;
+    public abstract EstadoEdificio suspender(Aldeano quienLoConstruye) throws Exception;
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine
 ;a vda del edifico  no termina si esta construyendo dura la cantidad de turnos

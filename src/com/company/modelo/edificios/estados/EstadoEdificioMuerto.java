@@ -18,7 +18,8 @@ public class EstadoEdificioMuerto extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio suspenderConstruccion(Aldeano quienLoConstruye) throws Exception {
+    public EstadoEdificio suspender(Aldeano quienLoConstruye) throws Exception {
         throw new Exception("El edificio esta destruido!");
     }
+
 }

@@ -20,7 +20,7 @@ public class EstadoEdificioInactivo extends EstadoEdificio { // TODO
     }
 
     @Override
-    public EstadoEdificio suspenderConstruccion(Aldeano quienLoConstruye) {
+    public EstadoEdificio suspender(Aldeano quienLoConstruye) {
         return this;
     }
 }

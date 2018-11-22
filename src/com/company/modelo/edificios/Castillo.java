@@ -1,5 +1,8 @@
 package com.company.modelo.edificios;
 
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.Unidad;
@@ -13,27 +16,17 @@ public class Castillo extends Edificio {
         vidaActual = 1000;
     }
 
+    @Override
+    public void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        if(!unidad.seLlama("ARMA_ASEDIO")){
+            throw new UnidadErroneaException("esta unidad no puede ser creada aqui");
+        }
+        posiciones.get(1).posicionar(unidad);
+    }
+
     public void actualizar() {
 
     }
-
-    @Override
-    public Boolean verificarAlianza(Posicionable otroPosicionable) {
-        return null;
-    }
-
-    @Override
-    public Boolean verificarAlianza(Jugador otroJugador) {
-        return null;
-    }
-
-	/*public void crearMaquinaAsedio() throws Exception {
-		try {
-			posiciones.get(1).ubicar(new MaquinaAsedio(this.jugador));
-		} catch (CasilleroLlenoException e) {
-			// 
-		}
-	}*/
 
     public void atacar(Unidad enemigo) {
         // TODO

@@ -12,12 +12,6 @@ public abstract class Posicionable {
 
     public abstract void recibirDanio(Integer montoDeDanio) throws Exception;
 
-    public Boolean verificarAlianza(Posicionable otroPosicionable){
-        return ( otroPosicionable.verificarAlianza(this.jugador) );
-    }
-    public Boolean verificarAlianza(Jugador otroJugador){
-        return(this.jugador == otroJugador);
-    }
 
     public abstract void actualizar();
 }

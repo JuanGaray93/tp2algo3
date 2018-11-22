@@ -10,6 +10,7 @@ public class Arquero extends UnidadAtacante {
 	public Arquero(Jugador jugador) {
 		super(jugador);
 		this.estado =  new EstadoUnidadInactivo();
+		this.nombre = "ARQUERO";
 	}
 
     public void atacar(Edificio enemigo) {

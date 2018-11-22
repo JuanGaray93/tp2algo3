@@ -41,7 +41,7 @@ public class CuartelTest {
 		assertTrue( mapa.estaOcupado(4, 5) );
 		assertTrue( mapa.estaOcupado(4, 6) );
 
-		cuartel.crearUnidad(new Arquero(jugador));
+		cuartel.crear(new Arquero(jugador));
 
 		assertTrue( mapa.estaOcupado(3, 7) );
 		assertFalse( mapa.estaOcupado(4, 7) );
@@ -68,7 +68,7 @@ public class CuartelTest {
 		assertTrue( mapa.estaOcupado(21, 20) );
 		assertTrue( mapa.estaOcupado(21, 21) );
 
-        cuartel.crearUnidad(new Espadachin(jugador));
+        cuartel.crear(new Espadachin(jugador));
 
         assertTrue( mapa.estaOcupado(21, 20) );
     }

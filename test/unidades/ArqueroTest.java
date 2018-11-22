@@ -38,7 +38,7 @@ public class ArqueroTest {
 
         cuartel.construir(peon, 5,5);
 
-        cuartel.crearUnidad(arquero);
+        cuartel.crear(arquero);
 
         assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -52,7 +52,7 @@ public class ArqueroTest {
 
         cuartel.construir(peon,3, 5);
 
-        cuartel.crearUnidad(arquero);
+        cuartel.crear(arquero);
 
         assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -68,7 +68,7 @@ public class ArqueroTest {
 
         cuartel.construir(peon,3, 5);
 
-        cuartel.crearUnidad(arquero);
+        cuartel.crear(arquero);
 
         assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -84,7 +84,7 @@ public class ArqueroTest {
 
         cuartel.construir(peon,3, 5);
 
-		cuartel.crearUnidad(arquero);
+		cuartel.crear(arquero);
 
 		assertTrue( mapa.estaOcupado(3, 7) );
     }
@@ -96,7 +96,7 @@ public class ArqueroTest {
         cuartel.construir(peon,3, 5);
 
         Arquero arquero = new Arquero(jugador);
-        cuartel.crearUnidad(arquero);
+        cuartel.crear(arquero);
         assertTrue( mapa.estaOcupado(3, 7) );
 
         arquero.moverA(2, 8);
@@ -110,7 +110,7 @@ public class ArqueroTest {
         cuartel.construir(peon,3, 5);
 
         Arquero arquero = new Arquero(jugador);
-        cuartel.crearUnidad(arquero);
+        cuartel.crear(arquero);
 
         assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -126,7 +126,7 @@ public class ArqueroTest {
         cuartel.construir(peon,3, 5);
 
         Arquero arquero = new Arquero(jugador);
-        cuartel.crearUnidad(arquero);
+        cuartel.crear(arquero);
 
         assertTrue( mapa.estaOcupado(3, 7) );
 
@@ -143,7 +143,7 @@ public class ArqueroTest {
 
         cuartel.construir(peon,3, 5);
 
-		cuartel.crearUnidad(arquero);
+		cuartel.crear(arquero);
 
 		assertTrue( mapa.estaOcupado(3, 7) );
     }

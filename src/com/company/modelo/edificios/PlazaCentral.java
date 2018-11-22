@@ -1,8 +1,12 @@
 package com.company.modelo.edificios;
 
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
+import com.company.modelo.unidades.Unidad;
 
 public class PlazaCentral extends Edificio {
 
@@ -19,20 +23,21 @@ public class PlazaCentral extends Edificio {
         this.estado = new EstadoPorConstruir(VIDA_MAXIMA,MONTO_DE_REPARACION);
     }
 
-    //verifica si otroPosicionable pertenece a mi alianza
     @Override
-    public Boolean verificarAlianza(Posicionable otroPosicionable) {
-        return null;
-    }
+    public void actualizar() {
 
-    //verifica si otroJugador pertenece a mi alianza
-    @Override
-    public Boolean verificarAlianza(Jugador otroJugador) {
-        return null;
     }
 
     @Override
     public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
+    }
+
+    @Override
+    public void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        if(!unidad.seLlama("ALDEANO")){
+            throw new UnidadErroneaException("Esta unidad no se crea en Plaza Central");
+        }
+        posiciones.get(1).posicionar(unidad);
     }
 }
