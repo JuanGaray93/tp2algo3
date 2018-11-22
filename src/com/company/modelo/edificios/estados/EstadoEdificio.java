@@ -1,7 +1,6 @@
 package com.company.modelo.edificios.estados;
 
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.excepciones.Edificio.EdificioTerminadoException;
 import com.company.modelo.unidades.Aldeano;
 
@@ -28,7 +27,7 @@ public abstract class EstadoEdificio {
         this.vidaActual -= montoDeDanio;
 
         if(vidaActual <= 0){
-            return new EstadoMuerto(VIDA_MAXIMA,MONTO_REPARACION);
+            return new EstadoEdificioMuerto(VIDA_MAXIMA,MONTO_REPARACION);
         }
 
         return this;
@@ -36,7 +35,7 @@ public abstract class EstadoEdificio {
 
     public abstract EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion) throws Exception;
 
-    public abstract EstadoEnConstruccion construir(Aldeano quienLoConstruye) throws EdificioEnConstruccionException, EdificioTerminadoException;
+    public abstract EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) throws EdificioEnConstruccionException, EdificioTerminadoException;
 
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine

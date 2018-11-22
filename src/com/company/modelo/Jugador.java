@@ -1,6 +1,7 @@
 package com.company.modelo;
 
 import com.company.excepciones.*;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.edificios.PlazaCentral;
@@ -13,14 +14,18 @@ import java.util.ArrayList;
 
 public class Jugador {
 
-	private final Integer LIMITE_POBLACIONAL = 50 ;
-	
+	private final static Integer LIMITE_POBLACIONAL = 50 ;
+	private static Integer jugadoresCreados = 0;
+	private Integer numeroDeJugador;
+
 	ArrayList <Unidad> poblacion;
 	ArrayList <Edificio> edificios;
 	private static Integer oro;
 
 	public Jugador() {
 		this.oro = 100;
+		jugadoresCreados++;
+		this.numeroDeJugador = jugadoresCreados;
 	}
 	/*
 	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException {
@@ -79,33 +84,35 @@ public class Jugador {
 		
 	}*/
 
-	public void crearEntidadesIniciales(){
-		/*
-		Castillo castillo = new Castillo(this);
+	public void crearEntidadesIniciales() throws EdificioEnConstruccionException, CasilleroNoExistenteException, CasilleroLlenoException {
 
-		try {
-			castillo.construir(1, 1);
-		} catch (CasilleroLlenoException e) {
-			e.printStackTrace();
+		Integer posicionInicialX = 0;
+		Integer posicionInicialY = 0;
+
+		if(this.numeroDeJugador == 1){
+			posicionInicialX = 1;
+			posicionInicialY = 1;
+		} else {
+			posicionInicialX = 80;
+			posicionInicialY = 80;
 		}
-		edificios.add(castillo);
 
+		poblacion.add(new Aldeano(this));
+		poblacion.add(new Aldeano(this));
+		poblacion.add(new Aldeano(this));
+
+		poblacion.get(0).establecerCoordenadasDeNacimiento(5+ posicionInicialX,+ posicionInicialY);
+		poblacion.get(1).establecerCoordenadasDeNacimiento(6+ posicionInicialX,+ posicionInicialY);
+		poblacion.get(2).establecerCoordenadasDeNacimiento(7+ posicionInicialX,+ posicionInicialY);
+
+		Castillo castillo = new Castillo(this);
 		PlazaCentral plaza = new PlazaCentral(this);
 
-		try {
-			plaza.construir(5, 0);
-		} catch (CasilleroLlenoException e) {
-			e.printStackTrace();
-		}
+		castillo.construir((Aldeano) poblacion.get(0), 5 + posicionInicialX, 5 + posicionInicialY);
+		plaza.construir((Aldeano) poblacion.get(1),5 + posicionInicialX, 10 + posicionInicialY);
+
+		edificios.add(castillo);
 		edificios.add(plaza);
-
-		poblacion.add(new Aldeano(this));
-		poblacion.add(new Aldeano(this));
-		poblacion.add(new Aldeano(this));
-
-		poblacion.get(0).establecerCoordenadasDeNacimiento(5,3);
-		poblacion.get(1).establecerCoordenadasDeNacimiento(6,3);
-		poblacion.get(2).establecerCoordenadasDeNacimiento(7,0);*/
 	}
 
 }

@@ -1,10 +1,19 @@
 package com.company.modelo;
 
-public interface Posicionable {
+public abstract class Posicionable {
 
-    void ubicar(Integer posicionHorizontal, Integer posicionVertical);
-    void recibirDanio(Integer montoDeDanio) throws Exception;
-    Boolean verificarAlianza(Posicionable otroPosicionable);
-    Boolean verificarAlianza(Jugador otroJugador);
+    protected Jugador jugador;
+
+    // Queda abstracto porque los edificios y las unidades se ubican de formas distintas
+    public abstract void ubicar(Integer posicionHorizontal, Integer posicionVertical);
+
+    public abstract void recibirDanio(Integer montoDeDanio) throws Exception;
+
+    public Boolean verificarAlianza(Posicionable otroPosicionable){
+        return ( otroPosicionable.verificarAlianza(this.jugador) );
+    }
+    public Boolean verificarAlianza(Jugador otroJugador){
+        return(this.jugador == otroJugador);
+    }
 }
 

@@ -1,19 +1,11 @@
 package com.company.modelo.edificios;
 
-import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.Edificio.EdificioTerminadoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoCastillo;
-import com.company.modelo.edificios.estados.EstadoEdificio;
-import com.company.modelo.edificios.estados.EstadoEnConstruccion;
-import com.company.modelo.unidades.Aldeano;
-import com.company.modelo.unidades.Ataque;
 import com.company.modelo.unidades.Unidad;
 
 public class Castillo extends Edificio {
-
-    private Ataque ataque;
 
     EstadoCastillo estado;
 
@@ -52,7 +44,11 @@ public class Castillo extends Edificio {
 	}*/
 
     public void atacar(Unidad enemigo) {
-        ataque.atacar(enemigo);
+        // TODO
+    }
+
+    public void atacar(Edificio enemigo) {
+        // TODO
     }
 
 

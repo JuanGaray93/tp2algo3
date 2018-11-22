@@ -3,18 +3,17 @@ package com.company.modelo.edificios;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.OroInsuficienteException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoEdificio;
-import com.company.modelo.edificios.estados.EstadoEnConstruccion;
+import com.company.modelo.edificios.estados.EstadoEdificioEnConstruccion;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
 import java.util.ArrayList;
 
-public abstract class Edificio implements Posicionable {
+public abstract class Edificio extends Posicionable {
 
     protected static Integer VIDA_MAXIMA;
     protected static Integer COSTO;
@@ -45,7 +44,7 @@ public abstract class Edificio implements Posicionable {
         /*TODO: manejo de posiciones.*/
 
         jugador.cobrar(this.COSTO);
-        estado = new EstadoEnConstruccion(VIDA_MAXIMA,COSTO);
+        estado = new EstadoEdificioEnConstruccion(VIDA_MAXIMA,COSTO);
         ubicarEn(posicionHorizontal,posicionVertical);
         estado.construir(quienLoConstruye);
     }

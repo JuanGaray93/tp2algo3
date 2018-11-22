@@ -2,8 +2,8 @@ package com.company.modelo.edificios.estados;
 
 import com.company.modelo.unidades.Aldeano;
 
-public class EstadoMuerto extends EstadoEdificio {
-    public EstadoMuerto(Integer vida, Integer montoDeReparacion) {
+public class EstadoEdificioMuerto extends EstadoEdificio {
+    public EstadoEdificioMuerto(Integer vida, Integer montoDeReparacion) {
         super(vida,montoDeReparacion);
     }
 
@@ -13,7 +13,7 @@ public class EstadoMuerto extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEnConstruccion construir(Aldeano quienLoConstruye) {
+    public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) {
         return null;
     }
 }

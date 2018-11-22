@@ -10,8 +10,8 @@ public class EstadoPorConstruir extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEnConstruccion construir(Aldeano quienLoConstruye) throws EdificioEnConstruccionException {
-        EstadoEdificio nuevoEstado = new EstadoEnConstruccion(VIDA_MAXIMA,MONTO_REPARACION);
+    public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) throws EdificioEnConstruccionException {
+        EstadoEdificio nuevoEstado = new EstadoEdificioEnConstruccion(VIDA_MAXIMA,MONTO_REPARACION);
         return nuevoEstado.construir(quienLoConstruye);
     }
 

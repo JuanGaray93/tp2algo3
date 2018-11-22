@@ -3,11 +3,8 @@ package com.company.modelo.unidades;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.estados.EstadoUnidad;
 
-public class Espadachin extends Unidad {
-	
-	private Ataque ataque;
+public class Espadachin extends UnidadAtacante {
 
 	public Espadachin(Jugador jugador) {
 		super(jugador);
@@ -17,13 +14,15 @@ public class Espadachin extends Unidad {
 		
 	}
 
-    /*public void atacar(Edificio enemigo) {
-        ataque.atacar(enemigo);
-    }
+	@Override
+	public void atacar(Unidad enemigo) {
 
-    public void atacar(Unidad enemigo) {
-    	ataque.atacar(enemigo);
-    }*/
+	}
+
+	@Override
+	public void atacar(Edificio enemigo) {
+
+	}
 
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {

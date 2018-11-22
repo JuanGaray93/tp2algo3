@@ -7,10 +7,9 @@ import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.estados.EstadoUnidad;
 
-public abstract class Unidad implements Posicionable {
+public abstract class Unidad extends Posicionable {
 
 	protected Posicion posicion;
-	protected Jugador jugador;
 	protected EstadoUnidad estado;
 
 	public Unidad(Jugador jugador) {
@@ -36,5 +35,10 @@ public abstract class Unidad implements Posicionable {
 		if(posicion != null){
 			posicion.eliminar();
 		}
+	}
+
+	@Override
+	public void ubicar(Integer posicionHorizontal, Integer posicionVertical){
+		// TODO
 	}
 }

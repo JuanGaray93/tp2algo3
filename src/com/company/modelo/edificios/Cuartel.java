@@ -2,7 +2,6 @@ package com.company.modelo.edificios;
 
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
-import com.company.modelo.edificios.estados.EstadoEnConstruccion;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Unidad;
 

@@ -5,10 +5,8 @@ import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.modelo.Jugador;
-import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.edificios.estados.EstadoEdificio;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeano;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoConstruyendo;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoRecolectandoOro;
@@ -52,12 +50,6 @@ public class Aldeano extends Unidad {
 			}
 
 	}
-
-	@Override
-	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-		//this.estadoActual = ;
-	}
-
 
 	public void actualizar(EstadoAldeano estado) {
 
