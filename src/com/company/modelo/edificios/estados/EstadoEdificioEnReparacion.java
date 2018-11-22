@@ -11,7 +11,7 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio{
     }
 
     @Override
-    public EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion) throws Exception {
+    public EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion) {
         if(trabajadorActual == null){
             trabajadorActual = reparador;
         }else if(trabajadorActual != null){

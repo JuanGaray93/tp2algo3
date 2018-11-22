@@ -36,7 +36,7 @@ public class Aldeano extends Unidad {
 		if(posicion.posicionEnRadio(x,y)){
 			try {
                 estadoActual = new EstadoAldeanoConstruyendo(this);
-				estadoActual.construir(edificio,x,y);
+				estadoActual  = estadoActual.construir(edificio,x,y);
                 edificio.construir(this,x,y);
 
             } catch (EdificioEnConstruccionException e) { }
@@ -56,9 +56,9 @@ public class Aldeano extends Unidad {
 
             estadoActual = new EstadoAldeanoReparando(this);
 
-            try {
+			try {
                 edificio.reparar(this);
-                estadoActual.reparar(edificio);
+				estadoActual  = estadoActual.reparar(edificio);
 
             } catch (EdificioReparadoException e) {
                 //

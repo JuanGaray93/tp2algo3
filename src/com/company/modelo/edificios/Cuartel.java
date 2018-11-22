@@ -23,11 +23,6 @@ public class Cuartel extends Edificio {
 	}
 
 	@Override
-	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-
-	}
-
-	@Override
 	public void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
 		 if(!unidad.seLlama("ARQUERO") || !unidad.seLlama("ESPADACHIN")){
 		 	throw new UnidadErroneaException("Imposible crear ese tipo de unidad");

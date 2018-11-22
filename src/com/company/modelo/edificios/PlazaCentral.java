@@ -29,11 +29,6 @@ public class PlazaCentral extends Edificio {
     }
 
     @Override
-    public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-
-    }
-
-    @Override
     public void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
         if(!unidad.seLlama("ALDEANO")){
             throw new UnidadErroneaException("Esta unidad no se crea en Plaza Central");

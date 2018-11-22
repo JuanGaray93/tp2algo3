@@ -50,7 +50,6 @@ public abstract class Edificio extends Posicionable {
 
         this.ubicar(posicionHorizontal,posicionVertical);
 
-
         estado = estado.construir(quienLoConstruye);
     }
 
@@ -58,7 +57,6 @@ public abstract class Edificio extends Posicionable {
         estado = estado.suspender(quienLoConstruye);
     }
 
-    @Override
     public void ubicar(Integer posicionHorizontal, Integer posicionVertical)
             throws CasilleroNoExistenteException, CasilleroLlenoException {
 

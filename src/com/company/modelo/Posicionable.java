@@ -12,7 +12,6 @@ public abstract class Posicionable {
 
     public abstract void recibirDanio(Integer montoDeDanio) throws Exception;
 
-
     public abstract void actualizar();
 }
 
