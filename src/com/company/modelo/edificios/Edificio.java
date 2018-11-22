@@ -39,7 +39,7 @@ public abstract class Edificio extends Posicionable {
 	}
 
     public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
-            throws EdificioEnConstruccionException, CasilleroNoExistenteException, CasilleroLlenoException {
+            throws EdificioEnConstruccionException, Exception {
 
         /*TODO: manejo de posiciones.*/
 
@@ -48,7 +48,7 @@ public abstract class Edificio extends Posicionable {
         estado = estado.construir(quienLoConstruye);
     }
 
-    public void suspenderConstruccion(Aldeano quienLoConstruye){
+    public void suspenderConstruccion(Aldeano quienLoConstruye) throws Exception {
         estado = estado.suspenderConstruccion(quienLoConstruye);
     }
 

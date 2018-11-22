@@ -20,7 +20,7 @@ public class Jugador {
 
 	ArrayList <Unidad> poblacion;
 	ArrayList <Edificio> edificios;
-	private static Integer oro;
+	private Integer oro;
 
 	public Jugador() {
 		this.oro = 100;
@@ -84,7 +84,7 @@ public class Jugador {
 		
 	}*/
 
-	public void crearEntidadesIniciales() throws EdificioEnConstruccionException, CasilleroNoExistenteException, CasilleroLlenoException {
+	public void crearEntidadesIniciales() throws EdificioEnConstruccionException, Exception {
 
 		Integer posicionInicialX = 0;
 		Integer posicionInicialY = 0;

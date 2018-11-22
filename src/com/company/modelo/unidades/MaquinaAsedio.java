@@ -6,14 +6,10 @@ import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioDesmontada;
 
 public class MaquinaAsedio extends UnidadAtacante {
-	
-	//private Ataque ataque;
 
 	public MaquinaAsedio(Jugador jugador) {
 		super(jugador);
 		this.estado =  new EstadoArmaAsedioDesmontada();
-		//ataque = new Ataque(75,0);
-		
 	}
 
 	@Override
@@ -35,17 +31,6 @@ public class MaquinaAsedio extends UnidadAtacante {
 	//@Override
 	public void actualizar() {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Boolean verificarAlianza(Posicionable otroPosicionable) {
-		return null;
-	}
-
-	@Override
-	public Boolean verificarAlianza(Jugador otroJugador) {
-		return null;
 	}
 
 }

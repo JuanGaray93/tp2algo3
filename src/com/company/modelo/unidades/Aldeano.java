@@ -22,7 +22,7 @@ public class Aldeano extends Unidad {
 		estadoActual = new EstadoAldeanoRecolectandoOro();
 	}
 	//LISTO
-	public void construir(Edificio edificio,Integer x, Integer y) throws OroInsuficienteException {
+	public void construir(Edificio edificio,Integer x, Integer y) throws Exception {
 		estadoActual = new EstadoAldeanoConstruyendo();
 		try {
 
@@ -45,16 +45,9 @@ public class Aldeano extends Unidad {
 
 			} catch (EdificioReparadoException e) {
 				//
-			} catch (EdificioEnReparacionException e) {
+			} catch (Exception e) {
 				//
 			}
-
-	}
-
-	public void actualizar(EstadoAldeano estado) {
-
-		this.estadoActual =  estado;
-		estadoActual.otorgarGanancia(jugador);
 	}
 
 	@Override

@@ -2,18 +2,15 @@ package com.company.modelo.edificios;
 
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
-import com.company.modelo.edificios.estados.EstadoCastillo;
 import com.company.modelo.unidades.Unidad;
 
 public class Castillo extends Edificio {
 
-    EstadoCastillo estado;
 
     public Castillo(Jugador jugador) {
         super(jugador);
         VIDA_MAXIMA = 1000;
         vidaActual = 1000;
-        estado = new EstadoCastillo(VIDA_MAXIMA);
     }
 
     public void actualizar() {
