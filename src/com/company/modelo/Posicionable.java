@@ -18,5 +18,7 @@ public abstract class Posicionable {
     public Boolean verificarAlianza(Jugador otroJugador){
         return(this.jugador == otroJugador);
     }
+
+    public abstract void actualizar();
 }
 
