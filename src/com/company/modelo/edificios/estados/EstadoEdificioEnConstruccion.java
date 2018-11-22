@@ -24,4 +24,10 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
         }
         return this;
     }
+
+    @Override
+    public EstadoEdificio suspenderConstruccion(Aldeano quienLoConstruye){
+        this.trabajadorActual = null;
+        return this;
+    }
 }

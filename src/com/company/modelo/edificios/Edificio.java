@@ -44,12 +44,16 @@ public abstract class Edificio extends Posicionable {
         /*TODO: manejo de posiciones.*/
 
         jugador.cobrar(this.COSTO);
-        estado = new EstadoEdificioEnConstruccion(VIDA_MAXIMA,COSTO);
-        ubicarEn(posicionHorizontal,posicionVertical);
-        estado.construir(quienLoConstruye);
+        ubicar(posicionHorizontal,posicionVertical);
+        estado = estado.construir(quienLoConstruye);
     }
 
-    private void ubicarEn(Integer posicionHorizontal, Integer posicionVertical)
+    public void suspenderConstruccion(Aldeano quienLoConstruye){
+        estado = estado.suspenderConstruccion(quienLoConstruye);
+    }
+
+    @Override
+    public void ubicar(Integer posicionHorizontal, Integer posicionVertical)
             throws CasilleroNoExistenteException, CasilleroLlenoException {
 
         for( int i = posicionHorizontal; i < ( posicionHorizontal + BLOQUES_DE_ANCHO ); i++)

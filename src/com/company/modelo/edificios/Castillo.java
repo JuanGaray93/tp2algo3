@@ -16,11 +16,6 @@ public class Castillo extends Edificio {
         estado = new EstadoCastillo(VIDA_MAXIMA);
     }
 
-    @Override
-    public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-
-    }
-
     public void actualizar() {
 
     }

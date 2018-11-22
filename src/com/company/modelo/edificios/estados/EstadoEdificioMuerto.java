@@ -9,11 +9,16 @@ public class EstadoEdificioMuerto extends EstadoEdificio {
 
     @Override
     public EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion) throws Exception {
-        return null;
+        throw new Exception("El edificio esta destruido!");
     }
 
     @Override
-    public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) {
-        return null;
+    public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) throws Exception {
+        throw new Exception("El edificio esta destruido!");
+    }
+
+    @Override
+    public EstadoEdificio suspenderConstruccion(Aldeano quienLoConstruye) throws Exception {
+        throw new Exception("El edificio esta destruido!");
     }
 }
