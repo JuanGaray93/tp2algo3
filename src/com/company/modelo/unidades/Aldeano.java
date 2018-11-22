@@ -1,31 +1,84 @@
-package unidades;
+package com.company.modelo.unidades;
 
-import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Unidad;
+import com.company.excepciones.*;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
+import com.company.modelo.Jugador;
+import com.company.modelo.Posicionable;
+import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeano;
+import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoConstruyendo;
+import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoRecolectandoOro;
+import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoReparando;
 
 public class Aldeano extends Unidad {
 
-	private int vida;
-	
-	public void construirPlazaCentral() {
-		
+	EstadoAldeano estadoActual;
+
+	//LISTO
+	public Aldeano(Jugador jugador) {
+		super(jugador);
+		estadoActual = new EstadoAldeanoRecolectandoOro();
 	}
-	
-	public void construirCuartel() {
-		
-	}
-	
-	public void repararEdificio() {
-		
-	}
-	
-	public void recolectarOro() {
-		
+	//LISTO
+	public void construir(Edificio edificio,Integer x, Integer y) throws OroInsuficienteException {
+		estadoActual = new EstadoAldeanoConstruyendo();
+		try {
+			edificio.construir(this,x,y);
+		} catch (EdificioEnConstruccionException e) {
+			e.printStackTrace();
+		} catch (CasilleroLlenoException e) {
+			e.printStackTrace();
+		} catch (CasilleroNoExistenteException e) {
+			e.printStackTrace();
+		} catch (EdificioEnReparacionException e) {
+			e.printStackTrace();
+		} catch (EdificioDestruidoExcepcion e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void nacerEn(Integer posicionHorizontal, Integer posicionVertical){
-		Mapa mapa = Mapa.getMapa();
-		mapa.colocarUnidad(self, posicionHorizontal, posicionVertical );
+	//LISTO
+	public void reparar(Edificio edificio) throws Exception {
+
+			try {
+				edificio.reparar(this);
+				estadoActual = new EstadoAldeanoReparando();
+
+			} catch (EdificioReparadoException e) {
+				e.printStackTrace();
+			} catch (EdificioEnReparacionException e) {
+				e.printStackTrace();
+			} catch (EdificioEnConstruccionException e) {
+				e.printStackTrace();
+			} catch (EdificioDestruidoExcepcion e) {
+				e.printStackTrace();
+			} catch (EdificioNoConstruidoException e) {
+				e.printStackTrace();
+			}
+
 	}
 
+	public void actualizar(EstadoAldeano estado) {
+
+		this.estadoActual =  estado;
+		estadoActual.otorgarGanancia(jugador);
+	}
+
+	@Override
+	public void recibirDanio(Integer montoDeDanio) {
+		this.estadoActual.recibirDanio(montoDeDanio);
+	}
+
+
+	@Override
+	public Boolean verificarAlianza(Posicionable otroPosicionable) {
+		return null;
+	}
+
+	@Override
+	public Boolean verificarAlianza(Jugador otroJugador) {
+		return null;
+	}
 }

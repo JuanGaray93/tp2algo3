@@ -1,31 +1,34 @@
 package com.company.modelo.edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
-import com.company.modelo.Posicion;
-import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Espadachin;
-import com.company.modelo.unidades.Arquero;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.modelo.Jugador;
+import com.company.modelo.Posicionable;
+import com.company.modelo.edificios.estados.EstadoPorConstruir;
+import com.company.modelo.unidades.Unidad;
 
 public class Cuartel extends Edificio {
-	
-	public Cuartel() {
-		this.vida = 250;
-		this.costo = 50;
-		this.tamanio = 4;
+
+	public Cuartel(Jugador jugador) {
+
+		super(jugador);
+		COSTO = 50;
+		MONTO_DE_REPARACION = 50;
+		BLOQUES_DE_ANCHO = 2;
+		BLOQUES_DE_ALTO = 2;
+		VIDA_MAXIMA = 250;
+		vidaActual = VIDA_MAXIMA;
+		this.estado = new EstadoPorConstruir(VIDA_MAXIMA,MONTO_DE_REPARACION);
 	}
-	
-	public Espadachin crearEspadachin() throws CasilleroLlenoException {
-		Posicion posicion = posiciones.get(0);
-		Espadachin espadachin = new Espadachin();
-		posicion.posicionarUnidad(espadachin);
-		return espadachin;
+
+	@Override
+	public Boolean verificarAlianza(Posicionable otroPosicionable) {
+		return null;
 	}
-	
-	public Arquero crearArquero() throws CasilleroLlenoException {
-		Posicion posicion = posiciones.get(0);
-		Arquero arquero = new Arquero();
-		posicion.posicionarUnidad(arquero);
-		return arquero;
+
+	@Override
+	public Boolean verificarAlianza(Jugador otroJugador) {
+		return null;
 	}
 
 }

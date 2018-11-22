@@ -3,14 +3,16 @@ package com.company.modelo.unidades;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioDesmontada;
 
-public class Espadachin extends UnidadAtacante {
+public class MaquinaAsedio extends UnidadAtacante {
+	
+	//private Ataque ataque;
 
-	public Espadachin(Jugador jugador) {
+	public MaquinaAsedio(Jugador jugador) {
 		super(jugador);
-
-		/*this.estado =  new EstadoUnidad(100,25);
-		ataque = new Ataque(15,25);*/
+		this.estado =  new EstadoArmaAsedioDesmontada();
+		//ataque = new Ataque(75,0);
 		
 	}
 
@@ -24,6 +26,7 @@ public class Espadachin extends UnidadAtacante {
 
 	}
 
+
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
@@ -32,6 +35,7 @@ public class Espadachin extends UnidadAtacante {
 	//@Override
 	public void actualizar() {
 		// TODO Auto-generated method stub
+
 	}
 
 	@Override

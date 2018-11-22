@@ -2,37 +2,39 @@ package com.company.modelo;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Unidad;
 
 public class Posicion {
 
-    private int x, y;
+    private Integer posicionHorizontal;
+    private Integer posicionVertical;
+    Mapa mapa = Mapa.getMapa();
 
     public Posicion(int posicionHorizontal, int posicionVertical) {
-        this.x = posicionHorizontal;
-        this.y = posicionVertical;
+        this.posicionHorizontal = posicionHorizontal;
+        this.posicionVertical = posicionVertical;
     }
 
-    public int obtenerPosicionHorizontal(){
-        return this.x;
+    public void posicionar(Posicionable posicionable) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        mapa.ubicar(posicionable, posicionHorizontal, posicionVertical);
     }
 
-    public int obtenerPosicionVertical(){
-        return this.y;
+    public void colocarEnCasilleroLibreMasCercano(Unidad unaUnidad) throws MapaLlenoException, CasilleroNoExistenteException, CasilleroLlenoException {
+        mapa.colocarEnCasilleroLibreMasCercano(unaUnidad, this.posicionHorizontal, this.posicionVertical);
     }
 
-    public void posicionarUnidad(Unidad unaUnidad) throws CasilleroLlenoException {
-        Mapa mapa = Mapa.getMapa();
-        mapa.colocarEnCasilleroLibreMasCercano(unaUnidad, this.x, this.y);
+    public void eliminar() {
+        try {
+            mapa.quitar(posicionHorizontal, posicionVertical);
+        } catch (CasilleroNoExistenteException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void posicionarEdificio(Edificio unEdificio, Mapa mapa) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        mapa.ubicar(unEdificio, this.x, this.y);
-    }
-
-    public void eliminar(){
-        //TODO implementar el borrar del mapa
+    public boolean estaOcupado(int i, int j) {
+        return mapa.estaOcupado(i, j);
     }
 }

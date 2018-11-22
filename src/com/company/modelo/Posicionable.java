@@ -1,11 +1,19 @@
 package com.company.modelo;
 
+import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 
-public interface Posicionable {
+public abstract class Posicionable {
 
-    void recibirDanio(int unDanio);
+    protected Jugador jugador;
 
-    void eliminar() throws CasilleroNoExistenteException;
+    public abstract void recibirDanio(Integer montoDeDanio) throws Exception;
 
+    public Boolean verificarAlianza(Posicionable otroPosicionable){
+        return ( otroPosicionable.verificarAlianza(this.jugador) );
+    }
+    public Boolean verificarAlianza(Jugador otroJugador){
+        return(this.jugador == otroJugador);
+    }
 }
+

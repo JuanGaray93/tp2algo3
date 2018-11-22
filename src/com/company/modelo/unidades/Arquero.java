@@ -1,24 +1,34 @@
 package com.company.modelo.unidades;
 
+import com.company.modelo.Jugador;
+import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.Unidad;
+import com.company.modelo.unidades.estados.EstadoUnidadInactivo;
 
-public class Arquero extends Unidad {
+public class Arquero extends UnidadAtacante {
 
-    public Arquero(){
-        this.vida = 75;
-        this.costo = 75;
+	public Arquero(Jugador jugador) {
+		super(jugador);
+		this.estado =  new EstadoUnidadInactivo();
+	}
+
+    public void atacar(Edificio enemigo) {
+		// TODO
+    }
+    
+    public void atacar(Unidad enemigo) {
+    	// TODO
     }
 
-    @Override
-    public void atacarEdificio(Edificio unEdificio) {
+	@Override
+	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
-        unEdificio.recibirDanio(10);
-    }
+	}
 
-    @Override
-    public void atacarUnidad(Unidad unaUnidad) {
+	//@Override
+	public void actualizar() {
+		// TODO Auto-generated method stub
 
-        unaUnidad.recibirDanio(15);
-    }
+	}
+
 }
