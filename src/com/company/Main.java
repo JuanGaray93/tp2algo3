@@ -1,8 +1,21 @@
 package com.company;
 
+import com.company.modelo.Jugador;
+import com.company.modelo.Partida;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO sumar código
+		try{
+
+			Partida partida = new Partida();
+
+			while(true){
+				partida.correr();
+			}
+
+		} catch (Exception e){
+			// Terminar programa
+		}
 	}
 }
