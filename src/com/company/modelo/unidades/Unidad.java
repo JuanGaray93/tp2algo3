@@ -2,6 +2,7 @@ package com.company.modelo.unidades;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.MapaLlenoException;
 import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
@@ -24,7 +25,7 @@ public abstract class Unidad extends Posicionable {
 
 	public void moverA(int posicionHorizontal, int posicionVertical)
 			throws CasilleroLlenoException, CasilleroNoExistenteException,
-			MovimientoInvalidoException {
+			MovimientoInvalidoException, MapaLlenoException {
 		if(posicion.posicionEnRadio(posicionHorizontal,posicionVertical)){
 			this.eliminarDePosicion();
 			posicion = new Posicion(posicionHorizontal, posicionVertical);

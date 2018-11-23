@@ -32,7 +32,8 @@ public class Aldeano extends Unidad {
 
 
 	//LISTO
-	public void construir(Edificio edificio,Integer x, Integer y) throws Exception, DistanciaInvalidaException {
+	public void construir(Edificio edificio,Integer x, Integer y)
+		throws Exception, DistanciaInvalidaException {
 		if(posicion.posicionEnRadio(x,y)){
 			try {
                 estadoActual = new EstadoAldeanoConstruyendo(this);
@@ -44,7 +45,6 @@ public class Aldeano extends Unidad {
 			catch (CasilleroNoExistenteException e) { }
 			catch (MovimientoInvalidoException e) { }
 		}else{
-
 			throw new DistanciaInvalidaException("No puedo construir a esa distancia");
 		}
 
@@ -75,6 +75,7 @@ public class Aldeano extends Unidad {
     }
 
 	public void liberar(){
+
 		estadoActual = new EstadoAldeanoRecolectandoOro(this);
 	}
 
@@ -90,7 +91,6 @@ public class Aldeano extends Unidad {
             estadoActual.otorgarGanancia(jugador);
 	    } catch(AldeanoOcupadoException e){
 	       //si esta ocupado no hace nada, no suma oro
-
         }
     }
 

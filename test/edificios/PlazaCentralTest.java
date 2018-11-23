@@ -1,28 +1,35 @@
 package edificios;
 
-import com.company.excepciones.*;
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.DistanciaInvalidaException;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
-import com.company.excepciones.Edificio.EdificioReparadoException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
-import com.company.modelo.unidades.Arquero;
-import com.company.modelo.unidades.Espadachin;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PlazaCentralTest{
 
-	private Mapa mapa;
-	private Jugador jugador = new Jugador();;
+	private Mapa mapa = Mapa.getMapa();
+	private Jugador jugador;
+	private Aldeano peon;
+	PlazaCentral central;
 
 	@Before
-	public void resetMapa() throws CasilleroLlenoException {
+	public void resetMapa() {
 		mapa.destruir();
 		mapa = Mapa.getMapa();
+		jugador = new Jugador();
+		peon =  new Aldeano(jugador);
+		central = new PlazaCentral(jugador);
 	}
 
 
@@ -34,122 +41,83 @@ public class PlazaCentralTest{
 		central.construir();
 	}
 	*/
-	/*
-	@Test
-	public void plazaCentralCrearAldeanoTest() throws CasilleroNoExistenteException, CasilleroLlenoException{
-
-		PlazaCentral central = new PlazaCentral(jugador);
-
-		//Terreno no esta ocupado en este momento
-		Assert.assertFalse(mapa.estaOcupado(16,22));
-		try {
-			mapa.ubicar(central, 5, 5);
-
-		}catch(CasilleroLlenoException e) {
-
-		}
-
-		central.crearUnidad(new Aldeano(jugador));
-		//Ahora terreno esta ocupado en posicion cercana de castillo y en castillo
-		//La posicion donde se crea la maquina de asedio es random en el castillo
-		// TODO probar mas casos borde!
-		//Assert.assertTrue(terreno.estaOcupado(16,22));
-		Assert.assertTrue(mapa.estaOcupado(15,21));
-		Assert.assertTrue(mapa.estaOcupado(16,20));
-	}
 
 	@Test
-	public void recibirDanioDeEspadachinYVerificarDanioTest() {
-		Espadachin espadachin = new Espadachin(jugador);
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		espadachin.atacar(plaza);
-		
-		Assert.assertFalse(plaza.comoNuevo());
-	}
+	public void plazaCentralCrearAldeanoTestYVerificarExistencia()
+			throws CasilleroNoExistenteException,
+			       CasilleroLlenoException {
 
-	@Test
-	public void recibirDanioDeArqueroYVerificarDanioTest() {
-		
-		Mapa terreno = Mapa.getMapa();
-		
-		Arquero archer = new Arquero(jugador);
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		Assert.assertTrue(plaza.comoNuevo());
-		
-		archer.atacar(plaza);
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-	}
-
-	@Test
-	public void recibirDanioDeArmaAsedioYVerificarDanioTest() {
-		
-		Mapa terreno = Mapa.getMapa();
-		
-		Arquero archer = new Arquero(jugador);
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		Assert.assertTrue(plaza.comoNuevo());
-		
-		archer.atacar(plaza);
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-	}
-
-	@Test
-	public void verificarReparacionEnTiempoIndicadoTest() {
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		plaza.recibirDanio(50);
+		mapa.ubicar(peon,16,21);
+		peon.establecerCoordenadasDeNacimiento(16,21);
 
 		try {
-			plaza.reparar();
-		} catch (EdificioReparadoException e) {
-			e.printStackTrace();
-		} catch (EdificioEnReparacionException e) {
-			e.printStackTrace();
-		}
+			peon.construir(central,16,22);
+		} catch (Exception | DistanciaInvalidaException ignored) {}
 
-		Assert.assertFalse(plaza.comoNuevo());
-		
-		plaza.actualizar();
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-		plaza.actualizar();
-		
-		Assert.assertTrue(plaza.comoNuevo());
+		/*   21  22  23
+		*
+		* 16  A  pc  pc
+		*
+		* 17     pc  pc
+		*
+		* */
+
+		try {
+			central.crear(new Aldeano(jugador));
+		} catch (MapaLlenoException | EdificioEnConstruccionException
+				| EdificioEnReparacionException ignored) {}
+
+		assertTrue(mapa.estaOcupado(16,21));
+		assertTrue(mapa.estaOcupado(16,23));
+		assertTrue(mapa.estaOcupado(17,22));
+	}
+
+	@Test
+	public void recibirDanioYVerificarDanioTest() throws Exception, DistanciaInvalidaException, EdificioEnConstruccionException {
+
+		peon.establecerCoordenadasDeNacimiento(5,3);
+
+		peon.construir(central,5,4);
+
+		central.recibirDanio(15);
+
+		assertEquals(central.getVida(), (Integer) 435);
+	}
+
+	@Test
+	public void verificarReparacionEnTiempoIndicadoTest() throws Exception, EdificioEnConstruccionException {
+
+		peon.establecerCoordenadasDeNacimiento(5,3);
+
+		try {
+			peon.construir(central,5,4);
+		} catch (DistanciaInvalidaException ignored) { }
+
+		central.recibirDanio(50);
+
+		//verificar tiempo de reparacion cuando haga el merge con turnos
+
+		assertEquals(central.getVida(),(Integer)400);
 		
 	}
 
 	@Test
-	public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest() throws EdificioReparadoException, EdificioEnReparacionException {
+	public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest()
+			throws Exception, DistanciaInvalidaException, EdificioEnConstruccionException {
 
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		plaza.recibirDanio(50);
-		
-		plaza.reparar();
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-		plaza.actualizar();
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-		plaza.actualizar();
-		
-		Assert.assertTrue(plaza.comoNuevo());
-		
-	}*/
+		peon.establecerCoordenadasDeNacimiento(5,5);
+
+		peon.construir(central,5,6);
+
+		central.recibirDanio(50);
+
+		central.reparar(peon);
+
+		try {
+			central.crear(new Aldeano(jugador));
+		} catch (EdificioEnConstruccionException ignored) { }
+
+	}
 	
 	//por simplicidad dura un turno la creacion de aldeano, es decir queda disponible en el sig. turno
 	/*

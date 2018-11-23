@@ -20,9 +20,12 @@ public class Posicion {
         this.posicionVertical = posicionVertical;
     }
 
-    public void posicionar(Posicionable posicionable) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        mapa.ubicar(posicionable, posicionHorizontal, posicionVertical);
+    public void posicionar(Edificio edificio) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        mapa.ubicar(edificio, posicionHorizontal, posicionVertical);
+    }
 
+    public void posicionar(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException {
+        mapa.colocarEnCasilleroLibreMasCercano(unidad, posicionHorizontal, posicionVertical);
     }
 
     public void colocarEnCasilleroLibreMasCercano(Unidad unaUnidad) throws MapaLlenoException, CasilleroNoExistenteException, CasilleroLlenoException {

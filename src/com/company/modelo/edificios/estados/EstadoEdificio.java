@@ -1,25 +1,36 @@
 package com.company.modelo.edificios.estados;
 
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.Edificio.EdificioTerminadoException;
+import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioOcupadoException;
+import com.company.excepciones.MapaLlenoException;
+import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
+import com.company.modelo.unidades.Unidad;
 
 public abstract class EstadoEdificio {
 
-    protected final Integer VIDA_MAXIMA;
+    protected final Integer VIDA_MAXIMA ;
     protected final Integer MONTO_REPARACION;
-    protected Integer vidaActual;
-    protected Aldeano trabajadorActual = null;
+    protected  static Integer vidaActual;
+    protected static Aldeano trabajadorActual = null;
 
 
-    public EstadoEdificio(Integer vida,Integer monto) {
+    public EstadoEdificio(Integer vida, Integer monto) {
+
         this.VIDA_MAXIMA = vida;
         this.MONTO_REPARACION = monto;
-        vidaActual = VIDA_MAXIMA;
+        this.vidaActual = 0;
     }
 
-    public EstadoEdificio recibirDanio(Integer montoDeDanio) throws Exception {
+    public abstract EstadoEdificio ejecutarAccion() throws Exception, EdificioEnConstruccionException;
 
+    public abstract EstadoEdificio crear(Unidad unidad, Posicion posicion)
+            throws EdificioEnConstruccionException, EdificioEnReparacionException, CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException;
+
+    public EstadoEdificio recibirDanio(Integer montoDeDanio) throws EdificioEnConstruccionException {
         if(montoDeDanio < 0){
             throw new RuntimeException("El daño recibido fue negativo todo mal.");
         }
@@ -33,11 +44,34 @@ public abstract class EstadoEdificio {
         return this;
     }
 
-    public abstract EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion) throws Exception;
+    /*si la vida actual es mayor a la vida maxima
+      entonces esta en un turno nuevo y deja de repararse */
+    public EstadoEdificio reparar(Aldeano reparador,
+                                           Integer montoDeReparacion)
+            throws Exception, EdificioEnConstruccionException {
+        if(trabajadorActual == null){
+            trabajadorActual = reparador;
 
-    public abstract EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) throws EdificioEnConstruccionException, Exception;
 
-    public abstract EstadoEdificio suspender(Aldeano quienLoConstruye) throws Exception;
+            if(vidaActual > VIDA_MAXIMA){
+                vidaActual = VIDA_MAXIMA;
+                return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION).suspender();
+            }else {
+                vidaActual+=montoDeReparacion;
+            }
+        }else if(trabajadorActual != null){
+            throw new EdificioOcupadoException("No se puede reparar este edificio, " +
+                                                "hay otro aldeano reparandolo!");
+        }
+        return this;
+    }
+
+    public abstract EstadoEdificio construir(Aldeano quienLoConstruye)
+            throws EdificioEnConstruccionException, Exception;
+
+    public abstract EstadoEdificio suspender() throws Exception, EdificioEnConstruccionException;
+
+    public abstract Integer getVidaActual() throws Exception;
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine
 ;a vda del edifico  no termina si esta construyendo dura la cantidad de turnos

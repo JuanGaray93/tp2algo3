@@ -9,22 +9,23 @@ import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public abstract class EstadoAldeano extends EstadoUnidad {
 
-    protected final static Integer PRODUCCION_ORO = 20;
+    protected final Integer PRODUCCION_ORO = 20;
 
-    protected Aldeano esteAldeano;
+    protected static Aldeano esteAldeano;
 
     protected Edificio edificioATrabajar;
 
     public EstadoAldeano(Aldeano aldeano) {
         this.esteAldeano = aldeano;
         VIDA_MAXIMA = 50;
-        COSTO =  25;
+        COSTO = 25;
         vidaActual = 50;
     }
 
-    public abstract void otorgarGanancia(Jugador jugador);
+    public abstract EstadoAldeano otorgarGanancia(Jugador jugador);
 
-    public abstract EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV) throws Exception, EdificioEnConstruccionException, DistanciaInvalidaException;
+    public abstract EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV)
+            throws Exception, EdificioEnConstruccionException, DistanciaInvalidaException;
 
     public abstract EstadoAldeano reparar(Edificio edificio) throws Exception, EdificioEnConstruccionException;
 

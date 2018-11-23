@@ -2,10 +2,13 @@ package com.company.modelo.edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.MapaLlenoException;
 import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
-import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
+import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
 public class PlazaCentral extends Edificio {
@@ -18,21 +21,36 @@ public class PlazaCentral extends Edificio {
         MONTO_DE_REPARACION = 25;
         COSTO = 100;
         VIDA_MAXIMA = 450;
-        vidaActual = 450;
 
-        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,MONTO_DE_REPARACION);
+        this.estado = new EstadoPorConstruir(VIDA_MAXIMA, MONTO_DE_REPARACION);
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar() throws Exception, EdificioEnConstruccionException {
+
+            estado = estado.ejecutarAccion();
+    }
+
+    @Override
+    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
+            throws EdificioEnConstruccionException, Exception {
+
+        jugador.cobrar(this.COSTO);
+
+        this.ubicar(posicionHorizontal, posicionVertical);
+
+        estado = estado.construir(quienLoConstruye);
 
     }
 
     @Override
-    public void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        if(!unidad.seLlama("ALDEANO")){
+    public void crear(Unidad unidad)
+            throws EdificioEnConstruccionException, EdificioEnReparacionException,
+            CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException {
+        if (!unidad.seLlama("ALDEANO")) {
             throw new UnidadErroneaException("Esta unidad no se crea en Plaza Central");
         }
-        posiciones.get(1).posicionar(unidad);
+        this.estado = estado.crear(unidad, posiciones.get(1));
     }
+
 }

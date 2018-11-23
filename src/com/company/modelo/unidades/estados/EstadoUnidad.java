@@ -13,12 +13,4 @@ public class EstadoUnidad {
 	public void recibirDanio(Integer montoDeDanio) {
 		this.vidaActual -= montoDeDanio;
 	}
-
-	public boolean estaSaludable() {
-		return VIDA_MAXIMA == vidaActual;
-	}
-
-	public boolean vivo() {
-		return this.vidaActual>0;
-	}
 }

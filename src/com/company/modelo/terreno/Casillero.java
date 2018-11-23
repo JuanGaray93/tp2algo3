@@ -19,7 +19,6 @@ public class Casillero {
         if(!this.estaOcupado()){
             habitante = entidadNueva;
 
-            System.out.println(entidadNueva);
         } else {
             throw new CasilleroLlenoException("Se intentó llenar un casillero ocupado");
         }

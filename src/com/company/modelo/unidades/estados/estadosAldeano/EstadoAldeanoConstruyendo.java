@@ -14,12 +14,12 @@ public class EstadoAldeanoConstruyendo extends EstadoAldeano {
     }
 
     public EstadoAldeano construir(Edificio aConstruir, Integer posicionH, Integer posicionV)
-            throws Exception {
+            throws Exception, EdificioEnConstruccionException {
         if (edificioATrabajar == null) {
             edificioATrabajar = aConstruir;
 
         } else if (edificioATrabajar != aConstruir) {
-            edificioATrabajar.suspender(esteAldeano);
+            edificioATrabajar.suspender();
             edificioATrabajar = aConstruir;
         }
         return this;
@@ -31,7 +31,7 @@ public class EstadoAldeanoConstruyendo extends EstadoAldeano {
     }
 
     @Override
-    public void otorgarGanancia(Jugador jugador) {
+    public EstadoAldeano otorgarGanancia(Jugador jugador) {
 
         throw new AldeanoOcupadoException("Ocupado construyendo");
     }
