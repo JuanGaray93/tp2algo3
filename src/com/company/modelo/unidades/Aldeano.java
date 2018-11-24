@@ -59,11 +59,6 @@ public class Aldeano extends Unidad {
 			try {
                 edificio.reparar(this);
 				estadoActual  = estadoActual.reparar(edificio);
-
-            } catch (EdificioReparadoException e) {
-                //
-            }  catch (EdificioEnConstruccionException e) {
-
             } catch (Exception e) {
 
             }

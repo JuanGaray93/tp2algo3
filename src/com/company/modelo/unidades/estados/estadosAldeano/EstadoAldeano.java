@@ -25,8 +25,8 @@ public abstract class EstadoAldeano extends EstadoUnidad {
     public abstract EstadoAldeano otorgarGanancia(Jugador jugador);
 
     public abstract EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV)
-            throws Exception, EdificioEnConstruccionException, DistanciaInvalidaException;
+            throws Exception, DistanciaInvalidaException;
 
-    public abstract EstadoAldeano reparar(Edificio edificio) throws Exception, EdificioEnConstruccionException;
+    public abstract EstadoAldeano reparar(Edificio edificio) throws Exception;
 
 }
