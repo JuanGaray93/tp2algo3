@@ -18,8 +18,8 @@ public class Castillo extends Edificio {
     public Castillo(Jugador jugador) {
         super(jugador);
         VIDA_MAXIMA = 1000;
-
-        this.estado = new EstadoEdificioInactivo(VIDA_MAXIMA,VIDA_MAXIMA,0);
+        MONTO_DE_REPARACION = 15;
+        this.estado = new EstadoEdificioInactivo(VIDA_MAXIMA,VIDA_MAXIMA,MONTO_DE_REPARACION);
     }
 
     @Override

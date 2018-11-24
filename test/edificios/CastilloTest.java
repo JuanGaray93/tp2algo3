@@ -38,6 +38,8 @@ public class CastilloTest {
 		 * 9  |0_|0 |0_|0_|0_|
 		 *      5  6  7  8  9
 		 */
+
+
 		assertTrue(terreno.estaOcupado(5,5));
 		assertTrue(terreno.estaOcupado(5,6));
 		assertTrue(terreno.estaOcupado(5,7));

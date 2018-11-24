@@ -196,7 +196,7 @@ public class AldeanoTest {
 		assertEquals((Integer) 1000, castillo.getVida());
 	}
 
-	/*
+
 	@Test
 	public void repararPlazaCentralTest() throws Exception, EdificioEnConstruccionException {
 
@@ -210,6 +210,10 @@ public class AldeanoTest {
             aldeano.construir(plazaCentral,5,5);
         } catch (DistanciaInvalidaException e) { }
 
+		plazaCentral.actualizar();
+		plazaCentral.actualizar();
+		plazaCentral.actualizar();
+
         plazaCentral.recibirDanio(60);
 
 		aldeano.reparar(plazaCentral);
@@ -218,8 +222,8 @@ public class AldeanoTest {
 			aldeano.actualizar();
 		}catch(AldeanoOcupadoException e){}
 
-		assertEquals((Integer)450,plazaCentral.getVida());
-	}*/
+		assertEquals((Integer)415,plazaCentral.getVida());
+	}
 
 	@Test
 	public void repararCuartelTest() throws Exception, EdificioEnConstruccionException {

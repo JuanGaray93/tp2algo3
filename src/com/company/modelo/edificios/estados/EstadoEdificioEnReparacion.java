@@ -22,6 +22,7 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
             trabajadorActual = reparador;
 
         }else if(trabajadorActual != reparador){
+
             throw new EdificioOcupadoException("No se puede reparar este edificio, " +
                     "hay otro aldeano reparandolo!");
         }
@@ -35,6 +36,7 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
         }else {
 
             vidaActual+=montoDeReparacion;
+
         }
         return this;
     }

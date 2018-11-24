@@ -54,6 +54,7 @@ public class Aldeano extends Unidad {
 	public void reparar(Edificio edificio) throws EdificioLejanoException {
         if(existentesEnRadio(edificio)){
 			try {
+
 				estadoActual  = estadoActual.reparar(edificio);
                 edificio.reparar(this);
 

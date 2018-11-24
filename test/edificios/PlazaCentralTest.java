@@ -5,6 +5,7 @@ import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.DistanciaInvalidaException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioOcupadoException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.PlazaCentral;
@@ -31,16 +32,6 @@ public class PlazaCentralTest{
 		peon =  new Aldeano(jugador);
 		central = new PlazaCentral(jugador);
 	}
-
-
-	/* ESTO DEBERIA SER UN TEST EN ALDEANO
-	@Test
-	public void puedeSerConstruida(){
-		PlazaCentral central = new PlazaCentral(jugador);
-		Aldeano aldea
-		central.construir();
-	}
-	*/
 
 	@Test
 	public void plazaCentralCrearAldeanoTestYVerificarExistencia()
@@ -79,6 +70,10 @@ public class PlazaCentralTest{
 
 		peon.construir(central,5,4);
 
+		central.actualizar();
+		central.actualizar();
+		central.actualizar();
+
 		central.recibirDanio(15);
 
 		assertEquals(central.getVida(), (Integer) 435);
@@ -93,11 +88,17 @@ public class PlazaCentralTest{
 			peon.construir(central,5,4);
 		} catch (DistanciaInvalidaException ignored) { }
 
+		central.actualizar();
+		central.actualizar();
+		central.actualizar();
+
 		central.recibirDanio(50);
 
-		//verificar tiempo de reparacion cuando haga el merge con turnos
+		peon.reparar(central);
 
-		assertEquals(central.getVida(),(Integer)400);
+		central.actualizar();
+
+		assertEquals(central.getVida(),(Integer)450);
 		
 	}
 
@@ -109,41 +110,52 @@ public class PlazaCentralTest{
 
 		peon.construir(central,5,6);
 
+		central.actualizar();
+		central.actualizar();
+		central.actualizar();
+
 		central.recibirDanio(50);
 
 		central.reparar(peon);
 
 		try {
 			central.crear(new Aldeano(jugador));
-		} catch (EdificioEnConstruccionException ignored) { }
+		} catch (EdificioEnReparacionException ignored) { }
 
 	}
 	
 	//por simplicidad dura un turno la creacion de aldeano, es decir queda disponible en el sig. turno
-	/*
 
-	COMENTO ESTE TEST PORQUE NO DEBERIA HABER UN GETTER DE SI ESTA LIBRE SINO UNA EXCEPTION DE EDIFICIOOCUPADO
 
 	@Test
-	public void verificarQueNoCreaAldeanoHastaTerminarActual() {
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		plaza.crearUnidad(new Aldeano(jugador));
-		
-		Assert.assertFalse(plaza.estaLibre());
+	public void verificarQueNoCreaAldeanoHastaTerminarActual() throws Exception, DistanciaInvalidaException, EdificioEnConstruccionException {
+
+		peon.establecerCoordenadasDeNacimiento(10,11);
+
+		peon.construir(central, 10,12);
+
+		central.actualizar();
+		central.actualizar();
+		central.actualizar();
+
 		try {
-			plaza.crearUnidad(new Aldeano(jugador));
+			central.crear(new Aldeano(jugador));
+		} catch (EdificioEnConstruccionException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			central.crear(new Aldeano(jugador));
 		}catch(EdificioOcupadoException e) {
 			//
+		} catch (EdificioEnConstruccionException e) {
+			e.printStackTrace();
 		}
+
+		central.actualizar();
+
+		central.crear(new Aldeano(jugador));
 		
-		plaza.actualizar();
-		
-		Assert.assertTrue(plaza.estaLibre());
-		
-		plaza.crearUnidad(new Aldeano(jugador));
-		
-	}*/
+	}
 	
 }
