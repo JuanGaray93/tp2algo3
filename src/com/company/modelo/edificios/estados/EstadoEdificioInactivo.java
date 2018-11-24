@@ -9,14 +9,22 @@ import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
-public class EstadoEdificioInactivo extends EstadoEdificio { // TODO
-    public EstadoEdificioInactivo(Integer vida,Integer vidaActual, Integer monto) {
-        super(vida, monto);
-        this.vidaActual = vidaActual;
+
+
+public class EstadoEdificioInactivo extends EstadoEdificio {
+
+    private Integer vidaDos;
+
+    public EstadoEdificioInactivo(Integer vidaMax,Integer vida, Integer monto) {
+
+        super(vidaMax, monto);
+        this.vidaActual = vida;
+        vidaDos = vida;
     }
 
     @Override
     public EstadoEdificio ejecutarAccion() {
+
         return this.suspender();
     }
 
@@ -29,11 +37,13 @@ public class EstadoEdificioInactivo extends EstadoEdificio { // TODO
 
     @Override
     public EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion)
-            throws EdificioEnConstruccionException, Exception {
+             {
 
         trabajadorActual = reparador;
-        return new EstadoEdificioEnReparacion(VIDA_MAXIMA, vidaActual, montoDeReparacion).
-                reparar(reparador, montoDeReparacion);
+
+        return new EstadoEdificioEnReparacion(VIDA_MAXIMA, vidaActual, montoDeReparacion)
+                  .reparar(reparador,MONTO_REPARACION);
+
     }
 
     @Override
@@ -45,15 +55,14 @@ public class EstadoEdificioInactivo extends EstadoEdificio { // TODO
 
     @Override
     public EstadoEdificio suspender() {
+
         if(trabajadorActual!=null){
             trabajadorActual.liberar();
+
         }
         this.trabajadorActual = null;
-        return this;
+
+        return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION);
     }
 
-    @Override
-    public Integer getVidaActual() throws Exception {
-        return null;
-    }
 }

@@ -15,8 +15,8 @@ public abstract class EstadoAldeano extends EstadoUnidad {
 
     protected Edificio edificioATrabajar;
 
-    public EstadoAldeano(Aldeano aldeano) {
-        this.esteAldeano = aldeano;
+    public EstadoAldeano() {
+
         VIDA_MAXIMA = 50;
         COSTO = 25;
         vidaActual = 50;

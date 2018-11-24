@@ -6,9 +6,9 @@ import com.company.modelo.unidades.Aldeano;
 
 public class EstadoAldeanoRecolectandoOro extends EstadoAldeano {
 
-    public EstadoAldeanoRecolectandoOro(Aldeano aldeano) {
-        super(aldeano);
+    public EstadoAldeanoRecolectandoOro() {
 
+        edificioATrabajar = null;
     }
 
     public EstadoAldeano otorgarGanancia(Jugador jugador) {
@@ -19,13 +19,13 @@ public class EstadoAldeanoRecolectandoOro extends EstadoAldeano {
     @Override
     public EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV) {
         edificioATrabajar = edificio;
-        return new EstadoAldeanoConstruyendo(esteAldeano);
+        return new EstadoAldeanoConstruyendo();
     }
 
     @Override
     public EstadoAldeano reparar(Edificio edificio) throws Exception {
         edificioATrabajar = edificio;
-        return new EstadoAldeanoReparando(esteAldeano);
+        return new EstadoAldeanoReparando();
     }
 
 }

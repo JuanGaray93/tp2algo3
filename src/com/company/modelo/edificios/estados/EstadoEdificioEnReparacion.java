@@ -2,6 +2,7 @@ package com.company.modelo.edificios.estados;
 
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioOcupadoException;
 import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
@@ -12,6 +13,30 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
     {
         super(vidaMax, reparacion);
         this.vidaActual = vidaActual;
+    }
+
+    public EstadoEdificio reparar(Aldeano reparador,
+                                  Integer montoDeReparacion) {
+
+        if(trabajadorActual == null){
+            trabajadorActual = reparador;
+
+        }else if(trabajadorActual != reparador){
+            throw new EdificioOcupadoException("No se puede reparar este edificio, " +
+                    "hay otro aldeano reparandolo!");
+        }
+
+        if(vidaActual >= VIDA_MAXIMA){
+
+
+            vidaActual = VIDA_MAXIMA;
+            return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION).suspender();
+
+        }else {
+
+            vidaActual+=montoDeReparacion;
+        }
+        return this;
     }
 
     @Override

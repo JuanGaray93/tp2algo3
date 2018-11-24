@@ -11,6 +11,7 @@ public class EstadoPorConstruir extends EstadoEdificio {
     public EstadoPorConstruir(Integer vidaMax, Integer reparacion) {
         super(vidaMax,reparacion);
         this.vidaActual = 0;
+        trabajadorActual = null;
     }
 
     @Override

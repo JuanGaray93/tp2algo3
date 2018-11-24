@@ -21,7 +21,7 @@ public class Aldeano extends Unidad {
 	//LISTO
 	public Aldeano(Jugador jugador) {
 		super(jugador);
-		estadoActual = new EstadoAldeanoRecolectandoOro(this);
+		estadoActual = new EstadoAldeanoRecolectandoOro();
 		this.nombre = "ALDEANO";
 	}
 
@@ -36,9 +36,9 @@ public class Aldeano extends Unidad {
 		throws Exception, DistanciaInvalidaException {
 		if(posicion.posicionEnRadio(x,y)){
 			try {
-                estadoActual = new EstadoAldeanoConstruyendo(this);
-				estadoActual  = estadoActual.construir(edificio,x,y);
+
                 edificio.construir(this,x,y);
+				estadoActual  = estadoActual.construir(edificio,x,y);
 
             } catch (EdificioEnConstruccionException e) { }
 			catch (CasilleroLlenoException e) { }
@@ -53,12 +53,9 @@ public class Aldeano extends Unidad {
 	//LISTO
 	public void reparar(Edificio edificio) throws EdificioLejanoException {
         if(existentesEnRadio(edificio)){
-
-            estadoActual = new EstadoAldeanoReparando(this);
-
 			try {
-                edificio.reparar(this);
 				estadoActual  = estadoActual.reparar(edificio);
+                edificio.reparar(this);
 
             } catch (EdificioReparadoException e) {
                 //
@@ -75,8 +72,9 @@ public class Aldeano extends Unidad {
     }
 
 	public void liberar(){
-
-		estadoActual = new EstadoAldeanoRecolectandoOro(this);
+		System.out.println("hoa");
+		estadoActual = new EstadoAldeanoRecolectandoOro();
+		estadoActual.otorgarGanancia(jugador);
 	}
 
 	@Override

@@ -8,9 +8,6 @@ import com.company.modelo.unidades.Aldeano;
 
 public class EstadoAldeanoReparando extends EstadoAldeano {
 
-   public EstadoAldeanoReparando(Aldeano aldeano){
-        super(aldeano);
-   }
 
     @Override
     public EstadoAldeano otorgarGanancia(Jugador jugador) {
@@ -29,8 +26,9 @@ public class EstadoAldeanoReparando extends EstadoAldeano {
         }else
         if(edificioATrabajar != aReparar){
             edificioATrabajar.suspender();
+            edificioATrabajar = aReparar;
         }
-        edificioATrabajar = aReparar;
+
         return this;
     }
 

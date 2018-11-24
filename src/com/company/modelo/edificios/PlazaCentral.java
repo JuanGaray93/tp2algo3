@@ -29,6 +29,7 @@ public class PlazaCentral extends Edificio {
     public void actualizar() throws Exception, EdificioEnConstruccionException {
 
             estado = estado.ejecutarAccion();
+
     }
 
     @Override

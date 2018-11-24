@@ -7,6 +7,7 @@ import com.company.excepciones.MapaLlenoException;
 import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
+import com.company.modelo.edificios.estados.EstadoEdificioInactivo;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
@@ -18,7 +19,7 @@ public class Castillo extends Edificio {
         super(jugador);
         VIDA_MAXIMA = 1000;
 
-        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,0);
+        this.estado = new EstadoEdificioInactivo(VIDA_MAXIMA,VIDA_MAXIMA,0);
     }
 
     @Override

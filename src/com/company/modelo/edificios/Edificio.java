@@ -37,15 +37,15 @@ public abstract class Edificio extends Posicionable {
         this.estado = new EstadoPorConstruir(VIDA_MAXIMA,COSTO);
     }
 
-	public void recibirDanio(Integer unDanio) throws Exception, EdificioEnConstruccionException {
+	public void recibirDanio(Integer unDanio) throws EdificioEnConstruccionException {
 
 		estado = estado.recibirDanio(unDanio);
+
 	}
 
     public abstract void construir(Aldeano quienLoConstruye, Integer posicionHorizontal,
                                    Integer posicionVertical)
                                    throws EdificioEnConstruccionException,Exception;
-
 
     public void suspender() throws Exception, EdificioEnConstruccionException {
         estado = estado.suspender();
@@ -61,7 +61,6 @@ public abstract class Edificio extends Posicionable {
                 posicion.posicionar(this);
                 posiciones.add(posicion);
             }
-
     }
 
     public Integer getVida() throws Exception {
@@ -72,7 +71,9 @@ public abstract class Edificio extends Posicionable {
     public abstract void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, EdificioEnConstruccionException, EdificioEnReparacionException;
     
     public void reparar(Aldeano reparador) throws Exception, EdificioEnConstruccionException {
+
        this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
+
     }
 
     public void eliminar() throws CasilleroNoExistenteException {

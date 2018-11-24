@@ -17,12 +17,11 @@ public abstract class EstadoEdificio {
     protected  static Integer vidaActual;
     protected static Aldeano trabajadorActual = null;
 
-
     public EstadoEdificio(Integer vida, Integer monto) {
 
         this.VIDA_MAXIMA = vida;
         this.MONTO_REPARACION = monto;
-        this.vidaActual = 0;
+
     }
 
     public abstract EstadoEdificio ejecutarAccion() throws Exception, EdificioEnConstruccionException;
@@ -31,11 +30,13 @@ public abstract class EstadoEdificio {
             throws EdificioEnConstruccionException, EdificioEnReparacionException, CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException;
 
     public EstadoEdificio recibirDanio(Integer montoDeDanio) throws EdificioEnConstruccionException {
+
         if(montoDeDanio < 0){
             throw new RuntimeException("El daño recibido fue negativo todo mal.");
         }
 
         this.vidaActual -= montoDeDanio;
+
 
         if(vidaActual <= 0){
             return new EstadoEdificioMuerto(VIDA_MAXIMA,MONTO_REPARACION);
@@ -44,34 +45,19 @@ public abstract class EstadoEdificio {
         return this;
     }
 
-    /*si la vida actual es mayor a la vida maxima
-      entonces esta en un turno nuevo y deja de repararse */
-    public EstadoEdificio reparar(Aldeano reparador,
-                                           Integer montoDeReparacion)
-            throws Exception, EdificioEnConstruccionException {
-        if(trabajadorActual == null){
-            trabajadorActual = reparador;
-
-
-            if(vidaActual > VIDA_MAXIMA){
-                vidaActual = VIDA_MAXIMA;
-                return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION).suspender();
-            }else {
-                vidaActual+=montoDeReparacion;
-            }
-        }else if(trabajadorActual != null){
-            throw new EdificioOcupadoException("No se puede reparar este edificio, " +
-                                                "hay otro aldeano reparandolo!");
-        }
-        return this;
-    }
+    public abstract EstadoEdificio reparar(Aldeano reparador,
+                                  Integer montoDeReparacion) throws Exception, EdificioEnConstruccionException;
 
     public abstract EstadoEdificio construir(Aldeano quienLoConstruye)
             throws EdificioEnConstruccionException, Exception;
 
     public abstract EstadoEdificio suspender() throws Exception, EdificioEnConstruccionException;
 
-    public abstract Integer getVidaActual() throws Exception;
+    public Integer getVidaActual() throws Exception{
+
+            return vidaActual;
+
+    }
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine
 ;a vda del edifico  no termina si esta construyendo dura la cantidad de turnos

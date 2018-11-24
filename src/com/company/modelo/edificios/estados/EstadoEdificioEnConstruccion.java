@@ -11,7 +11,7 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
 
     public EstadoEdificioEnConstruccion(Integer vidaMax, Integer reparacion) {
         super(vidaMax,reparacion);
-        vidaActual = vidaMax/3;
+        vidaActual = 0;
     }
 
     @Override
@@ -39,27 +39,27 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
 
     @Override
     public EstadoEdificio reparar(Aldeano reparador,
-                                  Integer montoDeReparacion)
-                                    throws EdificioEnConstruccionException {
+                                  Integer montoDeReparacion) throws EdificioEnConstruccionException {
         throw new EdificioEnConstruccionException("imposible reparar edificio en construccion");
     }
 
     @Override
     public EstadoEdificio construir(Aldeano quienLoConstruye) {
-
+        System.out.println(vidaActual);
 
         if(trabajadorActual == null){
             trabajadorActual = quienLoConstruye;
+
         } else if( trabajadorActual != quienLoConstruye){
+
             throw new EdificioOcupadoException("No se puede construir este edificio," +
                                                " hay otro aldeano construyendolo!");
         }
-        if(vidaActual > VIDA_MAXIMA){
-
+        if(vidaActual >= VIDA_MAXIMA){
             vidaActual = VIDA_MAXIMA;
+
             return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION).suspender();
         }else{
-
             vidaActual+= VIDA_MAXIMA/3;
         }
         return this;

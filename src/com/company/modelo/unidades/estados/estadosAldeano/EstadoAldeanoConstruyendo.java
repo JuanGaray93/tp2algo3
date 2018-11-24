@@ -9,9 +9,6 @@ import com.company.modelo.unidades.Aldeano;
 
 public class EstadoAldeanoConstruyendo extends EstadoAldeano {
 
-    public EstadoAldeanoConstruyendo(Aldeano aldeano) {
-        super(aldeano);
-    }
 
     public EstadoAldeano construir(Edificio aConstruir, Integer posicionH, Integer posicionV)
             throws Exception, EdificioEnConstruccionException {
