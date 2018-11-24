@@ -19,7 +19,7 @@ public abstract class Unidad extends Posicionable {
 		this.jugador = jugador;
 	}
 
-	public void establecerCoordenadasDeNacimiento(int posicionHorizontal, int posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+	public void establecerCoordenadasDeNacimiento(int posicionHorizontal, int posicionVertical) {
 		posicion = new Posicion(posicionHorizontal, posicionVertical);
 	}
 

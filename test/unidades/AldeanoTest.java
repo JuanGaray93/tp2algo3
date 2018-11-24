@@ -93,11 +93,9 @@ public class AldeanoTest {
 
 		Aldeano aldeano = new Aldeano(jugador);
         PlazaCentral plaza = new PlazaCentral(jugador);
-        try {
-            aldeano.establecerCoordenadasDeNacimiento(8,6);
-        } catch (CasilleroNoExistenteException | CasilleroLlenoException ignored) { }
+		aldeano.establecerCoordenadasDeNacimiento(8,6);
 
-        try {
+		try {
             aldeano.construir(plaza,8,7);
         } catch (DistanciaInvalidaException e) { } catch (Exception e) { }
 
@@ -153,12 +151,9 @@ public class AldeanoTest {
 
 		Aldeano aldeano = new Aldeano(jugador);
 
-        try {
-            aldeano.establecerCoordenadasDeNacimiento(5,5);
-        } catch (CasilleroNoExistenteException e) { }
-          catch (CasilleroLlenoException e) { }
+		aldeano.establecerCoordenadasDeNacimiento(5,5);
 
-        PlazaCentral plazaCentral = new PlazaCentral(jugador);
+		PlazaCentral plazaCentral = new PlazaCentral(jugador);
 
 
 		assertFalse(mapa.estaOcupado(5,6));

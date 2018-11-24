@@ -15,7 +15,7 @@ public class Posicion {
     private Integer posicionVertical;
     Mapa mapa = Mapa.getMapa();
 
-    public Posicion(int posicionHorizontal, int posicionVertical) {
+    public Posicion(Integer posicionHorizontal, Integer posicionVertical) {
         this.posicionHorizontal = posicionHorizontal;
         this.posicionVertical = posicionVertical;
     }
@@ -40,11 +40,11 @@ public class Posicion {
         }
     }
 
-    public boolean estaOcupado(int i, int j) {
+    public boolean estaOcupado(Integer i, Integer j) {
         return mapa.estaOcupado(i, j);
     }
 
-    public boolean posicionEnRadio(int x, int y){
+    public boolean posicionEnRadio(Integer x, Integer y){
         return (posicionHorizontal == x-1 || posicionHorizontal == x+1 || posicionHorizontal == x) &&
                 (posicionVertical == y-1 || posicionVertical == y+1 || posicionVertical == y);
     }
