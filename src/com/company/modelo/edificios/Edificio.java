@@ -9,7 +9,6 @@ import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoEdificio;
-import com.company.modelo.edificios.estados.EstadoEdificioEnConstruccion;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
@@ -83,7 +82,7 @@ public abstract class Edificio extends Posicionable {
 
         for (int i = longitud - 1; i >= 0; i--) {
             Posicion posicion = posiciones.remove(i);
-            posicion.eliminar();
+            posicion.quitarPosicionable();
         }
     }
 

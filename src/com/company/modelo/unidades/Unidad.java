@@ -31,7 +31,7 @@ public abstract class Unidad extends Posicionable {
 
 	/*private void eliminarDePosicion() throws CasilleroNoExistenteException {
 		if(posicion != null){
-			posicion.eliminar();
+			posicion.quitarPosicionable();
 		}
 	}*/
 

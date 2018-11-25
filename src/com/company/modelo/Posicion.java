@@ -1,7 +1,6 @@
 package com.company.modelo;
 
 import com.company.excepciones.*;
-import com.company.modelo.edificios.Edificio;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Unidad;
 
@@ -30,7 +29,7 @@ public class Posicion {
         mapa.colocarEnCasilleroLibreMasCercano(unaUnidad, this.posicionHorizontal, this.posicionVertical);
     }
 
-    public void eliminar() {
+    public void quitarPosicionable() {
         try {
             mapa.quitar(posicionHorizontal, posicionVertical);
         } catch (CasilleroNoExistenteException e) {
@@ -73,7 +72,7 @@ public class Posicion {
     public void moverA(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
         if(this.esDistanciaValida(posicionHorizontal,posicionVertical)){
                 Posicionable posicionable = mapa.conseguirOcupante(this.posicionHorizontal,this.posicionVertical);
-                this.eliminar();
+                this.quitarPosicionable();
                 this.posicionHorizontal = posicionHorizontal;
                 this.posicionVertical = posicionVertical;
                 this.posicionar(posicionable);

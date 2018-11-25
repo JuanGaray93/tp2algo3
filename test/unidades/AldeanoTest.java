@@ -207,6 +207,7 @@ public class AldeanoTest {
 		plazaCentral.actualizar();
 		plazaCentral.actualizar();
 		plazaCentral.actualizar();
+		plazaCentral.actualizar();
 
         plazaCentral.recibirDanio(60);
 
