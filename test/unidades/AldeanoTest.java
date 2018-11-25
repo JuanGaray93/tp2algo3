@@ -176,7 +176,12 @@ public class AldeanoTest {
 		Aldeano aldeano = new Aldeano(jugador);
 
 		aldeano.establecerCoordenadasDeNacimiento(5,5);
-		mapa.ubicar(castillo,5,6);
+		//mapa.ubicar(castillo,5,6);
+		castillo.construir(aldeano,3, 5);
+		castillo.actualizar();
+		castillo.actualizar();
+		castillo.actualizar();
+		castillo.actualizar();
 		try {
 			castillo.recibirDanio(15);
 		} catch (Exception e) { }
