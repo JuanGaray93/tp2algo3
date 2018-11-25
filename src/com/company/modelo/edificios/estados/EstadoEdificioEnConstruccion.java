@@ -45,7 +45,6 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
 
     @Override
     public EstadoEdificio construir(Aldeano quienLoConstruye) {
-        System.out.println(vidaActual);
 
         if(trabajadorActual == null){
             trabajadorActual = quienLoConstruye;

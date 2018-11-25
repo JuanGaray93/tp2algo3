@@ -66,7 +66,6 @@ public class Aldeano extends Unidad {
     }
 
     public void liberar() {
-        System.out.println("hoa");
         estadoActual = new EstadoAldeanoRecolectandoOro();
         estadoActual.otorgarGanancia(jugador);
     }
