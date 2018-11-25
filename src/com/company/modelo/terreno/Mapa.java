@@ -3,6 +3,7 @@ package com.company.modelo.terreno;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
+import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.Unidad;
 
@@ -42,7 +43,6 @@ public class Mapa {
 
 	        throw new CasilleroNoExistenteException("Error al intentar obtener casillero: El casillero " + posicionHorizontal + ", " + posicionVertical + "esta fuera del mapa.");
         }
-
         return casilleros[posicionHorizontal][posicionVertical];
     }
 
@@ -57,8 +57,7 @@ public class Mapa {
 		return instancia;
 	}
 
-	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException, CasilleroNoExistenteException, CasilleroLlenoException {
-        // TODO: SOLUCIONAR POSICION DE UNIDAD EN MAPA
+	public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException, CasilleroNoExistenteException, CasilleroLlenoException, MovimientoInvalidoException {
         Reptador reptador = new Reptador(posicionHorizontal, posicionVertical);
 
         Boolean encontrado = false;

@@ -1,24 +1,32 @@
 package com.company.modelo.unidades.estados;
 
+import com.company.excepciones.UnidadMuertaException;
+
 public class EstadoUnidad {
 
-	protected static Integer VIDA_MAXIMA;
-	protected static Integer COSTO;
-	protected static Integer vidaActual;
+	protected Integer VIDA_MAXIMA;
+	protected Integer vidaActual;
 
-	public EstadoUnidad() {
-
+	public EstadoUnidad(Integer vidaMaxima) {
+		this.VIDA_MAXIMA = vidaMaxima;
+		this.vidaActual = vidaMaxima;
 	}
 	
-	public void recibirDanio(Integer montoDeDanio) {
+	public EstadoUnidad recibirDanio(Integer montoDeDanio) throws UnidadMuertaException {
+
+		if(montoDeDanio < 0){
+			throw new RuntimeException("El daño recibido fue negativo todo mal.");
+		}
+
 		this.vidaActual -= montoDeDanio;
+
+		if(this.vidaActual <= 0) return new EstadoUnidadMuerto(this.VIDA_MAXIMA);
+
+		return this;
 	}
 
-	public boolean estaSaludable() {
-		return VIDA_MAXIMA == vidaActual;
+	public Integer getVidaActual() throws UnidadMuertaException {
+		return this.vidaActual;
 	}
 
-	public boolean vivo() {
-		return this.vidaActual>0;
-	}
 }

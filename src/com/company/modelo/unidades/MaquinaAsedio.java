@@ -11,19 +11,13 @@ public class MaquinaAsedio extends UnidadAtacante {
 
 	public MaquinaAsedio(Jugador jugador) {
 		super(jugador);
-		this.estado =  new EstadoArmaAsedioDesmontada();
-		//ataque = new Ataque(75,0);
-		
-	}
-
-	@Override
-	public void atacar(Unidad enemigo) {
-
-	}
-
-	@Override
-	public void atacar(Edificio enemigo) {
-
+		this.rangoAtaque = 5;
+		this.danioAEdifcio = 75;
+		this.danioAUnidad = 0;
+		VIDA_MAXIMA = 150;
+		vidaActual = VIDA_MAXIMA;
+		COSTO = 200;
+		this.estado =  new EstadoArmaAsedioDesmontada(VIDA_MAXIMA);
 	}
 
 
@@ -38,14 +32,5 @@ public class MaquinaAsedio extends UnidadAtacante {
 
 	}
 
-	@Override
-	public Boolean verificarAlianza(Posicionable otroPosicionable) {
-		return null;
-	}
-
-	@Override
-	public Boolean verificarAlianza(Jugador otroJugador) {
-		return null;
-	}
 
 }

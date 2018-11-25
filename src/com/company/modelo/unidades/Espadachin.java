@@ -8,40 +8,25 @@ public class Espadachin extends UnidadAtacante {
 
 	public Espadachin(Jugador jugador) {
 		super(jugador);
-
-		/*this.estado =  new EstadoUnidad(100,25);
-		ataque = new Ataque(15,25);*/
-		
+		this.rangoAtaque = 1;
+		this.danioAEdifcio = 15;
+		this.danioAUnidad = 25;
+		VIDA_MAXIMA = 100;
+		vidaActual = VIDA_MAXIMA;
+		COSTO = 50;
 	}
 
-	@Override
-	public void atacar(Unidad enemigo) {
-
-	}
-
-	@Override
-	public void atacar(Edificio enemigo) {
-
-	}
 
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
 	}
 
-	//@Override
+	@Override
 	public void actualizar() {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public Boolean verificarAlianza(Posicionable otroPosicionable) {
-		return null;
-	}
 
-	@Override
-	public Boolean verificarAlianza(Jugador otroJugador) {
-		return null;
-	}
 
 }

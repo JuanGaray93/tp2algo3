@@ -9,23 +9,20 @@ public class Arquero extends UnidadAtacante {
 
 	public Arquero(Jugador jugador) {
 		super(jugador);
-		this.estado =  new EstadoUnidadInactivo();
+		this.rangoAtaque = 3;
+		this.danioAEdifcio = 10;
+		this.danioAUnidad = 15;
+		VIDA_MAXIMA = 75;
+		vidaActual = VIDA_MAXIMA;
+		COSTO = 75;
 	}
-
-    public void atacar(Edificio enemigo) {
-		// TODO
-    }
-    
-    public void atacar(Unidad enemigo) {
-    	// TODO
-    }
 
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
 	}
 
-	//@Override
+	@Override
 	public void actualizar() {
 		// TODO Auto-generated method stub
 

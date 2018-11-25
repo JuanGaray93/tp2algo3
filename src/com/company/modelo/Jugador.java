@@ -60,6 +60,10 @@ public class Jugador {
 
 	}
 
+	public void agregarAEdificios(Edificio unEdificio) {
+		edificios.add(unEdificio);
+	}
+
 	public void eliminarDeConstrucciones(Edificio edificio) {
 		if(!edificios.contains(edificio)){
 
@@ -88,7 +92,15 @@ public class Jugador {
 		
 	}*/
 
-	public void crearEntidadesIniciales() throws EdificioEnConstruccionException, CasilleroNoExistenteException, CasilleroLlenoException, EdificioDestruidoExcepcion, EdificioEnReparacionException {
+	public ArrayList<Edificio> getEdificios() {
+		return edificios;
+	}
+
+	public ArrayList<Unidad> getPoblacion() {
+		return poblacion;
+	}
+
+	public void crearEntidadesIniciales() throws EdificioEnConstruccionException, CasilleroNoExistenteException, CasilleroLlenoException, EdificioDestruidoExcepcion, EdificioEnReparacionException, ErrorDeConstruccionException {
 
 		Integer posicionInicialX = 0;
 		Integer posicionInicialY = 0;

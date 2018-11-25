@@ -10,7 +10,10 @@ import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoEdificio;
 import com.company.modelo.edificios.estados.EstadoEdificioEnConstruccion;
+import com.company.modelo.edificios.estados.EstadoEdificioInactivo;
+import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Aldeano;
+import com.company.modelo.unidades.Arquero;
 import com.company.modelo.unidades.Unidad;
 
 import java.util.ArrayList;
@@ -22,17 +25,15 @@ public abstract class Edificio extends Posicionable {
     protected static Integer MONTO_DE_REPARACION;
     protected static Integer BLOQUES_DE_ANCHO ;
     protected static Integer BLOQUES_DE_ALTO;
-    protected static Integer vidaActual;
 
     protected ArrayList<Posicion> posiciones;
     protected EstadoEdificio estado;
     protected Jugador jugador;
 
     public Edificio(Jugador jugador){
-
         posiciones = new ArrayList<>();
-
         this.jugador = jugador;
+        this.estado = new EstadoPorConstruir(VIDA_MAXIMA, MONTO_DE_REPARACION);
 	}
 
 	@Override
@@ -41,20 +42,19 @@ public abstract class Edificio extends Posicionable {
 	}
 
     public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
-            throws EdificioEnConstruccionException, CasilleroNoExistenteException, CasilleroLlenoException, EdificioEnReparacionException, EdificioDestruidoExcepcion {
-
-        /*TODO: manejo de posiciones.*/
-
+            throws EdificioEnConstruccionException, CasilleroNoExistenteException, CasilleroLlenoException,
+            EdificioEnReparacionException, EdificioDestruidoExcepcion, ErrorDeConstruccionException {
         jugador.cobrar(this.COSTO);
         this.ubicar(posicionHorizontal, posicionVertical);
         estado = estado.construir(quienLoConstruye);
+        jugador.agregarAEdificios(this);
     }
 
-    public void suspenderConstruccion(Aldeano quienLoConstruye) throws EdificioDestruidoExcepcion, EdificioNoConstruidoException {
-        estado = estado.suspenderConstruccion(quienLoConstruye);
+    public void suspenderConstruccion() throws
+            EdificioNoConstruidoException, EdificioDestruidoExcepcion {
+        estado = estado.suspenderConstruccion();
     }
 
-    //@Override
     private void ubicar(Integer posicionHorizontal, Integer posicionVertical)
             throws CasilleroNoExistenteException, CasilleroLlenoException {
 
@@ -67,15 +67,13 @@ public abstract class Edificio extends Posicionable {
 
     }
 
-    public Integer getVida() {
-        return this.vidaActual;
+    public Integer getVida() throws EdificioEnReparacionException, EdificioDestruidoExcepcion, EdificioEnConstruccionException, EdificioNoConstruidoException {
+        return this.estado.getVidaActual();
     }
 
-    public void crearUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException {
-        posiciones.get(0).colocarEnCasilleroLibreMasCercano(unidad);
-        jugador.agregarAPoblacion(unidad);
-    }
-    
+    public abstract void crearUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException,
+            MapaLlenoException, UnidadErroneaException, MovimientoInvalidoException, EdificioNoDisponibleException;
+
     public void reparar(Aldeano reparador)
             throws EdificioEnConstruccionException, EdificioDestruidoExcepcion, EdificioReparadoException,
             EdificioEnReparacionException, EdificioNoConstruidoException {

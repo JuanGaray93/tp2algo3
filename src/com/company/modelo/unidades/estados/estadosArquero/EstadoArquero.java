@@ -6,10 +6,8 @@ public class EstadoArquero extends EstadoUnidad {
 
     private static final Integer DISTANCIA_MAX_ATQ = 3;
 
-    public EstadoArquero(){
-        VIDA_MAXIMA = 75;
-        COSTO =  75;
-        vidaActual = 75;
+    public EstadoArquero(Integer vida){
+        super(vida);
     }
 
 }

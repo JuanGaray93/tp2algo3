@@ -2,6 +2,8 @@ package com.company.modelo;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
 
 public abstract class Posicionable {
 
@@ -9,11 +11,6 @@ public abstract class Posicionable {
 
     public abstract void recibirDanio(Integer montoDeDanio) throws Exception;
 
-    public Boolean verificarAlianza(Posicionable otroPosicionable){
-        return ( otroPosicionable.verificarAlianza(this.jugador) );
-    }
-    public Boolean verificarAlianza(Jugador otroJugador){
-        return(this.jugador == otroJugador);
-    }
-}
+    public abstract void actualizar() throws EdificioEnConstruccionException, EdificioReparadoException;
 
+}

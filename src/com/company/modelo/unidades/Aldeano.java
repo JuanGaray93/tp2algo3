@@ -12,6 +12,8 @@ import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoConstruye
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoRecolectandoOro;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoReparando;
 
+import java.util.ArrayList;
+
 public class Aldeano extends Unidad {
 
 	EstadoAldeano estadoActual;
@@ -21,64 +23,69 @@ public class Aldeano extends Unidad {
 		super(jugador);
 		estadoActual = new EstadoAldeanoRecolectandoOro();
 	}
-	//LISTO
-	public void construir(Edificio edificio,Integer x, Integer y) throws OroInsuficienteException {
-		estadoActual = new EstadoAldeanoConstruyendo();
-		try {
-			edificio.construir(this,x,y);
-		} catch (EdificioEnConstruccionException e) {
-			e.printStackTrace();
-		} catch (CasilleroLlenoException e) {
-			e.printStackTrace();
-		} catch (CasilleroNoExistenteException e) {
-			e.printStackTrace();
-		} catch (EdificioEnReparacionException e) {
-			e.printStackTrace();
-		} catch (EdificioDestruidoExcepcion e) {
-			e.printStackTrace();
+
+	private boolean existeEnRadio(Edificio edificio) {
+		ArrayList<Posicionable> cercanos = this.posicion.buscarEnRadioPosicionables(1);
+		return cercanos.contains(edificio);
+	}
+
+	public void construir(Edificio edificio, Integer posicionHorizontal, Integer posicionVertical) throws DistanciaInvalidaException {
+
+		if (posicion.seEncuentraEnRadio(posicionHorizontal, posicionVertical)) {
+			try {
+				edificio.construir(this, posicionHorizontal, posicionVertical);
+				estadoActual = estadoActual.construir(edificio, posicionHorizontal, posicionVertical);
+			} catch (EdificioEnConstruccionException e) {
+			} catch (CasilleroLlenoException e) {
+			} catch (CasilleroNoExistenteException e) {
+			} catch (EdificioDestruidoExcepcion e) {
+			} catch (EdificioNoConstruidoException e) {
+			} catch (ErrorDeConstruccionException e) {
+			} catch (EdificioEnReparacionException e) {
+			}
 		}
+
+		else throw new DistanciaInvalidaException("No puedo construir a esa distancia");
+
 	}
 
 	//LISTO
-	public void reparar(Edificio edificio) throws Exception {
+	public void reparar(Edificio edificio) throws EdificioLejanoException {
 
-			try {
-				edificio.reparar(this);
-				estadoActual = new EstadoAldeanoReparando();
-
-			} catch (EdificioReparadoException e) {
-				e.printStackTrace();
-			} catch (EdificioEnReparacionException e) {
-				e.printStackTrace();
-			} catch (EdificioEnConstruccionException e) {
-				e.printStackTrace();
-			} catch (EdificioDestruidoExcepcion e) {
-				e.printStackTrace();
-			} catch (EdificioNoConstruidoException e) {
-				e.printStackTrace();
+			if (existeEnRadio(edificio)) {
+				try {
+					edificio.reparar(this);
+					estadoActual = new EstadoAldeanoReparando();
+				} catch (EdificioReparadoException e) {
+					e.printStackTrace();
+				} catch (EdificioEnReparacionException e) {
+				} catch (EdificioEnConstruccionException e) {
+				} catch (EdificioDestruidoExcepcion e) {
+				} catch (EdificioNoConstruidoException e) {
+				}
 			}
 
+			else throw new EdificioLejanoException("Disculpe, esto esta muy lejos");
+
 	}
 
-	public void actualizar(EstadoAldeano estado) {
-
-		this.estadoActual =  estado;
+	public void liberar(){
+		estadoActual = new EstadoAldeanoRecolectandoOro();
 		estadoActual.otorgarGanancia(jugador);
 	}
 
 	@Override
-	public void recibirDanio(Integer montoDeDanio) {
+	public void recibirDanio(Integer montoDeDanio) throws UnidadMuertaException {
 		this.estadoActual.recibirDanio(montoDeDanio);
 	}
 
-
 	@Override
-	public Boolean verificarAlianza(Posicionable otroPosicionable) {
-		return null;
+	public void actualizar() {
+		try {
+			estadoActual.otorgarGanancia(jugador);
+		} catch (AldeanoOcupadoException e) {
+			//si esta ocupado no hace nada, no suma oro
+		}
 	}
 
-	@Override
-	public Boolean verificarAlianza(Jugador otroJugador) {
-		return null;
-	}
 }
