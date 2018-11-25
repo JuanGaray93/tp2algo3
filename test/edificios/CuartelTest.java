@@ -43,9 +43,12 @@ public class CuartelTest {
 
 		cuartel.crear(new Arquero(jugador));
 
+		cuartel.actualizar();
+		cuartel.actualizar();
+		cuartel.actualizar();
+		cuartel.actualizar();
+
 		assertTrue( mapa.estaOcupado(3, 7) );
-		assertFalse( mapa.estaOcupado(4, 7) );
-		assertFalse( mapa.estaOcupado(3, 4) );
 
 		/*//Ahora terreno esta ocupado en posicion cercana de cuartel y en cuartel
 		//La posicion donde se crea espadachin es random en el cuartel

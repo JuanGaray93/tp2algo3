@@ -3,6 +3,7 @@ package com.company.modelo.edificios;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
@@ -38,17 +39,18 @@ public class Cuartel extends Edificio {
 
 	@Override
 	public void crear(Unidad unidad)
-			throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException {
-		 if(!unidad.seLlama("ARQUERO") || !unidad.seLlama("ESPADACHIN")){
+			throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, EdificioEnConstruccionException, EdificioEnReparacionException {
+		 /*if(!unidad.seLlama("ARQUERO") || !unidad.seLlama("ESPADACHIN")){
 		 	throw new UnidadErroneaException("Imposible crear ese tipo de unidad");
-		 }
-		 posiciones.get(1).posicionar(unidad);
+		 }*/
+		this.estado = estado.crear(unidad, posiciones.get(1));
+		jugador.agregarAPoblacion(unidad);
 
 	}
 
 	@Override
-	public void actualizar() {
-
+	public void actualizar() throws Exception {
+		estado = estado.ejecutarAccion();
 	}
 
 }
