@@ -80,7 +80,7 @@ public abstract class Edificio extends Posicionable {
 
     }
 
-    public void eliminar() throws CasilleroNoExistenteException {
+    public void eliminar() throws CasilleroNoExistenteException { // TODO Franco Crear test que pruebe que esté vacío el terreno
         int longitud = posiciones.size();
 
         for (int i = longitud - 1; i >= 0; i--) {

@@ -1,17 +1,10 @@
 package com.company.modelo.edificios;
 
-import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.modelo.Jugador;
-import com.company.modelo.Posicion;
-import com.company.modelo.Posicionable;
-import com.company.modelo.edificios.estados.EstadoEdificioInactivo;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
-
-import java.util.ArrayList;
 
 public class Castillo extends Edificio {
 
@@ -41,18 +34,18 @@ public class Castillo extends Edificio {
     }
 
     public void actualizar() throws Exception {
-        estado = estado.ejecutarAccion();
+        estado = estado.actualizar();
     }
 
     public void atacar(Unidad enemigo) {
-        // TODO
+        // TODO Martin
     }
 
     public void atacar(Edificio enemigo) {
-        // TODO
+        // TODO Martin
     }
 
-    /*
+    /* TODO Eliminar esto una vez que esté implementado. - Martin
     public void ataque() throws PosicionableEsAliadoException {
 
         ArrayList<Posicionable> posicionablesCercanos = new ArrayList <>();

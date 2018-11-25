@@ -14,7 +14,7 @@ public class EstadoEdificioMuerto extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() {
+    public EstadoEdificio actualizar() {
         return this;
     }
 

@@ -94,7 +94,6 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverVerticalmenteHaciaAbajo() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-        //TODO contemplar el caso de que se choca con el cuartel
 
         cuartel.construir(peon,3, 5);
         cuartel.actualizar();
@@ -174,7 +173,6 @@ public class ArqueroTest {
     @Test
     public void testArqueroMoverEnDiagonalHaciaAbajoALaDerecha()
             throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-        //TODO contemplar el caso de que se choca con el cuartel
 
         cuartel.construir(peon,3, 5);
         cuartel.actualizar();

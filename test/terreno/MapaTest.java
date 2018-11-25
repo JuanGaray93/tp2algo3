@@ -114,8 +114,8 @@ public class MapaTest {
     @Test
     public void colocarUnidadOcupaCasilleroVacioMasCercano(){
         /** El Reptador no se puede testear directamente por ser un objeto al que sólo puede acceder Mapa.
-         *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único método que delega responsabilidades a Reptador.
-         *  Que funcione bien ese método es que funcione bien el Reptador.
+         *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único métoddo que delega responsabilidades a Reptador.
+         *  Que funcione bien ese métoddo es que funcione bien el Reptador.
          *  Este test prueba entonces que funcione correctamente.
          */
 

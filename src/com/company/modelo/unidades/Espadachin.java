@@ -10,28 +10,18 @@ public class Espadachin extends UnidadAtacante {
 		super(jugador);
 
 		/*this.estado =  new EstadoUnidad(100,25);
-		ataque = new Ataque(15,25);*/
+		ataque = new Ataque(15,25); TODO Martin*/
 		
 	}
 
 	@Override
 	public void atacar(Unidad enemigo) {
-
+		// TODO Martin
 	}
 
 	@Override
 	public void atacar(Edificio enemigo) {
-
-	}
-
-	@Override
-	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-
-	}
-
-	//@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
+		// TODO Martin
 	}
 
 }

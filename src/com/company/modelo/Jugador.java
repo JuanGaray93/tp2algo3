@@ -29,14 +29,11 @@ public class Jugador {
 		poblacion = new ArrayList<Unidad>();
 		edificios = new ArrayList<Edificio>();
 	}
-	/*
-	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException {
-		try {
-			unidad.moverA(x,y);
-		} catch (CasilleroLlenoException e) {
-			// TODO si el casillero esta lleno...
-		}
-	}*/
+
+	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException, ArmaMontadaException, CasilleroLlenoException {
+		// TODO Jony Martin: Manejo de alianza! Por qué se voló esto? - Juan
+		unidad.moverA(x,y); // TODO Jony Martin: hacer que sólo pueda moverse si el jugador es su dueño
+	}
 
 	public Integer getOro(){
 		return this.oro;

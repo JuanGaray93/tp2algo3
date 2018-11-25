@@ -21,10 +21,6 @@ public class Posicion {
         mapa.ubicar(posicionable, posicionHorizontal, posicionVertical);
     }
 
-   /* public void posicionar(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException {
-        mapa.colocarEnCasilleroLibreMasCercano(unidad, posicionHorizontal, posicionVertical);
-    }*/
-
     public void colocarEnCasilleroLibreMasCercano(Unidad unaUnidad) throws MapaLlenoException, CasilleroNoExistenteException, CasilleroLlenoException {
         mapa.colocarEnCasilleroLibreMasCercano(unaUnidad, this.posicionHorizontal, this.posicionVertical);
     }

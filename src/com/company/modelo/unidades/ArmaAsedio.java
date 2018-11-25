@@ -38,12 +38,6 @@ public class ArmaAsedio extends UnidadAtacante {
 
 	}
 
-	//@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public Boolean verificarAlianza(Posicionable otroPosicionable) {
 		return null;
 	}

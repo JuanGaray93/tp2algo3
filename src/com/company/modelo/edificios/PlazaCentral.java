@@ -1,15 +1,9 @@
 package com.company.modelo.edificios;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.Edificio.EdificioEnReparacionException;
-import com.company.excepciones.MapaLlenoException;
-import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Aldeano;
-import com.company.modelo.unidades.Unidad;
 
 public class PlazaCentral extends Edificio {
 
@@ -28,7 +22,7 @@ public class PlazaCentral extends Edificio {
     @Override
     public void actualizar() throws Exception, EdificioEnConstruccionException {
 
-            estado = estado.ejecutarAccion();
+            estado = estado.actualizar();
 
     }
 

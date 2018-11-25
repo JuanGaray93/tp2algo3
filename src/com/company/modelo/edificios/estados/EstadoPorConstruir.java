@@ -15,7 +15,7 @@ public class EstadoPorConstruir extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() {
+    public EstadoEdificio actualizar() {
         return this;
     }
 

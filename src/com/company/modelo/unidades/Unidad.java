@@ -28,14 +28,19 @@ public abstract class Unidad extends Posicionable {
 		estado.recibirDanio(montoDeDanio);
 	}
 
-	/*private void eliminarDePosicion() throws CasilleroNoExistenteException {
-		if(posicion != null){
+	private void eliminarDePosicion() throws CasilleroNoExistenteException {
+		if (posicion != null) {
 			posicion.quitarPosicionable();
 		}
-	}*/
+	}
 
 	@Override
-	public void ubicar(Integer posicionHorizontal, Integer posicionVertical){
+	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+		posicion.posicionar(this);
+	}
 
+	@Override
+	public void actualizar(){
+		estado = estado.actualizar();
 	}
 }

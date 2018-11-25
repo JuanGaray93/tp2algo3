@@ -7,6 +7,7 @@ import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.ArmaAsedio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
 
@@ -22,15 +23,8 @@ public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
         return new EstadoArmaAsedioDesmontada(maquinaAsedio);
     }
 
-    public EstadoArmaAsedioMontada montar() {
-        try {
-			throw new ArmaMontadaException("la maquina de asedio ya esta montada");
-		} catch (ArmaMontadaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-
+    public EstadoArmaAsedioMontada montar() throws ArmaMontadaException {
+        throw new ArmaMontadaException("la maquina de asedio ya esta montada");
     }
 
     @Override
@@ -38,9 +32,12 @@ public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
         throw new ArmaMontadaException("la maquina de asedio no se puede mover porque esta montada");
     }
 
-
     public void atacar(Edificio enemigo) throws Exception {
-        //ataque.atacar(enemigo);
+        //ataque.atacar(enemigo); TODO Martin
     }
 
+    @Override
+    public EstadoUnidad actualizar() {
+        return this;
+    }
 }

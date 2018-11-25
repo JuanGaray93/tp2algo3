@@ -24,7 +24,7 @@ public abstract class EstadoEdificio {
 
     }
 
-    public abstract EstadoEdificio ejecutarAccion() throws Exception, EdificioEnConstruccionException;
+    public abstract EstadoEdificio actualizar() throws Exception, EdificioEnConstruccionException;
 
     public abstract EstadoEdificio crear(Unidad unidad, Posicion posicion)
             throws EdificioEnConstruccionException, EdificioEnReparacionException, CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException;
@@ -32,16 +32,13 @@ public abstract class EstadoEdificio {
     public EstadoEdificio recibirDanio(Integer montoDeDanio) throws EdificioEnConstruccionException {
 
         if(montoDeDanio < 0){
-            throw new RuntimeException("El daño recibido fue negativo todo mal.");
+            throw new RuntimeException("El daño recibido fue negativo toddo mal.");
         }
 
         this.vidaActual -= montoDeDanio;
-
-
         if(vidaActual <= 0){
             return new EstadoEdificioMuerto(VIDA_MAXIMA,MONTO_REPARACION);
         }
-
         return this;
     }
 

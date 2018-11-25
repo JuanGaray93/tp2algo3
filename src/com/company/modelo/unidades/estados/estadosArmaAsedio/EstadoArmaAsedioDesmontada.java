@@ -5,6 +5,7 @@ import com.company.excepciones.*;
 import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.ArmaAsedio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
     ArmaAsedio maquinaAsedio;
@@ -18,14 +19,8 @@ public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
         this.COSTO = 200;
     }
 
-    public EstadoArmaAsedioDesmontada desmontar() {
-        try {
-			throw new ArmaDesmontadaException("la maquina de asedio ya esta desmontada");
-		} catch (ArmaDesmontadaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+    public EstadoArmaAsedioDesmontada desmontar() throws ArmaDesmontadaException {
+        throw new ArmaDesmontadaException("la maquina de asedio ya esta desmontada");
     }
 
     public EstadoArmaAsedio montar() {
@@ -42,5 +37,10 @@ public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
     public void atacar(Edificio enemigo) throws ArmaDesmontadaException {
         throw new ArmaDesmontadaException("la maquina de asedio no puede atacar desmontada");
 
+    }
+
+    @Override
+    public EstadoUnidad actualizar() {
+        return this;
     }
 }

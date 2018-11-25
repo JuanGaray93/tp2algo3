@@ -42,7 +42,7 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() throws Exception, EdificioEnConstruccionException {
+    public EstadoEdificio actualizar() throws Exception, EdificioEnConstruccionException {
         return this.reparar(trabajadorActual,MONTO_REPARACION);
     }
 

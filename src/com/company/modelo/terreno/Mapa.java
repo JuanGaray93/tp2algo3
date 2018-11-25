@@ -59,7 +59,6 @@ public class Mapa {
     }
 
     public void colocarEnCasilleroLibreMasCercano(Unidad nuevaUnidad, Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException, CasilleroNoExistenteException, CasilleroLlenoException {
-        // TODO: SOLUCIONAR POSICION DE UNIDAD EN MAPA
         Reptador reptador = new Reptador(posicionHorizontal, posicionVertical);
 
         Boolean encontrado = false;
