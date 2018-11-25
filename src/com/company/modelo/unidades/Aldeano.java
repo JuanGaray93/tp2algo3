@@ -19,7 +19,6 @@ public class Aldeano extends Unidad {
     public Aldeano(Jugador jugador) {
         super(jugador);
         estadoActual = new EstadoAldeanoRecolectandoOro();
-        this.nombre = "ALDEANO";
     }
 
     private boolean existentesEnRadio(Edificio e) {

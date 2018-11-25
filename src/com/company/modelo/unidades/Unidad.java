@@ -10,7 +10,6 @@ public abstract class Unidad extends Posicionable {
 
 	protected Posicion posicion;
 	protected EstadoUnidad estado;
-	protected String nombre;
 
 	public Unidad(Jugador jugador) {
 		this.jugador = jugador;
@@ -39,8 +38,4 @@ public abstract class Unidad extends Posicionable {
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical){
 
 	}
-
-    public boolean seLlama(String nombre) {
-		return this.nombre == nombre;
-    }
 }

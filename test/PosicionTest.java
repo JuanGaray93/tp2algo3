@@ -34,8 +34,6 @@ public class PosicionTest {
             //Mockito.verify(mapa).colocarEnCasilleroLibreMasCercano(capturador.capture());
             // Ver cómo usar mockito verify con esto
             Logger logger = Logger.getLogger("");
-
-            logger.info(capturador.getAllValues().toString());
         } catch (Exception e) {
             assertTrue(false);
         }

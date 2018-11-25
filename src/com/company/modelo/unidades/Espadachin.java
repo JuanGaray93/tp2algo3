@@ -11,7 +11,6 @@ public class Espadachin extends UnidadAtacante {
 
 		/*this.estado =  new EstadoUnidad(100,25);
 		ataque = new Ataque(15,25);*/
-		this.nombre = "ESPADACHIN";
 		
 	}
 
