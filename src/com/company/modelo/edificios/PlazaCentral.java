@@ -44,14 +44,4 @@ public class PlazaCentral extends Edificio {
 
     }
 
-    @Override
-    public void crear(Unidad unidad)
-            throws EdificioEnConstruccionException, EdificioEnReparacionException,
-            CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException {
-        if (!unidad.seLlama("ALDEANO")) {
-            throw new UnidadErroneaException("Esta unidad no se crea en Plaza Central");
-        }
-        this.estado = estado.crear(unidad, posiciones.get(1));
-    }
-
 }

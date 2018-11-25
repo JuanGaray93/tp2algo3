@@ -38,17 +38,6 @@ public class Cuartel extends Edificio {
 	}
 
 	@Override
-	public void crear(Unidad unidad)
-			throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, EdificioEnConstruccionException, EdificioEnReparacionException {
-		 /*if(!unidad.seLlama("ARQUERO") || !unidad.seLlama("ESPADACHIN")){
-		 	throw new UnidadErroneaException("Imposible crear ese tipo de unidad");
-		 }*/
-		this.estado = estado.crear(unidad, posiciones.get(1));
-		jugador.agregarAPoblacion(unidad);
-
-	}
-
-	@Override
 	public void actualizar() throws Exception {
 		estado = estado.ejecutarAccion();
 	}

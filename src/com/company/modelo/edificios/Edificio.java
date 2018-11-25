@@ -69,7 +69,10 @@ public abstract class Edificio extends Posicionable {
         return this.estado.getVidaActual();
     }
 
-    public abstract void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, EdificioEnConstruccionException, EdificioEnReparacionException;
+    public void crear(Unidad unidad) throws CasilleroNoExistenteException, EdificioEnReparacionException, CasilleroLlenoException, EdificioEnConstruccionException, MapaLlenoException {
+        this.estado = estado.crear(unidad, posiciones.get(1));
+        jugador.agregarAPoblacion(unidad);
+    };
     
     public void reparar(Aldeano reparador) throws Exception, EdificioEnConstruccionException {
 

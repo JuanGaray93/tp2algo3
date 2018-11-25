@@ -40,17 +40,6 @@ public class Castillo extends Edificio {
 
     }
 
-    @Override
-    public void crear(Unidad unidad)
-            throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, EdificioEnConstruccionException, EdificioEnReparacionException {
-       /* if(!unidad.seLlama("ARMA_ASEDIO")){
-            throw new UnidadErroneaException("esta unidad no puede ser creada aqui");
-        }*/
-        this.estado = estado.crear(unidad, posiciones.get(1));
-       // posiciones.get(1).posicionar(unidad);
-        jugador.agregarAPoblacion(unidad);
-    }
-
     public void actualizar() throws Exception {
         estado = estado.ejecutarAccion();
     }
