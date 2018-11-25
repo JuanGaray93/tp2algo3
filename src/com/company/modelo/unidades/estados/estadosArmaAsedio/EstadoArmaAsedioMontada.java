@@ -1,12 +1,16 @@
 package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
-import com.company.excepciones.MaquinaMontadaException;
+import com.company.excepciones.ArmaMontadaException;
+import com.company.excepciones.ArmaMontadaException;
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.ArmaAsedio;
 
-public class EstadoMaquinaAsedioMontada extends EstadoArmaAsedio {
+public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
 
-    public EstadoMaquinaAsedioMontada(ArmaAsedio armaAsedio) {
+    public EstadoArmaAsedioMontada(ArmaAsedio armaAsedio) {
         super(armaAsedio);
         VIDA_MAXIMA = 150;
         vidaActual = 150;
@@ -14,14 +18,14 @@ public class EstadoMaquinaAsedioMontada extends EstadoArmaAsedio {
 
     }
 
-    public EstadoMaquinaAsedioDesmontada desmontar() {
-        return new EstadoMaquinaAsedioDesmontada(maquinaAsedio);
+    public EstadoArmaAsedioDesmontada desmontar() {
+        return new EstadoArmaAsedioDesmontada(maquinaAsedio);
     }
 
-    public EstadoMaquinaAsedioMontada montar() {
+    public EstadoArmaAsedioMontada montar() {
         try {
-			throw new MaquinaMontadaException("la maquina de asedio ya esta montada");
-		} catch (MaquinaMontadaException e) {
+			throw new ArmaMontadaException("la maquina de asedio ya esta montada");
+		} catch (ArmaMontadaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -29,8 +33,9 @@ public class EstadoMaquinaAsedioMontada extends EstadoArmaAsedio {
 
     }
 
-    public void moverA(Integer x, Integer y) throws MaquinaMontadaException {
-        throw new MaquinaMontadaException("la maquina de asedio no se puede mover porque esta montada");
+    @Override
+    public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException, ArmaMontadaException {
+        throw new ArmaMontadaException("la maquina de asedio no se puede mover porque esta montada");
     }
 
 

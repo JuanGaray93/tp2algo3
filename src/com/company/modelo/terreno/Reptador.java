@@ -58,7 +58,7 @@ public class Reptador {
 
     protected void ubicarUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
 
-        unidad.establecerCoordenadasDeNacimiento(posicionHorizontal,posicionHorizontal);
+        unidad.establecerCoordenadasDeNacimiento(posicionHorizontal,posicionVertical);
         mapa.ubicar(unidad,posicionHorizontal, posicionVertical);
     }
 

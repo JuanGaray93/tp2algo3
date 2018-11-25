@@ -177,7 +177,6 @@ public class AldeanoTest {
 
 		aldeano.establecerCoordenadasDeNacimiento(5,5);
 		mapa.ubicar(castillo,5,6);
-
 		try {
 			castillo.recibirDanio(15);
 		} catch (Exception e) { }

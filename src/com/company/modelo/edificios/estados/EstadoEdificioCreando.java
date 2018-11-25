@@ -23,7 +23,7 @@ public class EstadoEdificioCreando extends EstadoEdificio {
     @Override
     public EstadoEdificio crear(Unidad unidad, Posicion posicion)
             throws CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException {
-        posicion.posicionar(unidad);
+        posicion.colocarEnCasilleroLibreMasCercano(unidad);
         return this;
     }
     //tomo como premisa de que no se puede reparar un edificio que esta creando un unidad

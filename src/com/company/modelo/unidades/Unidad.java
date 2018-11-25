@@ -1,9 +1,6 @@
 package com.company.modelo.unidades;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.MapaLlenoException;
-import com.company.excepciones.MovimientoInvalidoException;
+import com.company.excepciones.*;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
@@ -19,20 +16,12 @@ public abstract class Unidad extends Posicionable {
 		this.jugador = jugador;
 	}
 
-	public void establecerCoordenadasDeNacimiento(int posicionHorizontal, int posicionVertical) {
+	public void establecerCoordenadasDeNacimiento(Integer posicionHorizontal, Integer posicionVertical) {
 		posicion = new Posicion(posicionHorizontal, posicionVertical);
 	}
 
-	public void moverA(int posicionHorizontal, int posicionVertical)
-			throws CasilleroLlenoException, CasilleroNoExistenteException,
-			MovimientoInvalidoException, MapaLlenoException {
-		if(posicion.posicionEnRadio(posicionHorizontal,posicionVertical)){
-			this.eliminarDePosicion();
-			posicion = new Posicion(posicionHorizontal, posicionVertical);
-			posicion.posicionar(this);
-		}else {
-			throw new MovimientoInvalidoException("No es posible moverse a ese casillero");
-		}
+	public void moverA(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException, ArmaMontadaException {
+		posicion.moverA(posicionHorizontal, posicionVertical);
 	}
 
 	@Override
@@ -40,11 +29,11 @@ public abstract class Unidad extends Posicionable {
 		estado.recibirDanio(montoDeDanio);
 	}
 
-	private void eliminarDePosicion() throws CasilleroNoExistenteException {
+	/*private void eliminarDePosicion() throws CasilleroNoExistenteException {
 		if(posicion != null){
 			posicion.eliminar();
 		}
-	}
+	}*/
 
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical){

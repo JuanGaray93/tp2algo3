@@ -43,10 +43,12 @@ public abstract class Edificio extends Posicionable {
 
 	}
 
-    public abstract void construir(Aldeano quienLoConstruye, Integer posicionHorizontal,
-                                   Integer posicionVertical)
-                                   throws EdificioEnConstruccionException,Exception;
-
+    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal,
+                          Integer posicionVertical) throws Exception {
+        jugador.cobrar(this.COSTO);
+        this.ubicar(posicionHorizontal, posicionVertical);
+        estado = estado.construir(quienLoConstruye);
+    }
     public void suspender() throws Exception, EdificioEnConstruccionException {
         estado = estado.suspender();
     }

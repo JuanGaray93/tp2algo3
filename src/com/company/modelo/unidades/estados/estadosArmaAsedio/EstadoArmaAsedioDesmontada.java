@@ -1,18 +1,15 @@
 package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.*;
 
-import com.company.excepciones.MaquinaDesmontadaException;
-import com.company.excepciones.MapaLlenoException;
-import com.company.excepciones.MaquinaDesmontadaException;
+import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.ArmaAsedio;
 
-public class EstadoMaquinaAsedioDesmontada extends EstadoArmaAsedio {
+public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
     ArmaAsedio maquinaAsedio;
 
-    public EstadoMaquinaAsedioDesmontada(ArmaAsedio armaAsedio) {
+    public EstadoArmaAsedioDesmontada(ArmaAsedio armaAsedio) {
         super(armaAsedio);
         maquinaAsedio = armaAsedio;
         //super(maquinaAsedio);
@@ -21,10 +18,10 @@ public class EstadoMaquinaAsedioDesmontada extends EstadoArmaAsedio {
         this.COSTO = 200;
     }
 
-    public EstadoMaquinaAsedioDesmontada desmontar() {
+    public EstadoArmaAsedioDesmontada desmontar() {
         try {
-			throw new MaquinaDesmontadaException("la maquina de asedio ya esta desmontada");
-		} catch (MaquinaDesmontadaException e) {
+			throw new ArmaDesmontadaException("la maquina de asedio ya esta desmontada");
+		} catch (ArmaDesmontadaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -32,24 +29,18 @@ public class EstadoMaquinaAsedioDesmontada extends EstadoArmaAsedio {
     }
 
     public EstadoArmaAsedio montar() {
-        return new EstadoMaquinaAsedioMontada(maquinaAsedio);
+
+        return new EstadoArmaAsedioMontada(maquinaAsedio);
     }
 
-    public void moverA(Integer posicionHorizontal, Integer posicionVertical) throws MapaLlenoException {
+    public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
 
-        try {
-			maquinaAsedio.moverA(posicionHorizontal, posicionVertical);
-		} catch (CasilleroLlenoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (CasilleroNoExistenteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			posicion.moverA(posicionHorizontal, posicionVertical);
+
     }
 
-    public void atacar(Edificio enemigo) throws MaquinaDesmontadaException {
-        throw new MaquinaDesmontadaException("la maquina de asedio no puede atacar desmontada");
+    public void atacar(Edificio enemigo) throws ArmaDesmontadaException {
+        throw new ArmaDesmontadaException("la maquina de asedio no puede atacar desmontada");
 
     }
 }

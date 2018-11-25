@@ -31,17 +31,11 @@ public class Aldeano extends Unidad {
     //LISTO
     public void construir(Edificio edificio, Integer x, Integer y)
             throws Exception, DistanciaInvalidaException {
-        if (posicion.posicionEnRadio(x, y)) {
-            try {
+        if (posicion.esDistanciaValida(x, y)) {
 
                 edificio.construir(this, x, y);
                 estadoActual = estadoActual.construir(edificio, x, y);
 
-            } catch (EdificioEnConstruccionException e) {
-            } catch (CasilleroLlenoException e) {
-            } catch (CasilleroNoExistenteException e) {
-            } catch (MovimientoInvalidoException e) {
-            }
         } else {
             throw new DistanciaInvalidaException("No puedo construir a esa distancia");
         }

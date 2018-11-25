@@ -26,6 +26,8 @@ public class Jugador {
 		this.oro = 100;
 		jugadoresCreados++;
 		this.numeroDeJugador = jugadoresCreados;
+		poblacion = new ArrayList<Unidad>();
+		edificios = new ArrayList<Edificio>();
 	}
 	/*
 	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException {
@@ -113,6 +115,14 @@ public class Jugador {
 
 		edificios.add(castillo);
 		edificios.add(plaza);
+	}
+
+	// hay que tener una forma de testear la creacion de unidades.
+	public Boolean estaEnPoblacion(Unidad unidad) {
+		if(poblacion.contains(unidad)) {
+			return true;
+		}
+		return false;
 	}
 
 }

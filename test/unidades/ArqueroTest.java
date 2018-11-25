@@ -1,5 +1,6 @@
 package unidades;
 
+import com.company.excepciones.ArmaMontadaException;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
@@ -32,7 +33,7 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverHorizontalmenteHaciaDelante() throws
-            Exception, EdificioEnConstruccionException {
+            Exception, EdificioEnConstruccionException, ArmaMontadaException {
 
         Cuartel cuartel = new Cuartel(jugador);
 
@@ -48,7 +49,7 @@ public class ArqueroTest {
     }
 
         @Test
-    public void testArqueroMoverHorizontalmenteHaciaAtras() throws Exception, EdificioEnConstruccionException {
+    public void testArqueroMoverHorizontalmenteHaciaAtras() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
 
         cuartel.construir(peon,3, 5);
 
@@ -64,7 +65,7 @@ public class ArqueroTest {
     }
 
     @Test
-    public void testArqueroMoverVerticalmenteHaciaArriba() throws Exception, EdificioEnConstruccionException {
+    public void testArqueroMoverVerticalmenteHaciaArriba() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
 
         cuartel.construir(peon,3, 5);
 
@@ -91,7 +92,7 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverEnDiagonalHaciaArribaALaIzquierda()
-            throws Exception, EdificioEnConstruccionException {
+            throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
 
         cuartel.construir(peon,3, 5);
 
@@ -105,7 +106,7 @@ public class ArqueroTest {
     }
 
     @Test
-    public void testArqueroMoverEnDiagonalHaciaArribaALaDerecha() throws Exception, EdificioEnConstruccionException {
+    public void testArqueroMoverEnDiagonalHaciaArribaALaDerecha() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
 
         cuartel.construir(peon,3, 5);
 
@@ -121,7 +122,7 @@ public class ArqueroTest {
     }
 
     @Test
-    public void testArqueroMoverEnDiagonalHaciaAbajoALaIzquierda() throws Exception, EdificioEnConstruccionException {
+    public void testArqueroMoverEnDiagonalHaciaAbajoALaIzquierda() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
 
         cuartel.construir(peon,3, 5);
 

@@ -1,8 +1,6 @@
 package com.company.modelo;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.MapaLlenoException;
+import com.company.excepciones.*;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Unidad;
@@ -20,13 +18,13 @@ public class Posicion {
         this.posicionVertical = posicionVertical;
     }
 
-    public void posicionar(Edificio edificio) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        mapa.ubicar(edificio, posicionHorizontal, posicionVertical);
+    public void posicionar(Posicionable posicionable) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        mapa.ubicar(posicionable, posicionHorizontal, posicionVertical);
     }
 
-    public void posicionar(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException {
+   /* public void posicionar(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException {
         mapa.colocarEnCasilleroLibreMasCercano(unidad, posicionHorizontal, posicionVertical);
-    }
+    }*/
 
     public void colocarEnCasilleroLibreMasCercano(Unidad unaUnidad) throws MapaLlenoException, CasilleroNoExistenteException, CasilleroLlenoException {
         mapa.colocarEnCasilleroLibreMasCercano(unaUnidad, this.posicionHorizontal, this.posicionVertical);
@@ -44,7 +42,7 @@ public class Posicion {
         return mapa.estaOcupado(i, j);
     }
 
-    public boolean posicionEnRadio(Integer x, Integer y){
+    public boolean esDistanciaValida(Integer x, Integer y){
         return (posicionHorizontal == x-1 || posicionHorizontal == x+1 || posicionHorizontal == x) &&
                 (posicionVertical == y-1 || posicionVertical == y+1 || posicionVertical == y);
     }
@@ -70,5 +68,17 @@ public class Posicion {
 
         }
         return posicionables;
+    }
+
+    public void moverA(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        if(this.esDistanciaValida(posicionHorizontal,posicionVertical)){
+                Posicionable posicionable = mapa.conseguirOcupante(this.posicionHorizontal,this.posicionVertical);
+                this.eliminar();
+                this.posicionHorizontal = posicionHorizontal;
+                this.posicionVertical = posicionVertical;
+                this.posicionar(posicionable);
+        }else {
+            throw new MovimientoInvalidoException("No es posible moverse a ese casillero");
+        }
     }
 }

@@ -30,7 +30,7 @@ public class EstadoPorConstruir extends EstadoEdificio {
 
     @Override
     public EstadoEdificioEnReparacion suspender() throws EdificioEnConstruccionException {
-        this.trabajadorActual = null;
+      this.trabajadorActual = null;
        throw new EdificioEnConstruccionException("Disculpe el edificio no existe");
     }
 
