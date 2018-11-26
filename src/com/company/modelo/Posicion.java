@@ -66,7 +66,7 @@ public class Posicion {
     }
 
     public void moverA(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        if(this.esDistanciaValida(posicionHorizontal,posicionVertical)){
+        if((this.esDistanciaValida(posicionHorizontal,posicionVertical)) & (!mapa.estaOcupado(posicionHorizontal,posicionVertical))){
                 Posicionable posicionable = mapa.conseguirOcupante(this.posicionHorizontal,this.posicionVertical);
                 this.quitarPosicionable();
                 this.posicionHorizontal = posicionHorizontal;

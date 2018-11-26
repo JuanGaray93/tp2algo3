@@ -3,13 +3,10 @@ package unidades;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import com.company.excepciones.ArmaMontadaException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
-import com.company.excepciones.MapaLlenoException;
 import org.junit.Before;
 import org.junit.Test;
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
@@ -376,7 +373,46 @@ public class AsedioTest {
 	        assertTrue( mapa.estaOcupado(7, 6) );
 	    	
 
-	    }   
-	    
+	    }
+
+	@Test (expected = MovimientoInvalidoException.class)
+	public void testAsedioMoverHorizontalmenteHaciaLaIzquierdaAUnCasilleroOcupado() throws Exception {
+
+		Jugador jugador = null;
+		jugador = new Jugador();
+
+		Castillo castillo = new Castillo(jugador);
+		Aldeano aldeano = new Aldeano(jugador);
+		try {
+			castillo.construir(aldeano, 3, 5);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		castillo.actualizar();
+		castillo.actualizar();
+		castillo.actualizar();
+		castillo.actualizar();
+
+		try{
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			castillo.crear(maquinaAsedio);
+
+			assertTrue( mapa.estaOcupado(7, 6) );
+			maquinaAsedio.moverA(6, 6);
+		}
+		catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
+			e.printStackTrace();
+		}
+		catch (CasilleroNoExistenteException e) {
+			e.printStackTrace();
+		}
+
+		assertFalse( mapa.estaOcupado(6, 6) );
+		assertTrue( mapa.estaOcupado(7, 6) );
+
+
+	}
+
 
 }

@@ -13,7 +13,7 @@ public class EstadoAldeanoConstruyendo extends EstadoAldeano {
     private Edificio edificioSiendoConstruido;
     private Aldeano constructor;
 
-    public EstadoAldeanoConstruyendo(Aldeano constructor, Edificio edificioSiendoConstruido){
+    public EstadoAldeanoConstruyendo(){
         this.constructor = constructor;
         this.edificioSiendoConstruido = edificioSiendoConstruido;
     }
@@ -46,7 +46,7 @@ public class EstadoAldeanoConstruyendo extends EstadoAldeano {
 
     @Override
     public EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV) throws Exception, DistanciaInvalidaException {
-        return new EstadoAldeanoConstruyendo(constructor, edificio);
+        return new EstadoAldeanoConstruyendo();
     }
 
     @Override

@@ -12,6 +12,11 @@ public class EstadoArquero extends EstadoUnidad {
         vidaActual = 75;
     }
 
+    @Override
+    public EstadoUnidad actualizar() throws Exception {
+        return this;
+    }
+
 }
 
 

@@ -11,4 +11,9 @@ public class EstadoEspadachin extends EstadoUnidad {
         vidaActual = 100;
     }
 
+    @Override
+    public EstadoUnidad actualizar() throws Exception {
+        return this;
+    }
+
 }

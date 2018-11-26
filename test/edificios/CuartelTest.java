@@ -1,6 +1,7 @@
 package edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
@@ -44,6 +45,22 @@ public class CuartelTest {
 		assertTrue(mapa.estaOcupado(3, 6));
 		assertTrue(mapa.estaOcupado(4, 5));
 		assertTrue(mapa.estaOcupado(4, 6));
+
+	}
+
+
+	@Test (expected = CasilleroNoExistenteException.class)
+	public void borrarCuartelYVerificarQueSeBorraTest() throws Exception, EdificioEnConstruccionException {
+
+		assertFalse(mapa.estaOcupado(3, 5));
+
+		cuartel.construir(peon, 3, 5);
+		cuartel.eliminar();
+
+		assertFalse(mapa.estaOcupado(3, 5));
+		assertFalse(mapa.estaOcupado(3, 6));
+		assertFalse(mapa.estaOcupado(4, 5));
+		assertFalse(mapa.estaOcupado(4, 6));
 
 	}
 

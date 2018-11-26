@@ -1,6 +1,7 @@
 package edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.terreno.Mapa;
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class CastilloTest {
 	
@@ -72,6 +74,38 @@ public class CastilloTest {
 		
 
 		assertTrue(jugador.estaEnPoblacion(maquinaAsedio));
+
+	}
+
+	public void borrarCastilloYVerificarQueSeBorraTest() throws CasilleroLlenoException, CasilleroNoExistenteException {
+
+		jugador.sumarOro(1400);
+		Castillo castillo = new Castillo(jugador);
+		Aldeano aldeano = new Aldeano(jugador);
+
+		try {
+			castillo.construir(aldeano, 3, 5);
+		}
+		catch ( Exception e){
+			e.printStackTrace();
+		}
+		castillo.eliminar();
+		assertFalse( mapa.estaOcupado(3, 5) );
+		assertFalse( mapa.estaOcupado(3, 6) );
+		assertFalse( mapa.estaOcupado(3, 7) );
+		assertFalse( mapa.estaOcupado(3, 8) );
+		assertFalse( mapa.estaOcupado(4, 5) );
+		assertFalse( mapa.estaOcupado(4, 6) );
+		assertFalse( mapa.estaOcupado(4, 7) );
+		assertFalse( mapa.estaOcupado(4, 8) );
+		assertFalse( mapa.estaOcupado(5, 5) );
+		assertFalse( mapa.estaOcupado(5, 6) );
+		assertFalse( mapa.estaOcupado(5, 7) );
+		assertFalse( mapa.estaOcupado(5, 8) );
+		assertFalse( mapa.estaOcupado(6, 5) );
+		assertFalse( mapa.estaOcupado(6, 6) );
+		assertFalse( mapa.estaOcupado(6, 7) );
+		assertFalse( mapa.estaOcupado(6, 8) );
 
 	}
 

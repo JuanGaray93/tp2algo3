@@ -3,12 +3,18 @@ package com.company.modelo.unidades.estados.estadosAldeano;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.Aldeano;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoAldeanoRecolectandoOro extends EstadoAldeano {
 
     public EstadoAldeanoRecolectandoOro() {
 
         edificioATrabajar = null;
+    }
+
+    @Override
+    public EstadoUnidad actualizar() throws Exception {
+        return this;
     }
 
     public EstadoAldeano otorgarGanancia(Jugador jugador) {

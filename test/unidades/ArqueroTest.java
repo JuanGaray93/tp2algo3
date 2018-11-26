@@ -4,6 +4,7 @@ import com.company.excepciones.ArmaMontadaException;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.terreno.Mapa;
@@ -185,6 +186,25 @@ public class ArqueroTest {
 		assertTrue( mapa.estaOcupado(5, 6) );
 
         arquero.moverA(6, 5);
+
+        assertTrue( mapa.estaOcupado(6, 5) );
+    }
+
+    @Test (expected = MovimientoInvalidoException.class)
+    public void testArqueroHorizontalmenteALaIzquierdaACasilleroOcupado()
+            throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
+
+        cuartel.construir(peon,3, 5);
+        cuartel.actualizar();
+        cuartel.actualizar();
+        cuartel.actualizar();
+        cuartel.actualizar();
+
+        cuartel.crear(arquero);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(4, 6);
 
         assertTrue( mapa.estaOcupado(6, 5) );
     }

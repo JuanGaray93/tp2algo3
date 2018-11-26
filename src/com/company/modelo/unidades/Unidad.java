@@ -40,7 +40,7 @@ public abstract class Unidad extends Posicionable {
 	}
 
 	@Override
-	public void actualizar(){
+	public void actualizar() throws Exception {
 		estado = estado.actualizar();
 	}
 }
