@@ -20,6 +20,7 @@ public class Jugador {
 	private final static Integer LIMITE_POBLACIONAL = 50 ;
 	private static Integer jugadoresCreados = 0;
 	private Integer numeroDeJugador;
+	private Iniciador unIniciador;
 
 	ArrayList <Unidad> poblacion;
 	ArrayList <Edificio> edificios;
@@ -31,6 +32,7 @@ public class Jugador {
 		this.numeroDeJugador = jugadoresCreados;
 		poblacion = new ArrayList<>();
 		edificios = new ArrayList<>();
+		this.unIniciador = new Iniciador(this);
 	}
 	/*
 	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException {
@@ -100,9 +102,10 @@ public class Jugador {
 		return poblacion;
 	}
 
-	public void crearEntidadesIniciales() throws EdificioEnConstruccionException, CasilleroNoExistenteException, CasilleroLlenoException, EdificioDestruidoExcepcion, EdificioEnReparacionException, ErrorDeConstruccionException {
+	public void crearEntidadesIniciales() throws CasilleroNoExistenteException, CasilleroLlenoException {
+		unIniciador.crearEntidadesIniciales();
 
-		Integer posicionInicialX = 0;
+		/*Integer posicionInicialX = 0;
 		Integer posicionInicialY = 0;
 
 		if(this.numeroDeJugador == 1){
@@ -128,7 +131,7 @@ public class Jugador {
 		plaza.construir((Aldeano) poblacion.get(1),5 + posicionInicialX, 10 + posicionInicialY);
 
 		edificios.add(castillo);
-		edificios.add(plaza);
+		edificios.add(plaza);*/
 	}
 
 }
