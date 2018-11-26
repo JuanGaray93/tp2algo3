@@ -32,6 +32,11 @@ public class PlazaCentral extends Edificio {
         jugador.agregarAPoblacion(unidad);
     }
 
+    public void surgir(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        this.ubicar(posicionHorizontal, posicionVertical);
+        jugador.agregarAEdificios(this);
+    }
+
     @Override
     public void actualizar() {
 
