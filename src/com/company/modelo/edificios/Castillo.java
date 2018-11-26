@@ -37,6 +37,11 @@ public class Castillo extends Edificio {
         jugador.agregarAPoblacion(unidad);
     }
 
+    public void surgir(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        this.ubicar(posicionHorizontal, posicionVertical);
+        jugador.agregarAEdificios(this);
+    }
+
     public void actualizar() {
 
     }
