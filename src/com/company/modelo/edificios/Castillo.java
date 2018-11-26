@@ -1,69 +1,69 @@
 package com.company.modelo.edificios;
 
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
+import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
-import com.company.modelo.edificios.estados.EstadoPorConstruir;
+import com.company.modelo.Posicion;
+import com.company.modelo.Posicionable;
+import com.company.modelo.edificios.estados.EstadoEdificioInactivo;
 import com.company.modelo.unidades.Aldeano;
+import com.company.modelo.unidades.MaquinaAsedio;
 import com.company.modelo.unidades.Unidad;
 
 public class Castillo extends Edificio {
 
+    private Integer rangoAtaque;
+    private Integer danioAPosicionable;
 
     public Castillo(Jugador jugador) {
         super(jugador);
-        VIDA_MAXIMA = 1000;
-        MONTO_DE_REPARACION = 15;
         COSTO = 0;
-        BLOQUES_DE_ALTO = 4;
-        BLOQUES_DE_ANCHO = 4;
-        estado = new EstadoPorConstruir(VIDA_MAXIMA, MONTO_DE_REPARACION);
-        //ataque = new Ataque(20,20);
-        //this.estado = new EstadoEdificioInactivo(VIDA_MAXIMA,VIDA_MAXIMA,MONTO_DE_REPARACION);
+        MONTO_DE_REPARACION = 15;
+        BLOQUES_DE_ANCHO = 8;
+        BLOQUES_DE_ALTO = 8;
+        VIDA_MAXIMA = 1000;
+        this.rangoAtaque = 7; // porque es a partir del centro del castillo
+        this.danioAPosicionable = 20;
     }
 
     @Override
-    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
-            throws EdificioEnConstruccionException, Exception {
+    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical) throws EdificioEnConstruccionException, ErrorDeConstruccionException {
+        throw new ErrorDeConstruccionException("Este edificio no se puede construir");
+    }
 
-        jugador.cobrar(this.COSTO);
+    @Override
+    public void crearUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, UnidadErroneaException, MovimientoInvalidoException, EdificioNoDisponibleException {
 
+        if( !(estado instanceof EstadoEdificioInactivo) ) throw new EdificioNoDisponibleException("El edificio no esta disponible");
+
+        if( !( unidad instanceof MaquinaAsedio ) ) {
+            throw new UnidadErroneaException("Imposible crear ese tipo de unidad");
+        }
+
+        posiciones.get(0).colocarEnCasilleroLibreMasCercano(unidad);
+        jugador.agregarAPoblacion(unidad);
+    }
+
+    public void surgir(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
         this.ubicar(posicionHorizontal, posicionVertical);
-
-        estado = estado.construir(quienLoConstruye);
-
+        jugador.agregarAEdificios(this);
     }
 
-    public void actualizar() throws Exception {
-        estado = estado.actualizar();
+    @Override
+    public void actualizar() throws EdificioEnConstruccionException, EdificioReparadoException {
+        estado = estado.ejecutarAccion();
     }
 
-    public void atacar(Unidad enemigo) {
-        // TODO Martin
+    public void atacarA(Posicionable enemigo) throws EnemigoInvalidoException {
+        this.atacar(enemigo, this.danioAPosicionable);
     }
 
-    public void atacar(Edificio enemigo) {
-        // TODO Martin
+    private void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
+        Ataque ataque = new Ataque(rangoAtaque, danioAPosicionable, danioAPosicionable, jugador, posiciones.get(36) ); //la posicion 36 es donde esta el centro del castillo
+        ataque.atacar(unEnemigo, unDanio);
     }
-
-    /* TODO Eliminar esto una vez que esté implementado. - Martin
-    public void ataque() throws PosicionableEsAliadoException {
-
-        ArrayList<Posicionable> posicionablesCercanos = new ArrayList <>();
-        for(Posicion posicion: this.posiciones) {
-            posicionablesCercanos.addAll(posicion.buscarEnRadio(3));
-        }
-        for(Posicionable cercano: posicionablesCercanos) {
-            if(this.verificarAlianza(cercano)) {
-                throw new PosicionableEsAliadoException("la unidad que quiere atacar es propia");
-            }
-            else {
-                //cambiar ATAQUE
-                //ataque.atacar(cercano);
-            }
-
-        }
-
-    }*/
 
 
 }
