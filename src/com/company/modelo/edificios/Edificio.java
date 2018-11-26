@@ -55,7 +55,7 @@ public abstract class Edificio extends Posicionable {
         estado = estado.suspenderConstruccion();
     }
 
-    private void ubicar(Integer posicionHorizontal, Integer posicionVertical)
+    public void ubicar(Integer posicionHorizontal, Integer posicionVertical)
             throws CasilleroNoExistenteException, CasilleroLlenoException {
 
         for( int i = posicionHorizontal; i < ( posicionHorizontal + BLOQUES_DE_ANCHO ); i++)
