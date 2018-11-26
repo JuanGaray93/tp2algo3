@@ -1,7 +1,6 @@
 package com.company;
 
-import com.company.gui.MyFxApp;
-import javafx.stage.Stage;
+import com.company.vista.gui.MyFxApp;
 
 public class Main {
 

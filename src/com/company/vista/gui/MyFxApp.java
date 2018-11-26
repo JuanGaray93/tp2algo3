@@ -1,4 +1,4 @@
-package com.company.gui;
+package com.company.vista.gui;
 
 
 import javafx.application.Application;
@@ -15,7 +15,6 @@ public class MyFxApp extends Application {
         primaryStage.setTitle("TP2 Algoritmos III");
 
         Label label = new Label("Age of Empires II");
-
 
         Rectangle rectangle = new Rectangle();
         rectangle.setX(200);
