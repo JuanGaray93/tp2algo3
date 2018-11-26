@@ -122,4 +122,13 @@ public class Jugador {
 		return false;
 	}
 
+
+	public ArrayList<Edificio> getEdificios() {
+		return edificios;
+	}
+
+	public ArrayList<Unidad> getPoblacion() {
+		return poblacion;
+	}
+
 }

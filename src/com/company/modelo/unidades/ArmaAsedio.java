@@ -7,6 +7,7 @@ import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedio;
 import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioDesmontada;
+import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioMontada;
 
 public class ArmaAsedio extends UnidadAtacante {
 
@@ -18,10 +19,6 @@ public class ArmaAsedio extends UnidadAtacante {
 		this.estado =  new EstadoArmaAsedioDesmontada(this);
 	}
 
-	@Override
-	public void atacar(Unidad enemigo) {
-
-	}
 
 	//solo ataca edificios por 75 da�o y hasta distancia 5.
     public void atacar(Edificio enemigo) throws PosicionableEsAliadoException {
@@ -32,7 +29,24 @@ public class ArmaAsedio extends UnidadAtacante {
     		//this.estado.atacar(enemigo);
     	}
     }
-    
+
+    @Override
+	public void atacarA(Unidad enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
+		if (estado instanceof EstadoArmaAsedioMontada) {
+			throw new EnemigoInvalidoException("El arma asedio no puede atacar unidades");
+		}
+		throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
+	}
+
+	@Override
+	public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
+		if (estado instanceof EstadoArmaAsedioMontada) {
+			atacar(enemigo, danioAEdifcio);
+		}
+		throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
+	}
+
+
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 

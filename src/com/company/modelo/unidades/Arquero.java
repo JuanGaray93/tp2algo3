@@ -12,13 +12,4 @@ public class Arquero extends UnidadAtacante {
 		this.estado =  new EstadoUnidadInactivo();
 	}
 
-	@Override
-	public void atacar(Unidad enemigo) {
-		// TODO Martin
-	}
-
-	@Override
-	public void atacar(Edificio enemigo) throws PosicionableEsAliadoException {
-		// TODO Martin
-	}
 }

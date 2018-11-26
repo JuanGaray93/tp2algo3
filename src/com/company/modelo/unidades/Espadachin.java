@@ -14,14 +14,5 @@ public class Espadachin extends UnidadAtacante {
 		
 	}
 
-	@Override
-	public void atacar(Unidad enemigo) {
-		// TODO Martin
-	}
-
-	@Override
-	public void atacar(Edificio enemigo) {
-		// TODO Martin
-	}
 
 }
