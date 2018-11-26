@@ -48,6 +48,12 @@ public abstract class Edificio extends Posicionable {
         this.ubicar(posicionHorizontal, posicionVertical);
         estado = estado.construir(quienLoConstruye);
     }
+
+    public void avanzarConstruccion(Aldeano quienLoConstruye) throws Exception {
+
+        estado = estado.construir(quienLoConstruye);
+    }
+
     public void suspender() throws Exception, EdificioEnConstruccionException {
         estado = estado.suspender();
     }

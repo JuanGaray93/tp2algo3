@@ -48,7 +48,7 @@ public class ArmaAsedio extends UnidadAtacante {
 	
 	//toma 1 turno montar/desmontar, si esta montada puede atacar pero no moverse.
 	
-	public void montar() {
+	public void montar() throws ArmaMontadaException {
 		this.estado = estado.montar();
 	}
 	

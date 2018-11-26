@@ -18,7 +18,7 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
     public EstadoEdificio actualizar() {
 
         return this.construir(trabajadorActual);
-
+        // TODO Jony: En realidad al actualizar es el aldeano el que construye el edificio. No deberíamos hacer nada acá.
     }
 
     @Override

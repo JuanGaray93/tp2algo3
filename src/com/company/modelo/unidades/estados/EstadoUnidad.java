@@ -15,5 +15,5 @@ public abstract class EstadoUnidad {
 		this.vidaActual -= montoDeDanio;
 	}
 
-    public abstract EstadoUnidad actualizar();
+    public abstract EstadoUnidad actualizar() throws Exception;
 }
