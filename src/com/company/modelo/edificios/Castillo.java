@@ -2,13 +2,20 @@ package com.company.modelo.edificios;
 
 import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
+import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
+import com.company.modelo.Posicion;
+import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoEdificioInactivo;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.MaquinaAsedio;
 import com.company.modelo.unidades.Unidad;
 
 public class Castillo extends Edificio {
+
+    private Integer rangoAtaque;
+    private Integer danioAPosicionable;
 
     public Castillo(Jugador jugador) {
         super(jugador);
@@ -17,6 +24,8 @@ public class Castillo extends Edificio {
         BLOQUES_DE_ANCHO = 8;
         BLOQUES_DE_ALTO = 8;
         VIDA_MAXIMA = 1000;
+        this.rangoAtaque = 7; // porque es a partir del centro del castillo
+        this.danioAPosicionable = 20;
     }
 
     @Override
@@ -42,16 +51,18 @@ public class Castillo extends Edificio {
         jugador.agregarAEdificios(this);
     }
 
-    public void actualizar() {
-
+    @Override
+    public void actualizar() throws EdificioEnConstruccionException, EdificioReparadoException {
+        estado = estado.ejecutarAccion();
     }
 
-    public void atacar(Unidad enemigo) {
-        // TODO
+    public void atacarA(Posicionable enemigo) throws EnemigoInvalidoException {
+        this.atacar(enemigo, this.danioAPosicionable);
     }
 
-    public void atacar(Edificio enemigo) {
-        // TODO
+    private void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
+        Ataque ataque = new Ataque(rangoAtaque, danioAPosicionable, danioAPosicionable, jugador, posiciones.get(36) ); //la posicion 36 es donde esta el centro del castillo
+        ataque.atacar(unEnemigo, unDanio);
     }
 
 
