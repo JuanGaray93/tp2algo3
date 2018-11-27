@@ -175,7 +175,7 @@ public class AldeanoTest {
 		Castillo castillo = new Castillo(jugador);
 		Aldeano aldeano = new Aldeano(jugador);
 
-		aldeano.establecerCoordenadasDeNacimiento(5,5);
+		aldeano.establecerCoordenadasDeNacimiento(2,5);
 		//mapa.ubicar(castillo,5,6);
 		castillo.construir(aldeano,3, 5);
 		castillo.actualizar();

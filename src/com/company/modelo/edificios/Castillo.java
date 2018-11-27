@@ -63,8 +63,8 @@ public class Castillo extends Edificio {
     }
 
     @Override
-    public void actualizar() throws EdificioEnConstruccionException, EdificioReparadoException {
-        estado = estado.ejecutarAccion();
+    public void actualizar() throws Exception {
+        estado = estado.actualizar();
     }
 
     public void atacarA(Posicionable enemigo) throws EnemigoInvalidoException {
