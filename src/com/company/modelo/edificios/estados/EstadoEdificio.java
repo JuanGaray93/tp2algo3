@@ -5,6 +5,7 @@ import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioOcupadoException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
@@ -55,6 +56,7 @@ public abstract class EstadoEdificio {
             return vidaActual;
 
     }
+    public abstract EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException;
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine
 ;a vda del edifico  no termina si esta construyendo dura la cantidad de turnos

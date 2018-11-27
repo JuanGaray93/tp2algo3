@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 
 import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import org.junit.Before;
 import org.junit.Test;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
@@ -27,37 +28,16 @@ public class AsedioTest {
 	    }
 
 	    @Test
-	    public void testAsedioMoverUnCasilleroALaDerecha() throws Exception {
+	    public void testAsedioMoverUnCasilleroALaDerecha() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			Castillo castillo = new Castillo(jugador);
-	        
-		    Aldeano aldeano = new Aldeano(jugador);
-	        try {
-	            castillo.construir(aldeano, 3, 5);
-	        }
-	        catch (Exception e){
-	            e.printStackTrace();
-	        }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-
-			try{
-	        	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-	            castillo.crear(maquinaAsedio);
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+	    	mapa.ubicar(maquinaAsedio,7,6);
 
 	            //arma de asedio se posiciona en 7 6
 	            assertTrue( mapa.estaOcupado(7, 6) );
 
 	            maquinaAsedio.moverA(8, 6);
-	        }
-	        catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-	            e.printStackTrace();
-	        }
-	        catch (CasilleroNoExistenteException e) {
-	            e.printStackTrace();
-	        }
 
 
 	        assertTrue( mapa.estaOcupado(8, 6) );
@@ -67,39 +47,17 @@ public class AsedioTest {
 	    }
 
 	    @Test
-	    public void testAsedioMoverHorizontalmenteHaciaAtras() throws Exception {
-	    	
-	    	Jugador jugador = null;
-			jugador = new Jugador();
+	    public void testAsedioMoverHorizontalmenteHaciaAtras() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			Castillo castillo = new Castillo(jugador);
-			 Aldeano aldeano = new Aldeano(jugador);
-		     try {
-		    	 castillo.construir(aldeano, 3, 5);
-		     }
-		     catch (Exception e){
-		    	 e.printStackTrace();
-		     }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-
-			try{
-		    	 ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-		         castillo.crear(maquinaAsedio);
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+			mapa.ubicar(maquinaAsedio,7,6);
 
 		         assertTrue( mapa.estaOcupado(7, 6) );
 
 	             maquinaAsedio.moverA(8, 6);
 				maquinaAsedio.moverA(7, 6);
-	         }
-	         catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-	            e.printStackTrace();
-	         }
-	         catch (CasilleroNoExistenteException e) {
-	        	 e.printStackTrace();
-	         }
+
 
 	         assertTrue( mapa.estaOcupado(7, 6) );
 	         assertFalse( mapa.estaOcupado(8, 6) );
@@ -107,267 +65,108 @@ public class AsedioTest {
 	    }
 
 	    @Test
-	    public void testAsedioMoverVerticalmenteHaciaArriba() throws Exception {
-	    	
-	    	Jugador jugador = null;
-			jugador = new Jugador();
+	    public void testAsedioMoverVerticalmenteHaciaArriba() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			Castillo castillo = new Castillo(jugador);
-			Aldeano aldeano = new Aldeano(jugador);
-		    try {
-		    	castillo.construir(aldeano, 3, 5);
-		    }
-		    catch ( Exception e){
-		    	e.printStackTrace();
-		    }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-
-			try{
-		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-		        castillo.crear(maquinaAsedio);
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+			mapa.ubicar(maquinaAsedio,7,6);
 
 		        assertTrue( mapa.estaOcupado(7, 6) );
 	            maquinaAsedio.moverA(7, 7);
-	        }
-	        catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-	            e.printStackTrace();
-	        }
-	        catch (CasilleroNoExistenteException e) {
-	            e.printStackTrace();
-	        }
+
 
 	        assertTrue( mapa.estaOcupado(7, 7) );
 	        assertFalse( mapa.estaOcupado(7, 6) );
 	    }
 
 	    @Test
-	    public void testAsedioMoverVerticalmenteHaciaAbajo() throws Exception {
-	    	
-	    	Jugador jugador = null;
-			jugador = new Jugador();
+	    public void testAsedioMoverVerticalmenteHaciaAbajo() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			Castillo castillo = new Castillo(jugador);
-			Aldeano aldeano = new Aldeano(jugador);
-		    try {
-		        castillo.construir(aldeano, 3, 5);
-		    }
-		    catch ( Exception e){
-		    	e.printStackTrace();
-		    }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-
-			try{
-		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-		        castillo.crear(maquinaAsedio);
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+			mapa.ubicar(maquinaAsedio,7,6);
 
 		        assertTrue( mapa.estaOcupado(7, 6) );
 		            
 		        maquinaAsedio.moverA(7, 5);
-		    }
-		    catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-		    	e.printStackTrace();
-		    }
-		    catch (CasilleroNoExistenteException e) {
-		    	e.printStackTrace();
-		    }
 
 		    assertTrue( mapa.estaOcupado(7, 5) );
 		    assertFalse( mapa.estaOcupado(7, 6) );
 	    }
 
 	    @Test
-	    public void testAsedioMoverEnDiagonalHaciaArribaALaIzquierda() throws Exception {
-	    	
-	    	Jugador jugador = null;
-			jugador = new Jugador();
+	    public void testAsedioMoverEnDiagonalHaciaArribaALaIzquierda() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			Castillo castillo = new Castillo(jugador);
-	        Aldeano aldeano = new Aldeano(jugador);
-	        try {
-	            castillo.construir(aldeano, 3, 5);
-	        }
-	        catch ( Exception e){
-	            e.printStackTrace();
-	        }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-
-			try{
-	        	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-	            castillo.crear(maquinaAsedio);
-
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+			mapa.ubicar(maquinaAsedio,7,6);
 	            assertTrue( mapa.estaOcupado(7, 6) );
 
 	            maquinaAsedio.moverA(8, 6);
 				maquinaAsedio.moverA(7, 7);
-	        }
-	        catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-	            e.printStackTrace();
-	        }
-	        catch (CasilleroNoExistenteException e) {
-	            e.printStackTrace();
-	        }
+
 
 	        assertTrue( mapa.estaOcupado(7, 7) );
 	        assertFalse( mapa.estaOcupado(8, 6) );
 	    }
 
 	    @Test
-	    public void testAsedioMoverEnDiagonalHaciaArribaALaDerecha() throws Exception {
-	    	
-	    	Jugador jugador = null;
-			jugador = new Jugador();
+	    public void testAsedioMoverEnDiagonalHaciaArribaALaDerecha() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			Castillo castillo = new Castillo(jugador);
-			Aldeano aldeano = new Aldeano(jugador);
-		    try {
-		    	castillo.construir(aldeano, 3, 5);
-		    }
-		    catch ( Exception e){
-		    	e.printStackTrace();
-		    }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-
-			try{
-		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-		        castillo.crear(maquinaAsedio);
-
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+			mapa.ubicar(maquinaAsedio,7,6);
 		        assertTrue( mapa.estaOcupado(7, 6) );
 
 	            maquinaAsedio.moverA(8, 7);
-	        }
-	        catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-	            e.printStackTrace();
-	        }
-	        catch (CasilleroNoExistenteException e) {
-	            e.printStackTrace();
-	        }
+
 
 	        assertTrue( mapa.estaOcupado(8, 7) );
 	        assertFalse( mapa.estaOcupado(7, 6) );
 	    }
 
 	    @Test
-	    public void testAsedioMoverEnDiagonalHaciaAbajoALaIzquierda() throws Exception {
-	    	
-	    	Jugador jugador = null;
-			jugador = new Jugador();
-			Castillo castillo = new Castillo(jugador);
-			Aldeano aldeano = new Aldeano(jugador);
-		    try {
-		    	castillo.construir(aldeano, 3, 5);
-		    }
-		    catch ( Exception e){
-		    	e.printStackTrace();
-		    }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
+	    public void testAsedioMoverEnDiagonalHaciaAbajoALaIzquierda() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			try{
-		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-		        castillo.crear(maquinaAsedio);
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+			mapa.ubicar(maquinaAsedio,7,6);
 
 		        assertTrue( mapa.estaOcupado(7, 6) );
 
 	            maquinaAsedio.moverA(8, 6);
 				maquinaAsedio.moverA(7, 5);
-	        }
-	        catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-	            e.printStackTrace();
-	        }
-	        catch (CasilleroNoExistenteException e) {
-	            e.printStackTrace();
-	        }
 
 	        assertTrue( mapa.estaOcupado(7, 5) );
 	        assertFalse( mapa.estaOcupado(8, 6) );
 	    }
 
 	    @Test
-	    public void testAsedioMoverEnDiagonalHaciaAbajoALaDerecha() throws Exception {
-	    	
-	    	Jugador jugador = null;
-			jugador = new Jugador();
+	    public void testAsedioMoverEnDiagonalHaciaAbajoALaDerecha() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			Castillo castillo = new Castillo(jugador);
-			Aldeano aldeano = new Aldeano(jugador);
-		    try {
-		    	castillo.construir(aldeano, 3, 5);
-		    }
-		    catch (Exception e){
-		    	e.printStackTrace();
-		    }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-
-
-			try{
-		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-		        castillo.crear(maquinaAsedio);
-
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+			mapa.ubicar(maquinaAsedio,7,6);
 		        assertTrue( mapa.estaOcupado(7, 6) );
 		        
 		        maquinaAsedio.moverA(8, 5);
-		    }
-		    catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-		    	e.printStackTrace();
-		    }
-		    catch (CasilleroNoExistenteException e) {
-		    	e.printStackTrace();
-		    }
+
 
 		    assertTrue( mapa.estaOcupado(8, 5) );
 		    assertFalse( mapa.estaOcupado(7, 6) );
 
 	}
-	    @Test
-	    public void testAsedioMoverVerticalementeHaciaArribaMontada() throws Exception {
-	    	
-	    	Jugador jugador = null;
-			jugador = new Jugador();
+	    @Test (expected = ArmaMontadaException.class)
+	    public void testAsedioMoverVerticalementeHaciaArribaMontada() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-			Castillo castillo = new Castillo(jugador);
-			Aldeano aldeano = new Aldeano(jugador);
-		    try {
-		    	castillo.construir(aldeano, 3, 5);
-		    }
-		    catch (Exception e){
-		    	e.printStackTrace();
-		    }
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-			castillo.actualizar();
-
-			try{
-		    	ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-		        castillo.crear(maquinaAsedio);
+			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+			maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+			mapa.ubicar(maquinaAsedio,7,6);
 
 		        assertTrue( mapa.estaOcupado(7, 6) );
 		        maquinaAsedio.montar();
 	            maquinaAsedio.moverA(7, 7);
-	        }
-	        catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-	            e.printStackTrace();
-	        }
-	        catch (CasilleroNoExistenteException e) {
-	            e.printStackTrace();
-	        }
+
 
 	        assertFalse( mapa.estaOcupado(7, 7) );
 	        assertTrue( mapa.estaOcupado(7, 6) );
@@ -376,43 +175,60 @@ public class AsedioTest {
 	    }
 
 	@Test (expected = MovimientoInvalidoException.class)
-	public void testAsedioMoverHorizontalmenteHaciaLaIzquierdaAUnCasilleroOcupado() throws Exception {
+	public void testAsedioMoverHorizontalmenteHaciaLaIzquierdaAUnCasilleroOcupado() throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-		Jugador jugador = null;
-		jugador = new Jugador();
+		ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+		ArmaAsedio maquinaAsedio2 = new ArmaAsedio(jugador);
+		maquinaAsedio.establecerCoordenadasDeNacimiento(7,6);
+		mapa.ubicar(maquinaAsedio,7,6);
+		maquinaAsedio2.establecerCoordenadasDeNacimiento(6,6);
+		mapa.ubicar(maquinaAsedio2,6,6);
 
-		Castillo castillo = new Castillo(jugador);
-		Aldeano aldeano = new Aldeano(jugador);
+
+
+		assertTrue( mapa.estaOcupado(7, 6) );
+		maquinaAsedio.moverA(6, 6);
+
+
+		assertFalse( mapa.estaOcupado(6, 6) );
+		assertTrue( mapa.estaOcupado(7, 6) );
+
+	}
+
+
+	//TEST DE CREACION DESDE EDIFICIO
+	/*
+	Jugador jugador = null;
+	jugador = new Jugador();
+
+	Castillo castillo = new Castillo(jugador);
+	Aldeano aldeano = new Aldeano(jugador);
 		try {
-			castillo.construir(aldeano, 3, 5);
-		}
+		castillo.construir(aldeano, 3, 5);
+	}
 		catch (Exception e){
-			e.printStackTrace();
-		}
+		e.printStackTrace();
+	}
 		castillo.actualizar();
 		castillo.actualizar();
 		castillo.actualizar();
 		castillo.actualizar();
 
 		try{
-			ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-			castillo.crear(maquinaAsedio);
+		ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+		castillo.crear(maquinaAsedio);
 
-			assertTrue( mapa.estaOcupado(7, 6) );
-			maquinaAsedio.moverA(6, 6);
-		}
-		catch (CasilleroLlenoException | MapaLlenoException | EdificioEnReparacionException | ArmaMontadaException e) {
-			e.printStackTrace();
-		}
-		catch (CasilleroNoExistenteException e) {
-			e.printStackTrace();
-		}
-
-		assertFalse( mapa.estaOcupado(6, 6) );
 		assertTrue( mapa.estaOcupado(7, 6) );
-
-
+		maquinaAsedio.moverA(6, 6);
+	}
+		catch (CasilleroLlenoException | MapaLlenoException | ArmaMontadaException e) {
+		e.printStackTrace();
+	}
+		catch (CasilleroNoExistenteException e) {
+		e.printStackTrace();
 	}
 
+	assertFalse( mapa.estaOcupado(6, 6) );
+	assertTrue( mapa.estaOcupado(7, 6) );*/
 
 }

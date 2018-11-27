@@ -3,6 +3,7 @@ package com.company.modelo.edificios.estados;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.excepciones.Edificio.EdificioTerminadoException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Posicion;
@@ -63,6 +64,11 @@ public class EstadoEdificioInactivo extends EstadoEdificio {
         this.trabajadorActual = null;
 
         return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION);
+    }
+
+    @Override
+    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
+        return this;
     }
 
 }

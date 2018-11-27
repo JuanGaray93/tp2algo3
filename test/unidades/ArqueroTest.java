@@ -4,6 +4,7 @@ import com.company.excepciones.ArmaMontadaException;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Cuartel;
@@ -34,7 +35,140 @@ public class ArqueroTest {
 
     @Test
     public void testArqueroMoverHorizontalmenteHaciaDelante() throws
-            Exception, EdificioEnConstruccionException, ArmaMontadaException {
+            Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+       arquero.establecerCoordenadasDeNacimiento(5,6);
+       mapa.ubicar(arquero,5,6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(6, 6);
+
+        assertTrue( mapa.estaOcupado(6, 6) );
+    }
+
+        @Test
+    public void testArqueroMoverHorizontalmenteHaciaAtras() throws Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+            arquero.establecerCoordenadasDeNacimiento(5,6);
+            mapa.ubicar(arquero,5,6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(6, 6);
+        arquero.moverA(5, 6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+        assertFalse( mapa.estaOcupado(6, 6) );
+
+    }
+
+    @Test
+    public void testArqueroMoverVerticalmenteHaciaArriba() throws Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+        arquero.establecerCoordenadasDeNacimiento(5,6);
+        mapa.ubicar(arquero,5,6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(5, 7);
+
+        assertTrue( mapa.estaOcupado(5, 7) );
+        assertFalse( mapa.estaOcupado(5, 6) );
+    }
+
+    @Test
+    public void testArqueroMoverVerticalmenteHaciaAbajo() throws Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+        arquero.establecerCoordenadasDeNacimiento(5,6);
+        mapa.ubicar(arquero,5,6);
+		assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(5, 5);
+
+        assertTrue( mapa.estaOcupado(5, 5) );
+    }
+
+    @Test
+    public void testArqueroMoverEnDiagonalHaciaArribaALaIzquierda()
+            throws Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+        arquero.establecerCoordenadasDeNacimiento(5,6);
+        mapa.ubicar(arquero,5,6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(4, 7);
+        assertTrue( mapa.estaOcupado(4, 7) );
+        assertFalse( mapa.estaOcupado(5, 6) );
+    }
+
+    @Test
+    public void testArqueroMoverEnDiagonalHaciaArribaALaDerecha() throws Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+        arquero.establecerCoordenadasDeNacimiento(5,6);
+        mapa.ubicar(arquero,5,6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(5, 7);
+
+        assertTrue( mapa.estaOcupado(5, 7) );
+        assertFalse( mapa.estaOcupado(5, 6) );
+    }
+
+    @Test
+    public void testArqueroMoverEnDiagonalHaciaAbajoALaIzquierda() throws Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+        arquero.establecerCoordenadasDeNacimiento(5,6);
+        mapa.ubicar(arquero,5,6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(6, 6);
+        arquero.moverA(5, 5);
+
+        assertTrue( mapa.estaOcupado(5, 5) );
+        assertFalse( mapa.estaOcupado(6, 6) );
+    }
+
+    @Test
+    public void testArqueroMoverEnDiagonalHaciaAbajoALaDerecha()
+            throws Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+        arquero.establecerCoordenadasDeNacimiento(5,6);
+        mapa.ubicar(arquero,5,6);
+
+		assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(6, 5);
+
+        assertTrue( mapa.estaOcupado(6, 5) );
+    }
+
+    @Test (expected = MovimientoInvalidoException.class)
+    public void testArqueroHorizontalmenteALaIzquierdaACasilleroOcupado()
+            throws Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
+
+        arquero.establecerCoordenadasDeNacimiento(5,6);
+        mapa.ubicar(arquero,5,6);
+
+        Arquero arquero2 = new Arquero(jugador);
+        arquero2.establecerCoordenadasDeNacimiento(4,6);
+        mapa.ubicar(arquero2,4,6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+
+        arquero.moverA(4, 6);
+
+        assertTrue( mapa.estaOcupado(5, 6) );
+    }
+
+    // TEST DE CREACION DESDE EDIFICO
+    /*
+    @Test
+    public void testArqueroMoverHorizontalmenteHaciaDelante() throws
+            Exception, EdificioEnConstruccionException, ArmaMontadaException, EdificioNoDisponibleException {
 
         Cuartel cuartel = new Cuartel(jugador);
 
@@ -51,162 +185,6 @@ public class ArqueroTest {
         arquero.moverA(6, 6);
 
         assertTrue( mapa.estaOcupado(6, 6) );
-    }
-
-        @Test
-    public void testArqueroMoverHorizontalmenteHaciaAtras() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-
-        cuartel.construir(peon,3, 5);
-            cuartel.actualizar();
-            cuartel.actualizar();
-            cuartel.actualizar();
-            cuartel.actualizar();
-
-        cuartel.crear(arquero);
-
-        assertTrue( mapa.estaOcupado(5, 6) );
-
-        arquero.moverA(6, 6);
-        arquero.moverA(5, 6);
-
-        assertTrue( mapa.estaOcupado(5, 6) );
-        assertFalse( mapa.estaOcupado(6, 6) );
-
-    }
-
-    @Test
-    public void testArqueroMoverVerticalmenteHaciaArriba() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-
-        cuartel.construir(peon,3, 5);
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-
-        cuartel.crear(arquero);
-
-        assertTrue( mapa.estaOcupado(5, 6) );
-
-        arquero.moverA(5, 7);
-
-        assertTrue( mapa.estaOcupado(5, 7) );
-        assertFalse( mapa.estaOcupado(5, 6) );
-    }
-
-    @Test
-    public void testArqueroMoverVerticalmenteHaciaAbajo() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-
-        cuartel.construir(peon,3, 5);
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-
-		cuartel.crear(arquero);
-
-		assertTrue( mapa.estaOcupado(5, 6) );
-
-        arquero.moverA(5, 5);
-
-        assertTrue( mapa.estaOcupado(5, 5) );
-    }
-
-    @Test
-    public void testArqueroMoverEnDiagonalHaciaArribaALaIzquierda()
-            throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-
-        cuartel.construir(peon,3, 5);
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-
-        Arquero arquero = new Arquero(jugador);
-        cuartel.crear(arquero);
-        assertTrue( mapa.estaOcupado(5, 6) );
-
-        arquero.moverA(4, 7);
-        assertTrue( mapa.estaOcupado(4, 7) );
-        assertFalse( mapa.estaOcupado(5, 6) );
-    }
-
-    @Test
-    public void testArqueroMoverEnDiagonalHaciaArribaALaDerecha() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-
-        cuartel.construir(peon,3, 5);
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-
-        Arquero arquero = new Arquero(jugador);
-        cuartel.crear(arquero);
-
-        assertTrue( mapa.estaOcupado(5, 6) );
-
-        arquero.moverA(5, 7);
-
-        assertTrue( mapa.estaOcupado(5, 7) );
-        assertFalse( mapa.estaOcupado(5, 6) );
-    }
-
-    @Test
-    public void testArqueroMoverEnDiagonalHaciaAbajoALaIzquierda() throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-
-        cuartel.construir(peon,3, 5);
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-
-        Arquero arquero = new Arquero(jugador);
-        cuartel.crear(arquero);
-
-        assertTrue( mapa.estaOcupado(5, 6) );
-
-        arquero.moverA(6, 6);
-        arquero.moverA(5, 5);
-
-        assertTrue( mapa.estaOcupado(5, 5) );
-        assertFalse( mapa.estaOcupado(6, 6) );
-    }
-
-    @Test
-    public void testArqueroMoverEnDiagonalHaciaAbajoALaDerecha()
-            throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-
-        cuartel.construir(peon,3, 5);
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-
-		cuartel.crear(arquero);
-
-		assertTrue( mapa.estaOcupado(5, 6) );
-
-        arquero.moverA(6, 5);
-
-        assertTrue( mapa.estaOcupado(6, 5) );
-    }
-
-    @Test (expected = MovimientoInvalidoException.class)
-    public void testArqueroHorizontalmenteALaIzquierdaACasilleroOcupado()
-            throws Exception, EdificioEnConstruccionException, ArmaMontadaException {
-
-        cuartel.construir(peon,3, 5);
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-        cuartel.actualizar();
-
-        cuartel.crear(arquero);
-
-        assertTrue( mapa.estaOcupado(5, 6) );
-
-        arquero.moverA(4, 6);
-
-        assertTrue( mapa.estaOcupado(6, 5) );
-    }
+    }*/
 
 }

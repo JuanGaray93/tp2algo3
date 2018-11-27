@@ -2,6 +2,7 @@ package com.company.modelo.edificios.estados;
 
 
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
@@ -37,6 +38,11 @@ public class EstadoPorConstruir extends EstadoEdificio {
     @Override
     public Integer getVidaActual() throws Exception {
         throw new Exception("Este edificio aun no existe");
+    }
+
+    @Override
+    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
+        return this;
     }
 
     @Override

@@ -46,6 +46,10 @@ public class Jugador {
 		}
 		poblacion.add(unidad);
 	}
+
+	public void agregarAEdificios(Edificio unEdificio) {
+		edificios.add(unEdificio);
+	}
 	
 	public void eliminarDePoblacion(Unidad unidad) {
 		if(!poblacion.contains(unidad)){

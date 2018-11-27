@@ -4,6 +4,8 @@ import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
+import com.company.excepciones.Edificio.ErrorDeConstruccionException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
@@ -43,10 +45,11 @@ public abstract class Edificio extends Posicionable {
 	}
 
     public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal,
-                          Integer posicionVertical) throws Exception {
+                          Integer posicionVertical) throws Exception, ErrorDeConstruccionException {
         jugador.cobrar(this.COSTO);
         this.ubicar(posicionHorizontal, posicionVertical);
         estado = estado.construir(quienLoConstruye);
+        jugador.agregarAEdificios(this);
     }
 
     public void avanzarConstruccion(Aldeano quienLoConstruye) throws Exception {
@@ -75,7 +78,7 @@ public abstract class Edificio extends Posicionable {
         return this.estado.getVidaActual();
     }
 
-    public void crear(Unidad unidad) throws CasilleroNoExistenteException, EdificioEnReparacionException, CasilleroLlenoException, EdificioEnConstruccionException, MapaLlenoException {
+    public void crear(Unidad unidad) throws CasilleroNoExistenteException, EdificioEnReparacionException, CasilleroLlenoException, EdificioEnConstruccionException, MapaLlenoException, EdificioNoDisponibleException {
         this.estado = estado.crear(unidad, posiciones.get(1));
         jugador.agregarAPoblacion(unidad);
     };

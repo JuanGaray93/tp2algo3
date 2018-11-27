@@ -2,6 +2,8 @@ package com.company.modelo.edificios.estados;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
@@ -46,5 +48,10 @@ public class EstadoEdificioCreando extends EstadoEdificio {
     @Override
     public Integer getVidaActual()  {
        return this.vidaActual;
+    }
+
+    @Override
+    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
+        return this;
     }
 }

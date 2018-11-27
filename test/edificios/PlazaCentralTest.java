@@ -5,6 +5,7 @@ import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.DistanciaInvalidaException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.excepciones.Edificio.EdificioOcupadoException;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Jugador;
@@ -55,8 +56,7 @@ public class PlazaCentralTest{
 
 		try {
 			central.crear(new Aldeano(jugador));
-		} catch (MapaLlenoException | EdificioEnConstruccionException
-				| EdificioEnReparacionException ignored) {}
+		} catch (MapaLlenoException | EdificioEnConstruccionException | EdificioEnReparacionException | EdificioNoDisponibleException ignored) {}
 
 		assertTrue(mapa.estaOcupado(16,21));
 		assertTrue(mapa.estaOcupado(16,23));
@@ -120,7 +120,7 @@ public class PlazaCentralTest{
 
 		try {
 			central.crear(new Aldeano(jugador));
-		} catch (EdificioEnReparacionException ignored) { }
+		} catch (EdificioEnReparacionException | EdificioNoDisponibleException ignored) { }
 
 	}
 	
@@ -128,7 +128,7 @@ public class PlazaCentralTest{
 
 
 	@Test
-	public void verificarQueNoCreaAldeanoHastaTerminarActual() throws Exception, DistanciaInvalidaException, EdificioEnConstruccionException {
+	public void verificarQueNoCreaAldeanoHastaTerminarActual() throws Exception, DistanciaInvalidaException, EdificioEnConstruccionException, EdificioNoDisponibleException {
 
 		peon.establecerCoordenadasDeNacimiento(10,11);
 
@@ -140,13 +140,13 @@ public class PlazaCentralTest{
 
 		try {
 			central.crear(new Aldeano(jugador));
-		} catch (EdificioEnConstruccionException e) {
+		} catch (EdificioEnConstruccionException | EdificioNoDisponibleException e) {
 			e.printStackTrace();
 		}
 
 		try {
 			central.crear(new Aldeano(jugador));
-		}catch(EdificioOcupadoException e) {
+		}catch(EdificioOcupadoException | EdificioNoDisponibleException e) {
 			//
 		} catch (EdificioEnConstruccionException e) {
 			e.printStackTrace();

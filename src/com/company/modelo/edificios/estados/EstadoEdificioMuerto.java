@@ -1,6 +1,7 @@
 package com.company.modelo.edificios.estados;
 
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
@@ -52,6 +53,11 @@ public class EstadoEdificioMuerto extends EstadoEdificio {
     @Override
     public Integer getVidaActual() throws Exception {
         return null;
+    }
+
+    @Override
+    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
+        return this;
     }
 
 }

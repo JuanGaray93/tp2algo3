@@ -2,6 +2,7 @@ package edificios;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.terreno.Mapa;
@@ -59,7 +60,7 @@ public class CastilloTest {
 	}
 
 	@Test
-	public void castilloCrearMaquinaAsedioTest() throws Exception {
+	public void castilloCrearMaquinaAsedioTest() throws Exception, EdificioNoDisponibleException {
 		
 		jugador.sumarOro(1400);
 		Castillo castillo = new Castillo(jugador);

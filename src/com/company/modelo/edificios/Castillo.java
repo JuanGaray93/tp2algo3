@@ -2,14 +2,17 @@ package com.company.modelo.edificios;
 
 import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.excepciones.Edificio.EdificioReparadoException;
+import com.company.excepciones.Edificio.ErrorDeConstruccionException;
 import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
-import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
+import com.company.modelo.edificios.estados.EstadoEdificioCreando;
 import com.company.modelo.edificios.estados.EstadoEdificioInactivo;
+import com.company.modelo.edificios.estados.EstadoPorConstruir;
 import com.company.modelo.unidades.Aldeano;
-import com.company.modelo.unidades.MaquinaAsedio;
+import com.company.modelo.unidades.ArmaAsedio;
 import com.company.modelo.unidades.Unidad;
 
 public class Castillo extends Edificio {
@@ -26,23 +29,31 @@ public class Castillo extends Edificio {
         VIDA_MAXIMA = 1000;
         this.rangoAtaque = 7; // porque es a partir del centro del castillo
         this.danioAPosicionable = 20;
+        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,MONTO_DE_REPARACION);
     }
 
     @Override
-    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical) throws EdificioEnConstruccionException, ErrorDeConstruccionException {
-        throw new ErrorDeConstruccionException("Este edificio no se puede construir");
+    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
+            throws EdificioEnConstruccionException, Exception {
+
+        jugador.cobrar(this.COSTO);
+
+        this.ubicar(posicionHorizontal,posicionVertical);
+
+        estado = estado.construir(quienLoConstruye);
     }
 
     @Override
-    public void crearUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, UnidadErroneaException, MovimientoInvalidoException, EdificioNoDisponibleException {
+    public void crear(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, UnidadErroneaException, MovimientoInvalidoException, EdificioNoDisponibleException {
 
-        if( !(estado instanceof EstadoEdificioInactivo) ) throw new EdificioNoDisponibleException("El edificio no esta disponible");
+        //esto no funciona
+        //if( !(estado instanceof EstadoEdificioCreando) | !(estado instanceof EstadoEdificioInactivo)  ) throw new EdificioNoDisponibleException("El edificio no esta disponible");
 
-        if( !( unidad instanceof MaquinaAsedio ) ) {
+        if( !( unidad instanceof ArmaAsedio) ) {
             throw new UnidadErroneaException("Imposible crear ese tipo de unidad");
         }
 
-        posiciones.get(0).colocarEnCasilleroLibreMasCercano(unidad);
+        posiciones.get(1).colocarEnCasilleroLibreMasCercano(unidad);
         jugador.agregarAPoblacion(unidad);
     }
 

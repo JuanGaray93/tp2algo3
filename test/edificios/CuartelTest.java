@@ -49,7 +49,7 @@ public class CuartelTest {
 	}
 
 
-	@Test (expected = CasilleroNoExistenteException.class)
+	@Test
 	public void borrarCuartelYVerificarQueSeBorraTest() throws Exception, EdificioEnConstruccionException {
 
 		assertFalse(mapa.estaOcupado(3, 5));
