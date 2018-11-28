@@ -41,13 +41,13 @@ public abstract class EstadoEdificio {
         return this;
     }
 
-    public abstract EstadoEdificio reparar(Aldeano reparador,
-                                  Integer montoDeReparacion) throws Exception, EdificioEnConstruccionException;
+    public abstract EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion)
+            throws Exception, EdificioEnConstruccionException;
 
     public abstract EstadoEdificio construir(Aldeano quienLoConstruye)
             throws Exception;
 
-    public abstract EstadoEdificio suspender() throws Exception;
+    public abstract EstadoEdificio suspender() throws Exception, EdificioEnConstruccionException;
 
     public Integer getVidaActual() throws Exception{
 

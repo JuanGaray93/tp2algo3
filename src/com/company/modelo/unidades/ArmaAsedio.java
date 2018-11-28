@@ -39,9 +39,10 @@ public class ArmaAsedio extends UnidadAtacante {
 	}
 
 	@Override
-	public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
+	public void atacarA(Edificio enemigo)
+			throws ArmaDesmontadaException, PosicionableEsAliadoException {
 		if (estado instanceof EstadoArmaAsedioMontada) {
-			atacar(enemigo, danioAEdifcio);
+			atacar(enemigo);
 		}
 		throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
 	}
@@ -71,7 +72,8 @@ public class ArmaAsedio extends UnidadAtacante {
 	}
 
 	@Override
-	public void moverA(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroLlenoException, CasilleroNoExistenteException, ArmaMontadaException {
+	public void moverA(Integer posicionHorizontal, Integer posicionVertical)
+			throws CasilleroLlenoException, CasilleroNoExistenteException, ArmaMontadaException, MovimientoInvalidoException {
 		estado.moverA(posicion, posicionHorizontal,posicionVertical);
 	}
 

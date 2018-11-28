@@ -88,7 +88,7 @@ public class AldeanoTest {
 
         try {
             aldeano.construir(plaza, 8, 7);
-        } catch (DistanciaInvalidaException | Exception ignored) { }
+        } catch (Exception ignored) { }
 
 
         aldeano.actualizar();
@@ -132,7 +132,7 @@ public class AldeanoTest {
         try {
             aldeano.construir(cuartel, 5, 5);
 
-        } catch (Exception | DistanciaInvalidaException ignored) { }
+        } catch (Exception | EdificioEnConstruccionException ignored) { }
 
         assertTrue(mapa.estaOcupado(5, 5));
     }
@@ -152,7 +152,7 @@ public class AldeanoTest {
         try {
             aldeano.construir(plazaCentral, 5, 6);
 
-        } catch (Exception | DistanciaInvalidaException ignored) {
+        } catch (Exception | EdificioEnConstruccionException ignored) {
 
         }
         assertTrue(mapa.estaOcupado(5, 6));
@@ -171,7 +171,7 @@ public class AldeanoTest {
 
         try {
             castillo.recibirDanio(15);
-        } catch (Exception ignored) { }
+        } catch (Exception | EdificioEnConstruccionException ignored) { }
 
         try {
             aldeano.reparar(castillo);

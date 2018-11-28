@@ -1,6 +1,7 @@
 package com.company.excepciones;
 
-public class EnemigoInvalidoException extends Throwable {
-    public EnemigoInvalidoException(String s) {
+public class EnemigoInvalidoException extends Exception {
+    public EnemigoInvalidoException(String mensaje) {
+        super(mensaje);
     }
 }

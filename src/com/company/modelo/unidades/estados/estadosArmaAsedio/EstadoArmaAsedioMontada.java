@@ -1,9 +1,7 @@
 package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
+import com.company.excepciones.*;
 import com.company.excepciones.ArmaMontadaException;
-import com.company.excepciones.ArmaMontadaException;
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.ArmaAsedio;

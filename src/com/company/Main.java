@@ -1,21 +1,20 @@
 package com.company;
 
-import com.company.modelo.Jugador;
 import com.company.modelo.Partida;
 
 public class Main {
 
-	public static void main(String[] args) {
-		try{
+    public static void main(String[] args) {
+        try {
 
-			Partida partida = new Partida();
+            Partida partida = new Partida();
 
-			while(true){
-				partida.correr();
-			}
+            while (true) {
+                partida.correr();
+            }
 
-		} catch (Exception e){
-			// Terminar programa
-		}
-	}
+        } catch (Exception e) {
+            // Terminar programa
+        }
+    }
 }

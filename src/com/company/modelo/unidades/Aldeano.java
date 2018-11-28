@@ -2,11 +2,9 @@ package com.company.modelo.unidades;
 
 import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.estados.EstadoUnidad;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeano;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoRecolectandoOro;
 
@@ -23,23 +21,25 @@ public class Aldeano extends Unidad {
 
     @Override
     public void moverA(Integer posicionHorizontal, Integer posicionVertical)
-            throws CasilleroNoExistenteException, CasilleroLlenoException, ArmaMontadaException {
+            throws CasilleroNoExistenteException,
+            CasilleroLlenoException, MovimientoInvalidoException {
         posicion.moverA(posicionHorizontal, posicionVertical);
         try {
             estadoActual.abandonarTareaActual();
-        } catch (Exception ignored) {}
+        } catch (Exception | EdificioEnConstruccionException ignored) {
+        }
     }
 
     private boolean existentesEnRadio(Edificio e) {
-        ArrayList<Posicionable> cercanos = this.posicion.buscarEnRadio(1);
+        ArrayList<Posicionable> cercanos = this.posicion.buscarPosicionablesEnRadio(1);
         return cercanos.contains(e);
     }
 
     @Override
     public void recibirDanio(Integer montoDeDanio) throws Exception {
-        try{
+        try {
             estadoActual.recibirDanio(montoDeDanio);
-        }catch(UnidadMuertaException e){
+        } catch (UnidadMuertaException | EdificioEnConstruccionException e) {
             posicion.quitarPosicionable();
             jugador.eliminarDePoblacion(this);
 
@@ -48,12 +48,12 @@ public class Aldeano extends Unidad {
 
 
     public void construir(Edificio edificio, Integer x, Integer y)
-            throws Exception, DistanciaInvalidaException {
+            throws Exception, EdificioEnConstruccionException {
         if (posicion.esDistanciaValida(x, y)) {
 
-                estadoActual = estadoActual.construir(edificio, x, y);
+            estadoActual = estadoActual.construir(edificio);
 
-                edificio.construir(this, x, y);
+            edificio.construir(this, x, y);
 
         } else {
             throw new DistanciaInvalidaException("No puedo construir a esa distancia");
@@ -69,7 +69,7 @@ public class Aldeano extends Unidad {
                 edificio.reparar(this);
                 estadoActual = estadoActual.reparar(edificio);
 
-            } catch (Exception e) {
+            } catch (Exception | EdificioEnConstruccionException e) {
                 //
             }
 
@@ -86,7 +86,7 @@ public class Aldeano extends Unidad {
 
     @Override
     public void actualizar() throws Exception {
-     ;
+
         estadoActual = estadoActual.actualizar();
 
     }

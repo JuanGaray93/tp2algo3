@@ -2,12 +2,12 @@ package com.company.modelo.unidades;
 
 import com.company.excepciones.ArmaDesmontadaException;
 import com.company.excepciones.EnemigoInvalidoException;
+import com.company.excepciones.PosicionableEsAliadoException;
+import com.company.excepciones.UnidadMuertaException;
 import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
-
-import java.util.ArrayList;
 
 public abstract class UnidadAtacante extends Unidad {
 
@@ -23,13 +23,16 @@ public abstract class UnidadAtacante extends Unidad {
         this.atacar(enemigo, this.danioAUnidad);
     }
 
-    public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
+    public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException, PosicionableEsAliadoException {
         this.atacar(enemigo, this.danioAEdifcio);
     }
 
-    public void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
+    private void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
         Ataque ataque = new Ataque(rangoAtaque, danioAEdifcio, danioAUnidad, jugador, posicion);
         ataque.atacar(unEnemigo, unDanio);
     }
 
+    public Integer getVida() throws UnidadMuertaException {
+        return estado.getVidaActual();
+    }
 }

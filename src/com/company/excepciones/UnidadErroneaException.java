@@ -1,7 +1,7 @@
 package com.company.excepciones;
 
-public class UnidadErroneaException extends RuntimeException {
-    public UnidadErroneaException(String s) {
-        super(s);
+public class UnidadErroneaException extends Exception {
+    public UnidadErroneaException(String mensaje) {
+        super(mensaje);
     }
 }

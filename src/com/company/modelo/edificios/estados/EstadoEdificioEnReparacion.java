@@ -46,7 +46,8 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) throws EdificioEnConstruccionException, Exception {
+    public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye)
+            throws Exception {
        throw new EdificioEnReparacionException("El edificio se esta reparando!");
     }
 

@@ -7,6 +7,7 @@ import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.excepciones.Edificio.ErrorDeConstruccionException;
 import com.company.excepciones.MapaLlenoException;
+import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
@@ -58,7 +59,7 @@ public abstract class Edificio extends Posicionable {
         estado = estado.ejecutarAccion();
     }
 
-    public void suspender() throws Exception {
+    public void suspender() throws Exception, EdificioEnConstruccionException {
         estado = estado.suspender();
     }
 
@@ -79,16 +80,16 @@ public abstract class Edificio extends Posicionable {
         return this.estado.getVidaActual();
     }
 
-    public void crear(Unidad unidad) throws CasilleroNoExistenteException, EdificioEnReparacionException, CasilleroLlenoException, EdificioEnConstruccionException, MapaLlenoException, EdificioNoDisponibleException {
+    public void crear(Unidad unidad) throws CasilleroNoExistenteException, EdificioEnReparacionException, CasilleroLlenoException, EdificioEnConstruccionException, MapaLlenoException, EdificioNoDisponibleException, UnidadErroneaException {
         this.estado = estado.crear(unidad, posiciones.get(1));
         jugador.agregarAPoblacion(unidad);
     };
     
-    public void reparar(Aldeano reparador) throws Exception {
+    public void reparar(Aldeano reparador) throws Exception, EdificioEnConstruccionException {
+  this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
+ }
 
-       this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
 
-    }
 
     public void eliminar() { // TODO Franco Crear test que pruebe que esté vacío el terreno
         int longitud = posiciones.size();

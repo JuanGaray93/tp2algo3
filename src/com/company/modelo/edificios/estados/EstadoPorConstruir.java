@@ -21,7 +21,7 @@ public class EstadoPorConstruir extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio construir(Aldeano quienLoConstruye) throws EdificioEnConstruccionException, Exception {
+    public EstadoEdificio construir(Aldeano quienLoConstruye) throws Exception {
         return new EstadoEdificioEnConstruccion(VIDA_MAXIMA,MONTO_REPARACION).construir(quienLoConstruye);}
 
     @Override
@@ -36,7 +36,7 @@ public class EstadoPorConstruir extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
+    public EstadoEdificio ejecutarAccion() {
         return this;
     }
 

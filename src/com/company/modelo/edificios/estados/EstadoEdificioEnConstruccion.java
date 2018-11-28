@@ -45,6 +45,7 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
     public EstadoEdificio reparar(Aldeano reparador,
                                   Integer montoDeReparacion)
             throws EdificioEnConstruccionException {
+
         throw new EdificioEnConstruccionException("imposible reparar edificio en construccion");
     }
 

@@ -1,46 +1,57 @@
 package com.company.modelo.unidades;
 
-import com.company.excepciones.*;
+import com.company.excepciones.ArmaMontadaException;
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
 import com.company.modelo.unidades.estados.EstadoUnidad;
+import com.company.modelo.unidades.estados.EstadoUnidadInactivo;
 
 public abstract class Unidad extends Posicionable {
 
-	protected Posicion posicion;
-	protected EstadoUnidad estado;
+    protected Posicion posicion;
+    protected EstadoUnidad estado;
 
-	public Unidad(Jugador jugador) {
-		this.jugador = jugador;
-	}
+    public Unidad(Jugador jugador) {
+        this.jugador = jugador;
+        this.posicion = null;
+        this.estado = new EstadoUnidadInactivo();
+    }
 
-	public void establecerCoordenadasDeNacimiento(Integer posicionHorizontal, Integer posicionVertical) {
-		posicion = new Posicion(posicionHorizontal, posicionVertical);
-	}
+    public void establecerCoordenadasDeNacimiento(Integer posicionHorizontal, Integer posicionVertical) {
+        posicion = new Posicion(posicionHorizontal, posicionVertical);
+    }
 
-	public void moverA(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException, ArmaMontadaException {
-		posicion.moverA(posicionHorizontal, posicionVertical);
-	}
+    public void moverA(Integer posicionHorizontal, Integer posicionVertical)
+            throws CasilleroNoExistenteException, CasilleroLlenoException,
+            ArmaMontadaException, MovimientoInvalidoException {
 
-	public void recibirDanio(Integer montoDeDanio) throws Exception {
-		try {
-			estado.recibirDanio(montoDeDanio);
-		} catch (Exception ignored) { }
-	}
+        posicion.moverA(posicionHorizontal, posicionVertical);
+    }
 
-	private void eliminarDePosicion() throws CasilleroNoExistenteException {
-		if (posicion != null) {
-			posicion.quitarPosicionable();
-		}
-	}
+    public void recibirDanio(Integer montoDeDanio) throws Exception {
+        try {
+            estado.recibirDanio(montoDeDanio);
+        } catch (Exception | EdificioEnConstruccionException ignored) {
+        }
+    }
 
-	@Override
-	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
-		posicion.posicionar(this);
-	}
+    private void eliminarDePosicion() {
+        if (posicion != null) {
+            posicion.quitarPosicionable();
+        }
+    }
 
-	public void actualizar() throws Exception {
-		estado = estado.actualizar();
-	}
+    @Override
+    public void ubicar(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        posicion.posicionar(this);
+    }
+
+    public void actualizar() throws Exception {
+        estado = estado.actualizar();
+    }
 }

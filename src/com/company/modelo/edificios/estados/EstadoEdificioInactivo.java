@@ -60,7 +60,7 @@ public class EstadoEdificioInactivo extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
+    public EstadoEdificio ejecutarAccion() {
         return this;
     }
 

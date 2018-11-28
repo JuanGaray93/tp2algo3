@@ -46,12 +46,12 @@ public class EstadoEdificioMuerto extends EstadoEdificio {
     }
 
     @Override
-    public Integer getVidaActual() throws Exception {
+    public Integer getVidaActual() {
         return null;
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
+    public EstadoEdificio ejecutarAccion() {
         return this;
     }
 

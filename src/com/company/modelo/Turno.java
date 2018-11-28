@@ -7,7 +7,7 @@ public class Turno {
 	ArrayList<Jugador> jugadores;
 	Integer turnoActual = 0;
 
-	public Turno() {
+	public Turno(Jugador random) {
 		jugadores = new ArrayList<>();
 	}
 

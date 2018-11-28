@@ -1,5 +1,6 @@
 package com.company.modelo;
 
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.EnemigoInvalidoException;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class Ataque {
             unEnemigo.recibirDanio(unDanio);
         } catch (Exception e) {
 
+        } catch (EdificioEnConstruccionException e) {
+            e.printStackTrace();
         }
     }
 
@@ -49,7 +52,7 @@ public class Ataque {
     }
 
     private ArrayList buscarAtacables(Integer unRadio){
-        return posicion.buscarEnRadio(unRadio);
+        return posicion.buscarPosicionablesEnRadio(unRadio);
     }
 
 }

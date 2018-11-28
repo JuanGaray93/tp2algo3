@@ -1,12 +1,9 @@
 package edificios;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.DistanciaInvalidaException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioNoDisponibleException;
-import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
@@ -43,7 +40,7 @@ public class PlazaCentralTest {
 
         try {
             peon.construir(central, 16, 22);
-        } catch (Exception | DistanciaInvalidaException ignored) {
+        } catch (Exception | EdificioEnConstruccionException ignored) {
         }
 
         /*   21  22  23
@@ -56,7 +53,7 @@ public class PlazaCentralTest {
 
         try {
             central.crear(new Aldeano(jugador));
-        } catch (MapaLlenoException | EdificioEnConstruccionException | EdificioEnReparacionException | EdificioNoDisponibleException ignored) {
+        } catch (MapaLlenoException | EdificioEnConstruccionException | EdificioEnReparacionException | EdificioNoDisponibleException | UnidadErroneaException ignored) {
         }
 
         assertTrue(mapa.estaOcupado(16, 21));
@@ -106,7 +103,7 @@ public class PlazaCentralTest {
 
     @Test
     public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest()
-            throws Exception, DistanciaInvalidaException {
+            throws Exception, EdificioEnConstruccionException {
 
         peon.establecerCoordenadasDeNacimiento(5, 5);
 

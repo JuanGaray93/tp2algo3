@@ -3,15 +3,14 @@ package com.company.modelo.unidades.estados.estadosAldeano;
 import com.company.excepciones.AldeanoOcupadoException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoAldeanoReparando extends EstadoAldeano {
 
-    public EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV) throws Exception, EdificioEnConstruccionException {
+    public EstadoAldeano construir(Edificio edificio) {
         throw new AldeanoOcupadoException("Estoy reparando...");
     }
 
-    public EstadoAldeano reparar(Edificio aReparar) throws Exception {
+    public EstadoAldeano reparar(Edificio aReparar) throws Exception, EdificioEnConstruccionException {
         if (edificioATrabajar == null) {
             edificioATrabajar = aReparar;
         } else if (edificioATrabajar != aReparar) {
@@ -25,11 +24,7 @@ public class EstadoAldeanoReparando extends EstadoAldeano {
 
     @Override
     public EstadoAldeano actualizar() throws Exception {
-        try {
-            edificioATrabajar.avanzarReparacion();
-        } catch (EdificioEnConstruccionException e) {
-            return this;
-        }
+        edificioATrabajar.avanzarReparacion();
 
         return this;
     }

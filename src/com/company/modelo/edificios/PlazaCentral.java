@@ -1,9 +1,9 @@
 package com.company.modelo.edificios;
 
-import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
-import com.company.modelo.unidades.Aldeano;
 
 public class PlazaCentral extends Edificio {
 
@@ -17,6 +17,11 @@ public class PlazaCentral extends Edificio {
         VIDA_MAXIMA = 450;
 
         this.estado = new EstadoPorConstruir(VIDA_MAXIMA, MONTO_DE_REPARACION);
+    }
+
+    public void surgir(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        this.ubicar(posicionHorizontal, posicionVertical);
+        jugador.agregarAEdificios(this);
     }
 
 }

@@ -1,0 +1,12 @@
+package com.company.excepciones.Edificio;
+
+<<<<<<< HEAD
+public class EdificioEnConstruccionException extends Exception {
+    public EdificioEnConstruccionException(String s) {
+        super(s);
+=======
+public class EdificioEnConstruccionException extends Throwable {
+    public EdificioEnConstruccionException(String s) {
+>>>>>>> 819adf656d5a54463b2ff9c013201be7b64f7f6a
+    }
+}

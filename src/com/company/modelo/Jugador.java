@@ -1,138 +1,144 @@
 package com.company.modelo;
 
-import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.EdificioInexistenteEnConstruccionesException;
+import com.company.excepciones.LimitePoblacionalException;
+import com.company.excepciones.OroInsuficienteException;
+import com.company.excepciones.UnidadInexistenteEnPoblacionException;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.edificios.PlazaCentral;
-import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
-import javax.naming.LimitExceededException;
 import java.util.ArrayList;
 
 public class Jugador {
 
-	private final static Integer LIMITE_POBLACIONAL = 50 ;
-	private static Integer jugadoresCreados = 0;
-	private Integer numeroDeJugador;
+    private final static Integer LIMITE_POBLACIONAL = 50;
+    private static Integer jugadoresCreados = 0;
+    private Integer numeroDeJugador;
+    private Iniciador unIniciador;
 
-	ArrayList <Unidad> poblacion;
-	ArrayList <Edificio> edificios;
-	private Integer oro;
+    ArrayList<Unidad> poblacion;
+    ArrayList<Edificio> edificios;
+    private static Integer oro;
 
-	public Jugador() {
-		this.oro = 100;
-		jugadoresCreados++;
-		this.numeroDeJugador = jugadoresCreados;
-		poblacion = new ArrayList<Unidad>();
-		edificios = new ArrayList<Edificio>();
-	}
-
-	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException, ArmaMontadaException, CasilleroLlenoException {
-		// TODO Jony Martin: Manejo de alianza! Por qué se voló esto? - Juan
-		unidad.moverA(x,y); // TODO Jony Martin: hacer que sólo pueda moverse si el jugador es su dueño
-	}
-
-	public Integer getOro(){
-		return this.oro;
-	}
-
-	public void agregarAPoblacion(Unidad unidad) {
-
-		if(poblacion.size() == LIMITE_POBLACIONAL) {
-			throw new LimitePoblacionalException("Alcanzaste el limite permitido de unidades");
+    public Jugador() {
+        this.oro = 100;
+        jugadoresCreados++;
+        this.numeroDeJugador = jugadoresCreados;
+        poblacion = new ArrayList<Unidad>();
+        edificios = new ArrayList<Edificio>();
+        this.unIniciador = new Iniciador(this);
+    }
+	/*
+	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException {
+		try {
+			unidad.moverA(x,y);
+		} catch (CasilleroLlenoException e) {
+			// TODO si el casillero esta lleno...
 		}
-		poblacion.add(unidad);
-	}
+	}*/
 
-	public void agregarAEdificios(Edificio unEdificio) {
-		edificios.add(unEdificio);
-	}
-	
-	public void eliminarDePoblacion(Unidad unidad) {
-		if(!poblacion.contains(unidad)){
-			throw new UnidadInexistenteEnPoblacionException("Disculpe, la unidad no existe en la poblacion");
-		}
-		poblacion.remove(unidad);
+    public Integer getOro() {
+        return this.oro;
+    }
 
-	}
+    public void agregarAPoblacion(Unidad unidad) {
 
-	public void eliminarDeConstrucciones(Edificio edificio) {
-		if(!edificios.contains(edificio)){
+        if (poblacion.size() == LIMITE_POBLACIONAL) {
+            throw new LimitePoblacionalException("Alcanzaste el limite permitido de unidades");
+        }
+        poblacion.add(unidad);
+    }
 
-			throw new EdificioInexistenteEnConstruccionesException("No existe tal edificio");
-		}
-		edificios.remove(edificio);
-	}
+    public void agregarAEdificios(Edificio unEdificio) {
+        edificios.add(unEdificio);
+    }
 
-	public void sumarOro(Integer produccionOro) {
-		this.oro += produccionOro;
+    public void eliminarDePoblacion(Unidad unidad) {
+        if (!poblacion.contains(unidad)) {
+            throw new UnidadInexistenteEnPoblacionException("Disculpe, la unidad no existe en la poblacion");
+        }
+        poblacion.remove(unidad);
 
-	}
+    }
 
-	public void cobrar(Integer monto) throws OroInsuficienteException{
-		if(monto < 0){
-			throw new OroInsuficienteException("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
-		}else
-			if (oro - monto < 0){
-				throw new OroInsuficienteException("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
-			}
 
-		oro -= monto;
-	}
+    public void eliminarDeConstrucciones(Edificio edificio) {
+        if (!edificios.contains(edificio)) {
+
+            throw new EdificioInexistenteEnConstruccionesException("No existe tal edificio");
+        }
+        edificios.remove(edificio);
+    }
+
+    public void sumarOro(Integer produccionOro) {
+        this.oro += produccionOro;
+
+    }
+
+    public void cobrar(Integer monto) throws OroInsuficienteException {
+        if (monto < 0) {
+            throw new OroInsuficienteException("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
+        } else if (oro - monto < 0) {
+            throw new OroInsuficienteException("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
+        }
+
+        oro -= monto;
+    }
 	/*
 	public void actualizar() {
 		
 	}*/
 
-	public void crearEntidadesIniciales() throws EdificioEnConstruccionException, Exception {
+    public void crearEntidadesIniciales() throws EdificioEnConstruccionException, Exception {
 
-		Integer posicionInicialX = 0;
-		Integer posicionInicialY = 0;
+        Integer posicionInicialX = 0;
+        Integer posicionInicialY = 0;
 
-		if(this.numeroDeJugador == 1){
-			posicionInicialX = 1;
-			posicionInicialY = 1;
-		} else {
-			posicionInicialX = 80;
-			posicionInicialY = 80;
-		}
+        if (this.numeroDeJugador == 1) {
+            posicionInicialX = 1;
+            posicionInicialY = 1;
+        } else {
+            posicionInicialX = 80;
+            posicionInicialY = 80;
+        }
 
-		poblacion.add(new Aldeano(this));
-		poblacion.add(new Aldeano(this));
-		poblacion.add(new Aldeano(this));
+        poblacion.add(new Aldeano(this));
+        poblacion.add(new Aldeano(this));
+        poblacion.add(new Aldeano(this));
 
-		poblacion.get(0).establecerCoordenadasDeNacimiento(5+ posicionInicialX,+ posicionInicialY);
-		poblacion.get(1).establecerCoordenadasDeNacimiento(6+ posicionInicialX,+ posicionInicialY);
-		poblacion.get(2).establecerCoordenadasDeNacimiento(7+ posicionInicialX,+ posicionInicialY);
+        poblacion.get(0).establecerCoordenadasDeNacimiento(5 + posicionInicialX, +posicionInicialY);
+        poblacion.get(1).establecerCoordenadasDeNacimiento(6 + posicionInicialX, +posicionInicialY);
+        poblacion.get(2).establecerCoordenadasDeNacimiento(7 + posicionInicialX, +posicionInicialY);
 
-		Castillo castillo = new Castillo(this);
-		PlazaCentral plaza = new PlazaCentral(this);
+        Castillo castillo = new Castillo(this);
+        PlazaCentral plaza = new PlazaCentral(this);
 
-		castillo.construir((Aldeano) poblacion.get(0), 5 + posicionInicialX, 5 + posicionInicialY);
-		plaza.construir((Aldeano) poblacion.get(1),5 + posicionInicialX, 10 + posicionInicialY);
+       // castillo.construir((Aldeano) poblacion.get(0), 5 + posicionInicialX, 5 + posicionInicialY);
+       // plaza.construir((Aldeano) poblacion.get(1), 5 + posicionInicialX, 10 + posicionInicialY);
 
-		edificios.add(castillo);
-		edificios.add(plaza);
-	}
+        edificios.add(castillo);
+        edificios.add(plaza);
+    }
 
-	// hay que tener una forma de testear la creacion de unidades.
-	public Boolean estaEnPoblacion(Unidad unidad) {
-		if(poblacion.contains(unidad)) {
-			return true;
-		}
-		return false;
-	}
+    // hay que tener una forma de testear la creacion de unidades.
+    public Boolean estaEnPoblacion(Unidad unidad) {
+        if (poblacion.contains(unidad)) {
+            return true;
+        }
+        return false;
+    }
 
 
-	public ArrayList<Edificio> getEdificios() {
-		return edificios;
-	}
+    public ArrayList<Edificio> getEdificios() {
+        return edificios;
+    }
 
-	public ArrayList<Unidad> getPoblacion() {
-		return poblacion;
-	}
+    public ArrayList<Unidad> getPoblacion() {
+        return poblacion;
+    }
 
 }
