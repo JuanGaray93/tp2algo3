@@ -15,11 +15,6 @@ public class EstadoEdificioMuerto extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio actualizar() {
-        return this;
-    }
-
-    @Override
     public EstadoEdificio recibirDanio(Integer montoDeDanio) {
 
         throw new RuntimeException("El edificio esta destruido!");

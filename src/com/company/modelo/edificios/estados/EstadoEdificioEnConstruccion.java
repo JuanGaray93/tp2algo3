@@ -11,71 +11,69 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
 
 
     public EstadoEdificioEnConstruccion(Integer vidaMax, Integer reparacion) {
-        super(vidaMax,reparacion);
+        super(vidaMax, reparacion);
         vidaActual = 0;
-    }
-
-    @Override
-    public EstadoEdificio actualizar() {
-
-        return this.construir(trabajadorActual);
-        // TODO Jony: En realidad al actualizar es el aldeano el que construye el edificio. No deberíamos hacer nada acá.
     }
 
     @Override
     public EstadoEdificio crear(Unidad unidad, Posicion posicion)
             throws EdificioEnConstruccionException {
-       throw new EdificioEnConstruccionException("No es posible crear unidades edificio construyendose");
+        throw new EdificioEnConstruccionException("No es posible crear unidades " +
+                "                                    edificio construyendose");
     }
 
     @Override
-    public EstadoEdificio recibirDanio(Integer montoDeDanio) throws EdificioEnConstruccionException {
-        throw new EdificioEnConstruccionException("No es posible atacar este edificio! en construccion");
+    public EstadoEdificio recibirDanio(Integer montoDeDanio)
+            throws EdificioEnConstruccionException {
+        throw new EdificioEnConstruccionException("No es posible atacar este edificio! " +
+                "en construccion");
     }
 
     @Override
-    public Integer getVidaActual(){
+    public Integer getVidaActual() {
         return vidaActual;
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
-        return this;
+    public EstadoEdificio ejecutarAccion() throws Exception {
+
+       return construir(trabajadorActual);
+
     }
 
     @Override
     public EstadoEdificio reparar(Aldeano reparador,
-                                  Integer montoDeReparacion) throws EdificioEnConstruccionException {
+                                  Integer montoDeReparacion)
+            throws EdificioEnConstruccionException {
         throw new EdificioEnConstruccionException("imposible reparar edificio en construccion");
     }
 
     @Override
-    public EstadoEdificio construir(Aldeano quienLoConstruye) {
+    public EstadoEdificio construir(Aldeano quienLoConstruye) throws Exception {
 
-        if(trabajadorActual == null){
+        if (trabajadorActual == null) {
             trabajadorActual = quienLoConstruye;
 
-        } else if( trabajadorActual != quienLoConstruye){
+        } else if (trabajadorActual != quienLoConstruye) {
 
             throw new EdificioOcupadoException("No se puede construir este edificio," +
-                                               " hay otro aldeano construyendolo!");
+                    " hay otro aldeano construyendolo!");
         }
-        if(vidaActual >= VIDA_MAXIMA){
+        vidaActual += VIDA_MAXIMA / 3;
+        if(vidaActual>=VIDA_MAXIMA) {
             vidaActual = VIDA_MAXIMA;
-
-            return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION).suspender();
-        }else{
-            vidaActual+= VIDA_MAXIMA/3;
+            trabajadorActual.liberar();
+            return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
         }
         return this;
     }
 
     @Override
-    public EstadoEdificio suspender() {
-        if(this.trabajadorActual !=null){
+    public EstadoEdificio suspender() throws Exception {
+        if (trabajadorActual != null) {
             trabajadorActual.liberar();
         }
-        this.trabajadorActual = null;
-        return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION);
+        trabajadorActual = null;
+        return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
     }
 }

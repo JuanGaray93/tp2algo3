@@ -2,36 +2,31 @@ package com.company.modelo.unidades.estados.estadosAldeano;
 
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoAldeanoRecolectandoOro extends EstadoAldeano {
 
-    public EstadoAldeanoRecolectandoOro() {
+    Jugador jugadorActual ;
+
+    public EstadoAldeanoRecolectandoOro(Jugador jugador) {
 
         edificioATrabajar = null;
+        jugadorActual = jugador;
     }
 
-    @Override
-    public EstadoUnidad actualizar() throws Exception {
+    public EstadoAldeano actualizar() {
+        jugadorActual.sumarOro(PRODUCCION_ORO);
         return this;
     }
 
-    public EstadoAldeano otorgarGanancia(Jugador jugador) {
-        jugador.sumarOro(PRODUCCION_ORO);
-        return this;
+    public EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV)
+            throws Exception {
+        return new EstadoAldeanoConstruyendo().construir(edificio,posicionH,posicionV);
     }
 
-    @Override
-    public EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV) {
-        edificioATrabajar = edificio;
-        return new EstadoAldeanoConstruyendo();
-    }
-
-    @Override
     public EstadoAldeano reparar(Edificio edificio) throws Exception {
-        edificioATrabajar = edificio;
-        return new EstadoAldeanoReparando();
+
+        return new EstadoAldeanoReparando().reparar(edificio);
     }
 
 }

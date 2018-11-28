@@ -11,7 +11,8 @@ public abstract class EstadoUnidad {
 		// TODO Jony: Que todos los estados de unidad manejen esa lógica
 	}
 	
-	public void recibirDanio(Integer montoDeDanio) {
+	public void recibirDanio(Integer montoDeDanio) throws Exception {
+
 		this.vidaActual -= montoDeDanio;
 	}
 

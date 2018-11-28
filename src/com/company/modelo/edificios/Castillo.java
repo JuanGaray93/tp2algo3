@@ -29,18 +29,7 @@ public class Castillo extends Edificio {
         VIDA_MAXIMA = 1000;
         this.rangoAtaque = 7; // porque es a partir del centro del castillo
         this.danioAPosicionable = 20;
-        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,MONTO_DE_REPARACION);
-    }
-
-    @Override
-    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
-            throws EdificioEnConstruccionException, Exception {
-
-        jugador.cobrar(this.COSTO);
-
-        this.ubicar(posicionHorizontal,posicionVertical);
-
-        estado = estado.construir(quienLoConstruye);
+        this.estado = new EstadoEdificioInactivo(VIDA_MAXIMA,VIDA_MAXIMA,MONTO_DE_REPARACION);
     }
 
     @Override
@@ -60,11 +49,6 @@ public class Castillo extends Edificio {
     public void surgir(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
         this.ubicar(posicionHorizontal, posicionVertical);
         jugador.agregarAEdificios(this);
-    }
-
-    @Override
-    public void actualizar() throws Exception {
-        estado = estado.actualizar();
     }
 
     public void atacarA(Posicionable enemigo) throws EnemigoInvalidoException {

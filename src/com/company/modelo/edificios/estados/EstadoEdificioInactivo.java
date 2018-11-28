@@ -14,19 +14,13 @@ import com.company.modelo.unidades.Unidad;
 
 public class EstadoEdificioInactivo extends EstadoEdificio {
 
-    private Integer vidaDos;
-
     public EstadoEdificioInactivo(Integer vidaMax,Integer vida, Integer monto) {
 
         super(vidaMax, monto);
-        this.vidaActual = vida;
-        vidaDos = vida;
-    }
 
-    @Override
-    public EstadoEdificio actualizar() {
+        vidaActual = vida;
+        trabajadorActual = null;
 
-        return this.suspender();
     }
 
     @Override
@@ -38,7 +32,7 @@ public class EstadoEdificioInactivo extends EstadoEdificio {
 
     @Override
     public EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion)
-             {
+            throws Exception {
 
         trabajadorActual = reparador;
 
@@ -55,11 +49,10 @@ public class EstadoEdificioInactivo extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio suspender() {
+    public EstadoEdificio suspender() throws Exception {
 
         if(trabajadorActual!=null){
             trabajadorActual.liberar();
-
         }
         this.trabajadorActual = null;
 

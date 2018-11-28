@@ -18,11 +18,6 @@ public class EstadoEdificioCreando extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio actualizar() {
-       return this;
-    }
-
-    @Override
     public EstadoEdificio crear(Unidad unidad, Posicion posicion)
             throws CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException {
         posicion.colocarEnCasilleroLibreMasCercano(unidad);
@@ -41,7 +36,7 @@ public class EstadoEdificioCreando extends EstadoEdificio {
 
     @Override
     public EstadoEdificio suspender() {
-        this.trabajadorActual = null;
+
        return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual, MONTO_REPARACION);
     }
 
@@ -51,7 +46,7 @@ public class EstadoEdificioCreando extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
+    public EstadoEdificio ejecutarAccion() {
         return this;
     }
 }

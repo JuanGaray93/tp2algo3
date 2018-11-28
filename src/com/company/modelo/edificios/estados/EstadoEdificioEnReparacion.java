@@ -17,7 +17,7 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
     }
 
     public EstadoEdificio reparar(Aldeano reparador,
-                                  Integer montoDeReparacion) {
+                                  Integer montoDeReparacion) throws Exception {
 
         if(trabajadorActual == null){
             trabajadorActual = reparador;
@@ -28,23 +28,15 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
                     "hay otro aldeano reparandolo!");
         }
 
-        if(vidaActual >= VIDA_MAXIMA){
-
-
+        vidaActual+=montoDeReparacion;
+        if(vidaActual>=VIDA_MAXIMA) {
             vidaActual = VIDA_MAXIMA;
-            return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual,MONTO_REPARACION).suspender();
-
-        }else {
-
-            vidaActual+=montoDeReparacion;
-
+            trabajadorActual.liberar();
+            return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
         }
-        return this;
-    }
 
-    @Override
-    public EstadoEdificio actualizar() throws Exception, EdificioEnConstruccionException {
-        return this.reparar(trabajadorActual,MONTO_REPARACION);
+
+        return this;
     }
 
     @Override
@@ -59,7 +51,7 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio suspender() {
+    public EstadoEdificio suspender() throws Exception {
         if(this.trabajadorActual !=null){
             trabajadorActual.liberar();
         }
@@ -73,7 +65,7 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException {
-        return this;
+    public EstadoEdificio ejecutarAccion() throws Exception {
+        return reparar(trabajadorActual,MONTO_REPARACION);
     }
 }

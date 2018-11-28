@@ -23,9 +23,10 @@ public abstract class Unidad extends Posicionable {
 		posicion.moverA(posicionHorizontal, posicionVertical);
 	}
 
-	@Override
-	public void recibirDanio(Integer montoDeDanio) {
-		estado.recibirDanio(montoDeDanio);
+	public void recibirDanio(Integer montoDeDanio) throws Exception {
+		try {
+			estado.recibirDanio(montoDeDanio);
+		} catch (Exception ignored) { }
 	}
 
 	private void eliminarDePosicion() throws CasilleroNoExistenteException {
@@ -39,7 +40,6 @@ public abstract class Unidad extends Posicionable {
 		posicion.posicionar(this);
 	}
 
-	@Override
 	public void actualizar() throws Exception {
 		estado = estado.actualizar();
 	}

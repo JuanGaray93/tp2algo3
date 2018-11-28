@@ -28,7 +28,8 @@ public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
         return new EstadoArmaAsedioMontada(maquinaAsedio);
     }
 
-    public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+    public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical)
+            throws CasilleroNoExistenteException, CasilleroLlenoException {
 
 			posicion.moverA(posicionHorizontal, posicionVertical);
 

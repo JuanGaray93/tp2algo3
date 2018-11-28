@@ -16,11 +16,6 @@ public class EstadoPorConstruir extends EstadoEdificio {
     }
 
     @Override
-    public EstadoEdificio actualizar() {
-        return this;
-    }
-
-    @Override
     public EstadoEdificio crear(Unidad unidad, Posicion posicion) throws EdificioEnConstruccionException {
         throw new EdificioEnConstruccionException("El edificio no existe!");
     }

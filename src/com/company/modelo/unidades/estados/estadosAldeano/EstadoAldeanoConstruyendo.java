@@ -1,25 +1,20 @@
 package com.company.modelo.unidades.estados.estadosAldeano;
 
-import com.company.excepciones.AldeanoOcupadoException;
-import com.company.excepciones.DistanciaInvalidaException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.estados.EstadoUnidad;
 
+
 public class EstadoAldeanoConstruyendo extends EstadoAldeano {
 
-    private Edificio edificioSiendoConstruido;
     private Aldeano constructor;
 
-    public EstadoAldeanoConstruyendo(){
-        this.constructor = constructor;
-        this.edificioSiendoConstruido = edificioSiendoConstruido;
+    public EstadoAldeanoConstruyendo() {
     }
 
     public EstadoAldeano construir(Aldeano constructor, Edificio aConstruir, Integer posicionH, Integer posicionV)
-            throws Exception, EdificioEnConstruccionException { // TODO nunca se usan las posiciones. por que?
+            throws Exception {
         if (edificioATrabajar == null) {
             edificioATrabajar = aConstruir;
 
@@ -39,21 +34,26 @@ public class EstadoAldeanoConstruyendo extends EstadoAldeano {
     }
 
     @Override
-    public EstadoAldeano otorgarGanancia(Jugador jugador) {
+    public EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV)
+            throws Exception {
+        if (edificioATrabajar == null) {
+            edificioATrabajar = edificio;
+        } else if (edificioATrabajar != edificio) {
+            edificioATrabajar.suspender();
+            edificioATrabajar = edificio;
+        }
 
-        throw new AldeanoOcupadoException("Ocupado construyendo");
+        return this;
     }
 
     @Override
-    public EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV) throws Exception, DistanciaInvalidaException {
-        return new EstadoAldeanoConstruyendo();
-    }
+    public EstadoAldeano actualizar() throws Exception {
 
-    @Override
-    public EstadoUnidad actualizar() throws Exception {
-        try{
-            edificioSiendoConstruido.avanzarConstruccion(constructor);
-        } catch (EdificioEnConstruccionException e){
+        try {
+
+            edificioATrabajar.avanzarConstruccion();
+
+        } catch (EdificioEnConstruccionException e) {
             return this;
         }
 

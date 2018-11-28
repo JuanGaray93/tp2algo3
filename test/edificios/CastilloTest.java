@@ -27,18 +27,12 @@ public class CastilloTest {
 	}
 	
 	@Test
-	public void castilloColocacionTest() throws CasilleroLlenoException {
+	public void castilloColocacionTest()
+			throws CasilleroLlenoException, CasilleroNoExistenteException {
 		
 		jugador.sumarOro(1400);
 		Castillo castillo = new Castillo(jugador);
-		Aldeano aldeano = new Aldeano(jugador);
-
-		try {
-			castillo.construir(aldeano, 3, 5);
-		}
-		catch ( Exception e){
-			e.printStackTrace();
-		}
+		castillo.surgir(3,5);
 
 		assertTrue( mapa.estaOcupado(3, 5) );
 		assertTrue( mapa.estaOcupado(3, 6) );
@@ -64,21 +58,18 @@ public class CastilloTest {
 		
 		jugador.sumarOro(1400);
 		Castillo castillo = new Castillo(jugador);
-		Aldeano aldeano = new Aldeano(jugador);
-		castillo.construir(aldeano,3, 5);
+
+		castillo.surgir(3,5);
 		ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
-		castillo.actualizar();
-		castillo.actualizar();
-		castillo.actualizar();
-		castillo.actualizar();
+
 		castillo.crear(maquinaAsedio);
-		
 
 		assertTrue(jugador.estaEnPoblacion(maquinaAsedio));
 
 	}
 
-	public void borrarCastilloYVerificarQueSeBorraTest() throws CasilleroLlenoException, CasilleroNoExistenteException {
+	@Test
+	public void borrarCastilloYVerificarQueSeBorraTest(){
 
 		jugador.sumarOro(1400);
 		Castillo castillo = new Castillo(jugador);

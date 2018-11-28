@@ -19,23 +19,4 @@ public class PlazaCentral extends Edificio {
         this.estado = new EstadoPorConstruir(VIDA_MAXIMA, MONTO_DE_REPARACION);
     }
 
-    @Override
-    public void actualizar() throws Exception, EdificioEnConstruccionException {
-
-            estado = estado.actualizar();
-
-    }
-
-    @Override
-    public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal, Integer posicionVertical)
-            throws EdificioEnConstruccionException, Exception {
-
-        jugador.cobrar(this.COSTO);
-
-        this.ubicar(posicionHorizontal, posicionVertical);
-
-        estado = estado.construir(quienLoConstruye);
-
-    }
-
 }

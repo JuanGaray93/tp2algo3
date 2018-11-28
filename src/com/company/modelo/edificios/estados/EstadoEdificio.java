@@ -25,8 +25,6 @@ public abstract class EstadoEdificio {
 
     }
 
-    public abstract EstadoEdificio actualizar() throws Exception, EdificioEnConstruccionException;
-
     public abstract EstadoEdificio crear(Unidad unidad, Posicion posicion)
             throws EdificioEnConstruccionException, EdificioEnReparacionException, CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException;
 
@@ -47,16 +45,17 @@ public abstract class EstadoEdificio {
                                   Integer montoDeReparacion) throws Exception, EdificioEnConstruccionException;
 
     public abstract EstadoEdificio construir(Aldeano quienLoConstruye)
-            throws EdificioEnConstruccionException, Exception;
+            throws Exception;
 
-    public abstract EstadoEdificio suspender() throws Exception, EdificioEnConstruccionException;
+    public abstract EstadoEdificio suspender() throws Exception;
 
     public Integer getVidaActual() throws Exception{
 
             return vidaActual;
 
     }
-    public abstract EstadoEdificio ejecutarAccion() throws EdificioEnConstruccionException, EdificioReparadoException;
+    public abstract EstadoEdificio ejecutarAccion() throws Exception;
+
 }
 /*estado puede estar reparando, construyendo o haciendo nada si esta reparando entonces hasta que no termine
 ;a vda del edifico  no termina si esta construyendo dura la cantidad de turnos

@@ -48,16 +48,17 @@ public abstract class Edificio extends Posicionable {
                           Integer posicionVertical) throws Exception, ErrorDeConstruccionException {
         jugador.cobrar(this.COSTO);
         this.ubicar(posicionHorizontal, posicionVertical);
+
         estado = estado.construir(quienLoConstruye);
         jugador.agregarAEdificios(this);
     }
 
-    public void avanzarConstruccion(Aldeano quienLoConstruye) throws Exception {
+    public void avanzarConstruccion() throws Exception {
 
-        estado = estado.construir(quienLoConstruye);
+        estado = estado.ejecutarAccion();
     }
 
-    public void suspender() throws Exception, EdificioEnConstruccionException {
+    public void suspender() throws Exception {
         estado = estado.suspender();
     }
 
@@ -83,13 +84,13 @@ public abstract class Edificio extends Posicionable {
         jugador.agregarAPoblacion(unidad);
     };
     
-    public void reparar(Aldeano reparador) throws Exception, EdificioEnConstruccionException {
+    public void reparar(Aldeano reparador) throws Exception {
 
        this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
 
     }
 
-    public void eliminar() throws CasilleroNoExistenteException { // TODO Franco Crear test que pruebe que esté vacío el terreno
+    public void eliminar() { // TODO Franco Crear test que pruebe que esté vacío el terreno
         int longitud = posiciones.size();
 
         for (int i = longitud - 1; i >= 0; i--) {
@@ -98,4 +99,7 @@ public abstract class Edificio extends Posicionable {
         }
     }
 
+    public void avanzarReparacion() throws Exception {
+        this.estado = estado.ejecutarAccion();
+    }
 }
