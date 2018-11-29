@@ -1,8 +1,26 @@
 package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
-public class EstadoArmaAsedioMontada extends EstadoArmaAsedio{
+import com.company.excepciones.ArmaMontadaException;
+import com.company.modelo.unidades.ArmaAsedio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
-    public EstadoArmaAsedioMontada(Integer vidaMaxima){
-        super(vidaMaxima);
+public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
+
+    public EstadoArmaAsedioMontada(Integer vidaActual) {
+        super(vidaActual);
+
+    }
+
+    public EstadoArmaAsedioDesmontada desmontar() {
+        return new EstadoArmaAsedioDesmontada(vidaActual);
+    }
+
+    public EstadoArmaAsedioMontada montar() throws ArmaMontadaException {
+        throw new ArmaMontadaException("la maquina de asedio ya esta montada");
+    }
+
+    @Override
+    public EstadoUnidad actualizar() {
+        return this;
     }
 }

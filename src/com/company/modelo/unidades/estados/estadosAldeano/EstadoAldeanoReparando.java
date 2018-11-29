@@ -6,34 +6,34 @@ import com.company.excepciones.EdificioDestruidoExcepcion;
 import com.company.excepciones.EdificioNoConstruidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoAldeanoReparando extends EstadoAldeano {
 
-    public EstadoAldeanoReparando(){
-        super(50);
+    public EstadoAldeanoReparando(Integer vidaActual){
+        super(vidaActual);
     }
 
-    @Override
-    public EstadoAldeano otorgarGanancia(Jugador jugador) {
-        throw new AldeanoOcupadoException("... reparando");
-    }
-
-    @Override
-    public EstadoAldeano construir(Edificio edificio, Integer posicionH, Integer posicionV) throws EdificioEnConstruccionException {
+    public EstadoAldeano construir(Edificio edificio) {
         throw new AldeanoOcupadoException("Estoy reparando...");
     }
 
-    @Override
-    public EstadoAldeano reparar(Edificio aReparar) throws EdificioEnConstruccionException, EdificioNoConstruidoException, EdificioDestruidoExcepcion {
+    public EstadoAldeano reparar(Edificio aReparar) throws Exception, EdificioEnConstruccionException {
+        if (edificioATrabajar == null) {
+            edificioATrabajar = aReparar;
+        } else if (edificioATrabajar != aReparar) {
 
-        if(edificioATrabajar == null) edificioATrabajar = aReparar;
-
-        else if(edificioATrabajar != aReparar){
-            edificioATrabajar.suspenderConstruccion();
+            edificioATrabajar.suspender();
             edificioATrabajar = aReparar;
         }
 
         return this;
     }
 
+    @Override
+    public EstadoAldeano actualizar() throws Exception {
+        edificioATrabajar.avanzarReparacion();
+
+        return this;
+    }
 }

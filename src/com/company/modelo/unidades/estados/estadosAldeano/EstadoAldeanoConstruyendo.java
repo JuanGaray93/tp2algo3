@@ -7,34 +7,37 @@ import com.company.excepciones.EdificioDestruidoExcepcion;
 import com.company.excepciones.EdificioNoConstruidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoAldeanoConstruyendo extends EstadoAldeano{
 
-    public EstadoAldeanoConstruyendo(){
-        super(50);
+    public EstadoAldeanoConstruyendo(Integer vidaActual){
+        super(vidaActual);
     }
 
     @Override
-    public EstadoAldeano otorgarGanancia(Jugador jugador) {
-        throw new AldeanoOcupadoException("Ocupado construyendo");
+    public EstadoAldeano reparar(Edificio aReparar) throws EdificioEnConstruccionException {
+        throw new EdificioEnConstruccionException("El edificio esta siendo construido");
     }
 
     @Override
-    public EstadoAldeano construir(Edificio aConstruir, Integer posicionH, Integer posicionV) throws DistanciaInvalidaException,
-            EdificioNoConstruidoException, EdificioDestruidoExcepcion {
+    public EstadoAldeano construir(Edificio edificio)
+            throws Exception, EdificioEnConstruccionException {
         if (edificioATrabajar == null) {
-            edificioATrabajar = aConstruir;
-
-        } else if (edificioATrabajar != aConstruir) {
-            edificioATrabajar.suspenderConstruccion();
-            edificioATrabajar = aConstruir;
+            edificioATrabajar = edificio;
+        } else if (edificioATrabajar != edificio) {
+            edificioATrabajar.suspender();
+            edificioATrabajar = edificio;
         }
+
         return this;
     }
 
     @Override
-    public EstadoAldeano reparar(Edificio edificio) throws EdificioEnConstruccionException {
-        throw new EdificioEnConstruccionException("El edificio esta siendo construido");
-    }
+    public EstadoAldeano actualizar() throws Exception {
 
+        edificioATrabajar.avanzarConstruccion();
+
+        return this;
+    }
 }
