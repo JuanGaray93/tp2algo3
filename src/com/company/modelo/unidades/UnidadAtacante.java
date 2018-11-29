@@ -8,7 +8,6 @@ import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
-
 public abstract class UnidadAtacante extends Unidad {
 
     protected Integer rangoAtaque;

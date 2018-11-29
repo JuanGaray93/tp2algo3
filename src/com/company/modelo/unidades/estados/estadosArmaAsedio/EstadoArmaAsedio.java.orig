@@ -1,0 +1,30 @@
+package com.company.modelo.unidades.estados.estadosArmaAsedio;
+
+import com.company.excepciones.*;
+import com.company.modelo.Posicion;
+import com.company.modelo.unidades.estados.EstadoUnidad;
+import com.company.modelo.unidades.ArmaAsedio;
+
+public abstract class EstadoArmaAsedio extends EstadoUnidad {
+
+    ArmaAsedio maquinaAsedio;
+    protected static Integer VIDA_MAXIMA = 150;
+    protected static Integer COSTO;
+
+<<<<<<< HEAD
+    public EstadoArmaAsedio(ArmaAsedio maquinaAsedio,Integer vida_actual) {
+        super(VIDA_MAXIMA,vida_actual);
+=======
+    public EstadoArmaAsedio(ArmaAsedio maquinaAsedio) {
+        super(VIDA_MAXIMA);
+
+>>>>>>> 969c90a9dda6186e07f0f11e981377a586b86c23
+        this.maquinaAsedio = maquinaAsedio;
+    }
+
+    public abstract EstadoArmaAsedioDesmontada desmontar() throws ArmaDesmontadaException;
+
+    public abstract EstadoArmaAsedio montar() throws ArmaMontadaException;
+
+    public abstract void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException, ArmaMontadaException, MovimientoInvalidoException;
+}
