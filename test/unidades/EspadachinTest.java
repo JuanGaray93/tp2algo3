@@ -163,21 +163,12 @@ public class EspadachinTest {
     @Test
     public void testEspadachinAtacarAUnEdificioCercanoEnemigo() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException, com.company.excepciones.Edificio.EdificioNoDisponibleException, ArmaDesmontadaException {
 
-        Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
-        Cuartel cuartel = new Cuartel(jugador);
         Cuartel otroCuartel = new Cuartel(otroJugador);
-        Aldeano peon = new Aldeano(jugador);
         Aldeano otroPeon = new Aldeano(otroJugador);
-        Espadachin espadachin = new Espadachin(jugador);
 
-        cuartel.construir(peon,2,2);
-
-        cuartel.avanzarConstruccion();
-        cuartel.avanzarConstruccion();
-        cuartel.avanzarConstruccion();
-
-        cuartel.crear(espadachin);
+        espadachin.establecerCoordenadasDeNacimiento(4,2);
+        mapa.ubicar(espadachin,4,2);
 
         otroCuartel.construir(otroPeon, 5, 2);
         otroCuartel.avanzarConstruccion();
@@ -230,35 +221,26 @@ public class EspadachinTest {
     @Test
     public void testEspadachinAtacarADosPosicionablesEnemigos() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException, EdificioNoDisponibleException, ArmaMontadaException, ArmaDesmontadaException {
 
-        Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
         Cuartel cuartel = new Cuartel(jugador);
-        Cuartel otroCuartel = new Cuartel(otroJugador);
         Aldeano peon = new Aldeano(jugador);
-        Aldeano otroPeon = new Aldeano(otroJugador);
-        Espadachin espadachin = new Espadachin(jugador);
         Espadachin otroEspadachin = new Espadachin(otroJugador);
 
-        cuartel.construir(peon,32, 9);
+        cuartel.construir(peon,5, 2);
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
 
         cuartel.crear(espadachin);
-        espadachin.moverA(34, 8);
 
-        otroCuartel.construir(otroPeon, 32, 7);
-        otroCuartel.avanzarConstruccion();
-        otroCuartel.avanzarConstruccion();
-        otroCuartel.avanzarConstruccion();
+        otroEspadachin.establecerCoordenadasDeNacimiento(7,3);
+        mapa.ubicar(otroEspadachin,7,3);
 
-        otroCuartel.crear(otroEspadachin);
+        otroEspadachin.atacarA(espadachin);
+        otroEspadachin.atacarA(cuartel);
 
-        espadachin.atacarA(otroEspadachin);
-        espadachin.atacarA(otroCuartel);
-
-        assertEquals( (Integer)75, otroEspadachin.getVida() );
-        assertEquals( (Integer)235, otroCuartel.getVida() );
+        assertEquals( (Integer)75, espadachin.getVida() );
+        assertEquals( (Integer)235, cuartel.getVida() );
     }
 
     @Test(expected = EnemigoInvalidoException.class)
