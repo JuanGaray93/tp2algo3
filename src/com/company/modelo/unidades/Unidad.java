@@ -2,6 +2,7 @@ package com.company.modelo.unidades;
 
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.MovimientoInvalidoException;
 import com.company.excepciones.UnidadMuertaException;
 import com.company.modelo.Jugador;
@@ -47,7 +48,7 @@ public abstract class Unidad extends Posicionable {
 	}
 
 	@Override
-	public void recibirDanio(Integer montoDeDanio) throws UnidadMuertaException {
+	public void recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException {
 		estado = estado.recibirDanio(montoDeDanio);
 	}
 
@@ -59,5 +60,10 @@ public abstract class Unidad extends Posicionable {
 
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical){
 		// TODO
+	}
+
+	@Override
+	public void actualizar() throws Exception {
+		estado = estado.actualizar();
 	}
 }

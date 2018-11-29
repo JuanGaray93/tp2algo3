@@ -1,5 +1,6 @@
 package com.company.modelo.unidades;
 
+import com.company.excepciones.ArmaDesmontadaException;
 import com.company.excepciones.EnemigoInvalidoException;
 import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
@@ -18,15 +19,15 @@ public abstract class UnidadAtacante extends Unidad {
         super(jugador);
     }
 
-    public void atacarA(Unidad enemigo) throws EnemigoInvalidoException {
+    public void atacarA(Unidad enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
         this.atacar(enemigo, this.danioAUnidad);
     }
 
-    public void atacarA(Edificio enemigo) throws EnemigoInvalidoException {
+    public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
         this.atacar(enemigo, this.danioAEdifcio);
     }
 
-    private void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
+    public void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
         Ataque ataque = new Ataque(rangoAtaque, danioAEdifcio, danioAUnidad, jugador, posicion);
         ataque.atacar(unEnemigo, unDanio);
     }
