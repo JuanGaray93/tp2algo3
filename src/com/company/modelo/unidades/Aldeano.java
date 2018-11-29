@@ -7,6 +7,7 @@ import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeano;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoConstruyendo;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoRecolectandoOro;
@@ -16,76 +17,87 @@ import java.util.ArrayList;
 
 public class Aldeano extends Unidad {
 
-	EstadoAldeano estadoActual;
 
-	//LISTO
 	public Aldeano(Jugador jugador) {
 		super(jugador);
-		estadoActual = new EstadoAldeanoRecolectandoOro();
+		VIDA_MAXIMA = 50;
+		vidaActual = VIDA_MAXIMA;
+		COSTO = 25;
+		this.estado = new EstadoAldeanoRecolectandoOro(jugador, vidaActual);
 	}
 
-	private boolean existeEnRadio(Edificio edificio) {
-		ArrayList<Posicionable> cercanos = this.posicion.buscarEnRadioPosicionables(1);
-		return cercanos.contains(edificio);
-	}
-
-	public void construir(Edificio edificio, Integer posicionHorizontal, Integer posicionVertical) throws DistanciaInvalidaException {
-
-		if (posicion.seEncuentraEnRadio(posicionHorizontal, posicionVertical)) {
-			try {
-				edificio.construir(this, posicionHorizontal, posicionVertical);
-				estadoActual = estadoActual.construir(edificio, posicionHorizontal, posicionVertical);
-			} catch (EdificioEnConstruccionException e) {
-			} catch (CasilleroLlenoException e) {
-			} catch (CasilleroNoExistenteException e) {
-			} catch (EdificioDestruidoExcepcion e) {
-			} catch (EdificioNoConstruidoException e) {
-			} catch (ErrorDeConstruccionException e) {
-			} catch (EdificioEnReparacionException e) {
-			}
-		}
-
-		else throw new DistanciaInvalidaException("No puedo construir a esa distancia");
-
-	}
-
-	//LISTO
-	public void reparar(Edificio edificio) throws EdificioLejanoException {
-
-			if (existeEnRadio(edificio)) {
-				try {
-					edificio.reparar(this);
-					estadoActual = new EstadoAldeanoReparando();
-				} catch (EdificioReparadoException e) {
-					e.printStackTrace();
-				} catch (EdificioEnReparacionException e) {
-				} catch (EdificioEnConstruccionException e) {
-				} catch (EdificioDestruidoExcepcion e) {
-				} catch (EdificioNoConstruidoException e) {
-				}
-			}
-
-			else throw new EdificioLejanoException("Disculpe, esto esta muy lejos");
-
-	}
-
-	public void liberar(){
-		estadoActual = new EstadoAldeanoRecolectandoOro();
-		estadoActual.otorgarGanancia(jugador);
-	}
-
-	@Override
-	public void recibirDanio(Integer montoDeDanio) throws UnidadMuertaException {
-		this.estadoActual.recibirDanio(montoDeDanio);
-	}
-
-	@Override
-	public void actualizar() {
+	/*@Override
+	public void moverA(Integer posicionHorizontal, Integer posicionVertical)
+			throws CasilleroNoExistenteException,
+			CasilleroLlenoException, MovimientoInvalidoException {
+		posicion.moverA(posicionHorizontal, posicionVertical);
 		try {
-			estadoActual.otorgarGanancia(jugador);
-		} catch (AldeanoOcupadoException e) {
-			//si esta ocupado no hace nada, no suma oro
+			estadoActual.abandonarTareaActual();
+		} catch (Exception | EdificioEnConstruccionException ignored) {
 		}
+	}
+
+	private boolean existentesEnRadio(Edificio e) {
+		ArrayList<Posicionable> cercanos = this.posicion.buscarPosicionablesEnRadio(1);
+		return cercanos.contains(e);
+	}*/
+
+	@Override
+	public void recibirDanio(Integer montoDeDanio) throws Exception {
+		try {
+			estado.recibirDanio(montoDeDanio);
+		} catch (UnidadMuertaException | EdificioEnConstruccionException e) {
+			//posicion.quitarPosicionable();
+			jugador.eliminarDePoblacion(this);
+
+		}
+	}
+
+
+	/*public void construir(Edificio edificio, Integer x, Integer y)
+			throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion {
+		if (posicion.esDistanciaValida(x, y)) {
+
+			estadoActual = estadoActual.construir(edificio);
+
+			edificio.construir(this, x, y);
+
+		} else {
+			throw new DistanciaInvalidaException("No puedo construir a esa distancia");
+		}
+
+	}
+
+	public void reparar(Edificio edificio) throws EdificioLejanoException {
+		if (existentesEnRadio(edificio)) {
+
+			try {
+
+				edificio.reparar(this);
+				estadoActual = estadoActual.reparar(edificio);
+
+			} catch (Exception | EdificioEnConstruccionException e) {
+				//
+			} catch (EdificioDestruidoExcepcion edificioDestruidoExcepcion) {
+				edificioDestruidoExcepcion.printStackTrace();
+			}
+
+		} else {
+			throw new EdificioLejanoException("Disculpe, esto esta muy lejos");
+		}
+
+	}*/
+
+	public void liberar() throws Exception {
+		estado = new EstadoAldeanoRecolectandoOro(jugador, vidaActual);
+		estado.actualizar();
+	}
+
+	@Override
+	public void actualizar() throws Exception {
+
+		estado = estado.actualizar();
+
 	}
 
 }

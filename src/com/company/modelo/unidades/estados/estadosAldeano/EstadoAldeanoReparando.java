@@ -14,16 +14,16 @@ public class EstadoAldeanoReparando extends EstadoAldeano {
         super(vidaActual);
     }
 
-    public EstadoAldeano construir(Edificio edificio) {
+    public EstadoUnidad construir(Edificio edificio) {
         throw new AldeanoOcupadoException("Estoy reparando...");
     }
 
-    public EstadoAldeano reparar(Edificio aReparar) throws Exception, EdificioEnConstruccionException {
+    public EstadoUnidad reparar(Edificio aReparar) throws Exception, EdificioEnConstruccionException {
         if (edificioATrabajar == null) {
             edificioATrabajar = aReparar;
         } else if (edificioATrabajar != aReparar) {
 
-            edificioATrabajar.suspender();
+            //edificioATrabajar.suspender();
             edificioATrabajar = aReparar;
         }
 
@@ -31,8 +31,8 @@ public class EstadoAldeanoReparando extends EstadoAldeano {
     }
 
     @Override
-    public EstadoAldeano actualizar() throws Exception {
-        edificioATrabajar.avanzarReparacion();
+    public EstadoUnidad actualizar() throws Exception {
+        //edificioATrabajar.avanzarReparacion();
 
         return this;
     }

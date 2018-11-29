@@ -15,7 +15,7 @@ public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
     }
 
     public EstadoArmaAsedio montar() {
-        return new EstadoArmaAsedioMontada(vidaActual);
+        return new EstadoArmaAsedioMontada(VIDA_ACTUAL);
     }
 
     @Override

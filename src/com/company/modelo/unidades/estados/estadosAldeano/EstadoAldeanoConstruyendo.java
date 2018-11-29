@@ -16,17 +16,17 @@ public class EstadoAldeanoConstruyendo extends EstadoAldeano{
     }
 
     @Override
-    public EstadoAldeano reparar(Edificio aReparar) throws EdificioEnConstruccionException {
+    public EstadoUnidad reparar(Edificio aReparar) throws EdificioEnConstruccionException {
         throw new EdificioEnConstruccionException("El edificio esta siendo construido");
     }
 
     @Override
-    public EstadoAldeano construir(Edificio edificio)
+    public EstadoUnidad construir(Edificio edificio)
             throws Exception, EdificioEnConstruccionException {
         if (edificioATrabajar == null) {
             edificioATrabajar = edificio;
         } else if (edificioATrabajar != edificio) {
-            edificioATrabajar.suspender();
+            //edificioATrabajar.suspender();
             edificioATrabajar = edificio;
         }
 
@@ -34,9 +34,9 @@ public class EstadoAldeanoConstruyendo extends EstadoAldeano{
     }
 
     @Override
-    public EstadoAldeano actualizar() throws Exception {
+    public EstadoUnidad actualizar() throws Exception {
 
-        edificioATrabajar.avanzarConstruccion();
+        //edificioATrabajar.avanzarConstruccion();
 
         return this;
     }

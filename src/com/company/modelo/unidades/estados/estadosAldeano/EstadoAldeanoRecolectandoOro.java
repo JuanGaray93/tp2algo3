@@ -16,23 +16,23 @@ public class EstadoAldeanoRecolectandoOro extends EstadoAldeano {
         jugadorActual = jugador;
     }
 
-    public EstadoAldeano otorgarGanancia(Jugador jugador) {
+    public EstadoUnidad otorgarGanancia(Jugador jugador) {
         jugador.sumarOro(PRODUCCION_ORO);
         return this;
     }
 
-    public EstadoAldeano construir(Edificio edificio)
+    public EstadoUnidad construir(Edificio edificio)
             throws Exception, EdificioEnConstruccionException {
-        return new EstadoAldeanoConstruyendo(vidaActual).construir(edificio);
+        return new EstadoAldeanoConstruyendo(VIDA_ACTUAL).construir(edificio);
     }
 
-    public EstadoAldeano reparar(Edificio edificio)
+    public EstadoUnidad reparar(Edificio edificio)
             throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion {
 
-        return new EstadoAldeanoReparando().reparar(edificio);
+        return new EstadoAldeanoReparando(VIDA_ACTUAL).reparar(edificio);
     }
 
-    public EstadoAldeano actualizar() {
+    public EstadoUnidad actualizar() {
         jugadorActual.sumarOro(PRODUCCION_ORO);
         return this;
     }
