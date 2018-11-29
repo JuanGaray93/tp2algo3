@@ -12,19 +12,13 @@ public class Arquero extends UnidadAtacante {
 		this.rangoAtaque = 3;
 		this.danioAEdifcio = 10;
 		this.danioAUnidad = 15;
-		/*VIDA_MAXIMA = 75;
+		VIDA_MAXIMA = 75;
 		vidaActual = VIDA_MAXIMA;
-		COSTO = 75*/
+		COSTO = 75;
 	}
 
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-
-	}
-
-	@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
 
 	}
 

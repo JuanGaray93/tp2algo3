@@ -12,10 +12,12 @@ public abstract class EstadoAldeano extends EstadoUnidad {
 
     protected Edificio edificioATrabajar;
 
+    protected static Integer VIDA_MAXIMA;
+
     public EstadoAldeano() {
+        super(VIDA_MAXIMA);
 
         VIDA_MAXIMA = 50;
-        COSTO = 25;
         vidaActual = 50;
     }
 
@@ -26,7 +28,7 @@ public abstract class EstadoAldeano extends EstadoUnidad {
         edificioATrabajar.suspender();
     }
 
-    public EstadoAldeano recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException {
+    public EstadoAldeano recibirDanio(Integer montoDeDanio) throws EdificioEnConstruccionException, Exception {
 
         if (montoDeDanio >= vidaActual) {
             vidaActual = 0;

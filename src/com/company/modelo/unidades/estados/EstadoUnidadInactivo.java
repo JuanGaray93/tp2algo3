@@ -1,14 +1,15 @@
 package com.company.modelo.unidades.estados;
 
-public class EstadoUnidadInactivo extends EstadoUnidad {
 
-    public EstadoUnidadInactivo() {
 
+    public class EstadoUnidadInactivo extends EstadoUnidad{
+
+        public EstadoUnidadInactivo(Integer vidaMaxima){
+            super(vidaMaxima);
+        }
+
+        @Override
+        public EstadoUnidad actualizar() {
+            return this;
+        }
     }
-
-    @Override
-    public EstadoUnidad actualizar() {
-        return this;
-    }
-
-}

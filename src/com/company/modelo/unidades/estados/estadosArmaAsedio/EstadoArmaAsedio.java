@@ -14,6 +14,7 @@ public abstract class EstadoArmaAsedio extends EstadoUnidad {
     protected static Integer COSTO;
 
     public EstadoArmaAsedio(ArmaAsedio maquinaAsedio) {
+        super(VIDA_MAXIMA);
 
         this.maquinaAsedio = maquinaAsedio;
     }

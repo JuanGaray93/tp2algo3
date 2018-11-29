@@ -1,10 +1,7 @@
 package com.company.modelo.unidades;
 
-import com.company.excepciones.ArmaMontadaException;
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
@@ -13,13 +10,18 @@ import com.company.modelo.unidades.estados.EstadoUnidadInactivo;
 
 public abstract class Unidad extends Posicionable {
 
+
+    protected static Integer VIDA_MAXIMA;
+    protected static Integer COSTO;
+    protected static Integer vidaActual;
+
     protected Posicion posicion;
     protected EstadoUnidad estado;
 
     public Unidad(Jugador jugador) {
         this.jugador = jugador;
         this.posicion = null;
-        this.estado = new EstadoUnidadInactivo();
+        this.estado = new EstadoUnidadInactivo(VIDA_MAXIMA);
     }
 
     public void establecerCoordenadasDeNacimiento(Integer posicionHorizontal, Integer posicionVertical) {
@@ -33,10 +35,10 @@ public abstract class Unidad extends Posicionable {
         posicion.moverA(posicionHorizontal, posicionVertical);
     }
 
-    public void recibirDanio(Integer montoDeDanio) throws Exception {
+    public void recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException {
         try {
             estado.recibirDanio(montoDeDanio);
-        } catch (Exception | EdificioEnConstruccionException ignored) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -49,6 +51,10 @@ public abstract class Unidad extends Posicionable {
     @Override
     public void ubicar(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
         posicion.posicionar(this);
+    }
+
+    public Integer getVida() throws UnidadMuertaException {
+        return this.estado.getVidaActual();
     }
 
     public void actualizar() throws Exception {

@@ -20,6 +20,7 @@ public class AsedioTest {
 	    private Mapa mapa = Mapa.getMapa();
 	    private Jugador jugador;
 
+
 	    @Before
 	    public void resetMapa() {
 	        mapa.destruir();

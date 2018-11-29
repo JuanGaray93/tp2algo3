@@ -5,16 +5,13 @@ import com.company.excepciones.UnidadMuertaException;
 
 public abstract class EstadoUnidad {
 
-	protected static Integer VIDA_MAXIMA;
-	protected static Integer COSTO;
-	protected static Integer vidaActual;
+	protected Integer VIDA_MAXIMA;
+	protected Integer vidaActual;
 
-	/*public EstadoUnidad() {
-		VIDA_MAXIMA = vida_maxima;
-		COSTO = costo;
-		vidaActual = vida_maxima;
+	public EstadoUnidad(Integer vidaMaxima) {
+		this.VIDA_MAXIMA = vidaMaxima;
+		this.vidaActual = vidaMaxima;
 	}
-	*/
 
 	public EstadoUnidad recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException {
 
@@ -24,14 +21,14 @@ public abstract class EstadoUnidad {
 
 		this.vidaActual -= montoDeDanio;
 
-		if(this.vidaActual <= 0) return new EstadoUnidadMuerto(VIDA_MAXIMA,COSTO);
+		//if(this.vidaActual <= 0) return new EstadoUnidadMuerto(this.VIDA_MAXIMA);
 
 		return this;
 	}
 
-	public Integer getVidaActual() throws UnidadMuertaException{
-		return vidaActual;
+	public Integer getVidaActual() throws UnidadMuertaException {
+		return this.vidaActual;
 	}
 
-    public abstract EstadoUnidad actualizar() throws Exception;
+	public abstract EstadoUnidad actualizar() throws Exception;
 }

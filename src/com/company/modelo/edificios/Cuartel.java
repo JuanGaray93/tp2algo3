@@ -34,6 +34,7 @@ public class Cuartel extends Edificio {
         jugador.cobrar(this.COSTO);
 
         this.ubicar(posicionHorizontal, posicionVertical);
+        jugador.agregarAEdificios(this);
 
         estado = estado.construir(quienLoConstruye);
     }
