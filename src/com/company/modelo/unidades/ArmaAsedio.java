@@ -29,18 +29,20 @@ public class ArmaAsedio extends UnidadAtacante {
 
 	@Override
 	public void atacarA(Unidad enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
-		if (estado instanceof EstadoArmaAsedioMontada) {
-			throw new EnemigoInvalidoException("El arma asedio no puede atacar unidades");
+		if ( !(estado instanceof EstadoArmaAsedioMontada) ) {
+			throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
 		}
-		throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
+
+		throw new EnemigoInvalidoException("El arma asedio no puede atacar unidades");
 	}
 
 	@Override
 	public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
-		if (estado instanceof EstadoArmaAsedioMontada) {
-			atacar(enemigo, danioAEdifcio);
+		if ( !(estado instanceof EstadoArmaAsedioMontada) ) {
+			throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
 		}
-		throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
+
+		this.atacar(enemigo, this.danioAEdifcio);
 	}
 
 
