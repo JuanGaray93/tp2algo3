@@ -1,15 +1,20 @@
 package edificios;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.EdificioNoDisponibleException;
+import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.modelo.edificios.Cuartel;
+import com.company.modelo.edificios.PlazaCentral;
+import com.company.modelo.unidades.Aldeano;
+import com.company.modelo.unidades.Arquero;
+import com.company.modelo.unidades.Espadachin;
 import org.junit.Test;
 import org.junit.Before;
 
-import com.company.excepciones.CasilleroLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.terreno.Mapa;
@@ -28,26 +33,13 @@ public class CastilloTest {
 	}
 
 	@Test
-	public void crearCastilloOcupaElmapaQueDebeOcuparTest() throws CasilleroLlenoException, CasilleroNoExistenteException {
+	public void testCastilloOcupaElmapaQueDebeOcuparCuandoSeLoCrea() throws CasilleroLlenoException, CasilleroNoExistenteException {
 
 		Jugador jugador = new Jugador();
 		Castillo castillo = new Castillo(jugador);
 
 		castillo.surgir(5, 5);
 
-		
-		//Ahora mapa esta ocupado en posicion cercana de castillo y en castillo
-		//La posicion donde se crea la maquina de asedio es random en el castillo
-
-		/* El 1! representa el lugar donde se ubica el castillo. 0 = lugares vacios
-		 *     _______________
-		 * 5  |1!|1 |1 |1 |0 |
-		 * 6  |1 |1 |1 |1 |0 |
-		 * 7  |1 |1 |1 |1 |0 |
-		 * 8  |1 |1 |1 |1 |0 |
-		 * 9  |0_|0 |0_|0_|0_|
-		 *      5  6  7  8  9
-		 */
 		assertTrue(mapa.estaOcupado(5,5));
 		assertTrue(mapa.estaOcupado(5,6));
 		assertTrue(mapa.estaOcupado(5,7));
@@ -69,8 +61,8 @@ public class CastilloTest {
 		assertTrue(mapa.estaOcupado(8,8));
 	}
 
-	@Test
-	public void castilloCrearMaquinaAsedioTest() throws Exception, EdificioNoDisponibleException, EdificioEnConstruccionException {
+	@Test(expected = OroInsuficienteException.class)
+	public void testCastilloCrearMaquinaAsedio() throws Exception, EdificioNoDisponibleException, EdificioEnConstruccionException {
 
 		Jugador jugador = new Jugador();
 		Castillo castillo = new Castillo(jugador);
@@ -84,4 +76,31 @@ public class CastilloTest {
 		assertTrue( mapa.estaOcupado(9, 5) );
 
 	}
+
+	@Test
+	public void testCastilloAtacarAUnidadesEnemigasConDistanciaIgualATres() throws CasilleroNoExistenteException, CasilleroLlenoException, UnidadMuertaException, EnemigoInvalidoException {
+
+		Jugador jugador = new Jugador();
+		Jugador jugadorEnemigo = new Jugador();
+		Castillo castillo = new Castillo(jugador);
+		Aldeano aldeanoEnemigo = new Aldeano(jugadorEnemigo);
+		Espadachin espadachinEnemigo = new Espadachin(jugadorEnemigo);
+		Arquero arqueroEnemigo = new Arquero(jugadorEnemigo);
+
+		castillo.surgir(8, 10);
+
+		mapa.ubicar(aldeanoEnemigo, 5, 10);
+		mapa.ubicar(espadachinEnemigo, 18, 14);
+		mapa.ubicar(arqueroEnemigo, 12, 7);
+
+		castillo.atacarA(aldeanoEnemigo);
+		castillo.atacarA(espadachinEnemigo);
+		castillo.atacarA(arqueroEnemigo);
+
+		assertEquals( (Integer)30, aldeanoEnemigo.getVida() );
+		assertEquals( (Integer)80, espadachinEnemigo.getVida() );
+		assertEquals( (Integer)55, arqueroEnemigo.getVida() );
+
+	}
+
 }
