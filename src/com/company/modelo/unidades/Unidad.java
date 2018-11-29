@@ -23,7 +23,6 @@ public abstract class Unidad extends Posicionable {
 	public Unidad(Jugador jugador) {
 		this.jugador = jugador;
 		this.posicion = null;
-		this.estado = new EstadoUnidadInactivo(VIDA_MAXIMA);
 	}
 
 	public void establecerCoordenadasDeNacimiento(int posicionHorizontal, int posicionVertical) {
@@ -65,5 +64,9 @@ public abstract class Unidad extends Posicionable {
 	@Override
 	public void actualizar() throws Exception {
 		estado = estado.actualizar();
+	}
+
+	public Integer getCosto(){
+		return COSTO;
 	}
 }

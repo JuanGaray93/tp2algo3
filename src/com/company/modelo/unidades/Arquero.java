@@ -15,6 +15,7 @@ public class Arquero extends UnidadAtacante {
 		VIDA_MAXIMA = 75;
 		vidaActual = VIDA_MAXIMA;
 		COSTO = 75;
+		this.estado = new EstadoUnidadInactivo(VIDA_MAXIMA);
 	}
 
 	@Override
