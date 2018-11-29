@@ -24,7 +24,7 @@ public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
         throw new ArmaMontadaException("la maquina de asedio ya esta montada");
     }
 
-    @Override
+    
     public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical) throws ArmaMontadaException {
         throw new ArmaMontadaException("la maquina de asedio no se puede mover porque esta montada");
     }

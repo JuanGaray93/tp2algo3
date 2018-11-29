@@ -1,13 +1,12 @@
 package com.company.modelo.unidades;
 
-import com.company.excepciones.ArmaDesmontadaException;
-import com.company.excepciones.ArmaMontadaException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioReparadoException;
-import com.company.excepciones.EnemigoInvalidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedio;
 import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioDesmontada;
 import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioMontada;
@@ -43,6 +42,10 @@ public class ArmaAsedio extends UnidadAtacante {
 		this.atacar(enemigo, this.danioAEdifcio);
 	}
 
+	@Override
+	public void moverA(Integer posicionHorizontal, Integer posicionVertical) throws ArmaMontadaException, CasilleroNoExistenteException, MovimientoInvalidoException, CasilleroLlenoException {
+		estado.moverA(posicion, posicionHorizontal, posicionVertical);
+	}
 
 	public void montar() throws ArmaMontadaException {
 		this.estado = estado.montar();
