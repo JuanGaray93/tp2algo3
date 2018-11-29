@@ -71,7 +71,7 @@ public class CastilloTest {
 
 		ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
 
-		castillo.crearUnidad(maquinaAsedio);
+		castillo.crear(maquinaAsedio);
 
 		assertTrue( mapa.estaOcupado(9, 5) );
 

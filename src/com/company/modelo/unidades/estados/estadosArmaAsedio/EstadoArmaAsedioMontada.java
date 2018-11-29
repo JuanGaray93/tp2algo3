@@ -17,7 +17,7 @@ public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
 
     public EstadoArmaAsedioDesmontada desmontar() {
 
-        return new EstadoArmaAsedioDesmontada(maquinaAsedio,vidaActual);
+        return new EstadoArmaAsedioDesmontada(maquinaAsedio);
     }
 
     public EstadoArmaAsedioMontada montar() throws ArmaMontadaException {

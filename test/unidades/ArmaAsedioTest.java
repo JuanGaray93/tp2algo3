@@ -190,7 +190,7 @@ public class ArmaAsedioTest {
     }
 
     @Test
-    public void testArmaAsedioAtacarAEdificiosEnemigosConDistanciaIgualACinco() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException {
+    public void testArmaAsedioAtacarAEdificiosEnemigosConDistanciaIgualACinco() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException, ArmaMontadaException, ArmaDesmontadaException {
 
         Jugador jugador = new Jugador();
         ArmaAsedio asedio = new ArmaAsedio(jugador);
@@ -206,8 +206,8 @@ public class ArmaAsedioTest {
         castilloEnemigo.surgir(15, 10);
         plazaEnemiga.surgir(4, 10);
         cuartelEnemigo.construir(aldeanoEnemigo, 10, 4);
-        cuartelEnemigo.actualizar();
-        cuartelEnemigo.actualizar();
+        //cuartelEnemigo.actualizar();
+        //cuartelEnemigo.actualizar();
 
         asedio.atacarA(castilloEnemigo);
         asedio.atacarA(plazaEnemiga);

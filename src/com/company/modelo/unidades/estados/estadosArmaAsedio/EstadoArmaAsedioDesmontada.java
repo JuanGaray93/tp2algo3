@@ -10,7 +10,8 @@ import com.company.modelo.unidades.estados.EstadoUnidad;
 public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
     ArmaAsedio maquinaAsedio;
 
-    public EstadoArmaAsedioDesmontada(ArmaAsedio armaAsedio, Integer vidaActual) {
+    // saco vida actual de parametros
+    public EstadoArmaAsedioDesmontada(ArmaAsedio armaAsedio) {
         super(armaAsedio,vidaActual);
         maquinaAsedio = armaAsedio;
         //super(maquinaAsedio);

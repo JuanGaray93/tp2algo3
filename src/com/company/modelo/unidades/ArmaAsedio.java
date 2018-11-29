@@ -21,10 +21,8 @@ public class ArmaAsedio extends UnidadAtacante {
 		this.rangoAtaque = 5;
 		this.danioAEdifcio = 75;
 		this.danioAUnidad = 0;
-		VIDA_MAXIMA = 150;
-		vidaActual = VIDA_MAXIMA;
 		COSTO = 200;
-		this.estado =  new EstadoArmaAsedioDesmontada(VIDA_MAXIMA);
+		this.estado =  new EstadoArmaAsedioDesmontada(this);
 	}
 
 	@Override
