@@ -30,7 +30,7 @@ public class ArqueroTest {
         peon = new Aldeano(jugador);
         arquero = new Arquero(jugador);
     }
-/*
+
     @Test
     public void testArqueroMoverHorizontalmenteHaciaDelante() throws
             Exception,
@@ -221,22 +221,24 @@ public class ArqueroTest {
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
+        Jugador otroJugador = new Jugador();
+        Arquero otroArquero = new Arquero(otroJugador);
+        otroArquero.establecerCoordenadasDeNacimiento(32,8);
 
-        arquero.establecerCoordenadasDeNacimiento(32,8);
-
-        arquero.ubicar(32,8);
+        otroArquero.ubicar(32,8);
 
         try {
-            arquero.atacarA(cuartel);
+            otroArquero.atacarA(cuartel);
         } catch (ArmaDesmontadaException ignored) { }
 
         assertEquals((Integer) 240, cuartel.getVida());
     }
-*/
+
     @Test
     public void testArqueroAtacarADosPosicionablesEnemigosConDistanciasDistintas() throws Exception, ArmaDesmontadaException {
 
-        Arquero otroArquero =  new Arquero(jugador);
+        Jugador otroJugador = new Jugador();
+        Arquero otroArquero =  new Arquero(otroJugador);
 
         otroArquero.establecerCoordenadasDeNacimiento(5,5);
         otroArquero.ubicar(5,5);
@@ -252,30 +254,26 @@ public class ArqueroTest {
         cuartel.avanzarConstruccion();
 
         cuartel.avanzarConstruccion();
-        System.out.println(arquero.getVida());
-        arquero.atacarA(otroArquero);
 
-        assertEquals((Integer) 60, otroArquero.getVida());
+        System.out.println(arquero.getVida());
+        otroArquero.atacarA(arquero);
+        otroArquero.atacarA(cuartel);
+
+        assertEquals((Integer) 60, arquero.getVida());
         assertEquals((Integer) 240, cuartel.getVida());
     }
-/*
+
     @Test(expected = EnemigoInvalidoException.class)
     public void testArqueroAtacarAUnEdificioEnemigoFueraDeSuRangoDeAtaque()
             throws Exception, EdificioNoDisponibleException, ArmaDesmontadaException {
 
-        Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
-        Cuartel cuartel = new Cuartel(jugador);
         Cuartel otroCuartel = new Cuartel(otroJugador);
-        Aldeano peon = new Aldeano(jugador);
         Aldeano otroPeon = new Aldeano(otroJugador);
-        Arquero arquero = new Arquero(jugador);
 
-        cuartel.construir(peon, 2, 10);
-        cuartel.avanzarConstruccion();
-        cuartel.avanzarConstruccion();
 
-        cuartel.crear(arquero);
+        arquero.establecerCoordenadasDeNacimiento(10,10);
+        arquero.ubicar(10,10);
 
         otroCuartel.construir(otroPeon, 0, 0);
         otroCuartel.avanzarConstruccion();
@@ -285,5 +283,5 @@ public class ArqueroTest {
 
         assertEquals((Integer) 250, otroCuartel.getVida());
     }
-*/
+
 }
