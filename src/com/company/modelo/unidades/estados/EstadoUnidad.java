@@ -5,18 +5,17 @@ import com.company.excepciones.UnidadMuertaException;
 
 public abstract class EstadoUnidad {
 
-	protected static Integer VIDA_MAXIMA;
-	protected static Integer COSTO;
+	protected final Integer VIDA_MAXIMA;
 	protected static Integer vidaActual;
 
-	/*public EstadoUnidad() {
-		VIDA_MAXIMA = vida_maxima;
-		COSTO = costo;
-		vidaActual = vida_maxima;
-	}
-	*/
+	public EstadoUnidad(Integer vidaMaxima, Integer vida_actual) {
+		this.VIDA_MAXIMA = vidaMaxima;
+		this.vidaActual = vida_actual;
 
-	public EstadoUnidad recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException {
+	}
+
+	public EstadoUnidad recibirDanio(Integer montoDeDanio)
+			throws Exception, EdificioEnConstruccionException {
 
 		if(montoDeDanio < 0){
 			throw new RuntimeException("El daño recibido fue negativo todo mal.");
@@ -24,12 +23,15 @@ public abstract class EstadoUnidad {
 
 		this.vidaActual -= montoDeDanio;
 
-		if(this.vidaActual <= 0) return new EstadoUnidadMuerto(VIDA_MAXIMA,COSTO);
+		if(this.vidaActual <= 0) {
+			vidaActual = 0;
+			throw new UnidadMuertaException("Esta unidad se ha muerto");
+		}
 
 		return this;
 	}
 
-	public Integer getVidaActual() throws UnidadMuertaException{
+	public Integer getVidaActual(){
 		return vidaActual;
 	}
 

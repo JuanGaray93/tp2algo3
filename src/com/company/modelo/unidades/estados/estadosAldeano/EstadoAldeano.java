@@ -9,14 +9,13 @@ import com.company.modelo.unidades.estados.EstadoUnidad;
 public abstract class EstadoAldeano extends EstadoUnidad {
 
     protected final Integer PRODUCCION_ORO = 20;
+    protected static Integer VIDA_MAXIMA = 50;
 
     protected Edificio edificioATrabajar;
 
     public EstadoAldeano() {
+        super(VIDA_MAXIMA,VIDA_MAXIMA);
 
-        VIDA_MAXIMA = 50;
-        COSTO = 25;
-        vidaActual = 50;
     }
 
     public void abandonarTareaActual() throws Exception, EdificioEnConstruccionException {

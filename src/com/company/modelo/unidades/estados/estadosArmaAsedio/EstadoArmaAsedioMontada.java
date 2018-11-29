@@ -9,16 +9,15 @@ import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
 
-    public EstadoArmaAsedioMontada(ArmaAsedio armaAsedio) {
-        super(armaAsedio);
-        VIDA_MAXIMA = 150;
-        vidaActual = 150;
+    public EstadoArmaAsedioMontada(ArmaAsedio armaAsedio,Integer vidaActual) {
+        super(armaAsedio,vidaActual);
         EstadoArmaAsedio.COSTO = 200;
 
     }
 
     public EstadoArmaAsedioDesmontada desmontar() {
-        return new EstadoArmaAsedioDesmontada(maquinaAsedio);
+
+        return new EstadoArmaAsedioDesmontada(maquinaAsedio,vidaActual);
     }
 
     public EstadoArmaAsedioMontada montar() throws ArmaMontadaException {
@@ -26,7 +25,7 @@ public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
     }
 
     @Override
-    public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException, ArmaMontadaException {
+    public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical) throws ArmaMontadaException {
         throw new ArmaMontadaException("la maquina de asedio no se puede mover porque esta montada");
     }
 

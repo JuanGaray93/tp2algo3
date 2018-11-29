@@ -16,6 +16,7 @@ public class Aldeano extends Unidad {
 
     public Aldeano(Jugador jugador) {
         super(jugador);
+        COSTO = 25;
         estadoActual = new EstadoAldeanoRecolectandoOro(jugador);
     }
 

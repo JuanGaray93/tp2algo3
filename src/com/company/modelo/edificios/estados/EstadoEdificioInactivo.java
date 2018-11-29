@@ -16,7 +16,7 @@ public class EstadoEdificioInactivo extends EstadoEdificio {
 
     public EstadoEdificioInactivo(Integer vidaMax,Integer vida, Integer monto) {
 
-        super(vidaMax, monto);
+        super(vidaMax,vida, monto);
 
         vidaActual = vida;
         trabajadorActual = null;
@@ -45,7 +45,7 @@ public class EstadoEdificioInactivo extends EstadoEdificio {
     public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye)
             throws EdificioTerminadoException {
         trabajadorActual = quienLoConstruye;
-        return new EstadoEdificioEnConstruccion(VIDA_MAXIMA, MONTO_REPARACION);
+        return new EstadoEdificioEnConstruccion(VIDA_MAXIMA,vidaActual, MONTO_REPARACION);
     }
 
     @Override

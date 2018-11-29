@@ -83,7 +83,8 @@ public class Posicion {
             throws CasilleroNoExistenteException,
             CasilleroLlenoException, MovimientoInvalidoException {
 
-        if ((this.esDistanciaValida(posicionHorizontal, posicionVertical)) & (!mapa.estaOcupado(posicionHorizontal, posicionVertical))) {
+        if ((this.esDistanciaValida(posicionHorizontal, posicionVertical)) &&
+                (!mapa.estaOcupado(posicionHorizontal, posicionVertical))) {
             Posicionable posicionable = mapa.conseguirOcupante(this.posicionHorizontal, this.posicionVertical);
             this.quitarPosicionable();
             this.posicionHorizontal = posicionHorizontal;

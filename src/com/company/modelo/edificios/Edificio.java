@@ -1,13 +1,10 @@
 package com.company.modelo.edificios;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.excepciones.Edificio.ErrorDeConstruccionException;
-import com.company.excepciones.MapaLlenoException;
-import com.company.excepciones.UnidadErroneaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
@@ -36,10 +33,11 @@ public abstract class Edificio extends Posicionable {
 
         this.jugador = jugador;
 
-        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,COSTO);
+        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,VIDA_MAXIMA,COSTO);
     }
 
-	public void recibirDanio(Integer unDanio) throws EdificioEnConstruccionException {
+	public void recibirDanio(Integer unDanio)
+            throws EdificioEnConstruccionException, EdificioDestruidoExcepcion {
 
 		estado = estado.recibirDanio(unDanio);
 
@@ -82,8 +80,9 @@ public abstract class Edificio extends Posicionable {
 
     public void crear(Unidad unidad) throws CasilleroNoExistenteException, EdificioEnReparacionException, CasilleroLlenoException, EdificioEnConstruccionException, MapaLlenoException, EdificioNoDisponibleException, UnidadErroneaException {
         this.estado = estado.crear(unidad, posiciones.get(1));
+        jugador.cobrar(unidad.getCosto());
         jugador.agregarAPoblacion(unidad);
-    };
+    }
     
     public void reparar(Aldeano reparador) throws Exception, EdificioEnConstruccionException {
   this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);

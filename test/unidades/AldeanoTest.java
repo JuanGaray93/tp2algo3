@@ -4,6 +4,7 @@ import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.DistanciaInvalidaException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.EdificioDestruidoExcepcion;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Cuartel;
@@ -55,7 +56,9 @@ public class AldeanoTest {
     }
 
     @Test
-    public void verificarQueMientrasReparaNoSumaOroTest() throws Exception, DistanciaInvalidaException, EdificioEnConstruccionException {
+    public void verificarQueMientrasReparaNoSumaOroTest()
+            throws Exception, EdificioEnConstruccionException,
+            EdificioDestruidoExcepcion {
 
         Aldeano aldeano = new Aldeano(jugador);
         PlazaCentral plaza = new PlazaCentral(jugador);
@@ -171,7 +174,8 @@ public class AldeanoTest {
 
         try {
             castillo.recibirDanio(15);
-        } catch (Exception | EdificioEnConstruccionException ignored) { }
+        } catch (Exception | EdificioEnConstruccionException
+                | EdificioDestruidoExcepcion ignored) { }
 
         try {
             aldeano.reparar(castillo);
@@ -183,7 +187,9 @@ public class AldeanoTest {
     }
 
     @Test
-    public void repararPlazaCentralTest() throws Exception, EdificioEnConstruccionException {
+    public void repararPlazaCentralTest()
+            throws Exception, EdificioEnConstruccionException,
+            EdificioDestruidoExcepcion {
 
         Aldeano aldeano = new Aldeano(jugador);
 
@@ -227,7 +233,9 @@ public class AldeanoTest {
 
         aldeano.actualizar();
 
-        cuartel.recibirDanio(60);
+        try {
+            cuartel.recibirDanio(60);
+        } catch (EdificioDestruidoExcepcion edificioDestruidoExcepcion) { }
 
         aldeano.reparar(cuartel);
 

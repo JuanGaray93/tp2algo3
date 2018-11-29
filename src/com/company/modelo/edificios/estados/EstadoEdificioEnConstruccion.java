@@ -10,9 +10,8 @@ import com.company.modelo.unidades.Unidad;
 public class EstadoEdificioEnConstruccion extends EstadoEdificio {
 
 
-    public EstadoEdificioEnConstruccion(Integer vidaMax, Integer reparacion) {
-        super(vidaMax, reparacion);
-        vidaActual = 0;
+    public EstadoEdificioEnConstruccion(Integer vidaMax,Integer vidaActual, Integer reparacion) {
+        super(vidaMax, vidaActual,reparacion);
     }
 
     @Override
@@ -53,6 +52,7 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
     public EstadoEdificio construir(Aldeano quienLoConstruye) throws Exception {
 
         if (trabajadorActual == null) {
+
             trabajadorActual = quienLoConstruye;
 
         } else if (trabajadorActual != quienLoConstruye) {
@@ -60,12 +60,15 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
             throw new EdificioOcupadoException("No se puede construir este edificio," +
                     " hay otro aldeano construyendolo!");
         }
+
         vidaActual += VIDA_MAXIMA / 3;
+
         if(vidaActual>=VIDA_MAXIMA) {
             vidaActual = VIDA_MAXIMA;
             trabajadorActual.liberar();
             return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
         }
+
         return this;
     }
 

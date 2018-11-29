@@ -15,6 +15,8 @@ import com.company.modelo.unidades.Unidad;
 
 public class Cuartel extends Edificio {
 
+    Integer vida = 0;
+
     public Cuartel(Jugador jugador) {
 
         super(jugador);
@@ -24,7 +26,9 @@ public class Cuartel extends Edificio {
         BLOQUES_DE_ALTO = 2;
         VIDA_MAXIMA = 250;
 
-        this.estado = new EstadoPorConstruir(VIDA_MAXIMA, MONTO_DE_REPARACION);
+        try {
+            this.estado = new EstadoPorConstruir(this.VIDA_MAXIMA,this.vida, MONTO_DE_REPARACION);
+        } catch (Exception ignored) { }
     }
 
     @Override
@@ -36,6 +40,8 @@ public class Cuartel extends Edificio {
         this.ubicar(posicionHorizontal, posicionVertical);
 
         estado = estado.construir(quienLoConstruye);
+
+
     }
 
 	@Override
@@ -51,6 +57,7 @@ public class Cuartel extends Edificio {
 		}
 
 		posiciones.get(0).colocarEnCasilleroLibreMasCercano(unidad);
+        jugador.cobrar(unidad.getCosto());
 		jugador.agregarAPoblacion(unidad);
 	}
 

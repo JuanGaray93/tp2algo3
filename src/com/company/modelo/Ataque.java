@@ -1,6 +1,7 @@
 package com.company.modelo;
 
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.EdificioDestruidoExcepcion;
 import com.company.excepciones.EnemigoInvalidoException;
 
 import java.util.ArrayList;
@@ -8,15 +9,11 @@ import java.util.ArrayList;
 public class Ataque {
 
     private Integer rangoAtaque;
-    private Integer danioAEdificio;
-    private Integer danioAUnidad;
     private Jugador jugador;
     private Posicion posicion;
 
-    public Ataque(Integer rangoDeAtaque, Integer danioAEdificio, Integer danioAUnidad, Jugador jugador, Posicion posicion){
+    public Ataque(Integer rangoDeAtaque, Jugador jugador, Posicion posicion){
         this.rangoAtaque = rangoDeAtaque;
-        this.danioAEdificio = danioAEdificio;
-        this.danioAUnidad = danioAUnidad;
         this.jugador = jugador;
         this.posicion = posicion;
     }
@@ -29,10 +26,9 @@ public class Ataque {
 
         try{
             unEnemigo.recibirDanio(unDanio);
-        } catch (Exception e) {
+        } catch (Exception | EdificioEnConstruccionException
+                | EdificioDestruidoExcepcion ignored) {
 
-        } catch (EdificioEnConstruccionException e) {
-            e.printStackTrace();
         }
     }
 

@@ -3,6 +3,7 @@ package com.company.modelo;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.EdificioDestruidoExcepcion;
 
 public abstract class Posicionable {
 
@@ -12,7 +13,7 @@ public abstract class Posicionable {
     public abstract void ubicar(Integer posicionHorizontal, Integer posicionVertical)
             throws CasilleroNoExistenteException, CasilleroLlenoException;
 
-    public abstract void recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException;
+    public abstract void recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion;
 
 }
 

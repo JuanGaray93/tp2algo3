@@ -1,31 +1,26 @@
 package com.company.modelo.unidades;
 
 import com.company.modelo.Jugador;
-import com.company.modelo.Posicionable;
-import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.estados.EstadoUnidadInactivo;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class Arquero extends UnidadAtacante {
 
-	public Arquero(Jugador jugador) {
-		super(jugador);
-		this.rangoAtaque = 3;
-		this.danioAEdifcio = 10;
-		this.danioAUnidad = 15;
-		/*VIDA_MAXIMA = 75;
-		vidaActual = VIDA_MAXIMA;
-		COSTO = 75*/
-	}
+    private final Integer VIDA_MAXIMA = 75;
+    private final Integer COSTO = 75;
 
-	@Override
-	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
+    EstadoUnidad estado;
 
-	}
+    public Arquero(Jugador jugador) {
 
-	@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
+        super(jugador);
+         estado =  establecerEstadoInicial(VIDA_MAXIMA, VIDA_MAXIMA);
+        this.rangoAtaque = 3;
+        this.danioAEdifcio = 10;
+        this.danioAUnidad = 15;
+    }
 
-	}
+    public Integer getVida(){
+        return estado.getVidaActual();
+    }
 
 }

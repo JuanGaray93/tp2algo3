@@ -13,7 +13,7 @@ public class EstadoEdificioCreando extends EstadoEdificio {
 
     EstadoEdificioCreando(Integer vida_maxima,Integer vidaActual, Integer monto_reparacion) {
 
-        super(vida_maxima, monto_reparacion);
+        super(vida_maxima,vidaActual, monto_reparacion);
         this.vidaActual = vidaActual;
     }
 

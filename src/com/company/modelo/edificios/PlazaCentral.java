@@ -16,7 +16,7 @@ public class PlazaCentral extends Edificio {
         COSTO = 100;
         VIDA_MAXIMA = 450;
 
-        this.estado = new EstadoPorConstruir(VIDA_MAXIMA, MONTO_DE_REPARACION);
+        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,VIDA_MAXIMA, MONTO_DE_REPARACION);
     }
 
     public void surgir(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {

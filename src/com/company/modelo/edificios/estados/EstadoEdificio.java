@@ -6,6 +6,7 @@ import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioOcupadoException;
 import com.company.excepciones.Edificio.EdificioReparadoException;
+import com.company.excepciones.EdificioDestruidoExcepcion;
 import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
@@ -13,22 +14,25 @@ import com.company.modelo.unidades.Unidad;
 
 public abstract class EstadoEdificio {
 
-    protected final Integer VIDA_MAXIMA ;
-    protected final Integer MONTO_REPARACION;
+    protected static Integer VIDA_MAXIMA ;
+    protected static Integer MONTO_REPARACION;
     protected  static Integer vidaActual;
     protected static Aldeano trabajadorActual = null;
 
-    public EstadoEdificio(Integer vida, Integer monto) {
+    public EstadoEdificio(Integer vida_maxima,Integer vida_actual, Integer monto) {
 
-        this.VIDA_MAXIMA = vida;
+        this.VIDA_MAXIMA = vida_maxima;
+        this.vidaActual = vida_actual;
         this.MONTO_REPARACION = monto;
 
     }
 
     public abstract EstadoEdificio crear(Unidad unidad, Posicion posicion)
-            throws EdificioEnConstruccionException, EdificioEnReparacionException, CasilleroLlenoException, CasilleroNoExistenteException, MapaLlenoException;
+            throws EdificioEnConstruccionException, EdificioEnReparacionException,
+            CasilleroLlenoException, CasilleroNoExistenteException,
+            MapaLlenoException;
 
-    public EstadoEdificio recibirDanio(Integer montoDeDanio) throws EdificioEnConstruccionException {
+    public EstadoEdificio recibirDanio(Integer montoDeDanio) throws EdificioEnConstruccionException, EdificioDestruidoExcepcion {
 
         if(montoDeDanio < 0){
             throw new RuntimeException("El daño recibido fue negativo toddo mal.");
@@ -36,7 +40,7 @@ public abstract class EstadoEdificio {
 
         this.vidaActual -= montoDeDanio;
         if(vidaActual <= 0){
-            return new EstadoEdificioMuerto(VIDA_MAXIMA,MONTO_REPARACION);
+           throw new EdificioDestruidoExcepcion("Este edificio esta destruido");
         }
         return this;
     }
@@ -54,6 +58,7 @@ public abstract class EstadoEdificio {
             return vidaActual;
 
     }
+
     public abstract EstadoEdificio ejecutarAccion() throws Exception;
 
 }

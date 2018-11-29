@@ -12,15 +12,16 @@ import com.company.modelo.unidades.estados.estadosArmaAsedio.EstadoArmaAsedioMon
 public class ArmaAsedio extends UnidadAtacante {
 
 	private EstadoArmaAsedio estado;
+	private Integer VIDA_MAXIMA = 150;
 
 	public ArmaAsedio(Jugador jugador) {
 		
 		super(jugador);
-		this.estado =  new EstadoArmaAsedioDesmontada(this);
+		COSTO = 200;
+		this.estado =  new EstadoArmaAsedioDesmontada(this,VIDA_MAXIMA);
 	}
 
-
-	//solo ataca edificios por 75 da�o y hasta distancia 5.
+	//solo ataca edificios por 75 danio y hasta distancia 5.
     public void atacar(Edificio enemigo) throws PosicionableEsAliadoException {
     	if(this.verificarAlianza(enemigo)) {
     		throw new PosicionableEsAliadoException("la unidad que quiere atacar es propia");

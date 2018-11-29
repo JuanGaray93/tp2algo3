@@ -1,35 +1,32 @@
 package com.company.modelo.edificios.estados;
 
-import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioOcupadoException;
-import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
 public class EstadoEdificioEnReparacion extends EstadoEdificio {
 
-    public EstadoEdificioEnReparacion(Integer vidaMax,Integer vidaActual,Integer reparacion)
-    {
-        super(vidaMax, reparacion);
+    public EstadoEdificioEnReparacion(Integer vidaMax, Integer vidaActual, Integer reparacion) {
+        super(vidaMax,vidaActual, reparacion);
         this.vidaActual = vidaActual;
     }
 
     public EstadoEdificio reparar(Aldeano reparador,
                                   Integer montoDeReparacion) throws Exception {
 
-        if(trabajadorActual == null){
+        if (trabajadorActual == null) {
             trabajadorActual = reparador;
 
-        }else if(trabajadorActual != reparador){
+        } else if (trabajadorActual != reparador) {
 
             throw new EdificioOcupadoException("No se puede reparar este edificio, " +
                     "hay otro aldeano reparandolo!");
         }
 
-        vidaActual+=montoDeReparacion;
-        if(vidaActual>=VIDA_MAXIMA) {
+        vidaActual += montoDeReparacion;
+        if (vidaActual >= VIDA_MAXIMA) {
             vidaActual = VIDA_MAXIMA;
             trabajadorActual.liberar();
             return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
@@ -48,16 +45,16 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
     @Override
     public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye)
             throws Exception {
-       throw new EdificioEnReparacionException("El edificio se esta reparando!");
+        throw new EdificioEnReparacionException("El edificio se esta reparando!");
     }
 
     @Override
     public EstadoEdificio suspender() throws Exception {
-        if(this.trabajadorActual !=null){
+        if (this.trabajadorActual != null) {
             trabajadorActual.liberar();
         }
         this.trabajadorActual = null;
-        return new EstadoEdificioInactivo(VIDA_MAXIMA,vidaActual, MONTO_REPARACION);
+        return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
     }
 
     @Override
@@ -67,6 +64,6 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
 
     @Override
     public EstadoEdificio ejecutarAccion() throws Exception {
-        return reparar(trabajadorActual,MONTO_REPARACION);
+        return reparar(trabajadorActual, MONTO_REPARACION);
     }
 }

@@ -37,6 +37,7 @@ public class Castillo extends Edificio {
         }
 
         posiciones.get(1).colocarEnCasilleroLibreMasCercano(unidad);
+        jugador.cobrar(unidad.getCosto());
         jugador.agregarAPoblacion(unidad);
     }
 
@@ -50,7 +51,7 @@ public class Castillo extends Edificio {
     }
 
     private void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
-        Ataque ataque = new Ataque(rangoAtaque, danioAPosicionable, danioAPosicionable, jugador, posiciones.get(36)); //la posicion 36 es donde esta el centro del castillo
+        Ataque ataque = new Ataque(rangoAtaque, jugador, posiciones.get(36)); //la posicion 36 es donde esta el centro del castillo
         ataque.atacar(unEnemigo, unDanio);
     }
 

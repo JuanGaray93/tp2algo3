@@ -62,7 +62,8 @@ public class PlazaCentralTest {
     }
 
     @Test
-    public void recibirDanioYVerificarDanioTest() throws Exception, DistanciaInvalidaException, EdificioEnConstruccionException {
+    public void recibirDanioYVerificarDanioTest() throws Exception,
+            EdificioEnConstruccionException, EdificioDestruidoExcepcion {
 
         peon.establecerCoordenadasDeNacimiento(5, 3);
 
@@ -78,7 +79,9 @@ public class PlazaCentralTest {
     }
 
     @Test
-    public void verificarReparacionEnTiempoIndicadoTest() throws Exception, EdificioEnConstruccionException {
+    public void verificarReparacionEnTiempoIndicadoTest()
+            throws Exception, EdificioEnConstruccionException,
+            EdificioDestruidoExcepcion {
 
         peon.establecerCoordenadasDeNacimiento(5, 3);
 
@@ -103,7 +106,8 @@ public class PlazaCentralTest {
 
     @Test
     public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest()
-            throws Exception, EdificioEnConstruccionException {
+            throws Exception, EdificioEnConstruccionException,
+            EdificioDestruidoExcepcion {
 
         peon.establecerCoordenadasDeNacimiento(5, 5);
 

@@ -10,8 +10,8 @@ import com.company.modelo.unidades.estados.EstadoUnidad;
 public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
     ArmaAsedio maquinaAsedio;
 
-    public EstadoArmaAsedioDesmontada(ArmaAsedio armaAsedio) {
-        super(armaAsedio);
+    public EstadoArmaAsedioDesmontada(ArmaAsedio armaAsedio, Integer vidaActual) {
+        super(armaAsedio,vidaActual);
         maquinaAsedio = armaAsedio;
         //super(maquinaAsedio);
         this.VIDA_MAXIMA = 150;
@@ -25,7 +25,7 @@ public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
 
     public EstadoArmaAsedio montar() {
 
-        return new EstadoArmaAsedioMontada(maquinaAsedio);
+        return new EstadoArmaAsedioMontada(maquinaAsedio,vidaActual);
     }
 
     public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical)

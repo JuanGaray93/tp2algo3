@@ -8,13 +8,11 @@ import com.company.modelo.unidades.ArmaAsedio;
 public abstract class EstadoArmaAsedio extends EstadoUnidad {
 
     ArmaAsedio maquinaAsedio;
-    protected static Integer DISTANCIA_MAX_ATQ = 5;
-    protected static Integer VIDA_MAXIMA;
-    protected static Integer vidaActual;
+    protected static Integer VIDA_MAXIMA = 150;
     protected static Integer COSTO;
 
-    public EstadoArmaAsedio(ArmaAsedio maquinaAsedio) {
-
+    public EstadoArmaAsedio(ArmaAsedio maquinaAsedio,Integer vida_actual) {
+        super(VIDA_MAXIMA,vida_actual);
         this.maquinaAsedio = maquinaAsedio;
     }
 

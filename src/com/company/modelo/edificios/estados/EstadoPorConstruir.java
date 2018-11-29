@@ -9,9 +9,8 @@ import com.company.modelo.unidades.Unidad;
 
 public class EstadoPorConstruir extends EstadoEdificio {
 
-    public EstadoPorConstruir(Integer vidaMax, Integer reparacion) {
-        super(vidaMax,reparacion);
-        this.vidaActual = 0;
+    public EstadoPorConstruir(Integer vidaMax,Integer vida_actual, Integer reparacion) {
+        super(vidaMax,vida_actual,reparacion);
         trabajadorActual = null;
     }
 
@@ -22,7 +21,10 @@ public class EstadoPorConstruir extends EstadoEdificio {
 
     @Override
     public EstadoEdificio construir(Aldeano quienLoConstruye) throws Exception {
-        return new EstadoEdificioEnConstruccion(VIDA_MAXIMA,MONTO_REPARACION).construir(quienLoConstruye);}
+
+        return new EstadoEdificioEnConstruccion(VIDA_MAXIMA,0,MONTO_REPARACION).construir(quienLoConstruye);
+
+    }
 
     @Override
     public EstadoEdificioEnReparacion suspender() throws EdificioEnConstruccionException {

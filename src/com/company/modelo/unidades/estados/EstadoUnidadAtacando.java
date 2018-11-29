@@ -6,7 +6,8 @@ public class EstadoUnidadAtacando extends EstadoUnidad {
 
     private Posicionable enemigo;
 
-    public EstadoUnidadAtacando(){
+    public EstadoUnidadAtacando(Integer vidaMaxima,Integer vidaActual){
+        super(vidaMaxima,vidaActual);
         enemigo = null;
     }
 
