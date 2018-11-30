@@ -29,7 +29,7 @@ public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
     public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical)
             throws CasilleroNoExistenteException, CasilleroLlenoException, MovimientoInvalidoException {
 
-			posicion.moverA(posicionHorizontal, posicionVertical);
+        posicion.moverA(posicionHorizontal, posicionVertical);
 
     }
 

@@ -26,17 +26,13 @@ public class ArmaAsedio extends UnidadAtacante {
 	}
 
     @Override
-	public void atacarA(Unidad enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
-		if (estado instanceof EstadoArmaAsedioMontada) {
+	public void atacarA(Unidad enemigo) throws EnemigoInvalidoException {
 			throw new EnemigoInvalidoException("El arma asedio no puede atacar unidades");
-		}
-		throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
 	}
 
 	@Override
 	public void atacarA(Edificio enemigo) throws ArmaDesmontadaException, EnemigoInvalidoException {
 		estado.atacarA(enemigo,new Ataque(rangoAtaque,jugador,posicion),danioAEdificio);
-
 	}
 
 	@Override

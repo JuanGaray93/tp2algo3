@@ -35,7 +35,7 @@ public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
     public void atacarA(Edificio enemigo, Ataque ataque, Integer danio)
             throws EnemigoInvalidoException {
 
-            ataque.atacar(enemigo,danio);
+        ataque.atacar(enemigo,danio);
     }
 
     @Override

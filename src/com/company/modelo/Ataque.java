@@ -18,7 +18,8 @@ public class Ataque {
         this.posicion = posicion;
     }
 
-    public void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
+    public void atacar(Posicionable unEnemigo, Integer unDanio)
+            throws EnemigoInvalidoException {
 
         ArrayList atacables = this.buscarAtacables(this.rangoAtaque);
 
