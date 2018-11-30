@@ -9,6 +9,7 @@ import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Arquero;
+import com.company.modelo.unidades.Espadachin;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -204,7 +205,7 @@ public class ArqueroTest {
     }
 
     @Test
-    public void testArqueroAtacarAUnEdificioCercanoEnemigoConDistanciaIgualATres() throws CasilleroLlenoException, EdificioDestruidoExcepcion, EdificioEnConstruccionException, ErrorDeConstruccionException, EdificioEnReparacionException, CasilleroNoExistenteException, UnidadErroneaException, MovimientoInvalidoException, MapaLlenoException, EnemigoInvalidoException, EdificioNoConstruidoException, EdificioNoDisponibleException, EdificioReparadoException {
+    public void testArqueroAtacarAUnEdificioCercanoEnemigoConDistanciaIgualATres() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException {
 
         Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
@@ -231,7 +232,7 @@ public class ArqueroTest {
     }
 
     @Test
-    public void testArqueroAtacarAUnaUnidadCercanaEnemigaConDistanciaIgualADos() throws CasilleroLlenoException, EdificioDestruidoExcepcion, EdificioEnConstruccionException, ErrorDeConstruccionException, EdificioEnReparacionException, CasilleroNoExistenteException, EdificioNoDisponibleException, UnidadErroneaException, MovimientoInvalidoException, MapaLlenoException, EnemigoInvalidoException, UnidadMuertaException, EdificioReparadoException {
+    public void testArqueroAtacarAUnaUnidadCercanaEnemigaConDistanciaIgualADos() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException {
 
         Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
@@ -261,26 +262,31 @@ public class ArqueroTest {
     }
 
     @Test(expected = EnemigoInvalidoException.class)
-    public void testArqueroAtacarAUnaUnidadAmigaConDistanciaIgualAUno() throws CasilleroLlenoException, EdificioDestruidoExcepcion, EdificioEnConstruccionException, ErrorDeConstruccionException, EdificioEnReparacionException, CasilleroNoExistenteException, EdificioNoDisponibleException, UnidadErroneaException, MovimientoInvalidoException, MapaLlenoException, EnemigoInvalidoException, EdificioNoConstruidoException, EdificioReparadoException {
+    public void testArqueroAtacarAVariasUnidadsAmigasConDistanciaIgualAUnoFalla() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException {
 
         Jugador jugador = new Jugador();
         Cuartel cuartel = new Cuartel(jugador);
         Aldeano peon = new Aldeano(jugador);
         Arquero arquero = new Arquero(jugador);
+        Espadachin espadachin = new Espadachin(jugador);
 
         cuartel.construir(peon,32, 9);
         cuartel.actualizar();
         cuartel.actualizar();
 
         cuartel.crearUnidad(arquero);
+        cuartel.crearUnidad(espadachin);
+        mapa.ubicar(peon, 34, 10);
 
-        arquero.atacarA(cuartel);
+        arquero.atacarA(peon);
+        arquero.atacarA(espadachin);
 
-        assertEquals( (Integer)250, cuartel.getVida() );
+        assertEquals( (Integer)50, peon.getVida() );
+        assertEquals( (Integer)100, espadachin.getVida() );
     }
 
     @Test
-    public void testArqueroAtacarADosPosicionablesEnemigosConDistanciasDistintas() throws CasilleroLlenoException, EdificioDestruidoExcepcion, EdificioEnConstruccionException, ErrorDeConstruccionException, EdificioEnReparacionException, CasilleroNoExistenteException, EdificioNoDisponibleException, UnidadErroneaException, MovimientoInvalidoException, MapaLlenoException, EnemigoInvalidoException, EdificioNoConstruidoException, UnidadMuertaException, EdificioReparadoException {
+    public void testArqueroAtacarADosPosicionablesEnemigosConDistanciasDistintas() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException {
 
         Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
@@ -311,7 +317,7 @@ public class ArqueroTest {
     }
 
     @Test(expected = EnemigoInvalidoException.class)
-    public void testArqueroAtacarAUnEdificioEnemigoFueraDeSuRangoDeAtaque() throws CasilleroLlenoException, EdificioDestruidoExcepcion, EdificioEnConstruccionException, ErrorDeConstruccionException, EdificioEnReparacionException, CasilleroNoExistenteException, EdificioNoDisponibleException, UnidadErroneaException, MovimientoInvalidoException, MapaLlenoException, EnemigoInvalidoException, EdificioNoConstruidoException, EdificioReparadoException {
+    public void testArqueroAtacarAUnEdificioEnemigoFueraDeSuRangoDeAtaque() throws Exception, EdificioDestruidoExcepcion, EdificioEnConstruccionException {
 
         Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();

@@ -236,9 +236,9 @@ public class ArmaAsedioTest {
         mapa.ubicar(espadachinEnemigo, 8, 8);
         mapa.ubicar(arqueroEnemigo, 11, 11);
 
-        asedio.atacarA(aldeanoEnemigo);
-        asedio.atacarA(espadachinEnemigo);
-        asedio.atacarA(arqueroEnemigo);
+        asedio.atacar(aldeanoEnemigo);
+        asedio.atacar(espadachinEnemigo);
+        asedio.atacar(arqueroEnemigo);
 
         assertEquals( (Integer)50, aldeanoEnemigo.getVida() );
         assertEquals( (Integer)100, espadachinEnemigo.getVida() );
