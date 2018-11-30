@@ -68,9 +68,7 @@ public class Posicion {
                         posicionables.add(mapa.conseguirOcupante(i, j));
                     }
 
-                } catch (CasilleroNoExistenteException e) {
-
-                }
+                } catch (CasilleroNoExistenteException ignored) { }
 
 
             }

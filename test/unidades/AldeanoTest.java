@@ -20,19 +20,27 @@ public class AldeanoTest {
 
     private Mapa mapa = Mapa.getMapa();
     private Jugador jugador = null;
+    Aldeano aldeano = null;
 
     @Before
     public void resetMapa() throws CasilleroLlenoException {
         mapa.destruir();
         mapa = Mapa.getMapa();
-
         jugador = new Jugador();
+        aldeano = new Aldeano(jugador);
+    }
+
+    @Test
+    public void recibirDanio(){
+        try {
+            aldeano.recibirDanio(50);
+        } catch (Exception ignored) {}
+        assertEquals(aldeano.getVida(),(Integer)0);
     }
 
     @Test
     public void verificarQueSumaOroSiNoEstaOcupadoTest() throws Exception {
 
-        Aldeano aldeano = new Aldeano(jugador);
         aldeano.actualizar();
         assertEquals(jugador.getOro(), (Integer) 120);
     }
@@ -61,15 +69,18 @@ public class AldeanoTest {
             EdificioDestruidoExcepcion {
 
         Aldeano aldeano = new Aldeano(jugador);
+
         PlazaCentral plaza = new PlazaCentral(jugador);
         aldeano.establecerCoordenadasDeNacimiento(5, 4);
 
+        aldeano.ubicar(5,4);
         aldeano.construir(plaza, 5, 5);
         //3 turnos en construirse
 
         aldeano.actualizar();
 
         aldeano.actualizar();
+
         aldeano.actualizar();
 
         //aca dejo de construir suma oro

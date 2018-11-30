@@ -9,8 +9,9 @@ public class EstadoAldeanoRecolectandoOro extends EstadoAldeano {
 
     Jugador jugadorActual ;
 
-    public EstadoAldeanoRecolectandoOro(Jugador jugador) {
+    public EstadoAldeanoRecolectandoOro(Jugador jugador, Integer vida_actual) {
 
+        super(vida_actual);
         edificioATrabajar = null;
         jugadorActual = jugador;
     }
@@ -22,13 +23,13 @@ public class EstadoAldeanoRecolectandoOro extends EstadoAldeano {
 
     public EstadoAldeano construir(Edificio edificio)
             throws Exception, EdificioEnConstruccionException {
-        return new EstadoAldeanoConstruyendo().construir(edificio);
+        return new EstadoAldeanoConstruyendo(vidaActual).construir(edificio);
     }
 
     public EstadoAldeano reparar(Edificio edificio)
             throws Exception, EdificioEnConstruccionException {
 
-        return new EstadoAldeanoReparando().reparar(edificio);
+        return new EstadoAldeanoReparando(vidaActual).reparar(edificio);
     }
 
 }

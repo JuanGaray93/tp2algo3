@@ -15,19 +15,20 @@ import com.company.modelo.unidades.Unidad;
 
 public class Cuartel extends Edificio {
 
-    Integer vida = 0;
+    final Integer MONTO_DE_REPARACION = 50;
+
+    final Integer VIDA_MAXIMA = 250;
 
     public Cuartel(Jugador jugador) {
 
         super(jugador);
         COSTO = 50;
-        MONTO_DE_REPARACION = 50;
         BLOQUES_DE_ANCHO = 2;
         BLOQUES_DE_ALTO = 2;
-        VIDA_MAXIMA = 250;
-
         try {
-            this.estado = new EstadoPorConstruir(this.VIDA_MAXIMA,this.vida, MONTO_DE_REPARACION);
+            this.estado = new EstadoPorConstruir
+                    (this.VIDA_MAXIMA,SIN_VIDA, MONTO_DE_REPARACION);
+
         } catch (Exception ignored) { }
     }
 

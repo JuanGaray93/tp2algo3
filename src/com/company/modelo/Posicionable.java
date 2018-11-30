@@ -13,7 +13,9 @@ public abstract class Posicionable {
     public abstract void ubicar(Integer posicionHorizontal, Integer posicionVertical)
             throws CasilleroNoExistenteException, CasilleroLlenoException;
 
-    public abstract void recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion;
+    public abstract void recibirDanio(Integer montoDeDanio)
+            throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion;
 
+    public abstract Integer getVida() throws Exception;
 }
 

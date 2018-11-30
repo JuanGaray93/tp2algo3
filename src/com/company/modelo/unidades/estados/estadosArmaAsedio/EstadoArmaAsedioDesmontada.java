@@ -2,6 +2,7 @@ package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
 import com.company.excepciones.*;
 
+import com.company.modelo.Ataque;
 import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.ArmaAsedio;
@@ -13,10 +14,7 @@ public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
     public EstadoArmaAsedioDesmontada(ArmaAsedio armaAsedio, Integer vidaActual) {
         super(armaAsedio,vidaActual);
         maquinaAsedio = armaAsedio;
-        //super(maquinaAsedio);
-        this.VIDA_MAXIMA = 150;
-        this.vidaActual = 150;
-        this.COSTO = 200;
+
     }
 
     public EstadoArmaAsedioDesmontada desmontar() throws ArmaDesmontadaException {
@@ -35,9 +33,8 @@ public class EstadoArmaAsedioDesmontada extends EstadoArmaAsedio {
 
     }
 
-    public void atacar(Edificio enemigo) throws ArmaDesmontadaException {
+    public void atacarA(Edificio enemigo, Ataque ataque,Integer danio) throws ArmaDesmontadaException {
         throw new ArmaDesmontadaException("la maquina de asedio no puede atacar desmontada");
-
     }
 
     @Override

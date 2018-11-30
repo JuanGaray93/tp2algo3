@@ -6,7 +6,8 @@ import com.company.modelo.edificios.Edificio;
 
 public class EstadoAldeanoConstruyendo extends EstadoAldeano {
 
-    public EstadoAldeanoConstruyendo() {
+    public EstadoAldeanoConstruyendo(Integer vidaActual) {
+        super(vidaActual);
     }
 
     @Override

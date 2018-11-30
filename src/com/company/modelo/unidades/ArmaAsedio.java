@@ -2,6 +2,7 @@ package com.company.modelo.unidades;
 
 import com.company.excepciones.*;
 
+import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
@@ -17,19 +18,12 @@ public class ArmaAsedio extends UnidadAtacante {
 	public ArmaAsedio(Jugador jugador) {
 		
 		super(jugador);
-		COSTO = 200;
 		this.estado =  new EstadoArmaAsedioDesmontada(this,VIDA_MAXIMA);
-	}
+		rangoAtaque = 5;
+		danioAEdificio = 75;
+		danioAUnidad = 0;
 
-	//solo ataca edificios por 75 danio y hasta distancia 5.
-    public void atacar(Edificio enemigo) throws PosicionableEsAliadoException {
-    	if(this.verificarAlianza(enemigo)) {
-    		throw new PosicionableEsAliadoException("la unidad que quiere atacar es propia");
-    	}
-    	else {
-    		//this.estado.atacar(enemigo);
-    	}
-    }
+	}
 
     @Override
 	public void atacarA(Unidad enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
@@ -40,26 +34,14 @@ public class ArmaAsedio extends UnidadAtacante {
 	}
 
 	@Override
-	public void atacarA(Edificio enemigo)
-			throws ArmaDesmontadaException, PosicionableEsAliadoException {
-		if (estado instanceof EstadoArmaAsedioMontada) {
-			atacar(enemigo);
-		}
-		throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
-	}
+	public void atacarA(Edificio enemigo) throws ArmaDesmontadaException, EnemigoInvalidoException {
+		estado.atacarA(enemigo,new Ataque(rangoAtaque,jugador,posicion),danioAEdificio);
 
+	}
 
 	@Override
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
-	}
-
-	public Boolean verificarAlianza(Posicionable otroPosicionable) {
-		return null;
-	}
-
-	public Boolean verificarAlianza(Jugador otroJugador) {
-		return null;
 	}
 	
 	//toma 1 turno montar/desmontar, si esta montada puede atacar pero no moverse.

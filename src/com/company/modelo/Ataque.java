@@ -19,16 +19,21 @@ public class Ataque {
     }
 
     public void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
+
         ArrayList atacables = this.buscarAtacables(this.rangoAtaque);
+
         this.eliminarPosicionablesAmigos(atacables);
 
-        if( !atacables.contains(unEnemigo) ) throw new EnemigoInvalidoException("No se pudo atacar al enemigo");
+        if(!atacables.contains(unEnemigo) )
+            throw new EnemigoInvalidoException("No se pudo atacar al enemigo");
 
         try{
+
             unEnemigo.recibirDanio(unDanio);
+            return;
+
         } catch (Exception | EdificioEnConstruccionException
                 | EdificioDestruidoExcepcion ignored) {
-
         }
     }
 
@@ -48,6 +53,7 @@ public class Ataque {
     }
 
     private ArrayList buscarAtacables(Integer unRadio){
+
         return posicion.buscarPosicionablesEnRadio(unRadio);
     }
 

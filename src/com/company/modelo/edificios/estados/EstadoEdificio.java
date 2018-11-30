@@ -14,10 +14,10 @@ import com.company.modelo.unidades.Unidad;
 
 public abstract class EstadoEdificio {
 
-    protected static Integer VIDA_MAXIMA ;
-    protected static Integer MONTO_REPARACION;
-    protected  static Integer vidaActual;
-    protected static Aldeano trabajadorActual = null;
+    protected final Integer VIDA_MAXIMA ;
+    protected final Integer MONTO_REPARACION;
+    protected Integer vidaActual;
+    protected  Aldeano trabajadorActual = null;
 
     public EstadoEdificio(Integer vida_maxima,Integer vida_actual, Integer monto) {
 

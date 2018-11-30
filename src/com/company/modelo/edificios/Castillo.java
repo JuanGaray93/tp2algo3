@@ -10,16 +10,19 @@ import com.company.modelo.unidades.Unidad;
 
 public class Castillo extends Edificio {
 
+
+    final Integer MONTO_DE_REPARACION = 15;
+    final Integer COSTO = 0;
+
+    final Integer VIDA_MAXIMA = 1000;
+
     private Integer rangoAtaque;
     private Integer danioAPosicionable;
 
     public Castillo(Jugador jugador) {
         super(jugador);
-        COSTO = 0;
-        MONTO_DE_REPARACION = 15;
-        BLOQUES_DE_ANCHO = 8;
         BLOQUES_DE_ALTO = 8;
-        VIDA_MAXIMA = 1000;
+        BLOQUES_DE_ANCHO = 8;
         this.rangoAtaque = 7; // porque es a partir del centro del castillo
         this.danioAPosicionable = 20;
         this.estado = new EstadoEdificioInactivo(VIDA_MAXIMA, VIDA_MAXIMA, MONTO_DE_REPARACION);
@@ -29,15 +32,14 @@ public class Castillo extends Edificio {
     public void crear(Unidad unidad) throws CasilleroNoExistenteException,
             CasilleroLlenoException, UnidadErroneaException, MapaLlenoException {
 
-        //esto no funciona
-        //if( !(estado instanceof EstadoEdificioCreando) | !(estado instanceof EstadoEdificioInactivo)  ) throw new EdificioNoDisponibleException("El edificio no esta disponible");
 
         if (!(unidad instanceof ArmaAsedio)) {
             throw new UnidadErroneaException("Imposible crear ese tipo de unidad");
         }
 
         posiciones.get(1).colocarEnCasilleroLibreMasCercano(unidad);
-        jugador.cobrar(unidad.getCosto());
+
+        jugador.cobrar(this.COSTO);
         jugador.agregarAPoblacion(unidad);
     }
 

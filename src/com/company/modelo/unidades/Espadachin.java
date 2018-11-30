@@ -4,14 +4,15 @@ import com.company.modelo.Jugador;
 
 public class Espadachin extends UnidadAtacante {
 
-    private static Integer VIDA_MAXIMA = 100;
+    private final Integer VIDA_MAXIMA = 100;
+    protected static Integer COSTO = 50;
 
     public Espadachin(Jugador jugador) {
+
         super(jugador);
-        establecerEstadoInicial(VIDA_MAXIMA, VIDA_MAXIMA);
-        COSTO = 50;
+        establecerEstadoInicial(VIDA_MAXIMA, COSTO);
         this.rangoAtaque = 1;
-        this.danioAEdifcio = 15;
+        this.danioAEdificio = 15;
         this.danioAUnidad = 25;
     }
 

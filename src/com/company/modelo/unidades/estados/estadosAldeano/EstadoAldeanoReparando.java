@@ -6,7 +6,12 @@ import com.company.modelo.edificios.Edificio;
 
 public class EstadoAldeanoReparando extends EstadoAldeano {
 
+    public EstadoAldeanoReparando(Integer vida_actual){
+        super(vida_actual);
+    }
+
     public EstadoAldeano construir(Edificio edificio) {
+
         throw new AldeanoOcupadoException("Estoy reparando...");
     }
 

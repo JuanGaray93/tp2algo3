@@ -16,24 +16,24 @@ public abstract class Unidad extends Posicionable {
     protected Posicion posicion;
     protected EstadoUnidad estado;
 
-    protected Integer COSTO;
-
     public Unidad(Jugador jugador) {
         this.jugador = jugador;
         this.posicion = null;
+
     }
 
+    //devuelve el estado de la unidad inicial
+    public void establecerEstadoInicial(Integer vida_maxima,Integer costo){
+        estado = new EstadoUnidadInactivo(vida_maxima,vida_maxima,costo);
+    }
 
     public Integer getCosto(){
-        return this.COSTO;
+        return estado.getCosto();
     }
 
     public Integer getVida(){
-        return estado.getVidaActual();
-    }
 
-    public EstadoUnidad establecerEstadoInicial(Integer vidaMax, Integer vidaActual){
-        return new EstadoUnidadInactivo(vidaMax,vidaActual);
+        return estado.getVidaActual();
     }
 
     public void establecerCoordenadasDeNacimiento(Integer posicionHorizontal, Integer posicionVertical) {

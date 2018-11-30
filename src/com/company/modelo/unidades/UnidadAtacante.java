@@ -11,7 +11,7 @@ import com.company.modelo.edificios.Edificio;
 public abstract class UnidadAtacante extends Unidad {
 
     protected Integer rangoAtaque;
-    protected Integer danioAEdifcio;
+    protected Integer danioAEdificio;
     protected Integer danioAUnidad;
 
     public UnidadAtacante(Jugador jugador) {
@@ -23,13 +23,12 @@ public abstract class UnidadAtacante extends Unidad {
         this.atacar(enemigo, this.danioAUnidad);
     }
 
-    public void atacarA(Edificio enemigo) throws EnemigoInvalidoException,
-            ArmaDesmontadaException, PosicionableEsAliadoException {
+    public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
 
-        this.atacar(enemigo, this.danioAEdifcio);
+        this.atacar(enemigo, this.danioAEdificio);
     }
 
-    private void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
+    protected void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
 
         Ataque ataque = new Ataque(rangoAtaque, jugador, posicion);
         ataque.atacar(unEnemigo, unDanio);

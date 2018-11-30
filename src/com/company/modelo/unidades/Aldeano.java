@@ -5,6 +5,7 @@ import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.estados.EstadoUnidad;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeano;
 import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoRecolectandoOro;
 
@@ -13,11 +14,20 @@ import java.util.ArrayList;
 public class Aldeano extends Unidad {
 
     private EstadoAldeano estadoActual;
+    private Integer vida_Maxima = 50;
 
     public Aldeano(Jugador jugador) {
         super(jugador);
-        COSTO = 25;
-        estadoActual = new EstadoAldeanoRecolectandoOro(jugador);
+        estadoActual = new EstadoAldeanoRecolectandoOro(jugador,vida_Maxima);
+    }
+    @Override
+    public Integer getCosto(){
+        return estadoActual.getCosto();
+    }
+
+    @Override
+    public Integer getVida(){
+        return estadoActual.getVidaActual();
     }
 
     @Override
@@ -81,7 +91,7 @@ public class Aldeano extends Unidad {
     }
 
     public void liberar() throws Exception {
-        estadoActual = new EstadoAldeanoRecolectandoOro(jugador);
+        estadoActual = new EstadoAldeanoRecolectandoOro(jugador,getVida());
         estadoActual.actualizar();
     }
 

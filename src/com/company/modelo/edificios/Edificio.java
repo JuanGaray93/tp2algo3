@@ -22,6 +22,7 @@ public abstract class Edificio extends Posicionable {
     protected static Integer MONTO_DE_REPARACION;
     protected static Integer BLOQUES_DE_ANCHO ;
     protected static Integer BLOQUES_DE_ALTO;
+    final Integer SIN_VIDA = 0;
 
     protected ArrayList<Posicion> posiciones;
     protected EstadoEdificio estado;
@@ -87,8 +88,6 @@ public abstract class Edificio extends Posicionable {
     public void reparar(Aldeano reparador) throws Exception, EdificioEnConstruccionException {
   this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
  }
-
-
 
     public void eliminar() { // TODO Franco Crear test que pruebe que esté vacío el terreno
         int longitud = posiciones.size();

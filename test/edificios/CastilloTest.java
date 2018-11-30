@@ -1,104 +1,99 @@
 package edificios;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.Edificio.EdificioNoDisponibleException;
+import com.company.excepciones.*;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.ArmaAsedio;
+import com.company.modelo.unidades.Arquero;
+import com.company.modelo.unidades.Espadachin;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 public class CastilloTest {
-	
-	Mapa mapa = Mapa.getMapa();
-	Jugador jugador;
-	
-	@Before
-	public void resetMapa() throws CasilleroLlenoException {
-		mapa.destruir();
-		mapa = Mapa.getMapa();
-		jugador  = new Jugador();
-	}
-	
-	@Test
-	public void castilloColocacionTest()
-			throws CasilleroLlenoException, CasilleroNoExistenteException {
-		
-		jugador.sumarOro(1400);
-		Castillo castillo = new Castillo(jugador);
-		castillo.surgir(3,5);
 
-		assertTrue( mapa.estaOcupado(3, 5) );
-		assertTrue( mapa.estaOcupado(3, 6) );
-		assertTrue( mapa.estaOcupado(3, 7) );
-		assertTrue( mapa.estaOcupado(3, 8) );
-		assertTrue( mapa.estaOcupado(4, 5) );
-		assertTrue( mapa.estaOcupado(4, 6) );
-		assertTrue( mapa.estaOcupado(4, 7) );
-		assertTrue( mapa.estaOcupado(4, 8) );
-		assertTrue( mapa.estaOcupado(5, 5) );
-		assertTrue( mapa.estaOcupado(5, 6) );
-		assertTrue( mapa.estaOcupado(5, 7) );
-		assertTrue( mapa.estaOcupado(5, 8) );
-		assertTrue( mapa.estaOcupado(6, 5) );
-		assertTrue( mapa.estaOcupado(6, 6) );
-		assertTrue( mapa.estaOcupado(6, 7) );
-		assertTrue( mapa.estaOcupado(6, 8) );
+    Mapa mapa = Mapa.getMapa();
 
-	}
+    @Before
+    public void resetMapa() {
+        mapa.destruir();
+        mapa = Mapa.getMapa();
+    }
 
-	@Test
-	public void castilloCrearMaquinaAsedioTest() throws Exception, EdificioNoDisponibleException {
-		
-		jugador.sumarOro(1400);
-		Castillo castillo = new Castillo(jugador);
+    @Test
+    public void testCastilloOcupaElmapaQueDebeOcuparCuandoSeLoCrea() throws CasilleroLlenoException, CasilleroNoExistenteException {
 
-		castillo.surgir(3,5);
-		ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+        Jugador jugador = new Jugador();
+        Castillo castillo = new Castillo(jugador);
 
-		castillo.crear(maquinaAsedio);
+        castillo.surgir(5, 5);
 
-		assertTrue(jugador.estaEnPoblacion(maquinaAsedio));
+        assertTrue(mapa.estaOcupado(5, 5));
+        assertTrue(mapa.estaOcupado(5, 6));
+        assertTrue(mapa.estaOcupado(5, 7));
+        assertTrue(mapa.estaOcupado(5, 8));
 
-	}
+        assertTrue(mapa.estaOcupado(6, 5));
+        assertTrue(mapa.estaOcupado(6, 6));
+        assertTrue(mapa.estaOcupado(6, 7));
+        assertTrue(mapa.estaOcupado(6, 8));
 
-	@Test
-	public void borrarCastilloYVerificarQueSeBorraTest(){
+        assertTrue(mapa.estaOcupado(7, 5));
+        assertTrue(mapa.estaOcupado(7, 6));
+        assertTrue(mapa.estaOcupado(7, 7));
+        assertTrue(mapa.estaOcupado(7, 8));
 
-		jugador.sumarOro(1400);
-		Castillo castillo = new Castillo(jugador);
-		Aldeano aldeano = new Aldeano(jugador);
+        assertTrue(mapa.estaOcupado(8, 5));
+        assertTrue(mapa.estaOcupado(8, 6));
+        assertTrue(mapa.estaOcupado(8, 7));
+        assertTrue(mapa.estaOcupado(8, 8));
+    }
 
-		try {
-			castillo.construir(aldeano, 3, 5);
-		}
-		catch ( Exception e){
-			e.printStackTrace();
-		}
-		castillo.eliminar();
-		assertFalse( mapa.estaOcupado(3, 5) );
-		assertFalse( mapa.estaOcupado(3, 6) );
-		assertFalse( mapa.estaOcupado(3, 7) );
-		assertFalse( mapa.estaOcupado(3, 8) );
-		assertFalse( mapa.estaOcupado(4, 5) );
-		assertFalse( mapa.estaOcupado(4, 6) );
-		assertFalse( mapa.estaOcupado(4, 7) );
-		assertFalse( mapa.estaOcupado(4, 8) );
-		assertFalse( mapa.estaOcupado(5, 5) );
-		assertFalse( mapa.estaOcupado(5, 6) );
-		assertFalse( mapa.estaOcupado(5, 7) );
-		assertFalse( mapa.estaOcupado(5, 8) );
-		assertFalse( mapa.estaOcupado(6, 5) );
-		assertFalse( mapa.estaOcupado(6, 6) );
-		assertFalse( mapa.estaOcupado(6, 7) );
-		assertFalse( mapa.estaOcupado(6, 8) );
+    @Test
+    public void testCastilloCrearMaquinaAsedio() throws Exception{
 
-	}
+        Jugador jugador = new Jugador();
+        Castillo castillo = new Castillo(jugador);
+
+        castillo.surgir(5, 5);
+
+        ArmaAsedio maquinaAsedio = new ArmaAsedio(jugador);
+
+        castillo.crear(maquinaAsedio);
+
+        assertTrue(mapa.estaOcupado(9, 5));
+
+    }
+
+    @Test
+    public void testCastilloAtacarAUnidadesEnemigasConDistanciaIgualATres() throws CasilleroNoExistenteException, CasilleroLlenoException, UnidadMuertaException, EnemigoInvalidoException {
+
+        Jugador jugador = new Jugador();
+        Jugador jugadorEnemigo = new Jugador();
+        Castillo castillo = new Castillo(jugador);
+        Aldeano aldeanoEnemigo = new Aldeano(jugadorEnemigo);
+        Espadachin espadachinEnemigo = new Espadachin(jugadorEnemigo);
+        Arquero arqueroEnemigo = new Arquero(jugadorEnemigo);
+
+        castillo.surgir(8, 10);
+
+        mapa.ubicar(aldeanoEnemigo, 5, 10);
+        mapa.ubicar(espadachinEnemigo, 18, 14);
+        mapa.ubicar(arqueroEnemigo, 12, 7);
+
+        castillo.atacarA(aldeanoEnemigo);
+        castillo.atacarA(espadachinEnemigo);
+        castillo.atacarA(arqueroEnemigo);
+
+        assertEquals((Integer) 30, aldeanoEnemigo.getVida());
+        assertEquals((Integer) 80, espadachinEnemigo.getVida());
+        assertEquals((Integer) 55, arqueroEnemigo.getVida());
+
+    }
 
 }
