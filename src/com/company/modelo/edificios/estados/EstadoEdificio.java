@@ -40,9 +40,19 @@ public abstract class EstadoEdificio {
 
         this.vidaActual -= montoDeDanio;
         if(vidaActual <= 0){
+
            throw new EdificioDestruidoExcepcion("Este edificio esta destruido");
         }
         return this;
+    }
+
+    public EstadoEdificio comprobarVida(EstadoEdificio estado, Integer vida_actual) throws Exception {
+        if (vida_actual >= VIDA_MAXIMA) {
+            vidaActual = VIDA_MAXIMA;
+            trabajadorActual.liberar();
+            return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
+        }
+        return estado;
     }
 
     public abstract EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion)

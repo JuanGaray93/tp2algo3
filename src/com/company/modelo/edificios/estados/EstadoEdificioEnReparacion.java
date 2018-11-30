@@ -26,14 +26,7 @@ public class EstadoEdificioEnReparacion extends EstadoEdificio {
         }
 
         vidaActual += montoDeReparacion;
-        if (vidaActual >= VIDA_MAXIMA) {
-            vidaActual = VIDA_MAXIMA;
-            trabajadorActual.liberar();
-            return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
-        }
-
-
-        return this;
+        return comprobarVida(this,vidaActual);
     }
 
     @Override

@@ -42,6 +42,7 @@ public class Jugador {
 	}*/
 
     public Integer getOro() {
+
         return this.oro;
     }
 
@@ -64,7 +65,6 @@ public class Jugador {
         poblacion.remove(unidad);
 
     }
-
 
     public void eliminarDeConstrucciones(Edificio edificio) {
         if (!edificios.contains(edificio)) {

@@ -10,8 +10,6 @@ import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
 import com.company.modelo.unidades.Unidad;
 
-
-
 public class EstadoEdificioInactivo extends EstadoEdificio {
 
     public EstadoEdificioInactivo(Integer vidaMax,Integer vida, Integer monto) {

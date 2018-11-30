@@ -23,7 +23,7 @@ public class EstadoEdificioCreando extends EstadoEdificio {
         posicion.colocarEnCasilleroLibreMasCercano(unidad);
         return this;
     }
-    //tomo como premisa de que no se puede reparar un edificio que esta creando un unidad
+
     @Override
     public EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion) {
         throw new RuntimeException("El edificio esta creando!");

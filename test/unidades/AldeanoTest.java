@@ -174,7 +174,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void repararCastilloTest() throws Exception {
+    public void repararCastilloTest() throws Exception, EdificioEnConstruccionException {
         Castillo castillo = new Castillo(jugador);
         Aldeano aldeano = new Aldeano(jugador);
 
@@ -183,24 +183,18 @@ public class AldeanoTest {
         //el castillo no se construye...
         castillo.surgir(5, 6);
 
-        try {
-            castillo.recibirDanio(15);
-        } catch (Exception | EdificioEnConstruccionException
-                | EdificioDestruidoExcepcion ignored) { }
+        castillo.recibirDanio(15);
 
         try {
             aldeano.reparar(castillo);
-        } catch (Exception e) {
-            //
-        }
+        } catch (Exception ignored) { }
 
         assertEquals((Integer) 1000, castillo.getVida());
     }
 
     @Test
     public void repararPlazaCentralTest()
-            throws Exception, EdificioEnConstruccionException,
-            EdificioDestruidoExcepcion {
+            throws Exception, EdificioEnConstruccionException{
 
         Aldeano aldeano = new Aldeano(jugador);
 
@@ -244,9 +238,7 @@ public class AldeanoTest {
 
         aldeano.actualizar();
 
-        try {
-            cuartel.recibirDanio(60);
-        } catch (EdificioDestruidoExcepcion edificioDestruidoExcepcion) { }
+        cuartel.recibirDanio(60);
 
         aldeano.reparar(cuartel);
 

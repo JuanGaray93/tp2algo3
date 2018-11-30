@@ -62,14 +62,8 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
         }
 
         vidaActual += VIDA_MAXIMA / 3;
+        return comprobarVida(this,vidaActual);
 
-        if(vidaActual>=VIDA_MAXIMA) {
-            vidaActual = VIDA_MAXIMA;
-            trabajadorActual.liberar();
-            return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
-        }
-
-        return this;
     }
 
     @Override

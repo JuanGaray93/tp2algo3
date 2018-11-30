@@ -38,10 +38,13 @@ public abstract class Edificio extends Posicionable {
     }
 
 	public void recibirDanio(Integer unDanio)
-            throws EdificioEnConstruccionException, EdificioDestruidoExcepcion {
-
-		estado = estado.recibirDanio(unDanio);
-
+            throws EdificioEnConstruccionException {
+        try {
+            estado = estado.recibirDanio(unDanio);
+        }catch(EdificioDestruidoExcepcion e){
+            jugador.eliminarDeConstrucciones(this);
+            this.eliminar();
+        }
 	}
 
     public void construir(Aldeano quienLoConstruye, Integer posicionHorizontal,
