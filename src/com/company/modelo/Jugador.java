@@ -1,6 +1,5 @@
 package com.company.modelo;
 
-import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.EdificioInexistenteEnConstruccionesException;
 import com.company.excepciones.LimitePoblacionalException;
 import com.company.excepciones.OroInsuficienteException;
@@ -20,6 +19,7 @@ public class Jugador {
     private Integer numeroDeJugador;
     private Iniciador unIniciador;
 
+
     ArrayList<Unidad> poblacion;
     ArrayList<Edificio> edificios;
     private static Integer oro;
@@ -31,6 +31,7 @@ public class Jugador {
         poblacion = new ArrayList<Unidad>();
         edificios = new ArrayList<Edificio>();
         this.unIniciador = new Iniciador(this);
+
     }
 	/*
 	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException {
@@ -60,7 +61,8 @@ public class Jugador {
 
     public void eliminarDePoblacion(Unidad unidad) {
         if (!poblacion.contains(unidad)) {
-            throw new UnidadInexistenteEnPoblacionException("Disculpe, la unidad no existe en la poblacion");
+            throw new UnidadInexistenteEnPoblacionException
+                    ("Disculpe, la unidad no existe en la poblacion");
         }
         poblacion.remove(unidad);
 
@@ -81,9 +83,11 @@ public class Jugador {
 
     public void cobrar(Integer monto) throws OroInsuficienteException {
         if (monto < 0) {
-            throw new OroInsuficienteException("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
+            throw new OroInsuficienteException
+                    ("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
         } else if (oro - monto < 0) {
-            throw new OroInsuficienteException("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
+            throw new OroInsuficienteException
+                    ("Se intentó hacer un cobro negativo. Algo salió horriblemente mal.");
         }
 
         oro -= monto;
@@ -93,7 +97,7 @@ public class Jugador {
 		
 	}*/
 
-    public void crearEntidadesIniciales() throws EdificioEnConstruccionException, Exception {
+    public void crearEntidadesIniciales() {
 
         Integer posicionInicialX = 0;
         Integer posicionInicialY = 0;
@@ -110,15 +114,18 @@ public class Jugador {
         poblacion.add(new Aldeano(this));
         poblacion.add(new Aldeano(this));
 
-        poblacion.get(0).establecerCoordenadasDeNacimiento(5 + posicionInicialX, +posicionInicialY);
-        poblacion.get(1).establecerCoordenadasDeNacimiento(6 + posicionInicialX, +posicionInicialY);
-        poblacion.get(2).establecerCoordenadasDeNacimiento(7 + posicionInicialX, +posicionInicialY);
+        poblacion.get(0).establecerCoordenadasDeNacimiento(5 +
+                posicionInicialX, +posicionInicialY);
+        poblacion.get(1).establecerCoordenadasDeNacimiento(6 +
+                posicionInicialX, +posicionInicialY);
+        poblacion.get(2).establecerCoordenadasDeNacimiento(7 +
+                posicionInicialX, +posicionInicialY);
 
         Castillo castillo = new Castillo(this);
         PlazaCentral plaza = new PlazaCentral(this);
 
-       // castillo.construir((Aldeano) poblacion.get(0), 5 + posicionInicialX, 5 + posicionInicialY);
-       // plaza.construir((Aldeano) poblacion.get(1), 5 + posicionInicialX, 10 + posicionInicialY);
+        // castillo.construir((Aldeano) poblacion.get(0), 5 + posicionInicialX, 5 + posicionInicialY);
+        // plaza.construir((Aldeano) poblacion.get(1), 5 + posicionInicialX, 10 + posicionInicialY);
 
         edificios.add(castillo);
         edificios.add(plaza);

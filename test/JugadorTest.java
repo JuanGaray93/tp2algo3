@@ -14,7 +14,7 @@ public class JugadorTest {
     Aldeano aldeano = null;
 
     @Before
-    public void resetMapa() throws CasilleroLlenoException {
+    public void resetMapa() {
         mapa.destruir();
         mapa = Mapa.getMapa();
         jugador = new Jugador();
@@ -27,6 +27,7 @@ public class JugadorTest {
             MovimientoInvalidoException {
     	aldeano.establecerCoordenadasDeNacimiento(5,5);
     	aldeano.moverA(5,6);
+
     	aldeano.moverA(5,5);
     }
 

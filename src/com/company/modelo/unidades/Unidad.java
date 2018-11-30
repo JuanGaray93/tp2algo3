@@ -61,11 +61,9 @@ public abstract class Unidad extends Posicionable {
     }
 
     @Override
-    public void ubicar(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
+    public void ubicar(Integer posicionHorizontal, Integer posicionVertical)
+            throws CasilleroNoExistenteException, CasilleroLlenoException {
         posicion.posicionar(this);
     }
 
-    public void actualizar() throws Exception {
-        estado = estado.actualizar();
-    }
 }

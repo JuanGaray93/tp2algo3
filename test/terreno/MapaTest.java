@@ -1,8 +1,6 @@
 package terreno;
 
 import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.PlazaCentral;
@@ -23,7 +21,7 @@ public class MapaTest {
     private Jugador jugador = null;
 
     @Before
-    public void resetMapa() throws CasilleroLlenoException {
+    public void resetMapa() {
         mapa.destruir();
         mapa = Mapa.getMapa();
 

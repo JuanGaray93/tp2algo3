@@ -1,26 +1,35 @@
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.Edificio.ErrorDeConstruccionException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
+import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
 import java.util.logging.Logger;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+
 import static org.junit.Assert.assertTrue;
 
 
 public class PosicionTest {
 
-    private Jugador jugador;
+    private Jugador jugador = null;
+    private Aldeano aldeano = null;
 
     @Mock
     private Mapa mapa;
 
     @Before
     public void inicializar() {
+        mapa = Mapa.getMapa();
         jugador = new Jugador();
+        aldeano = new Aldeano(jugador);
     }
 
     @Test
@@ -40,39 +49,33 @@ public class PosicionTest {
 
     }
 
-/*@Test
-	public void nacerAldeanoYVerificarQueSePosicionaEnPosicionIndicadaTest() {
-		Aldeano aldeano = null;
-		try {
-			aldeano = new Aldeano(new Jugador(Mapa.getMapa()));
-		} catch (CasilleroLlenoException e) {
-			// TODO Auto-generated catch block
-		}
-		
-		Posicion posicion = new Posicion(3,4);
-		
+@Test
+	public void nacerAldeanoYVerificarQueSePosicionaEnPosicionIndicadaTest()
+        throws CasilleroNoExistenteException, CasilleroLlenoException {
+        aldeano = new Aldeano(new Jugador());
+
 		aldeano.establecerCoordenadasDeNacimiento(3,4);
-		
-		Assert.assertTrue(posicion.contiene(aldeano));
+		aldeano.ubicar(3,4);
+
+		Assert.assertTrue(mapa.estaOcupado(3,4));
 		
 	}
-*/
-	/*@Test
-	public void crearPlazaCentralYVerificarQueSePosicionaEnPosicionIndicadaTest() throws CasilleroLlenoException {
+
+	@Test
+	public void crearPlazaCentralYVerificarQueSePosicionaEnPosicionIndicadaTest()
+            throws Exception {
 		
-		PlazaCentral plazaCentral = new PlazaCentral(new Jugador(Mapa.getMapa()));
-		
-		Posicion posicion = new Posicion(3,4);
+		PlazaCentral plazaCentral = new PlazaCentral(jugador);
 		
 		try {
-			plazaCentral.construir(3,4);
-		} catch (CasilleroNoExistenteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			plazaCentral.construir(aldeano,3,4);
+		} catch (Exception e) { }
+		plazaCentral.avanzarConstruccion();
+		plazaCentral.avanzarConstruccion();
+		plazaCentral.avanzarConstruccion();
+
+        Assert.assertTrue(mapa.estaOcupado(3,4));
 		
-		Assert.assertTrue(posicion.contiene(plazaCentral));
-		
-	}*/
+	}
 
 }

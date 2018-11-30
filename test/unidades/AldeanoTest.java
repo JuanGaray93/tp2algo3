@@ -23,7 +23,7 @@ public class AldeanoTest {
     Aldeano aldeano = null;
 
     @Before
-    public void resetMapa() throws CasilleroLlenoException {
+    public void resetMapa()  {
         mapa.destruir();
         mapa = Mapa.getMapa();
         jugador = new Jugador();
