@@ -1,5 +1,6 @@
 package com.company.modelo;
 
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.EnemigoInvalidoException;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Ataque {
             unEnemigo.recibirDanio(unDanio);
         } catch (Exception e) {
 
+        } catch (EdificioEnConstruccionException e) {
         }
     }
 
