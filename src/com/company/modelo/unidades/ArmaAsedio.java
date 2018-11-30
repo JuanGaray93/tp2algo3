@@ -5,6 +5,7 @@ import com.company.excepciones.ArmaMontadaException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioReparadoException;
 import com.company.excepciones.EnemigoInvalidoException;
+import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Edificio;
@@ -27,22 +28,9 @@ public class ArmaAsedio extends UnidadAtacante {
 		this.estado =  new EstadoArmaAsedioDesmontada(VIDA_MAXIMA);
 	}
 
-	@Override
-	public void atacarA(Unidad enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
-		if ( !(estado instanceof EstadoArmaAsedioMontada) ) {
-			throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
-		}
-
-		throw new EnemigoInvalidoException("El arma asedio no puede atacar unidades");
-	}
-
-	@Override
-	public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
-		if ( !(estado instanceof EstadoArmaAsedioMontada) ) {
-			throw new ArmaDesmontadaException("el arma no puede atacar desmontada");
-		}
-
-		this.atacar(enemigo, this.danioAEdifcio);
+	public void atacar(Posicionable unEnemigo) throws ArmaDesmontadaException, EnemigoInvalidoException {
+		Ataque ataque = new Ataque(rangoAtaque, danioAEdifcio, danioAUnidad, jugador, posicion);
+		this.estado.atacar(ataque, unEnemigo, danioAEdifcio);
 	}
 
 

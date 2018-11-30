@@ -27,7 +27,7 @@ public abstract class UnidadAtacante extends Unidad {
         this.atacar(enemigo, this.danioAEdifcio);
     }
 
-    public void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
+    private void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
         Ataque ataque = new Ataque(rangoAtaque, danioAEdifcio, danioAUnidad, jugador, posicion);
         ataque.atacar(unEnemigo, unDanio);
     }
