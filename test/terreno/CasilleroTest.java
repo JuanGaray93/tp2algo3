@@ -1,15 +1,20 @@
 package terreno;
 
 import com.company.excepciones.CasilleroLlenoException;
+import com.company.modelo.Jugador;
 import com.company.modelo.terreno.Casillero;
+import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CasilleroTest {
-
+	
+	Mapa mapa = Mapa.getMapa();
+	
     @Test
     public void casilleroRecienCreadoEstaVacioTest(){
         Casillero casillero = new Casillero();
@@ -17,9 +22,10 @@ public class CasilleroTest {
     }
 
     @Test
-    public void casilleroVacioPermiteInsercionTest(){
+    public void casilleroVacioPermiteInsercionTest() throws CasilleroLlenoException {
         Casillero casillero = new Casillero();
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = null;
+        aldeano = new Aldeano(new Jugador());
 
         try {
             casillero.agregarPosicionable(aldeano);
@@ -30,9 +36,10 @@ public class CasilleroTest {
     }
 
     @Test
-    public void casilleroEstaLlenoLuegoDeInsercionTest(){
+    public void casilleroEstaLlenoLuegoDeInsercionTest() throws CasilleroLlenoException {
         Casillero casillero = new Casillero();
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = null;
+        aldeano = new Aldeano(new Jugador());
 
         try {
             casillero.agregarPosicionable(aldeano);
@@ -43,9 +50,10 @@ public class CasilleroTest {
     }
 
     @Test
-    public void luegoDeQuitarPosicionableElCasilleroEstaVacioNuevamenteTest(){
+    public void luegoDeQuitarPosicionableElCasilleroEstaVacioNuevamenteTest() throws CasilleroLlenoException {
         Casillero casillero = new Casillero();
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = null;
+        aldeano = new Aldeano(new Jugador());
 
         try {
             casillero.agregarPosicionable(aldeano);

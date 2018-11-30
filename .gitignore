@@ -4,3 +4,6 @@
 /build/*
 /libs/*
 /out/*
+/compilationFolder/*
+/compilation/*
+.attach*

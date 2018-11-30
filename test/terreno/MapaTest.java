@@ -3,13 +3,15 @@ package terreno;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
+import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
-import com.company.modelo.unidades.Aldeano;
 
+import com.company.modelo.unidades.Aldeano;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -17,12 +19,15 @@ import static org.junit.Assert.assertTrue;
 
 public class MapaTest {
 
-    Mapa mapa = Mapa.getMapa();
+    private Mapa mapa = Mapa.getMapa();
+    private Jugador jugador = null;
 
     @Before
-    public void resetMapa() {
+    public void resetMapa() throws CasilleroLlenoException {
         mapa.destruir();
         mapa = Mapa.getMapa();
+
+        jugador = new Jugador();
     }
 
     @Test
@@ -40,7 +45,7 @@ public class MapaTest {
 
     @Test
     public void colocarPosicionableOcupaElLugarTest() {
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano(jugador);
         try {
             mapa.ubicar(aldeano, 10, 10);
         } catch (Exception e) {
@@ -51,7 +56,7 @@ public class MapaTest {
 
     @Test
     public void colocarPosicionableNoOcupaOtroLugarTest() {
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano(jugador);
         try {
             mapa.ubicar(aldeano, 10, 10);
         } catch (Exception e) {
@@ -62,7 +67,7 @@ public class MapaTest {
 
     @Test
     public void colocarPosicionablePermiteRecuperarloTest() {
-        PlazaCentral plazaCentral = new PlazaCentral();
+        PlazaCentral plazaCentral = new PlazaCentral(jugador);
         Posicionable unidadRecuperada = null;
         try {
             mapa.ubicar(plazaCentral, 10, 10);
@@ -75,8 +80,8 @@ public class MapaTest {
 
     @Test
     public void colocarDosPosicionablesPermiteRecuperarlosTest(){
-        Aldeano aldeano1 = new Aldeano();
-        Aldeano aldeano2 = new Aldeano();
+        Aldeano aldeano1 = new Aldeano(jugador);
+        Aldeano aldeano2 = new Aldeano(jugador);
         Posicionable unidadRecuperada1 = null;
         Posicionable unidadRecuperada2 = null;
         try {
@@ -95,54 +100,8 @@ public class MapaTest {
     }
 
     @Test
-    public void colocarUnidadOcupaCasilleroVacioMasCercano(){
-        /** El Reptador no se puede testear directamente por ser un objeto al que sólo puede acceder Mapa.
-         *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único método que delega responsabilidades a Reptador.
-         *  Que funcione bien ese método es que funcione bien el Reptador.
-         *  Este test prueba entonces que funcione correctamente.
-         */
-
-        Posicionable obtenido = null;
-        Aldeano aColocar = new Aldeano();
-
-        try {
-            /* El 1! representa el lugar donde se empieza la búsqueda. El 0 el lugar vacío más cercano.
-             *     _______________
-             * 10  |1 |0 |1 |1 |1 |
-             * 11  |1 |1 |1 |1 |1 |
-             * 12  |1 |1 |1!|1 |1 |
-             * 13  |1 |1 |1 |1 |1 |
-             * 14  |1_|1_|1_|1_|1_|
-             *     10  11 12 13 14
-             */
-
-            mapa.ubicar(new Aldeano(), 10, 12);
-            mapa.ubicar(new Aldeano(), 11, 12);
-            mapa.ubicar(new Aldeano(), 12, 12);
-            mapa.ubicar(new Aldeano(), 13, 12);
-
-            assertTrue(mapa.estaOcupado(10,12));
-            assertTrue(mapa.estaOcupado(11,12));
-            assertTrue(mapa.estaOcupado(12,12));
-            assertTrue(mapa.estaOcupado(13,12));
-
-            mapa.colocarEnCasilleroLibreMasCercano(aColocar, 10, 12);
-            obtenido = mapa.conseguirOcupante(14, 12);
-
-        } catch (CasilleroNoExistenteException e) {
-            e.printStackTrace();
-        } catch (CasilleroLlenoException e) {
-            e.printStackTrace();
-        } catch (MapaLlenoException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(aColocar, obtenido);
-    }
-
-    @Test
     public void quitarPosicionableDesocupaElLugarTest() {
-        Aldeano aldeano = new Aldeano();
+        Aldeano aldeano = new Aldeano(jugador);
         try {
             mapa.ubicar(aldeano, 10, 11);
             mapa.quitar(10, 11);
@@ -151,5 +110,43 @@ public class MapaTest {
         }
         assertFalse(mapa.estaOcupado(10, 11));
     }
+
+    @Test
+    public void colocarUnidadOcupaCasilleroVacioMasCercano(){
+        /** El Reptador no se puede testear directamente por ser un objeto al que sólo puede acceder Mapa.
+         *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único métoddo que delega responsabilidades a Reptador.
+         *  Que funcione bien ese métoddo es que funcione bien el Reptador.
+         *  Este test prueba entonces que funcione correctamente.
+         */
+
+        Posicionable obtenido = null;
+        Aldeano aColocar = new Aldeano(jugador);
+
+        try {
+            /* El 1! representa el lugar donde se empieza la búsqueda. El 0 el lugar vacío más cercano.
+             *     _______________
+             * 10  |1 |1 |1 |1 |1 |
+             * 11  |1 |1 |1 |1 |1 |
+             * 12  |1!|1 |1 |1 |0 |
+             * 13  |1 |1 |1 |1 |1 |
+             * 14  |1_|1_|1_|1_|1_|
+             *     10  11 12 13 14
+             */
+
+            mapa.ubicar(new Aldeano(jugador), 10, 12);
+            mapa.ubicar(new Aldeano(jugador), 11, 12);
+            mapa.ubicar(new Aldeano(jugador), 12, 12);
+            mapa.ubicar(new Aldeano(jugador), 13, 12);
+
+            mapa.colocarEnCasilleroLibreMasCercano(aColocar, 10, 12);
+            obtenido = mapa.conseguirOcupante(14, 12);
+
+        } catch (Exception e){
+
+        }
+
+        assertEquals(aColocar, obtenido);
+    }
+
 
 }
