@@ -7,9 +7,9 @@ public class Turno {
 	ArrayList<Jugador> jugadores;
 	Integer turnoActual = 0;
 
-	public Turno(Jugador random) {
+	public Turno() {
 
-		jugadores = new ArrayList<>();
+		jugadores = new ArrayList <>();
 	}
 
 	public void sumarJugador(Jugador nuevoJugador)

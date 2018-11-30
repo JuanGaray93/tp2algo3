@@ -95,10 +95,7 @@ public class Aldeano extends Unidad {
         estadoActual.actualizar();
     }
 
-    @Override
     public void actualizar() throws Exception {
-
         estadoActual = estadoActual.actualizar();
-
     }
 }

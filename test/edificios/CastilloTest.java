@@ -1,7 +1,6 @@
 package edificios;
 
 import com.company.excepciones.*;
-import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.terreno.Mapa;
