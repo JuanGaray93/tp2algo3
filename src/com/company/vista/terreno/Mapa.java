@@ -39,7 +39,7 @@ public class Mapa extends Pane {
     private void dibujarFormas() {
         this.clean();
         canvas.getGraphicsContext2D().setFill(Color.DARKBLUE);
-        canvas.getGraphicsContext2D().fillOval(robot.getPosicion().getX() + 230, robot.getPosicion().getY() + 110, robot.RADIO, robot.RADIO);
+        //canvas.getGraphicsContext2D().fillOval(robot.getPosicion().getX() + 230, robot.getPosicion().getY() + 110, robot.RADIO, robot.RADIO);
     }
 
     public void clean() {

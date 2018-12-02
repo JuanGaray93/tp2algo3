@@ -14,7 +14,7 @@ public class ContenedorPrincipal extends BorderPane {
     VBox contenedorCentral;
 
     public ContenedorPrincipal(){
-        Node appContent = new Mapa().obtenerCasilleros();
+        Node appContent = new Mapa();
         setCenter(appContent);
     }
 
