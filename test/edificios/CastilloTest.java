@@ -71,7 +71,7 @@ public class CastilloTest {
 
     /*
     @Test
-    public void testCastilloAtacarAUnidadesEnemigasConDistanciaIgualATres() throws CasilleroNoExistenteException, CasilleroLlenoException, UnidadMuertaException, EnemigoInvalidoException {
+    public void testCastilloAtacarAUnidadesEnemigasConDistanciaMenorOIgualATres() throws CasilleroNoExistenteException, CasilleroLlenoException, UnidadMuertaException, EnemigoInvalidoException {
 
         Jugador jugador = new Jugador();
         Jugador jugadorEnemigo = new Jugador();
