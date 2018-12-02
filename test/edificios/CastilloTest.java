@@ -65,10 +65,11 @@ public class CastilloTest {
 
         castillo.crear(maquinaAsedio);
 
-        assertTrue(mapa.estaOcupado(9, 5));
+        assertTrue(jugador.estaEnPoblacion(maquinaAsedio));
 
     }
 
+    /*
     @Test
     public void testCastilloAtacarAUnidadesEnemigasConDistanciaIgualATres() throws CasilleroNoExistenteException, CasilleroLlenoException, UnidadMuertaException, EnemigoInvalidoException {
 
@@ -81,18 +82,22 @@ public class CastilloTest {
 
         castillo.surgir(8, 10);
 
-        mapa.ubicar(aldeanoEnemigo, 5, 10);
-        mapa.ubicar(espadachinEnemigo, 18, 14);
-        mapa.ubicar(arqueroEnemigo, 12, 7);
+        aldeanoEnemigo.establecerCoordenadasDeNacimiento(7, 10);
+        mapa.ubicar(aldeanoEnemigo, 7, 10);
 
-        castillo.atacarA(aldeanoEnemigo);
-        castillo.atacarA(espadachinEnemigo);
-        castillo.atacarA(arqueroEnemigo);
+        espadachinEnemigo.establecerCoordenadasDeNacimiento(10, 9);
+        mapa.ubicar(espadachinEnemigo, 10, 9);
+
+        arqueroEnemigo.establecerCoordenadasDeNacimiento(13, 11);
+        mapa.ubicar(arqueroEnemigo, 13, 11);
+
+
+        castillo.atacar(20);
 
         assertEquals((Integer) 30, aldeanoEnemigo.getVida());
         assertEquals((Integer) 80, espadachinEnemigo.getVida());
         assertEquals((Integer) 55, arqueroEnemigo.getVida());
 
-    }
+    }*/
 
 }

@@ -4,6 +4,7 @@ import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.EdificioDestruidoExcepcion;
+import com.company.excepciones.UnidadMuertaException;
 
 public abstract class Posicionable {
 
@@ -14,7 +15,7 @@ public abstract class Posicionable {
             throws CasilleroNoExistenteException, CasilleroLlenoException;
 
     public abstract void recibirDanio(Integer montoDeDanio)
-            throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion;
+            throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion, UnidadMuertaException;
 
     public abstract Integer getVida() throws Exception;
 }

@@ -38,6 +38,19 @@ public class Ataque {
         }
     }
 
+    public void atacarATodos(Integer danio) throws EnemigoInvalidoException {
+        ArrayList <Posicionable> vector = posicion.buscarPosicionablesEnRadio(rangoAtaque);
+        ArrayList <Posicionable> vector2 = new ArrayList();
+        for (Posicionable x : vector) {
+            if(! (vector2.contains(x))) {
+                vector2.add(x);
+            }
+        }
+        for(Posicionable y : vector2) {
+            atacar(y, danio);
+        }
+    }
+
     private void eliminarPosicionablesAmigos(ArrayList<Posicionable> atacables){
         ArrayList edificios = jugador.getEdificios();
         ArrayList poblacion = jugador.getPoblacion();

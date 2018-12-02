@@ -1,10 +1,7 @@
 package com.company.modelo.unidades;
 
-import com.company.excepciones.ArmaMontadaException;
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
@@ -47,10 +44,12 @@ public abstract class Unidad extends Posicionable {
         posicion.moverA(posicionHorizontal, posicionVertical);
     }
 
-    public void recibirDanio(Integer montoDeDanio) throws Exception {
+    public void recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException, UnidadMuertaException {
         try {
             estado.recibirDanio(montoDeDanio);
-        } catch (Exception | EdificioEnConstruccionException ignored) {
+        } catch (UnidadMuertaException e) {
+            this.eliminarDePosicion();
+            jugador.eliminarDePoblacion(this);
         }
     }
 

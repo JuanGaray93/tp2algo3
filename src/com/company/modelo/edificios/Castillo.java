@@ -7,6 +7,11 @@ import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoEdificioInactivo;
 import com.company.modelo.unidades.ArmaAsedio;
 import com.company.modelo.unidades.Unidad;
+import javafx.geometry.Pos;
+
+import java.util.ArrayList;
+
+import static jdk.nashorn.internal.objects.ArrayBufferView.length;
 
 public class Castillo extends Edificio {
 
@@ -21,8 +26,8 @@ public class Castillo extends Edificio {
 
     public Castillo(Jugador jugador) {
         super(jugador);
-        BLOQUES_DE_ALTO = 8;
-        BLOQUES_DE_ANCHO = 8;
+        BLOQUES_DE_ALTO = 4;
+        BLOQUES_DE_ANCHO = 4;
         this.rangoAtaque = 7; // porque es a partir del centro del castillo
         this.danioAPosicionable = 20;
         this.estado = new EstadoEdificioInactivo(VIDA_MAXIMA, VIDA_MAXIMA, MONTO_DE_REPARACION);
@@ -48,13 +53,9 @@ public class Castillo extends Edificio {
         jugador.agregarAEdificios(this);
     }
 
-    public void atacarA(Posicionable enemigo) throws EnemigoInvalidoException {
-        this.atacar(enemigo, this.danioAPosicionable);
-    }
-
-    private void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
-        Ataque ataque = new Ataque(rangoAtaque, jugador, posiciones.get(36)); //la posicion 36 es donde esta el centro del castillo
-        ataque.atacar(unEnemigo, unDanio);
+    public void atacar(Integer unDanio) throws EnemigoInvalidoException {
+        Ataque ataque = new Ataque(rangoAtaque, jugador, posiciones.get(9)); //la posicion 36 es donde esta el centro del castillo
+        ataque.atacarATodos(unDanio);
     }
 
 
