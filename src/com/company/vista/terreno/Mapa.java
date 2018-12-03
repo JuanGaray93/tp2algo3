@@ -9,22 +9,19 @@ import javafx.scene.paint.Color;
 
 public class Mapa extends GridPane {
 
-    private final Integer CASILLEROS_DE_ANCHO = 60;
-    private final Integer CASILLEROS_DE_ALTO = 60;
-    private Float dimensionCasillero = 50.0F;
+    private final Integer CASILLEROS_DE_ANCHO = 25;
+    private final Integer CASILLEROS_DE_ALTO = 25;
+    private Float dimensionCasillero = 25.0F;
     private Casillero[][] casilleros;
 
     public Mapa(){
 
         //this.inicializarDimensiones();
 
-
-        Double dimensionRestrictora = Math.min( this.getHeight(), this.getWidth());
-
-        this.dimensionCasillero = dimensionRestrictora.floatValue() / (CASILLEROS_DE_ANCHO * 1.1F);
+        this.inicializarCasilleros();
         this.setHgap(dimensionCasillero / 20);
         this.setVgap(dimensionCasillero / 20);
-        this.inicializarCasilleros();
+
 
     }
 
@@ -57,7 +54,9 @@ public class Mapa extends GridPane {
                     GridPane.setRowIndex(casilleroNuevo, y);
                     GridPane.setColumnIndex(casilleroNuevo, x);
                     this.getChildren().addAll(casilleroNuevo);
-                    this.add(new Label("A"), x, y);
+                    //La siguiente línea de código muestra el índice de cada casillero.
+                    //                                             útil para debuggear:
+                    // this.add(new Label("" + x + "," + y), x, y);
                 } catch (Exception e){
                     //TODO
                 }
