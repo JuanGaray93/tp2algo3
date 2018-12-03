@@ -1,4 +1,4 @@
-package com.company.vista.gui;
+package com.company.vista.gui.eventos;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
