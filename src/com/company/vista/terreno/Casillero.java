@@ -1,7 +1,6 @@
 package com.company.vista.terreno;
 
 
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class Casillero extends Rectangle {

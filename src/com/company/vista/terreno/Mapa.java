@@ -1,7 +1,6 @@
 package com.company.vista.terreno;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -16,30 +15,11 @@ public class Mapa extends GridPane {
 
     public Mapa(){
 
-        //this.inicializarDimensiones();
-
         this.inicializarCasilleros();
         this.setHgap(dimensionCasillero / 20);
         this.setVgap(dimensionCasillero / 20);
 
 
-    }
-
-    private void inicializarDimensiones(){
-        // Restrinjo las columnas y las filas a las dimensiones prestablecidas.
-        for (int i = 0; i < CASILLEROS_DE_ANCHO; i++) {
-            ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / CASILLEROS_DE_ANCHO);
-            this.getColumnConstraints().add(colConst);
-        }
-        for (int i = 0; i < CASILLEROS_DE_ALTO; i++) {
-            RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / CASILLEROS_DE_ALTO);
-            this.getRowConstraints().add(rowConst);
-        }
-        //Establezco la separación entre casilleros
-
-        this.setAlignment(Pos.CENTER);
     }
 
     private void inicializarCasilleros(){
@@ -49,8 +29,6 @@ public class Mapa extends GridPane {
                 try{
                     Casillero casilleroNuevo = new Casillero(x, y, dimensionCasillero);
                     casilleroNuevo.setFill(Color.GREEN);
-
-                    casilleros[x][y] = casilleroNuevo;
                     GridPane.setRowIndex(casilleroNuevo, y);
                     GridPane.setColumnIndex(casilleroNuevo, x);
                     this.getChildren().addAll(casilleroNuevo);
@@ -62,6 +40,10 @@ public class Mapa extends GridPane {
                 }
             }
         }
+    }
+
+    public void establecerCasillero(Casillero casilleroNuevo){
+        // TODO
     }
 
 }
