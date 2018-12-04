@@ -56,7 +56,7 @@ public class Posicion {
                 (posicionVertical == y - 1 || posicionVertical == y + 1 || posicionVertical == y);
     }
 
-    public ArrayList buscarPosicionablesEnRadio(Integer radio) {
+    public ArrayList<Posicionable> buscarPosicionablesEnRadio(Integer radio) {
         ArrayList<Posicionable> posicionables = new ArrayList<>();
 
         for (Integer i = this.posicionHorizontal - radio; i <= this.posicionHorizontal + radio; i++) {
