@@ -28,7 +28,7 @@ public class Castillo extends Edificio {
         super(jugador);
         BLOQUES_DE_ALTO = 4;
         BLOQUES_DE_ANCHO = 4;
-        this.rangoAtaque = 7; // porque es a partir del centro del castillo
+        this.rangoAtaque = 5; // porque es a partir del centro del castillo
         this.danioAPosicionable = 20;
         this.estado = new EstadoEdificioInactivo(VIDA_MAXIMA, VIDA_MAXIMA, MONTO_DE_REPARACION);
     }
@@ -54,7 +54,7 @@ public class Castillo extends Edificio {
     }
 
     public void atacar(Integer unDanio) throws EnemigoInvalidoException {
-        Ataque ataque = new Ataque(rangoAtaque, jugador, posiciones.get(9)); //la posicion 36 es donde esta el centro del castillo
+        Ataque ataque = new Ataque(rangoAtaque, jugador, posiciones.get(9)); //la posicion 9 es donde esta el centro del castillo
         ataque.atacarATodos(unDanio);
     }
 
