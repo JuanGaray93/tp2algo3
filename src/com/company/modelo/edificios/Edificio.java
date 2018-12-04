@@ -89,10 +89,10 @@ public abstract class Edificio extends Posicionable {
     }
     
     public void reparar(Aldeano reparador) throws Exception, EdificioEnConstruccionException {
-  this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
- }
+        this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
+    }
 
-    public void eliminar() { // TODO Franco Crear test que pruebe que esté vacío el terreno
+    public void eliminar() {
         int longitud = posiciones.size();
 
         for (int i = longitud - 1; i >= 0; i--) {
