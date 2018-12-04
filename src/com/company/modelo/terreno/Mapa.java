@@ -8,8 +8,8 @@ import com.company.modelo.unidades.Unidad;
 
 public class Mapa {
 
-    private static Integer numeroDeCasillerosHorizontales = 90;
-    private static Integer numeroDeCasillerosVerticales = 90;
+    private static Integer numeroDeCasillerosHorizontales = 25;
+    private static Integer numeroDeCasillerosVerticales = 25;
     private static Mapa instancia = new Mapa();
     private Casillero[][] casilleros;
 
