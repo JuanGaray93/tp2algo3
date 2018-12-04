@@ -1,284 +1,252 @@
 package unidades;
 
-import com.company.excepciones.AldeanoOcupadoException;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.DistanciaInvalidaException;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.EdificioDestruidoExcepcion;
 import com.company.modelo.Jugador;
-import com.company.modelo.Posicion;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
-import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoConstruyendo;
-import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoRecolectandoOro;
-import com.company.modelo.unidades.estados.estadosAldeano.EstadoAldeanoReparando;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class AldeanoTest {
 
-	private Mapa mapa = Mapa.getMapa();
-	private Jugador jugador = null;
-	private EstadoAldeanoConstruyendo construyendo = null;
-	private EstadoAldeanoReparando reparando = null;
-	private EstadoAldeanoRecolectandoOro recolectando = null;
+    private Mapa mapa = Mapa.getMapa();
+    private Jugador jugador = null;
+    Aldeano aldeano = null;
 
+    @Before
+    public void resetMapa()  {
+        mapa.destruir();
+        mapa = Mapa.getMapa();
+        jugador = new Jugador();
+        aldeano = new Aldeano(jugador);
+    }
 
-	@Before
-	public void resetMapa() throws CasilleroLlenoException {
-		mapa.destruir();
-		mapa = Mapa.getMapa();
-		jugador = new Jugador();
-		construyendo = new EstadoAldeanoConstruyendo();
-		reparando = new EstadoAldeanoReparando();
-		recolectando = new EstadoAldeanoRecolectandoOro();
-	}
+    @Test
+    public void recibirDanio(){
+        try {
+            aldeano.recibirDanio(50);
+        } catch (Exception ignored) {}
+        assertEquals(aldeano.getVida(),(Integer)0);
+    }
 
-	/*@Test
-	public void verificarQueSumaOroSiNoEstaOcupadoTest() {
+    @Test
+    public void verificarQueSumaOroSiNoEstaOcupadoTest() throws Exception {
 
-		Aldeano aldeano = new Aldeano(jugador);
-		aldeano.actualizar(recolectando);
-		assertEquals(jugador.getOro(), (Integer) 120);
-	}
+        aldeano.actualizar();
+        assertEquals(jugador.getOro(), (Integer) 120);
+    }
 
-	@Test
-	public void verificarQueSumaOroUnaVezPorTurnoTest() {
+    @Test
+    public void verificarQueSumaOroUnaVezPorTurnoTest() throws Exception {
 
-		Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano(jugador);
 
-		aldeano.actualizar(recolectando);
+        aldeano.actualizar();
 
-		//Actualizo el turno 4 veces e incrementa jugador su oro 4 veces
-		aldeano.actualizar(recolectando);
+        //Actualizo el turno 4 veces e incrementa jugador su oro 4 veces
+        aldeano.actualizar();
 
-		aldeano.actualizar(recolectando);
+        aldeano.actualizar();
 
-		aldeano.actualizar(recolectando);
+        aldeano.actualizar();
 
-		assertEquals(jugador.getOro(), (Integer) 180);
+        assertEquals(jugador.getOro(), (Integer) 180);
 
-	}
+    }
 
-	@Test
-	public void verificarQueMientrasReparaNoSumaOroTest() throws Exception {
+    @Test
+    public void verificarQueMientrasReparaNoSumaOroTest()
+            throws Exception, EdificioEnConstruccionException,
+            EdificioDestruidoExcepcion {
 
-		Aldeano aldeano = new Aldeano(jugador);
+        Aldeano aldeano = new Aldeano(jugador);
 
-		PlazaCentral plaza = new PlazaCentral(jugador);
+        PlazaCentral plaza = new PlazaCentral(jugador);
+        aldeano.establecerCoordenadasDeNacimiento(5, 4);
 
-		aldeano.construir(plaza, 5, 5);
+        aldeano.ubicar(5,4);
+        aldeano.construir(plaza, 5, 5);
+        //3 turnos en construirse
 
-		plaza.recibirDanio(25);
+        aldeano.actualizar();
 
-		aldeano.reparar(plaza);
+        aldeano.actualizar();
 
-		try {
-			aldeano.actualizar(reparando);
-		} catch (AldeanoOcupadoException e) {
+        aldeano.actualizar();
 
-		}
-		//no suma oro por estar reparando la plaza
-		assertEquals(jugador.getOro(), (Integer) 0);
-	}
+        //aca dejo de construir suma oro
+        plaza.recibirDanio(30);
 
-	@Test
-	public void verificarQueMientrasConstruyeNoSumaOroTest() {
+        aldeano.actualizar();
 
-		Aldeano aldeano = new Aldeano(jugador);
+        //no suma oro por estar reparando la plaza
+        assertEquals(jugador.getOro(), (Integer) 20);
 
-		PlazaCentral plaza = new PlazaCentral(jugador);
+    }
 
-		aldeano.construir(plaza, 5, 5);
+    @Test
+    public void verificarQueMientrasConstruyeNoSumaOroTest() throws Exception, EdificioEnConstruccionException {
 
-		//no suma oro por 3 turnos: el actual + los dos siguientes
-		try {
+        Aldeano aldeano = new Aldeano(jugador);
+        PlazaCentral plaza = new PlazaCentral(jugador);
+        aldeano.establecerCoordenadasDeNacimiento(8, 6);
 
-			aldeano.actualizar(construyendo);
+        try {
+            aldeano.construir(plaza, 8, 7);
+        } catch (Exception ignored) { }
 
-		} catch (AldeanoOcupadoException e) {
-		}
 
-		try {
+        aldeano.actualizar();
 
+        aldeano.actualizar();
 
-			aldeano.actualizar(construyendo);
+        aldeano.actualizar();
 
-		} catch (AldeanoOcupadoException e) {
-		}
+        //Se libera y suma oro de nuevo
+        assertEquals(jugador.getOro(), (Integer) 20);
 
-		try {
+    }
 
+    @Test
+    public void verificarQueAldeanoAunHeridoSumaOroTest() throws Exception {
 
-			aldeano.actualizar(construyendo);
+        Aldeano aldeano = new Aldeano(jugador);
 
-		} catch (AldeanoOcupadoException e) {
-		}
+        aldeano.recibirDanio(20);
 
-		try {
+        aldeano.actualizar();
 
-			aldeano.actualizar(recolectando);
+        assertEquals(jugador.getOro(), (Integer) 120);
 
-		} catch (AldeanoOcupadoException e) {
-		}
+    }
 
-		//Se libera y suma oro de nuevo
-		assertEquals(jugador.getOro(), (Integer) 20);
+    @Test
+    public void construirCuartelYVerificarConstruccionTest()
+            throws CasilleroNoExistenteException, CasilleroLlenoException {
 
-	}
+        Aldeano aldeano = new Aldeano(jugador);
 
-	@Test
-	public void verificarQueAldeanoAunHeridoSumaOroTest() {
+        aldeano.establecerCoordenadasDeNacimiento(5, 5);
 
-		Aldeano aldeano = new Aldeano(jugador);
+        mapa.ubicar(aldeano, 5, 5);
 
-		aldeano.recibirDanio(20);
+        Cuartel cuartel = new Cuartel(jugador);
 
-		aldeano.actualizar(recolectando);
+        assertFalse(mapa.estaOcupado(5, 6));
 
-		assertEquals(jugador.getOro(), (Integer) 120);
+        try {
+            aldeano.construir(cuartel, 5, 5);
 
-	}
+        } catch (Exception | EdificioEnConstruccionException ignored) { }
 
-	@Test
-	public void construirCuartelYVerificarConstruccionTest() {
+        assertTrue(mapa.estaOcupado(5, 5));
+    }
 
-		Aldeano aldeano = new Aldeano(jugador);
+    @Test
+    public void construirPlazaCentralTestYVerificarConstruccionTest() {
 
-		Posicion posicion = new Posicion(5, 5);
+        Aldeano aldeano = new Aldeano(jugador);
 
-		Cuartel cuartel = new Cuartel(jugador);
+        aldeano.establecerCoordenadasDeNacimiento(5, 5);
 
-		assertFalse(posicion.estaOcupado(5, 5));
+        PlazaCentral plazaCentral = new PlazaCentral(jugador);
 
-		aldeano.construir(cuartel, 5, 5);
-		try {
-			aldeano.actualizar(construyendo);
-		} catch (AldeanoOcupadoException e) {
-		}
 
-		try {
-			aldeano.actualizar(construyendo);
-		} catch (AldeanoOcupadoException e) {
-		}
+        assertFalse(mapa.estaOcupado(5, 6));
 
-		try {
-			aldeano.actualizar(construyendo);
-		} catch (AldeanoOcupadoException e) {
-		}
+        try {
+            aldeano.construir(plazaCentral, 5, 6);
 
-		try {
-			aldeano.actualizar(recolectando);
-		} catch (AldeanoOcupadoException e) {
-		}
+        } catch (Exception | EdificioEnConstruccionException ignored) {
 
-		assertTrue(posicion.estaOcupado(5, 5));
-	}
+        }
+        assertTrue(mapa.estaOcupado(5, 6));
 
-	@Test
-	public void construirPlazaCentralTestYVerificarConstruccionTest() {
+    }
 
-		Aldeano aldeano = new Aldeano(jugador);
+    @Test
+    public void repararCastilloTest() throws Exception, EdificioEnConstruccionException {
+        Castillo castillo = new Castillo(jugador);
+        Aldeano aldeano = new Aldeano(jugador);
 
-		Posicion posicion = new Posicion(5, 5);
+        aldeano.establecerCoordenadasDeNacimiento(5, 5);
 
-		PlazaCentral plazaCentral = new PlazaCentral(jugador);
+        //el castillo no se construye...
+        castillo.surgir(5, 6);
 
-		assertFalse(posicion.estaOcupado(5, 5));
+        castillo.recibirDanio(15);
 
-		aldeano.construir(plazaCentral, 5, 5);
+        try {
+            aldeano.reparar(castillo);
+        } catch (Exception ignored) { }
 
-		try {
-			aldeano.actualizar(construyendo);
-		} catch (AldeanoOcupadoException e) {
-		}
+        assertEquals((Integer) 1000, castillo.getVida());
+    }
 
-		try {
-			aldeano.actualizar(construyendo);
-		} catch (AldeanoOcupadoException e) {
-		}
+    @Test
+    public void repararPlazaCentralTest()
+            throws Exception, EdificioEnConstruccionException{
 
-		try {
-			aldeano.actualizar(construyendo);
+        Aldeano aldeano = new Aldeano(jugador);
 
-		} catch (AldeanoOcupadoException e) {
-		}
+        PlazaCentral plazaCentral = new PlazaCentral(jugador);
 
-		try {
-			aldeano.actualizar(recolectando);
-		} catch (AldeanoOcupadoException e) {
-		}
+        aldeano.establecerCoordenadasDeNacimiento(5, 5);
 
-		assertTrue(posicion.estaOcupado(5, 5));
+        try {
+            aldeano.construir(plazaCentral, 5, 5);
+        } catch (DistanciaInvalidaException e) {
+        }
 
-	}
+        aldeano.actualizar();
+        aldeano.actualizar();
+        aldeano.actualizar();
 
-	@Test
-	public void repararCastilloTest() throws Exception {
-		Castillo castillo = new Castillo(jugador);
-		Aldeano aldeano = new Aldeano(jugador);
+        plazaCentral.recibirDanio(60);
 
-		try {
-			castillo.recibirDanio(15);
-		} catch (Exception e) {
-			//
-		}
+        aldeano.reparar(plazaCentral);
 
-		try {
-			aldeano.reparar(castillo);
-		} catch (Exception e) {
-			//
-		}
+        assertEquals((Integer) 415, plazaCentral.getVida());
+    }
 
-		assertEquals((Integer) 1000, castillo.getVida());
-	}
+    @Test
+    public void repararCuartelTest() throws Exception, EdificioEnConstruccionException {
 
-	@Test
-	public void repararPlazaCentralTest() throws Exception {
+        Aldeano aldeano = new Aldeano(jugador);
 
-		Aldeano aldeano = new Aldeano(jugador);
+        Cuartel cuartel = new Cuartel(jugador);
 
-		PlazaCentral plazaCentral = new PlazaCentral(jugador);
+        aldeano.establecerCoordenadasDeNacimiento(5, 5);
 
-		aldeano.construir(plazaCentral,5,5);
+        try {
+            aldeano.construir(cuartel, 5, 6);
+        } catch (DistanciaInvalidaException ignored) {
+        }
 
-		plazaCentral.recibirDanio(60);
+        aldeano.actualizar();
 
-		aldeano.reparar(plazaCentral);
+        aldeano.actualizar();
 
-		try {
-			aldeano.actualizar(reparando);
-		}catch(AldeanoOcupadoException e){}
+        aldeano.actualizar();
 
-		assertEquals((Integer)450,plazaCentral.getVida());
-	}
+        cuartel.recibirDanio(60);
 
-	@Test
-	public void repararCuartelTest() throws Exception {
+        aldeano.reparar(cuartel);
 
-		Aldeano aldeano = new Aldeano(jugador);
+        aldeano.actualizar();
 
-		Cuartel cuartel = new Cuartel(jugador);
+        assertEquals((Integer) 250, cuartel.getVida());
 
-		aldeano.construir(cuartel,5,5);
-
-
-		cuartel.recibirDanio(60);
-
-		aldeano.reparar(cuartel);
-
-		try {
-			aldeano.actualizar(reparando);
-		}catch(AldeanoOcupadoException e){}
-
-		assertEquals((Integer)250,cuartel.getVida());
-	}*/
-
+    }
 
 }
 

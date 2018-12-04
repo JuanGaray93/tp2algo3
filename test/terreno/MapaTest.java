@@ -1,8 +1,6 @@
 package terreno;
 
 import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
-import com.company.excepciones.MapaLlenoException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.PlazaCentral;
@@ -23,7 +21,7 @@ public class MapaTest {
     private Jugador jugador = null;
 
     @Before
-    public void resetMapa() throws CasilleroLlenoException {
+    public void resetMapa() {
         mapa.destruir();
         mapa = Mapa.getMapa();
 
@@ -100,10 +98,22 @@ public class MapaTest {
     }
 
     @Test
+    public void quitarPosicionableDesocupaElLugarTest() {
+        Aldeano aldeano = new Aldeano(jugador);
+        try {
+            mapa.ubicar(aldeano, 10, 11);
+            mapa.quitar(10, 11);
+        } catch (Exception e) {
+            assertTrue( e.getMessage(),false);
+        }
+        assertFalse(mapa.estaOcupado(10, 11));
+    }
+
+    @Test
     public void colocarUnidadOcupaCasilleroVacioMasCercano(){
         /** El Reptador no se puede testear directamente por ser un objeto al que sólo puede acceder Mapa.
-         *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único método que delega responsabilidades a Reptador.
-         *  Que funcione bien ese método es que funcione bien el Reptador.
+         *  Sin embargo, colocarEnCasilleroLibreMasCercano es el único métoddo que delega responsabilidades a Reptador.
+         *  Que funcione bien ese métoddo es que funcione bien el Reptador.
          *  Este test prueba entonces que funcione correctamente.
          */
 
@@ -130,22 +140,11 @@ public class MapaTest {
             obtenido = mapa.conseguirOcupante(14, 12);
 
         } catch (Exception e){
-            assertTrue(false);
+
         }
 
         assertEquals(aColocar, obtenido);
     }
 
-    @Test
-    public void quitarPosicionableDesocupaElLugarTest() {
-        Aldeano aldeano = new Aldeano(jugador);
-        try {
-            mapa.ubicar(aldeano, 10, 11);
-            mapa.quitar(10, 11);
-        } catch (Exception e) {
-            assertTrue( e.getMessage(),false);
-        }
-        assertFalse(mapa.estaOcupado(10, 11));
-    }
 
 }

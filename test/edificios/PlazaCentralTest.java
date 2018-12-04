@@ -1,181 +1,163 @@
 package edificios;
 
 import com.company.excepciones.*;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
-import com.company.excepciones.Edificio.EdificioReparadoException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
-import com.company.modelo.unidades.Arquero;
-import com.company.modelo.unidades.Espadachin;
+import org.junit.Before;
+import org.junit.Test;
 
-public class PlazaCentralTest{
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-	private Mapa mapa;
-	private Jugador jugador = new Jugador();;
+public class PlazaCentralTest {
 
-	@Before
-	public void resetMapa() throws CasilleroLlenoException {
-		mapa.destruir();
-		mapa = Mapa.getMapa();
+    private Mapa mapa = Mapa.getMapa();
+    private Jugador jugador;
+    private Aldeano peon;
+    PlazaCentral central;
+
+    @Before
+    public void resetMapa() {
+        mapa.destruir();
+        mapa = Mapa.getMapa();
+        jugador = new Jugador();
+        peon = new Aldeano(jugador);
+        central = new PlazaCentral(jugador);
+    }
+
+    @Test
+    public void plazaCentralCrearAldeanoTestYVerificarExistencia()
+            throws CasilleroNoExistenteException,
+            CasilleroLlenoException {
+
+        mapa.ubicar(peon, 16, 21);
+        peon.establecerCoordenadasDeNacimiento(16, 21);
+
+        try {
+            peon.construir(central, 16, 22);
+        } catch (Exception | EdificioEnConstruccionException ignored) {
+        }
+
+        /*   21  22  23
+         *
+         * 16  A  pc  pc
+         *
+         * 17     pc  pc
+         *
+         * */
+
+        try {
+            central.crear(new Aldeano(jugador));
+        } catch (MapaLlenoException | EdificioEnConstruccionException | EdificioEnReparacionException | EdificioNoDisponibleException | UnidadErroneaException ignored) {
+        }
+
+        assertTrue(mapa.estaOcupado(16, 21));
+        assertTrue(mapa.estaOcupado(16, 23));
+        assertTrue(mapa.estaOcupado(17, 22));
+    }
+
+    @Test
+    public void recibirDanioYVerificarDanioTest() throws Exception,
+            EdificioEnConstruccionException, EdificioDestruidoExcepcion {
+
+        peon.establecerCoordenadasDeNacimiento(5, 3);
+
+        peon.construir(central, 5, 4);
+
+        central.avanzarConstruccion();
+        central.avanzarConstruccion();
+        central.avanzarConstruccion();
+
+        central.recibirDanio(15);
+
+        assertEquals(central.getVida(), (Integer) 435);
+    }
+
+    @Test
+    public void verificarReparacionEnTiempoIndicadoTest()
+            throws Exception, EdificioEnConstruccionException,
+            EdificioDestruidoExcepcion {
+
+        peon.establecerCoordenadasDeNacimiento(5, 3);
+
+        try {
+            peon.construir(central, 5, 4);
+        } catch (DistanciaInvalidaException ignored) {
+        }
+
+        central.avanzarConstruccion();
+        central.avanzarConstruccion();
+        central.avanzarConstruccion();
+
+        central.recibirDanio(50);
+
+        peon.reparar(central);
+
+        central.avanzarReparacion();
+
+        assertEquals(central.getVida(), (Integer) 450);
+
+    }
+
+    @Test
+    public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest()
+            throws Exception, EdificioEnConstruccionException,
+            EdificioDestruidoExcepcion {
+
+        peon.establecerCoordenadasDeNacimiento(5, 5);
+
+        peon.construir(central, 5, 6);
+
+        central.avanzarConstruccion();
+        central.avanzarConstruccion();
+        central.avanzarConstruccion();
+
+        central.recibirDanio(50);
+
+        central.reparar(peon);
+
+        try {
+            central.crear(new Aldeano(jugador));
+        } catch (EdificioEnReparacionException | EdificioNoDisponibleException ignored) {
+        }
+
+    }
+
+	@Test
+	public void crearPlazaCentralYVerificarQueSePosicionaEnPosicionIndicadaTest()
+            throws Exception {
+
+		PlazaCentral plazaCentral = new PlazaCentral(jugador);
+
+		plazaCentral.construir(peon,3,4);
+
+		plazaCentral.avanzarConstruccion();
+		plazaCentral.avanzarConstruccion();
+		plazaCentral.avanzarConstruccion();
+
+        assertTrue(mapa.estaOcupado(3,4));
+
 	}
 
-
-	/* ESTO DEBERIA SER UN TEST EN ALDEANO
 	@Test
-	public void puedeSerConstruida(){
-		PlazaCentral central = new PlazaCentral(jugador);
-		Aldeano aldea
-		central.construir();
-	}
-	*/
-	/*
-	@Test
-	public void plazaCentralCrearAldeanoTest() throws CasilleroNoExistenteException, CasilleroLlenoException{
+    public void borrarPlazaCentralYVerificarQueSeBorraTest() throws CasilleroNoExistenteException, CasilleroLlenoException {
 
-		PlazaCentral central = new PlazaCentral(jugador);
+        PlazaCentral plazaCentral = new PlazaCentral(jugador);
 
-		//Terreno no esta ocupado en este momento
-		Assert.assertFalse(mapa.estaOcupado(16,22));
-		try {
-			mapa.ubicar(central, 5, 5);
+        plazaCentral.surgir(0, 0);
+        plazaCentral.eliminar();
 
-		}catch(CasilleroLlenoException e) {
+        assertFalse( mapa.estaOcupado(0, 0) );
+        assertFalse( mapa.estaOcupado(0, 1) );
+        assertFalse( mapa.estaOcupado(1, 0) );
+        assertFalse( mapa.estaOcupado(1, 1) );
 
-		}
+    }
 
-		central.crearUnidad(new Aldeano(jugador));
-		//Ahora terreno esta ocupado en posicion cercana de castillo y en castillo
-		//La posicion donde se crea la maquina de asedio es random en el castillo
-		// TODO probar mas casos borde!
-		//Assert.assertTrue(terreno.estaOcupado(16,22));
-		Assert.assertTrue(mapa.estaOcupado(15,21));
-		Assert.assertTrue(mapa.estaOcupado(16,20));
-	}
-
-	@Test
-	public void recibirDanioDeEspadachinYVerificarDanioTest() {
-		Espadachin espadachin = new Espadachin(jugador);
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		espadachin.atacar(plaza);
-		
-		Assert.assertFalse(plaza.comoNuevo());
-	}
-
-	@Test
-	public void recibirDanioDeArqueroYVerificarDanioTest() {
-		
-		Mapa terreno = Mapa.getMapa();
-		
-		Arquero archer = new Arquero(jugador);
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		Assert.assertTrue(plaza.comoNuevo());
-		
-		archer.atacar(plaza);
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-	}
-
-	@Test
-	public void recibirDanioDeArmaAsedioYVerificarDanioTest() {
-		
-		Mapa terreno = Mapa.getMapa();
-		
-		Arquero archer = new Arquero(jugador);
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		Assert.assertTrue(plaza.comoNuevo());
-		
-		archer.atacar(plaza);
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-	}
-
-	@Test
-	public void verificarReparacionEnTiempoIndicadoTest() {
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		plaza.recibirDanio(50);
-
-		try {
-			plaza.reparar();
-		} catch (EdificioReparadoException e) {
-			e.printStackTrace();
-		} catch (EdificioEnReparacionException e) {
-			e.printStackTrace();
-		}
-
-		Assert.assertFalse(plaza.comoNuevo());
-		
-		plaza.actualizar();
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-		plaza.actualizar();
-		
-		Assert.assertTrue(plaza.comoNuevo());
-		
-	}
-
-	@Test
-	public void verificarQueNoCreaAldeanosCuandoEstaEnReparacionTest() throws EdificioReparadoException, EdificioEnReparacionException {
-
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		plaza.recibirDanio(50);
-		
-		plaza.reparar();
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-		plaza.actualizar();
-		
-		Assert.assertFalse(plaza.comoNuevo());
-		
-		plaza.actualizar();
-		
-		Assert.assertTrue(plaza.comoNuevo());
-		
-	}*/
-	
-	//por simplicidad dura un turno la creacion de aldeano, es decir queda disponible en el sig. turno
-	/*
-
-	COMENTO ESTE TEST PORQUE NO DEBERIA HABER UN GETTER DE SI ESTA LIBRE SINO UNA EXCEPTION DE EDIFICIOOCUPADO
-
-	@Test
-	public void verificarQueNoCreaAldeanoHastaTerminarActual() {
-		
-		PlazaCentral plaza = new PlazaCentral(jugador);
-		
-		plaza.crearUnidad(new Aldeano(jugador));
-		
-		Assert.assertFalse(plaza.estaLibre());
-		try {
-			plaza.crearUnidad(new Aldeano(jugador));
-		}catch(EdificioOcupadoException e) {
-			//
-		}
-		
-		plaza.actualizar();
-		
-		Assert.assertTrue(plaza.estaLibre());
-		
-		plaza.crearUnidad(new Aldeano(jugador));
-		
-	}*/
-	
 }
