@@ -61,22 +61,4 @@ public class PosicionTest {
 		
 	}
 
-	/* Este test corresponde a plaza central no a posicion TODO tira error
-	@Test
-	public void crearPlazaCentralYVerificarQueSePosicionaEnPosicionIndicadaTest()
-            throws Exception {
-		
-		PlazaCentral plazaCentral = new PlazaCentral(jugador);
-		
-		try {
-			plazaCentral.construir(aldeano,3,4);
-		} catch (Exception e) { }
-		plazaCentral.avanzarConstruccion();
-		plazaCentral.avanzarConstruccion();
-		plazaCentral.avanzarConstruccion();
-
-        Assert.assertTrue(mapa.estaOcupado(3,4));
-		
-	}*/
-
 }
