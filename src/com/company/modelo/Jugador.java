@@ -1,9 +1,6 @@
 package com.company.modelo;
 
-import com.company.excepciones.EdificioInexistenteEnConstruccionesException;
-import com.company.excepciones.LimitePoblacionalException;
-import com.company.excepciones.OroInsuficienteException;
-import com.company.excepciones.UnidadInexistenteEnPoblacionException;
+import com.company.excepciones.*;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.edificios.PlazaCentral;
@@ -17,7 +14,6 @@ public class Jugador {
     private final static Integer LIMITE_POBLACIONAL = 50;
     private static Integer jugadoresCreados = 0;
     private Integer numeroDeJugador;
-    private Iniciador unIniciador;
 
 
     ArrayList<Unidad> poblacion;
@@ -30,10 +26,11 @@ public class Jugador {
         this.numeroDeJugador = jugadoresCreados;
         poblacion = new ArrayList<Unidad>();
         edificios = new ArrayList<Edificio>();
-        this.unIniciador = new Iniciador(this);
 
     }
 	/*
+	 *No creo que sea necesario ver que pasa si el casillero esta lleno, la view podria mostrar en verde los casilleros
+	 * libres y validos a los que se puede mover la unidad y en rojo a los casilleros invalidos u ocupados. (soy Martín)
 	public void mover(Unidad unidad, Integer x, Integer y) throws CasilleroNoExistenteException {
 		try {
 			unidad.moverA(x,y);
@@ -43,7 +40,6 @@ public class Jugador {
 	}*/
 
     public Integer getOro() {
-
         return this.oro;
     }
 
@@ -52,6 +48,7 @@ public class Jugador {
         if (poblacion.size() == LIMITE_POBLACIONAL) {
             throw new LimitePoblacionalException("Alcanzaste el limite permitido de unidades");
         }
+
         poblacion.add(unidad);
     }
 
@@ -92,14 +89,31 @@ public class Jugador {
 
         oro -= monto;
     }
+
+    // hay que tener una forma de testear la creacion de unidades.
+    public Boolean estaEnPoblacion(Unidad unidad) {
+        return poblacion.contains(unidad);
+    }
+
+
+    public ArrayList<Edificio> getEdificios() {
+        return edificios;
+    }
+
+    public ArrayList<Unidad> getPoblacion() {
+        return poblacion;
+    }
+
 	/*
 	public void actualizar() {
 		
 	}*/
 
-    public void crearEntidadesIniciales() {
+    public void crearEntidadesIniciales() throws CasilleroNoExistenteException, CasilleroLlenoException {
+        Iniciador iniciador = new Iniciador(this);
+        iniciador.crearEntidadesIniciales();
 
-        Integer posicionInicialX = 0;
+        /*Integer posicionInicialX = 0;
         Integer posicionInicialY = 0;
 
         if (this.numeroDeJugador == 1) {
@@ -128,24 +142,7 @@ public class Jugador {
         // plaza.construir((Aldeano) poblacion.get(1), 5 + posicionInicialX, 10 + posicionInicialY);
 
         edificios.add(castillo);
-        edificios.add(plaza);
-    }
-
-    // hay que tener una forma de testear la creacion de unidades.
-    public Boolean estaEnPoblacion(Unidad unidad) {
-        if (poblacion.contains(unidad)) {
-            return true;
-        }
-        return false;
-    }
-
-
-    public ArrayList<Edificio> getEdificios() {
-        return edificios;
-    }
-
-    public ArrayList<Unidad> getPoblacion() {
-        return poblacion;
+        edificios.add(plaza);*/
     }
 
 }
