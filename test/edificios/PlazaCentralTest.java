@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class PlazaCentralTest {
@@ -125,6 +126,37 @@ public class PlazaCentralTest {
             central.crear(new Aldeano(jugador));
         } catch (EdificioEnReparacionException | EdificioNoDisponibleException ignored) {
         }
+
+    }
+
+	@Test
+	public void crearPlazaCentralYVerificarQueSePosicionaEnPosicionIndicadaTest()
+            throws Exception {
+
+		PlazaCentral plazaCentral = new PlazaCentral(jugador);
+
+		plazaCentral.construir(peon,3,4);
+
+		plazaCentral.avanzarConstruccion();
+		plazaCentral.avanzarConstruccion();
+		plazaCentral.avanzarConstruccion();
+
+        assertTrue(mapa.estaOcupado(3,4));
+
+	}
+
+	@Test
+    public void borrarPlazaCentralYVerificarQueSeBorraTest() throws CasilleroNoExistenteException, CasilleroLlenoException {
+
+        PlazaCentral plazaCentral = new PlazaCentral(jugador);
+
+        plazaCentral.surgir(0, 0);
+        plazaCentral.eliminar();
+
+        assertFalse( mapa.estaOcupado(0, 0) );
+        assertFalse( mapa.estaOcupado(0, 1) );
+        assertFalse( mapa.estaOcupado(1, 0) );
+        assertFalse( mapa.estaOcupado(1, 1) );
 
     }
 
