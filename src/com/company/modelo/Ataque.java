@@ -21,15 +21,12 @@ public class Ataque {
     public void atacar(Posicionable unEnemigo, Integer unDanio)
             throws EnemigoInvalidoException {
 
-        ArrayList atacables = this.buscarAtacables(this.rangoAtaque);
+        ArrayList enemigos = buscarEnemigos(this.rangoAtaque);
 
-        this.eliminarPosicionablesAmigos(atacables);
-
-        if(!atacables.contains(unEnemigo) )
+        if( !enemigos.contains(unEnemigo) )
             throw new EnemigoInvalidoException("No se pudo atacar al enemigo");
 
         try{
-
             unEnemigo.recibirDanio(unDanio);
             return;
 
@@ -38,17 +35,26 @@ public class Ataque {
         }
     }
 
-    public void atacarATodos(Integer danio) throws EnemigoInvalidoException {
-        ArrayList <Posicionable> vector = posicion.buscarPosicionablesEnRadio(rangoAtaque);
-        ArrayList <Posicionable> vector2 = new ArrayList();
-        for (Posicionable x : vector) {
-            if(! (vector2.contains(x))) {
-                vector2.add(x);
+    public void atacarATodos(Integer unDanio) {
+        ArrayList<Posicionable> enemigosProvisorios = buscarEnemigos(this.rangoAtaque);
+        ArrayList<Posicionable> enemigosDefinitivos = new ArrayList<>();
+
+        for (Posicionable unPosicionable : enemigosProvisorios) {
+
+            if( !( enemigosDefinitivos.contains(unPosicionable) ) ) enemigosDefinitivos.add(unPosicionable);
+
+        }
+
+        for(Posicionable unEnemigo : enemigosDefinitivos) {
+
+            try{
+                unEnemigo.recibirDanio(unDanio);
+            } catch (Exception | EdificioEnConstruccionException
+                    | EdificioDestruidoExcepcion ignored) {
             }
+
         }
-        for(Posicionable y : vector2) {
-            atacar(y, danio);
-        }
+
     }
 
     private void eliminarPosicionablesAmigos(ArrayList<Posicionable> atacables){
@@ -66,9 +72,14 @@ public class Ataque {
 
     }
 
-    private ArrayList buscarAtacables(Integer unRadio){
-
+    private ArrayList<Posicionable> buscarAtacables(Integer unRadio){
         return posicion.buscarPosicionablesEnRadio(unRadio);
+    }
+
+    private ArrayList<Posicionable> buscarEnemigos(Integer unRadio){
+        ArrayList<Posicionable> atacables = this.buscarAtacables(unRadio);
+        this.eliminarPosicionablesAmigos(atacables);
+        return atacables;
     }
 
 }
