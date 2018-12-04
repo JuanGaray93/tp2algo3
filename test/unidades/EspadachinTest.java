@@ -217,7 +217,7 @@ public class EspadachinTest {
         Aldeano peon = new Aldeano(jugador);
         Espadachin espadachin = new Espadachin(jugador);
 
-        cuartel.construir(peon, 32, 9);
+        cuartel.construir(peon, 12, 9);
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
@@ -239,16 +239,16 @@ public class EspadachinTest {
 
         Espadachin otroEspadachin = new Espadachin(otroJugador);
 
-        cuartel.construir(peon, 32, 9);
+        cuartel.construir(peon, 12, 9);
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
 
-        otroEspadachin.establecerCoordenadasDeNacimiento(33,7);
-        otroEspadachin.ubicar(33,7);
+        otroEspadachin.establecerCoordenadasDeNacimiento(13,7);
+        otroEspadachin.ubicar(13,7);
 
-        espadachin.establecerCoordenadasDeNacimiento(34,8);
-        espadachin.ubicar(34,8);
+        espadachin.establecerCoordenadasDeNacimiento(14,8);
+        espadachin.ubicar(14,8);
 
         espadachin.atacarA(otroEspadachin);
         espadachin.atacarA(cuartel);

@@ -116,16 +116,16 @@ public class ArqueroTest {
     public void testArqueroMoverEnDiagonalHaciaArribaALaDerecha()
             throws Exception, EdificioNoDisponibleException, ArmaMontadaException {
 
-        arquero.establecerCoordenadasDeNacimiento(34, 9);
+        arquero.establecerCoordenadasDeNacimiento(14, 9);
 
-        arquero.ubicar(34, 9);
+        arquero.ubicar(14, 9);
 
-        assertTrue(mapa.estaOcupado(34, 9));
+        assertTrue(mapa.estaOcupado(14, 9));
 
-        arquero.moverA(35, 10);
+        arquero.moverA(15, 10);
 
-        assertTrue(mapa.estaOcupado(35, 10));
-        assertFalse(mapa.estaOcupado(34, 9));
+        assertTrue(mapa.estaOcupado(15, 10));
+        assertFalse(mapa.estaOcupado(14, 9));
     }
 
     @Test
@@ -222,15 +222,15 @@ public class ArqueroTest {
 
         cuartel = new Cuartel(new Jugador());
 
-        cuartel.construir(peon, 32, 9);
+        cuartel.construir(peon, 12, 9);
 
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
         cuartel.avanzarConstruccion();
 
-        arquero.establecerCoordenadasDeNacimiento(32, 8);
+        arquero.establecerCoordenadasDeNacimiento(12, 8);
 
-        arquero.ubicar(32, 8);
+        arquero.ubicar(12, 8);
 
         try {
             arquero.atacarA(cuartel);
