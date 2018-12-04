@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CastilloTest {
@@ -25,7 +26,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void testCastilloOcupaElmapaQueDebeOcuparCuandoSeLoCrea() throws CasilleroLlenoException, CasilleroNoExistenteException {
+    public void castilloOcupaElmapaQueDebeOcuparCuandoSeLoCreaTest() throws CasilleroLlenoException, CasilleroNoExistenteException {
 
         Jugador jugador = new Jugador();
         Castillo castillo = new Castillo(jugador);
@@ -54,7 +55,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void testCastilloCrearMaquinaAsedio() throws Exception{
+    public void castilloCrearMaquinaAsedioTest() throws Exception{
 
         Jugador jugador = new Jugador();
         Castillo castillo = new Castillo(jugador);
@@ -69,9 +70,9 @@ public class CastilloTest {
 
     }
 
-    /*
+
     @Test
-    public void testCastilloAtacarAUnidadesEnemigasConDistanciaMenorOIgualATres() throws CasilleroNoExistenteException, CasilleroLlenoException, UnidadMuertaException, EnemigoInvalidoException {
+    public void castilloAtacarAUnidadesEnemigasConDistanciaMenorOIgualATresTest() throws CasilleroNoExistenteException, CasilleroLlenoException, UnidadMuertaException, EnemigoInvalidoException {
 
         Jugador jugador = new Jugador();
         Jugador jugadorEnemigo = new Jugador();
@@ -98,6 +99,21 @@ public class CastilloTest {
         assertEquals((Integer) 80, espadachinEnemigo.getVida());
         assertEquals((Integer) 55, arqueroEnemigo.getVida());
 
-    }*/
+    }
+
+    @Test
+    public void borrarCastilloYVerificarQueSeBorraTest() throws CasilleroNoExistenteException, CasilleroLlenoException {
+
+        Jugador jugador = new Jugador();
+        Castillo castillo = new Castillo(jugador);
+
+        castillo.surgir(10, 10);
+        castillo.eliminar();
+
+        assertFalse( mapa.estaOcupado(10, 10) );
+        assertFalse( mapa.estaOcupado(10, 11) );
+        assertFalse( mapa.estaOcupado(11, 10) );
+        assertFalse( mapa.estaOcupado(11, 11) );
+    }
 
 }
