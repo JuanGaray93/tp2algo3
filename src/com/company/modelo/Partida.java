@@ -14,10 +14,10 @@ public class Partida {
 
     public Partida(){
         turno = new Turno();
-        turno.sumarJugador(new Jugador());
-        for(Integer i = 0; i < NUMERO_DE_JUGADORES; i++){
-            turno.sumarJugador(new Jugador());
-        }
+
+        for(Integer i = 0; i < NUMERO_DE_JUGADORES; i++) turno.sumarJugador(new Jugador());
+
+
     }
 
     public void correr() throws Exception{
