@@ -1,10 +1,7 @@
 package com.company.modelo.unidades;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.MovimientoInvalidoException;
-import com.company.excepciones.UnidadMuertaException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicion;
 import com.company.modelo.Posicionable;
@@ -13,60 +10,59 @@ import com.company.modelo.unidades.estados.EstadoUnidadInactivo;
 
 public abstract class Unidad extends Posicionable {
 
-	protected static Integer VIDA_MAXIMA;
-	protected static Integer COSTO;
-	protected static Integer vidaActual;
+    protected Posicion posicion;
+    protected EstadoUnidad estado;
 
-	protected Posicion posicion;
-	protected EstadoUnidad estado;
+    public Unidad(Jugador jugador) {
+        this.jugador = jugador;
+        this.posicion = null;
 
-	public Unidad(Jugador jugador) {
-		this.jugador = jugador;
-		this.posicion = null;
-	}
+    }
 
-	public void establecerCoordenadasDeNacimiento(int posicionHorizontal, int posicionVertical) {
-		posicion = new Posicion(posicionHorizontal, posicionVertical);
-	}
+    //devuelve el estado de la unidad inicial
+    public void establecerEstadoInicial(Integer vida_maxima,Integer costo){
+        estado = new EstadoUnidadInactivo(vida_maxima,vida_maxima,costo);
+    }
 
-	public void moverA(int posicionHorizontal, int posicionVertical) throws CasilleroLlenoException,
-			CasilleroNoExistenteException, MovimientoInvalidoException {
+    public Integer getCosto(){
+        return estado.getCosto();
+    }
 
-		if( posicion.seEncuentraEnRadio(posicionHorizontal, posicionVertical) ){
-			this.eliminarDePosicion();
-			posicion = new Posicion(posicionHorizontal, posicionVertical);
-			posicion.posicionar(this);
-		}
+    public Integer getVida(){
 
-		else throw new MovimientoInvalidoException("No es posible moverse a ese casillero");
+        return estado.getVidaActual();
+    }
 
-	}
+    public void establecerCoordenadasDeNacimiento(Integer posicionHorizontal, Integer posicionVertical) {
+        posicion = new Posicion(posicionHorizontal, posicionVertical);
+    }
 
-	public Integer getVida() throws UnidadMuertaException {
-		return this.estado.getVidaActual();
-	}
+    public void moverA(Integer posicionHorizontal, Integer posicionVertical)
+            throws CasilleroNoExistenteException, CasilleroLlenoException,
+            ArmaMontadaException, MovimientoInvalidoException {
 
-	@Override
-	public void recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException {
-		estado = estado.recibirDanio(montoDeDanio);
-	}
+        posicion.moverA(posicionHorizontal, posicionVertical);
+    }
 
-	private void eliminarDePosicion() {
-		if(posicion != null){
-			posicion.eliminar();
-		}
-	}
+    public void recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException, UnidadMuertaException {
+        try {
+            estado.recibirDanio(montoDeDanio);
+        } catch (UnidadMuertaException e) {
+            this.eliminarDePosicion();
+            jugador.eliminarDePoblacion(this);
+        }
+    }
 
-	public void ubicar(Integer posicionHorizontal, Integer posicionVertical){
-		// TODO
-	}
+    private void eliminarDePosicion() {
+        if (posicion != null) {
+            posicion.quitarPosicionable();
+        }
+    }
 
-	@Override
-	public void actualizar() throws Exception {
-		estado = estado.actualizar();
-	}
+    @Override
+    public void ubicar(Integer posicionHorizontal, Integer posicionVertical)
+            throws CasilleroNoExistenteException, CasilleroLlenoException {
+        posicion.posicionar(this);
+    }
 
-	public Integer getCosto(){
-		return COSTO;
-	}
 }

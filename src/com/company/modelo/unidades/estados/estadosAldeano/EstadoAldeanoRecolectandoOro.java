@@ -1,39 +1,35 @@
 package com.company.modelo.unidades.estados.estadosAldeano;
 
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.EdificioDestruidoExcepcion;
 import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoAldeanoRecolectandoOro extends EstadoAldeano {
 
-    private Jugador jugadorActual;
+    Jugador jugadorActual ;
 
-    public EstadoAldeanoRecolectandoOro(Jugador jugador, Integer vidaActual){
-        super(vidaActual);
+    public EstadoAldeanoRecolectandoOro(Jugador jugador, Integer vida_actual) {
+
+        super(vida_actual);
         edificioATrabajar = null;
         jugadorActual = jugador;
     }
 
-    public EstadoUnidad otorgarGanancia(Jugador jugador) {
-        jugador.sumarOro(PRODUCCION_ORO);
-        return this;
-    }
-
-    public EstadoUnidad construir(Edificio edificio)
-            throws Exception, EdificioEnConstruccionException {
-        return new EstadoAldeanoConstruyendo(VIDA_ACTUAL).construir(edificio);
-    }
-
-    public EstadoUnidad reparar(Edificio edificio)
-            throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion {
-
-        return new EstadoAldeanoReparando(VIDA_ACTUAL).reparar(edificio);
-    }
-
-    public EstadoUnidad actualizar() {
+    public EstadoAldeano actualizar() {
         jugadorActual.sumarOro(PRODUCCION_ORO);
         return this;
     }
+
+    public EstadoAldeano construir(Edificio edificio)
+            throws Exception, EdificioEnConstruccionException {
+        return new EstadoAldeanoConstruyendo(vidaActual).construir(edificio);
+    }
+
+    public EstadoAldeano reparar(Edificio edificio)
+            throws Exception, EdificioEnConstruccionException {
+
+        return new EstadoAldeanoReparando(vidaActual).reparar(edificio);
+    }
+
 }

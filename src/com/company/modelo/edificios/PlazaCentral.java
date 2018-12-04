@@ -1,45 +1,30 @@
 package com.company.modelo.edificios;
 
-import com.company.excepciones.*;
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Jugador;
-import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.estados.EstadoEdificioInactivo;
 import com.company.modelo.edificios.estados.EstadoPorConstruir;
-import com.company.modelo.unidades.Aldeano;
-import com.company.modelo.unidades.Unidad;
 
 public class PlazaCentral extends Edificio {
 
+
     public PlazaCentral(Jugador jugador) {
         super(jugador);
-        COSTO = 100;
-        MONTO_DE_REPARACION = 25;
-        BLOQUES_DE_ANCHO = 2;
+
         BLOQUES_DE_ALTO = 2;
+        BLOQUES_DE_ANCHO = 2;
+        MONTO_DE_REPARACION = 25;
+        COSTO = 100;
         VIDA_MAXIMA = 450;
-    }
 
-    @Override
-    public void crearUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException, UnidadErroneaException, MovimientoInvalidoException, EdificioNoDisponibleException {
-
-        if( !(estado instanceof EstadoEdificioInactivo) ) throw new EdificioNoDisponibleException("El edificio no esta disponible");
-
-        if( !( unidad instanceof Aldeano ) ) {
-            throw new UnidadErroneaException("Imposible crear ese tipo de unidad");
-        }
-
-        posiciones.get(0).colocarEnCasilleroLibreMasCercano(unidad);
-        jugador.agregarAPoblacion(unidad);
+        this.estado = new EstadoPorConstruir(VIDA_MAXIMA,VIDA_MAXIMA, MONTO_DE_REPARACION);
     }
 
     public void surgir(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, CasilleroLlenoException {
         this.ubicar(posicionHorizontal, posicionVertical);
+        estado = new EstadoEdificioInactivo(VIDA_MAXIMA,VIDA_MAXIMA,MONTO_DE_REPARACION);
         jugador.agregarAEdificios(this);
-    }
-
-    @Override
-    public void actualizar() {
-
     }
 
 }

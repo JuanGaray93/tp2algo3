@@ -1,77 +1,62 @@
 package com.company.modelo.edificios.estados;
 
-import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioOcupadoException;
-import com.company.excepciones.Edificio.EdificioReparadoException;
-import com.company.excepciones.EdificioDestruidoExcepcion;
-import com.company.excepciones.EdificioNoConstruidoException;
+import com.company.modelo.Posicion;
 import com.company.modelo.unidades.Aldeano;
+import com.company.modelo.unidades.Unidad;
 
 public class EstadoEdificioEnReparacion extends EstadoEdificio {
 
-    public EstadoEdificioEnReparacion(Integer vidaMaxima, Integer montoReparacion, Integer vidaActual) {
-        super(vidaMaxima, montoReparacion);
-        this.VIDA_ACTUAL = vidaActual;
+    public EstadoEdificioEnReparacion(Integer vidaMax, Integer vidaActual, Integer reparacion) {
+        super(vidaMax,vidaActual, reparacion);
+        this.vidaActual = vidaActual;
     }
 
-    @Override
-    public EstadoEdificio ejecutarAccion() throws EdificioReparadoException {
-        return this.reparar(trabajadorActual,MONTO_REPARACION);
-    }
+    public EstadoEdificio reparar(Aldeano reparador,
+                                  Integer montoDeReparacion) throws Exception {
 
-    @Override
-    public EstadoEdificio reparar(Aldeano reparador, Integer montoDeReparacion) throws EdificioReparadoException, EdificioOcupadoException {
+        if (trabajadorActual == null) {
+            trabajadorActual = reparador;
 
-        if (this.VIDA_ACTUAL == this.VIDA_MAXIMA) throw new EdificioReparadoException("El edificio esta reparado");
+        } else if (trabajadorActual != reparador) {
 
-        if( trabajadorActual != reparador){
-            throw new EdificioOcupadoException("No se puede reparar este edificio, hay otro aldeano reparandolo!");
+            throw new EdificioOcupadoException("No se puede reparar este edificio, " +
+                    "hay otro aldeano reparandolo!");
         }
 
-        if(trabajadorActual == null) trabajadorActual = reparador;
-
-        Integer posibleVida =this.VIDA_ACTUAL + montoDeReparacion;
-
-        if(posibleVida > this.VIDA_ACTUAL){
-            this.VIDA_ACTUAL = this.VIDA_MAXIMA;
-
-            if(this.trabajadorActual != null){
-                trabajadorActual.liberar();
-                this.trabajadorActual = null;
-            }
-
-            return new EstadoEdificioInactivo(this.VIDA_MAXIMA, this.MONTO_REPARACION, this.VIDA_ACTUAL);
-
-        }
-        return this;
+        vidaActual += montoDeReparacion;
+        return comprobarVida(this,vidaActual);
     }
 
     @Override
-    public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye) throws EdificioEnReparacionException {
-        throw new EdificioEnReparacionException("No se puede construir, el edificio esta en reparación");
+    public EstadoEdificio crear(Unidad unidad, Posicion posicion)
+            throws EdificioEnReparacionException {
+        throw new EdificioEnReparacionException("Edificio en reparacion, no es posible crear unidad");
     }
 
     @Override
-    public EstadoEdificio suspenderConstruccion() throws EdificioDestruidoExcepcion, EdificioNoConstruidoException {
+    public EstadoEdificioEnConstruccion construir(Aldeano quienLoConstruye)
+            throws Exception {
+        throw new EdificioEnReparacionException("El edificio se esta reparando!");
+    }
 
-        if(this.trabajadorActual !=null){
+    @Override
+    public EstadoEdificio suspender() throws Exception {
+        if (this.trabajadorActual != null) {
             trabajadorActual.liberar();
-            this.trabajadorActual = null;
         }
-
-        return new EstadoEdificioInactivo(this.VIDA_MAXIMA, this.MONTO_REPARACION, this.VIDA_ACTUAL);
+        this.trabajadorActual = null;
+        return new EstadoEdificioInactivo(VIDA_MAXIMA, vidaActual, MONTO_REPARACION);
     }
 
     @Override
-    public Integer getVidaActual() throws EdificioEnReparacionException {
-        throw new EdificioEnReparacionException("El edificio esta en reparacion");
+    public Integer getVidaActual() {
+        return vidaActual;
     }
 
     @Override
-    public EstadoEdificio recibirDanio(Integer danio){
-        throw new RuntimeException("El edifico no existe, no recibe danio");
+    public EstadoEdificio ejecutarAccion() throws Exception {
+        return reparar(trabajadorActual, MONTO_REPARACION);
     }
-
-
 }

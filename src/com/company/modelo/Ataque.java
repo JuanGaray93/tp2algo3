@@ -1,6 +1,7 @@
 package com.company.modelo;
 
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.EdificioDestruidoExcepcion;
 import com.company.excepciones.EnemigoInvalidoException;
 
 import java.util.ArrayList;
@@ -8,31 +9,52 @@ import java.util.ArrayList;
 public class Ataque {
 
     private Integer rangoAtaque;
-    private Integer danioAEdificio;
-    private Integer danioAUnidad;
     private Jugador jugador;
     private Posicion posicion;
 
-    public Ataque(Integer rangoDeAtaque, Integer danioAEdificio, Integer danioAUnidad, Jugador jugador, Posicion posicion){
+    public Ataque(Integer rangoDeAtaque, Jugador jugador, Posicion posicion){
         this.rangoAtaque = rangoDeAtaque;
-        this.danioAEdificio = danioAEdificio;
-        this.danioAUnidad = danioAUnidad;
         this.jugador = jugador;
         this.posicion = posicion;
     }
 
-    public void atacar(Posicionable unEnemigo, Integer unDanio) throws EnemigoInvalidoException {
-        ArrayList atacables = this.buscarAtacables(this.rangoAtaque);
-        this.eliminarPosicionablesAmigos(atacables);
+    public void atacar(Posicionable unEnemigo, Integer unDanio)
+            throws EnemigoInvalidoException {
 
-        if( !atacables.contains(unEnemigo) ) throw new EnemigoInvalidoException("No se pudo atacar al enemigo");
+        ArrayList enemigos = buscarEnemigos(this.rangoAtaque);
+
+        if( !enemigos.contains(unEnemigo) )
+            throw new EnemigoInvalidoException("No se pudo atacar al enemigo");
 
         try{
             unEnemigo.recibirDanio(unDanio);
-        } catch (Exception e) {
+            return;
 
-        } catch (EdificioEnConstruccionException e) {
+        } catch (Exception | EdificioEnConstruccionException
+                | EdificioDestruidoExcepcion ignored) {
         }
+    }
+
+    public void atacarATodos(Integer unDanio) {
+        ArrayList<Posicionable> enemigosProvisorios = buscarEnemigos(this.rangoAtaque);
+        ArrayList<Posicionable> enemigosDefinitivos = new ArrayList<>();
+
+        for (Posicionable unPosicionable : enemigosProvisorios) {
+
+            if( !( enemigosDefinitivos.contains(unPosicionable) ) ) enemigosDefinitivos.add(unPosicionable);
+
+        }
+
+        for(Posicionable unEnemigo : enemigosDefinitivos) {
+
+            try{
+                unEnemigo.recibirDanio(unDanio);
+            } catch (Exception | EdificioEnConstruccionException
+                    | EdificioDestruidoExcepcion ignored) {
+            }
+
+        }
+
     }
 
     private void eliminarPosicionablesAmigos(ArrayList<Posicionable> atacables){
@@ -50,8 +72,14 @@ public class Ataque {
 
     }
 
-    private ArrayList buscarAtacables(Integer unRadio){
-        return posicion.buscarEnRadioPosicionables(unRadio);
+    private ArrayList<Posicionable> buscarAtacables(Integer unRadio){
+        return posicion.buscarPosicionablesEnRadio(unRadio);
+    }
+
+    private ArrayList<Posicionable> buscarEnemigos(Integer unRadio){
+        ArrayList<Posicionable> atacables = this.buscarAtacables(unRadio);
+        this.eliminarPosicionablesAmigos(atacables);
+        return atacables;
     }
 
 }

@@ -1,23 +1,25 @@
 package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
-import com.company.excepciones.ArmaDesmontadaException;
+import com.company.excepciones.*;
 import com.company.excepciones.ArmaMontadaException;
-import com.company.excepciones.EnemigoInvalidoException;
 import com.company.modelo.Ataque;
-import com.company.modelo.Posicionable;
+import com.company.modelo.Posicion;
+import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.ArmaAsedio;
-import com.company.modelo.unidades.Unidad;
 import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
 
-    public EstadoArmaAsedioMontada(Integer vidaActual) {
-        super(vidaActual);
+    public EstadoArmaAsedioMontada(ArmaAsedio armaAsedio,Integer vidaActual) {
+        super(armaAsedio,vidaActual);
+
+
 
     }
 
     public EstadoArmaAsedioDesmontada desmontar() {
-        return new EstadoArmaAsedioDesmontada(VIDA_ACTUAL);
+
+        return new EstadoArmaAsedioDesmontada(maquinaAsedio,vidaActual);
     }
 
     public EstadoArmaAsedioMontada montar() throws ArmaMontadaException {
@@ -25,12 +27,15 @@ public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
     }
 
     @Override
-    public void atacar(Ataque unAtaque, Posicionable unEnemigo, Integer unDanio) throws ArmaDesmontadaException, EnemigoInvalidoException {
-        if(unEnemigo instanceof Unidad) {
-            throw new EnemigoInvalidoException("El arma asedio no puede atacar unidades");
-        }
+    public void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical)
+            throws ArmaMontadaException {
+        throw new ArmaMontadaException("la maquina de asedio no se puede mover porque esta montada");
+    }
 
-        unAtaque.atacar(unEnemigo, unDanio);
+    public void atacarA(Edificio enemigo, Ataque ataque, Integer danio)
+            throws EnemigoInvalidoException {
+
+        ataque.atacar(enemigo,danio);
     }
 
     @Override

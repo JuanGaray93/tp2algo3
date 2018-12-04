@@ -1,34 +1,19 @@
 package com.company.modelo.unidades;
 
 import com.company.modelo.Jugador;
-import com.company.modelo.Posicionable;
-import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.estados.EstadoUnidadInactivo;
 
 public class Espadachin extends UnidadAtacante {
 
-	public Espadachin(Jugador jugador) {
-		super(jugador);
-		this.rangoAtaque = 1;
-		this.danioAEdifcio = 15;
-		this.danioAUnidad = 25;
-		VIDA_MAXIMA = 100;
-		vidaActual = VIDA_MAXIMA;
-		COSTO = 50;
-		this.estado = new EstadoUnidadInactivo(VIDA_MAXIMA);
-	}
+    private final Integer VIDA_MAXIMA = 100;
+    protected static Integer COSTO = 50;
 
+    public Espadachin(Jugador jugador) {
 
-	@Override
-	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
-
-	}
-
-	@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
-	}
-
-
+        super(jugador);
+        establecerEstadoInicial(VIDA_MAXIMA, COSTO);
+        this.rangoAtaque = 1;
+        this.danioAEdificio = 15;
+        this.danioAUnidad = 25;
+    }
 
 }

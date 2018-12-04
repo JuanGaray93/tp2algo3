@@ -3,7 +3,6 @@ package com.company.modelo.terreno;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MapaLlenoException;
-import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.unidades.Unidad;
 
 import java.util.ArrayList;
@@ -43,6 +42,7 @@ public class Reptador {
 
         try{
             Casillero lugar = mapa.obtenerCasillero(posicionHorizontal, posicionVertical );
+
             casillerosMirados++;
             encontrado = (! lugar.estaOcupado());
 
@@ -52,12 +52,14 @@ public class Reptador {
             return false;
         }
 
+
         return encontrado;
     }
 
-    protected void ubicarUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException, MovimientoInvalidoException {
-        unidad.establecerCoordenadasDeNacimiento(posicionHorizontal, posicionVertical);
-        mapa.ubicar(unidad, posicionHorizontal, posicionVertical);
+    protected void ubicarUnidad(Unidad unidad) throws CasilleroNoExistenteException, CasilleroLlenoException {
+
+        unidad.establecerCoordenadasDeNacimiento(posicionHorizontal,posicionVertical);
+        mapa.ubicar(unidad,posicionHorizontal, posicionVertical);
     }
 
     private void avanzarPosicion(){

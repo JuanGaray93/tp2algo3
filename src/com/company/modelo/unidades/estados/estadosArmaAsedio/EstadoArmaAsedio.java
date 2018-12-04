@@ -1,24 +1,32 @@
 package com.company.modelo.unidades.estados.estadosArmaAsedio;
 
-import com.company.excepciones.ArmaDesmontadaException;
-import com.company.excepciones.ArmaMontadaException;
-import com.company.excepciones.EnemigoInvalidoException;
+import com.company.excepciones.*;
 import com.company.modelo.Ataque;
 import com.company.modelo.Posicion;
-import com.company.modelo.Posicionable;
-import com.company.modelo.unidades.ArmaAsedio;
+import com.company.modelo.edificios.Edificio;
 import com.company.modelo.unidades.estados.EstadoUnidad;
+import com.company.modelo.unidades.ArmaAsedio;
 
 public abstract class EstadoArmaAsedio extends EstadoUnidad {
 
-    public EstadoArmaAsedio(Integer vidaActual) {
-        super(vidaActual);
+    ArmaAsedio maquinaAsedio;
+    protected static Integer VIDA_MAXIMA = 150;
+    protected static Integer COSTO = 200;
+
+
+    public EstadoArmaAsedio(ArmaAsedio maquinaAsedio,Integer vidaActual) {
+        super(VIDA_MAXIMA,vidaActual,COSTO);
+        this.maquinaAsedio = maquinaAsedio;
     }
 
-    public abstract EstadoArmaAsedioDesmontada desmontar() throws ArmaDesmontadaException, ArmaDesmontadaException;
+    public abstract EstadoArmaAsedioDesmontada desmontar() throws ArmaDesmontadaException;
 
-    public abstract EstadoArmaAsedio montar() throws ArmaMontadaException, ArmaMontadaException;
+    public abstract EstadoArmaAsedio montar() throws ArmaMontadaException;
 
-    public abstract void atacar(Ataque unAtaque, Posicionable unEnemigo, Integer unDanio) throws ArmaDesmontadaException, EnemigoInvalidoException;
+    public abstract void moverA(Posicion posicion, Integer posicionHorizontal, Integer posicionVertical)
+            throws CasilleroNoExistenteException, CasilleroLlenoException, ArmaMontadaException,
+            MovimientoInvalidoException;
 
+    public abstract void atacarA(Edificio enemigo, Ataque ataque, Integer danio)
+            throws ArmaDesmontadaException, EnemigoInvalidoException;
 }

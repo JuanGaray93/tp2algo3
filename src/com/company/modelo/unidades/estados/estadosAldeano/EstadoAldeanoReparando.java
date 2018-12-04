@@ -2,28 +2,25 @@ package com.company.modelo.unidades.estados.estadosAldeano;
 
 import com.company.excepciones.AldeanoOcupadoException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.EdificioDestruidoExcepcion;
-import com.company.excepciones.EdificioNoConstruidoException;
-import com.company.modelo.Jugador;
 import com.company.modelo.edificios.Edificio;
-import com.company.modelo.unidades.estados.EstadoUnidad;
 
 public class EstadoAldeanoReparando extends EstadoAldeano {
 
-    public EstadoAldeanoReparando(Integer vidaActual){
-        super(vidaActual);
+    public EstadoAldeanoReparando(Integer vida_actual){
+        super(vida_actual);
     }
 
-    public EstadoUnidad construir(Edificio edificio) {
+    public EstadoAldeano construir(Edificio edificio) {
+
         throw new AldeanoOcupadoException("Estoy reparando...");
     }
 
-    public EstadoUnidad reparar(Edificio aReparar) throws Exception, EdificioEnConstruccionException {
+    public EstadoAldeano reparar(Edificio aReparar) throws Exception, EdificioEnConstruccionException {
         if (edificioATrabajar == null) {
             edificioATrabajar = aReparar;
         } else if (edificioATrabajar != aReparar) {
 
-            //edificioATrabajar.suspender();
+            edificioATrabajar.suspender();
             edificioATrabajar = aReparar;
         }
 
@@ -31,8 +28,8 @@ public class EstadoAldeanoReparando extends EstadoAldeano {
     }
 
     @Override
-    public EstadoUnidad actualizar() throws Exception {
-        //edificioATrabajar.avanzarReparacion();
+    public EstadoAldeano actualizar() throws Exception {
+        edificioATrabajar.avanzarReparacion();
 
         return this;
     }
