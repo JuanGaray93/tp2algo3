@@ -1,5 +1,7 @@
 package com.company.vista.terreno;
 
+import com.company.vista.terreno.entidades.Pasto;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
@@ -18,20 +20,16 @@ public class Mapa extends GridPane {
     private void inicializarCasilleros(){
         for(Integer y = 0; y < CASILLEROS_DE_ALTO; y++){
             for(Integer x = 0; x < CASILLEROS_DE_ANCHO; x++){
-                Casillero casilleroNuevo = new Casillero(x, y, dimensionCasillero);
-                casilleroNuevo.setFill(Color.GREEN);
-                GridPane.setRowIndex(casilleroNuevo, y);
-                GridPane.setColumnIndex(casilleroNuevo, x);
-                this.getChildren().addAll(casilleroNuevo);
-                //La siguiente línea de código muestra el índice de cada casillero.
-                //                                             útil para debuggear:
-                // this.add(new Label("" + x + "," + y), x, y);
+                Casillero casilleroNuevo = new Pasto(x, y, dimensionCasillero, this);
+                establecerCasillero(casilleroNuevo);
             }
         }
     }
 
     public void establecerCasillero(Casillero casilleroNuevo){
-        // TODO
+        GridPane.setRowIndex(casilleroNuevo, casilleroNuevo.getFila() );
+        GridPane.setColumnIndex(casilleroNuevo, casilleroNuevo.getColumna());
+        this.getChildren().addAll(casilleroNuevo);
     }
 
 }
