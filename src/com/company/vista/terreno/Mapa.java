@@ -1,9 +1,10 @@
 package com.company.vista.terreno;
 
-import com.company.vista.terreno.entidades.Pasto;
-import javafx.scene.control.Label;
+import com.company.DTO.EntidadDTO;
+import com.company.vista.terreno.entidades.Casillero;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 public class Mapa extends GridPane {
 
@@ -20,8 +21,11 @@ public class Mapa extends GridPane {
     private void inicializarCasilleros(){
         for(Integer y = 0; y < CASILLEROS_DE_ALTO; y++){
             for(Integer x = 0; x < CASILLEROS_DE_ANCHO; x++){
-                Casillero casilleroNuevo = new Pasto(x, y, dimensionCasillero, this);
+                // EntidadDTO entidad = Controlador.getEntidadEn(x, y);
+                Casillero casilleroNuevo = new Casillero(x, y, dimensionCasillero, this,
+                        null);
                 establecerCasillero(casilleroNuevo);
+                casilleroNuevo.mostrarEtiqueta();
             }
         }
     }

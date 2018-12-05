@@ -3,10 +3,11 @@ package com.company.DTO;
 import java.util.ArrayList;
 
 public class EntidadDTO {
+
     private Integer jugador;
     private String nombre;
     private ArrayList<Accion> acciones;
-
+    
     public EntidadDTO(Integer jugador, String nombre, ArrayList<Accion> acciones){
         this.jugador = jugador;
         this.nombre = nombre;
