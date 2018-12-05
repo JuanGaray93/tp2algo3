@@ -2,10 +2,19 @@ package com.company.controlador;
 
 import com.company.DTO.Accion;
 import com.company.DTO.EntidadDTO;
-import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.*;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioEnReparacionException;
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
+import com.company.modelo.edificios.Castillo;
+import com.company.modelo.edificios.Cuartel;
+import com.company.modelo.edificios.Edificio;
+import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
+import com.company.modelo.unidades.*;
+import com.company.vista.gui.eventos.*;
 
 import java.util.ArrayList;
 
@@ -21,6 +30,56 @@ public class Controlador {
             instancia = new Controlador();
         }
         return instancia;
+    }
+
+    public Posicionable obtenerContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
+        return mapa.conseguirOcupante(posicionHorizontal, posicionVertical);
+    }
+
+    public void mover(Unidad unidad, Integer posicionHorizontal, Integer posicionVertical) throws ArmaMontadaException, CasilleroNoExistenteException, MovimientoInvalidoException, CasilleroLlenoException {
+        unidad.moverA(posicionHorizontal,posicionVertical);
+    }
+
+    public void reparar(Aldeano aldeano, Edificio edificio) throws EdificioLejanoException {
+        aldeano.reparar(edificio);
+    }
+
+    public void construirCuartel(Aldeano aldeano, Cuartel cuartel, Integer posicionHorizontal, Integer posicionVertical) throws Exception, EdificioEnConstruccionException {
+        aldeano.construir(cuartel,posicionHorizontal,posicionVertical);
+    }
+
+    public void construirPlazaCentral(Aldeano aldeano, PlazaCentral plazaCentral, Integer posicionHorizontal, Integer posicionVertical) throws Exception, EdificioEnConstruccionException {
+        aldeano.construir(plazaCentral,posicionHorizontal,posicionVertical);
+    }
+
+    public void atacar(UnidadAtacante unidad, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
+        Posicionable enemigo = mapa.conseguirOcupante(posicionHorizontal,posicionVertical);
+        // TODO no puedo atacar a posicionable
+        unidad.atacarA(enemigo);
+    }
+
+    public void crearArmaDeAsedio(Castillo castillo, ArmaAsedio armaAsedio) throws CasilleroNoExistenteException, UnidadErroneaException, CasilleroLlenoException, MapaLlenoException {
+        castillo.crear(armaAsedio);
+    }
+
+    public void crearEspadachin(Cuartel cuartel, Espadachin espadachin) throws CasilleroNoExistenteException, UnidadErroneaException, CasilleroLlenoException, MapaLlenoException, EdificioNoDisponibleException {
+        cuartel.crear(espadachin);
+    }
+
+    public void crearArquero(Cuartel cuartel, Arquero arquero) throws CasilleroNoExistenteException, UnidadErroneaException, CasilleroLlenoException, MapaLlenoException, EdificioNoDisponibleException {
+        cuartel.crear(arquero);
+    }
+
+    public void crearAldeano(PlazaCentral plazaCentral, Aldeano aldeano) throws CasilleroNoExistenteException, UnidadErroneaException, CasilleroLlenoException, MapaLlenoException, EdificioNoDisponibleException, EdificioEnConstruccionException, EdificioEnReparacionException {
+        plazaCentral.crear(aldeano);
+    }
+
+    public void montar(ArmaAsedio armaAsedio) throws ArmaMontadaException {
+        armaAsedio.montar();
+    }
+
+    public void desmontar(ArmaAsedio armaAsedio) throws ArmaMontadaException, ArmaDesmontadaException {
+        armaAsedio.desmontar();
     }
 
     public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
@@ -40,10 +99,11 @@ public class Controlador {
         ArrayList<Accion> acciones = new ArrayList<Accion>();
 
         if (nombrePosicionable.equals("Aldeano")){
-            Accion accion1 = new Accion("mover unidad aqui");
-            Accion accion2 = new Accion("reparar este edificio");
-            Accion accion3 = new Accion("construir cuartel");
-            Accion accion4 = new Accion("construir plaza central");
+            Accion accion1 = new Accion("mover unidad aqui", MoverHandler);
+            Accion accion2 = new Accion("reparar este edificio", RepararHandler);
+            // un handler para construccion? o dos?
+            Accion accion3 = new Accion("construir cuartel", ConstruirCuartelHandler);
+            Accion accion4 = new Accion("construir plaza central", ConstruirPlazaCentralHandler);
 
             acciones.add(accion1);
             acciones.add(accion2);
@@ -51,40 +111,42 @@ public class Controlador {
             acciones.add(accion4);
         }
 
-        if (nombrePosicionable.equals("Espadachin") || nombrePosicionable.equals("Arquero") ){
-            Accion accion1 = new Accion("mover unidad aqui");
-            Accion accion2 = new Accion("atacar esta unidad");
-            Accion accion3 = new Accion("atacar este edificio");
+        if (nombrePosicionable.equals("Espadachin") || nombrePosicionable.equals("Arquero")){
+            Accion accion1 = new Accion("mover unidad aqui", MoverHandler);
+            Accion accion2 = new Accion("atacar", AtacarHandler);
+
+            acciones.add(accion1);
+            acciones.add(accion2);
+        }
+
+        if(nombrePosicionable.equals("ArmaAsedio")){
+            Accion accion1 = new Accion("mover unidad aqui", MoverHandler);
+            Accion accion2 = new Accion("atacar", AtacarHandler);
+            Accion accion3 = new Accion("montar", MontarHandler);
+            Accion accion4 = new Accion("desmontar", DesmontarHandler);
 
             acciones.add(accion1);
             acciones.add(accion2);
             acciones.add(accion3);
-        }
-
-        if (nombrePosicionable.equals("ArmaAsedio")){
-            Accion accion1 = new Accion("mover unidad aqui");
-            Accion accion2 = new Accion("atacar este edificio");
-
-            acciones.add(accion1);
-            acciones.add(accion2);
+            acciones.add(accion4);
         }
 
         if (nombrePosicionable.equals("Castillo")){
-            Accion accion1 = new Accion("crear arma de asedio");
+            Accion accion1 = new Accion("crear arma de asedio", CrearArmaDeAsedioHandler);
 
             acciones.add(accion1);
         }
 
         if (nombrePosicionable.equals("Cuartel")){
-            Accion accion1 = new Accion("crear espadachin");
-            Accion accion2 = new Accion("crear arquero");
+            Accion accion1 = new Accion("crear espadachin", CrearEspadachinHandler);
+            Accion accion2 = new Accion("crear arquero", CrearArqueroHandler);
 
             acciones.add(accion1);
             acciones.add(accion2);
         }
 
         if (nombrePosicionable.equals("PlazaCentral")){
-            Accion accion1 = new Accion("crear aldeano");
+            Accion accion1 = new Accion("crear aldeano", CrearAldeanoHandler);
 
             acciones.add(accion1);
         }
