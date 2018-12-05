@@ -145,4 +145,7 @@ public class Jugador {
         edificios.add(plaza);*/
     }
 
+    public Integer getNumeroDeJugador(){
+        return numeroDeJugador;
+    }
 }
