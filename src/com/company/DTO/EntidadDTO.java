@@ -24,5 +24,4 @@ public class EntidadDTO {
     public Integer getJugador(){
         return jugador;
     }
-
 }

@@ -13,7 +13,6 @@ public class Main extends Application {
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage);
 
         Scene escena = new Scene(contenedorPrincipal,1200, 600);
-        //Scene escena = new Scene(new Mapa(),1200, 600);
         primaryStage.setScene(escena);
 
         primaryStage.show();
