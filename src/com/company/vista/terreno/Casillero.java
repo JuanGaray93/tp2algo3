@@ -26,7 +26,7 @@ public class Casillero extends Rectangle {
         return this.fila;
     }
 
-    private void establecerEtiqueta(String nuevaEtiqueta){
+    protected void establecerEtiqueta(String nuevaEtiqueta){
         mapa.add(new Label(nuevaEtiqueta), this.getColumna(), this.getFila());
     }
 }
