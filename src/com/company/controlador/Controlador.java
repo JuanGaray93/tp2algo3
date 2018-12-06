@@ -2,6 +2,7 @@ package com.company.controlador;
 
 import com.company.DTO.Accion;
 import com.company.DTO.EntidadDTO;
+import com.company.DTO.JugadorDTO;
 import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
@@ -93,6 +94,12 @@ public class Controlador {
         partida.pasarTurno();
     }
 
+    public JugadorDTO getJugador(){
+        Jugador jugador = partida.obtenerJugadorCorriente();
+        JugadorDTO jugadorDTO = new JugadorDTO(jugador);
+        return jugadorDTO;
+    }
+
     public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) {
         Posicionable posicionable = null;
         try{
@@ -118,7 +125,6 @@ public class Controlador {
         if (nombrePosicionable.equals("Aldeano")){
             Accion accion1 = new Accion("mover unidad aqui", new Movedor());
             Accion accion2 = new Accion("reparar este edificio", new Reparador());
-            // un handler para construccion? o dos?
             Accion accion3 = new Accion("construir cuartel",  new ConstructorDeCuartel());
             Accion accion4 = new Accion("construir plaza central",  new ConstructorDePlazaCentral());
 
