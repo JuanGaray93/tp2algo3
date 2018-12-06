@@ -48,7 +48,7 @@ public class GestorDeSelecciones {
         xDelCasilleroDeOrigen = -1;
         yDelCasilleroDeOrigen = -1;
         accionAEjecutar = null;
-        //generadorDeBotones.
+        //generadorDeBotones.limpiar();
     }
 
     public static void pasarTurno(){
