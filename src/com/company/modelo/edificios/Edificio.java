@@ -20,7 +20,7 @@ public abstract class Edificio extends Posicionable {
     protected Integer VIDA_MAXIMA;
     protected Integer COSTO;
     protected Integer MONTO_DE_REPARACION;
-    protected Integer BLOQUES_DE_ANCHO ;
+    protected Integer BLOQUES_DE_ANCHO;
     protected Integer BLOQUES_DE_ALTO;
     final Integer SIN_VIDA = 0;
 

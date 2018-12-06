@@ -14,14 +14,11 @@ import com.company.modelo.unidades.Espadachin;
 import com.company.modelo.unidades.Unidad;
 
 public class Cuartel extends Edificio {
-
-    final Integer MONTO_DE_REPARACION = 50;
-
-    final Integer VIDA_MAXIMA = 250;
-
+    
     public Cuartel(Jugador jugador) {
-
         super(jugador);
+        MONTO_DE_REPARACION = 50;
+        VIDA_MAXIMA = 250;
         COSTO = 50;
         BLOQUES_DE_ANCHO = 2;
         BLOQUES_DE_ALTO = 2;
