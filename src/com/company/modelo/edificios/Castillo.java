@@ -58,5 +58,13 @@ public class Castillo extends Edificio {
         ataque.atacarATodos(unDanio);
     }
 
+    public void actualizar(){
+        try {
+            this.atacar(20); //a todos les saca la misma vida
+        } catch (EnemigoInvalidoException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
