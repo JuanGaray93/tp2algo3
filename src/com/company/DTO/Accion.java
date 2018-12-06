@@ -8,12 +8,12 @@ import javafx.event.EventHandler;
 public class Accion {
 
     private String descripcion;
-    private EventHandler<ActionEvent> handlerDelBoton;
+    private HandlerDeAccion handlerDelBoton;
     private Ejecutador ejecutador;
 
-    public Accion(String descripcion, HandlerDeAccion handlerDelBoton, Ejecutador ejecutador){
+    public Accion(String descripcion, Ejecutador ejecutador){
         this.descripcion = descripcion;
-        this.handlerDelBoton = handlerDelBoton;
+        this.handlerDelBoton = new HandlerDeAccion();
         this.ejecutador = ejecutador;
         handlerDelBoton.setearAccion(this);
     }
