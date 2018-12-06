@@ -21,7 +21,7 @@ public class PantallaInicial extends VBox {
 
     Stage stage;
 
-    public PantallaInicial(Stage stage, Scene proximaEscena/*, MediaPlayer mediaPlayer, MediaPlayer mediaPlayerBatalla*/) {
+    public PantallaInicial(Stage stage, Scene proximaEscena) {
 
         super();
 
@@ -31,11 +31,6 @@ public class PantallaInicial extends VBox {
         this.setSpacing(20);
         this.setPadding(new Insets(25));
         this.setPrefSize(800,615);
-
-       /* Image imagen = new Image(getClass().getResourceAsStream("/fiuba/algos3/DragonAlgoBall/Vista/imagenes/inicio.png"));
-
-        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        this.setBackground(new Background(imagenDeFondo));*/
 
         Label etiqueta = new Label();
         etiqueta.setFont(Font.font("Arial Black", FontWeight.BOLD, 50));

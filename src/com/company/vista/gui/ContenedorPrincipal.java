@@ -31,7 +31,6 @@ public class ContenedorPrincipal extends BorderPane {
         botonCambiarTurno.setOnAction(new CambiarTurnoHandler());
 
         GeneradorDeBotones generadorDeBotones = GeneradorDeBotones.getGenerador();
-        //generadorDeBotones.establecerContenedor(this);
         generadorDeBotones.generarBotonPasarTurno();
 
     }
