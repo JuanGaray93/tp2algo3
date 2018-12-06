@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.modelo.Partida;
 import com.company.vista.gui.ContenedorPrincipal;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("AOE2");
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage);
 
@@ -16,6 +17,12 @@ public class Main extends Application {
         primaryStage.setScene(escena);
 
         primaryStage.show();
+        Partida partida = new Partida();
+        try {
+            partida.correr();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

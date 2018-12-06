@@ -23,8 +23,7 @@ public class Partida {
     public void correr() throws Exception{
         Jugador jugadorCorriente = turno.obtenerJugadorCorriente();
 
-        // jugadorCorriente.ejecutarAcciones();
-        /*
+        /*TODO
 
         Acá podríamos recibir del controller un objeto acción - no sé bien cómo hacer.
 

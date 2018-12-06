@@ -1,5 +1,8 @@
 package com.company.vista.terreno;
 
+import com.company.DTO.EntidadDTO;
+import com.company.controlador.Controlador;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.vista.terreno.entidades.Casillero;
 import javafx.scene.layout.GridPane;
 
@@ -10,6 +13,7 @@ public class MapaView extends GridPane {
     private final Integer CASILLEROS_DE_ANCHO = 25;
     private final Integer CASILLEROS_DE_ALTO = 25;
     private Float dimensionCasillero = 25.0F;
+    private Controlador controlador = Controlador.getControlador();
 
     private MapaView(){
         this.actualizarCasilleros();
@@ -20,11 +24,15 @@ public class MapaView extends GridPane {
     public void actualizarCasilleros(){
         for(Integer y = 0; y < CASILLEROS_DE_ALTO; y++){
             for(Integer x = 0; x < CASILLEROS_DE_ANCHO; x++){
-                // EntidadDTO entidad = Controlador.getEntidadEn(x, y);
-                Casillero casilleroNuevo = new Casillero(x, y, dimensionCasillero, this,
-                        null);
-                establecerCasillero(casilleroNuevo);
-                casilleroNuevo.mostrarEtiqueta();
+                try {
+                    EntidadDTO entidad = controlador.buscarContenidoDelCasillero(x,y);
+                    Casillero casilleroNuevo = new Casillero(x, y, dimensionCasillero, this,
+                            entidad);
+                    establecerCasillero(casilleroNuevo);
+                    casilleroNuevo.mostrarEtiqueta();
+                } catch (CasilleroNoExistenteException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -1,6 +1,10 @@
 package com.company.vista.gui.eventos.selecciones;
 
 import com.company.DTO.Accion;
+import com.company.excepciones.ArmaDesmontadaException;
+import com.company.excepciones.ArmaMontadaException;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
+import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import javafx.scene.control.Alert;
 
 public class GestorDeSelecciones {
@@ -22,14 +26,14 @@ public class GestorDeSelecciones {
         accionAEjecutar = accion;
     }
 
-    public static void seleccionarCasilleroDestino(Integer x, Integer y){
+    public static void seleccionarCasilleroDestino(Integer x, Integer y) {
         try {
             accionAEjecutar.llamarAccion(xDelCasilleroDeOrigen, yDelCasilleroDeOrigen, x, y);
             reiniciarOpciones();
         } catch (NullPointerException npe){
             System.out.println("No se selecciono ningun casillero");
             return;
-        } catch (Exception e){
+        } catch (Exception | ArmaMontadaException | EdificioNoDisponibleException | ArmaDesmontadaException | EdificioEnConstruccionException e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Atencion!");
             //alert.setHeaderText("Ejemplo de mensaje de alerta");
