@@ -1,5 +1,6 @@
 package com.company.modelo;
 
+import com.company.controlador.Controlador;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.terreno.Mapa;
@@ -10,9 +11,7 @@ public class Partida {
 
     private Turno turno;
     private static Integer NUMERO_DE_JUGADORES = 2;
-    private Mapa mapa;
     private ArrayList<Jugador> jugadores = new ArrayList<>();
-    private boolean comenzada;
 
     public Partida() throws CasilleroNoExistenteException, CasilleroLlenoException {
         turno = new Turno();
@@ -24,17 +23,20 @@ public class Partida {
         }
 
         for (Jugador jugador : jugadores) { jugador.crearEntidadesIniciales(); }
+
+        Controlador controlador = Controlador.getControlador();
+        controlador.setPartida(this);
     }
-    public void correr() throws Exception{
-        Jugador jugadorCorriente = turno.obtenerJugadorCorriente();
-
-        /*TODO
-
-        Acá podríamos recibir del controller un objeto acción - no sé bien cómo hacer.
-
-        */
-         turno.pasar();
+    public void correr() {
+        pasarTurno();
     }
 
+    public void pasarTurno(){
+        turno.pasar();
+    }
+
+    public Jugador obtenerJugadorCorriente(){
+        return turno.obtenerJugadorCorriente();
+    }
 
 }

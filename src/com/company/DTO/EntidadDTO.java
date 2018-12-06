@@ -9,7 +9,8 @@ public class EntidadDTO {
     private Integer jugador;
     private String nombre;
     private ArrayList<Accion> acciones;
-    private static GeneradorDeBotones generadorDeBotones = GeneradorDeBotones.getGenerador();
+    private GeneradorDeBotones generadorDeBotones = GeneradorDeBotones.getGenerador();
+
 
     public EntidadDTO(Integer jugador, String nombre, ArrayList<Accion> acciones){
         this.jugador = jugador;

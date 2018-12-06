@@ -20,6 +20,7 @@ public class Turno {
 	public void pasar(){
 
 		turnoActual = (turnoActual + 1) % jugadores.size();
+		jugadores.get(turnoActual).ejecutarAcciones();
 	}
 
 	public Jugador obtenerJugadorCorriente(){

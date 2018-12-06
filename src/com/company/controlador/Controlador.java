@@ -2,11 +2,13 @@ package com.company.controlador;
 
 import com.company.DTO.Accion;
 import com.company.DTO.EntidadDTO;
+import com.company.DTO.JugadorDTO;
 import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.modelo.Jugador;
+import com.company.modelo.Partida;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Cuartel;
@@ -23,9 +25,8 @@ import java.util.logging.Logger;
 public class Controlador {
 
     private static Controlador instancia = new Controlador();
-
+    private Partida partida;
     private Mapa mapa = Mapa.getMapa();
-
     private Logger logger = Logger.getLogger(getClass().toString());
 
     public static Controlador getControlador(){
@@ -34,13 +35,6 @@ public class Controlador {
         }
         return instancia;
     }
-
-   /*
-   *  public Posicionable obtenerContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
-        return mapa.conseguirOcupante(posicionHorizontal, posicionVertical);
-    }
-
-   * */
 
     public void mover(Unidad unidad, Integer posicionHorizontal, Integer posicionVertical) throws ArmaMontadaException, CasilleroNoExistenteException, MovimientoInvalidoException, CasilleroLlenoException {
         unidad.moverA(posicionHorizontal,posicionVertical);
@@ -92,6 +86,21 @@ public class Controlador {
         armaAsedio.desmontar();
     }
 
+    public void setPartida(Partida nuevaPartida){
+        this.partida = nuevaPartida;
+    }
+
+    public void pasarTurno(){
+        partida.pasarTurno();
+    }
+
+    public JugadorDTO obtenerJugadorActual(){
+        Jugador jugador = partida.obtenerJugadorCorriente();
+        JugadorDTO jugadorDTO = new JugadorDTO(jugador);
+        return jugadorDTO;
+    }
+
+
     public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) {
         Posicionable posicionable = null;
         try{
@@ -117,7 +126,6 @@ public class Controlador {
         if (nombrePosicionable.equals("Aldeano")){
             Accion accion1 = new Accion("mover unidad aqui", new Movedor());
             Accion accion2 = new Accion("reparar este edificio", new Reparador());
-            // un handler para construccion? o dos?
             Accion accion3 = new Accion("construir cuartel",  new ConstructorDeCuartel());
             Accion accion4 = new Accion("construir plaza central",  new ConstructorDePlazaCentral());
 
