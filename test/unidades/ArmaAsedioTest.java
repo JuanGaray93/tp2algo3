@@ -32,10 +32,10 @@ public class ArmaAsedioTest {
 
     @Before
     public void resetMapa() {
-        mapa.destruir();
-        mapa = Mapa.getMapa();
         jugador = new Jugador();
         jugadorEnemigo = new Jugador();
+        mapa.destruir();
+        mapa = Mapa.getMapa();
         aldeanoEnemigo = new Aldeano(jugadorEnemigo);
         castilloEnemigo = new Castillo(jugadorEnemigo);
         cuartelEnemigo = new Cuartel(jugadorEnemigo);

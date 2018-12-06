@@ -18,9 +18,13 @@ import static org.junit.Assert.assertTrue;
 public class CastilloTest {
 
     Mapa mapa = Mapa.getMapa();
+    Jugador jugador = null;
+    Jugador jugadorEnemigo = null;
 
     @Before
     public void resetMapa() {
+        jugador = new Jugador();
+        jugadorEnemigo = new Jugador();
         mapa.destruir();
         mapa = Mapa.getMapa();
     }
@@ -28,7 +32,6 @@ public class CastilloTest {
     @Test
     public void castilloOcupaElmapaQueDebeOcuparCuandoSeLoCreaTest() throws CasilleroLlenoException, CasilleroNoExistenteException {
 
-        Jugador jugador = new Jugador();
         Castillo castillo = new Castillo(jugador);
 
         castillo.surgir(5, 5);
@@ -57,7 +60,6 @@ public class CastilloTest {
     @Test
     public void castilloCrearMaquinaAsedioTest() throws Exception{
 
-        Jugador jugador = new Jugador();
         Castillo castillo = new Castillo(jugador);
 
         castillo.surgir(5, 5);
@@ -74,8 +76,6 @@ public class CastilloTest {
     @Test
     public void castilloAtacarAUnidadesEnemigasConDistanciaMenorOIgualATresTest() throws CasilleroNoExistenteException, CasilleroLlenoException, UnidadMuertaException, EnemigoInvalidoException {
 
-        Jugador jugador = new Jugador();
-        Jugador jugadorEnemigo = new Jugador();
         Castillo castillo = new Castillo(jugador);
         Aldeano aldeanoEnemigo = new Aldeano(jugadorEnemigo);
         Espadachin espadachinEnemigo = new Espadachin(jugadorEnemigo);
@@ -104,7 +104,6 @@ public class CastilloTest {
     @Test
     public void borrarCastilloYVerificarQueSeBorraTest() throws CasilleroNoExistenteException, CasilleroLlenoException {
 
-        Jugador jugador = new Jugador();
         Castillo castillo = new Castillo(jugador);
 
         castillo.surgir(10, 10);

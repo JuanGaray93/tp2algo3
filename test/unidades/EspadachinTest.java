@@ -23,9 +23,9 @@ public class EspadachinTest {
 
     @Before
     public void resetMapa() {
+        jugador = new Jugador();
         mapa.destruir();
         mapa = Mapa.getMapa();
-        jugador = new Jugador();
         espadachin = new Espadachin(jugador);
         cuartel = new Cuartel(jugador);
         peon = new Aldeano(jugador);

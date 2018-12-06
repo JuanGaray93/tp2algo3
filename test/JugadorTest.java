@@ -2,9 +2,11 @@ import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.MovimientoInvalidoException;
 import com.company.modelo.Jugador;
+import com.company.modelo.edificios.Cuartel;
 import com.company.modelo.edificios.Edificio;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Aldeano;
+import com.company.modelo.unidades.Arquero;
 import com.company.modelo.unidades.Unidad;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +19,20 @@ import static junit.framework.TestCase.assertTrue;
 public class JugadorTest {
 
     private Mapa mapa = Mapa.getMapa();
+    Jugador jugador = null;
+    Jugador segundoJugador = null;
+    Cuartel cuartel = null;
+    Aldeano aldeano = null;
+    Arquero arquero = null;
 
     @Before
     public void resetMapa() {
+        jugador = new Jugador();
+        segundoJugador = new Jugador();
         mapa.destruir();
         mapa = Mapa.getMapa();
+        cuartel = new Cuartel(jugador);
+        arquero = new Arquero(jugador);
     }
 
     @Test
@@ -29,9 +40,7 @@ public class JugadorTest {
             throws CasilleroLlenoException, CasilleroNoExistenteException,
             MovimientoInvalidoException {
 
-        Jugador jugador = new Jugador();
-        Aldeano aldeano = new Aldeano(jugador);
-
+        aldeano = new Aldeano(jugador);
     	aldeano.establecerCoordenadasDeNacimiento(5,5);
     	aldeano.moverA(5,6);
 
@@ -40,14 +49,12 @@ public class JugadorTest {
 
     @Test
     public void verificarQueLasSituacionesInicialesSeInicializaronCorrectamenteParaAmbosJugadoresTest() throws CasilleroNoExistenteException, CasilleroLlenoException {
-        Jugador primerJugador = new Jugador();
-        Jugador segundoJugador = new Jugador();
 
-        primerJugador.crearEntidadesIniciales();
+        jugador.crearEntidadesIniciales();
         segundoJugador.crearEntidadesIniciales();
 
-        ArrayList<Edificio> edificiosPrimerJugador = primerJugador.getEdificios();
-        ArrayList<Unidad> unidadesPrimerJugador = primerJugador.getPoblacion();
+        ArrayList<Edificio> edificiosPrimerJugador = jugador.getEdificios();
+        ArrayList<Unidad> unidadesPrimerJugador = jugador.getPoblacion();
         ArrayList<Edificio> edificiosSegundoJugador = segundoJugador.getEdificios();
         ArrayList<Unidad> unidadesSegundoJugador = segundoJugador.getPoblacion();
 
@@ -65,7 +72,7 @@ public class JugadorTest {
 
         assertEquals( 3, unidadesPrimerJugador.size() );
         assertEquals( 2, edificiosPrimerJugador.size() );
-        assertEquals( 100, (int)primerJugador.getOro() );
+        assertEquals( 100, (int)jugador.getOro() );
 
         assertEquals( 3, unidadesSegundoJugador.size() );
         assertEquals( 2, edificiosSegundoJugador.size() );

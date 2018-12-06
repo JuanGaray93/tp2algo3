@@ -26,13 +26,15 @@ public class Jugador {
         this.numeroDeJugador = jugadoresCreados;
         poblacion = new ArrayList<Unidad>();
         edificios = new ArrayList<Edificio>();
-        try {
+        
+        // TODO donde inicializar entidades iniciales
+        /*try {
             crearEntidadesIniciales();
         } catch (CasilleroNoExistenteException e) {
             e.printStackTrace();
         } catch (CasilleroLlenoException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 	/*
 	 *No creo que sea necesario ver que pasa si el casillero esta lleno, la view podria mostrar en verde los casilleros
