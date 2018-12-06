@@ -35,9 +35,12 @@ public class Controlador {
         return instancia;
     }
 
-    public Posicionable obtenerContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
+   /*
+   *  public Posicionable obtenerContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
         return mapa.conseguirOcupante(posicionHorizontal, posicionVertical);
     }
+
+   * */
 
     public void mover(Unidad unidad, Integer posicionHorizontal, Integer posicionVertical) throws ArmaMontadaException, CasilleroNoExistenteException, MovimientoInvalidoException, CasilleroLlenoException {
         unidad.moverA(posicionHorizontal,posicionVertical);
@@ -85,11 +88,12 @@ public class Controlador {
         armaAsedio.montar();
     }
 
-    public void desmontar(ArmaAsedio armaAsedio) throws ArmaMontadaException, ArmaDesmontadaException {
+    public void desmontar(ArmaAsedio armaAsedio) throws ArmaDesmontadaException {
         armaAsedio.desmontar();
     }
 
-    public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
+    public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical)
+             {
         Posicionable posicionable = null;
         try{
             posicionable = mapa.conseguirOcupante(posicionHorizontal, posicionVertical);
@@ -166,4 +170,5 @@ public class Controlador {
 
         return acciones;
     }
+
 }
