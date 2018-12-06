@@ -16,7 +16,7 @@ public class ContenedorPrincipal extends BorderPane {
     Mapa mapa;
 
     public ContenedorPrincipal(Stage stage){
-        Mapa mapa = new Mapa();
+        Mapa mapa = Mapa.getMapa();
         setCenter(mapa);
         setMenu(stage);
         setBotonera();
