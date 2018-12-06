@@ -100,6 +100,7 @@ public class Controlador {
         return jugadorDTO;
     }
 
+
     public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) {
         Posicionable posicionable = null;
         try{
@@ -113,7 +114,7 @@ public class Controlador {
             String nombrePosicionable = posicionable.getClass().getSimpleName().substring(0, 2);
             Jugador jugador = posicionable.getJugador();
             Integer numeroJugador = jugador.getNumeroDeJugador();
-            ArrayList<Accion> acciones = devolverAcciones(nombrePosicionable);
+            ArrayList<Accion> acciones = devolverAcciones(posicionable.getClass().getSimpleName());
             entidad = new EntidadDTO(numeroJugador, nombrePosicionable, acciones );
         }
        return entidad;
@@ -132,17 +133,13 @@ public class Controlador {
             acciones.add(accion2);
             acciones.add(accion3);
             acciones.add(accion4);
-        }
-
-        if (nombrePosicionable.equals("Espadachin") || nombrePosicionable.equals("Arquero")){
+        } else if (nombrePosicionable.equals("Espadachin") || nombrePosicionable.equals("Arquero")){
             Accion accion1 = new Accion("mover unidad aqui", new Movedor() );
             Accion accion2 = new Accion("atacar",  new Atacador());
 
             acciones.add(accion1);
             acciones.add(accion2);
-        }
-
-        if(nombrePosicionable.equals("ArmaAsedio")){
+        } else if(nombrePosicionable.equals("ArmaAsedio")){
             Accion accion1 = new Accion("mover unidad aqui",  new Movedor() );
             Accion accion2 = new Accion("atacar",  new Atacador() );
             Accion accion3 = new Accion("montar",  new Montador() );
@@ -152,23 +149,17 @@ public class Controlador {
             acciones.add(accion2);
             acciones.add(accion3);
             acciones.add(accion4);
-        }
-
-        if (nombrePosicionable.equals("Castillo")){
+        } else if (nombrePosicionable.equals("Castillo")){
             Accion accion1 = new Accion("crear arma de asedio",  new CreadorDeArmaDeAsedio() );
 
             acciones.add(accion1);
-        }
-
-        if (nombrePosicionable.equals("Cuartel")){
+        } else if (nombrePosicionable.equals("Cuartel")){
             Accion accion1 = new Accion("crear espadachin",  new CreadorDeEspadachin() );
             Accion accion2 = new Accion("crear arquero",  new CreadorDeArquero());
 
             acciones.add(accion1);
             acciones.add(accion2);
-        }
-
-        if (nombrePosicionable.equals("PlazaCentral")){
+        } else if (nombrePosicionable.equals("PlazaCentral")){
             Accion accion1 = new Accion("crear aldeano",  new CreadorDeAldeano() );
 
             acciones.add(accion1);

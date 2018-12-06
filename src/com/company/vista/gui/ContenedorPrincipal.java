@@ -30,10 +30,9 @@ public class ContenedorPrincipal extends BorderPane {
         Button botonCambiarTurno = new Button("Pasar turno");
         botonCambiarTurno.setOnAction(new CambiarTurnoHandler());
 
-        VBox contenedorVertical = new VBox(botonCambiarTurno);
-        contenedorVertical.setSpacing(10);
-        contenedorVertical.setPadding(new Insets(15));
+        GeneradorDeBotones generadorDeBotones = GeneradorDeBotones.getGenerador();
+        //generadorDeBotones.establecerContenedor(this);
+        generadorDeBotones.generarBotonPasarTurno();
 
-        this.setLeft(contenedorVertical);
     }
 }
