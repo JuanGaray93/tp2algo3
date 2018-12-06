@@ -94,7 +94,7 @@ public class Controlador {
         partida.pasarTurno();
     }
 
-    public JugadorDTO getJugador(){
+    public JugadorDTO obtenerJugadorActual(){
         Jugador jugador = partida.obtenerJugadorCorriente();
         JugadorDTO jugadorDTO = new JugadorDTO(jugador);
         return jugadorDTO;

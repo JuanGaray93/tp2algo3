@@ -98,7 +98,6 @@ public class Jugador {
         oro -= monto;
     }
 
-    // hay que tener una forma de testear la creacion de unidades.
     public Boolean estaEnPoblacion(Unidad unidad) {
         return poblacion.contains(unidad);
     }
@@ -112,10 +111,24 @@ public class Jugador {
         return poblacion;
     }
 
-	/*
-	public void actualizar() {
-		
-	}*/
+    public void ejecutarAcciones(){
+        // TODO
+        ArrayList<Posicionable> posicionables = new ArrayList<>();
+        posicionables.addAll(poblacion);
+        for(Posicionable posicionable : posicionables){
+
+            if(posicionable instanceof Aldeano){
+                Aldeano aldeano;
+                aldeano = ( Aldeano ) posicionable ;
+                aldeano.actualizar();
+            } else if(posicionable instanceof Castillo){
+                Castillo castillo;
+                castillo = ( Castillo ) posicionable ;
+                //castillo.actualizar(); TODO
+            }
+
+        }
+    }
 
     public void crearEntidadesIniciales() throws CasilleroNoExistenteException, CasilleroLlenoException {
         Iniciador iniciador = new Iniciador(this);

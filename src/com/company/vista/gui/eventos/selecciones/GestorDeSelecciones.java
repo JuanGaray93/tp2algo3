@@ -2,6 +2,7 @@ package com.company.vista.gui.eventos.selecciones;
 
 import com.company.DTO.Accion;
 import com.company.DTO.EntidadDTO;
+import com.company.DTO.JugadorDTO;
 import com.company.controlador.Controlador;
 import com.company.excepciones.ArmaDesmontadaException;
 import com.company.excepciones.ArmaMontadaException;
@@ -51,11 +52,11 @@ public class GestorDeSelecciones {
         //generadorDeBotones.limpiar();
     }
 
-    public static void pasarTurno(){
-        //controlador.pasarTurno();
+    public static void pasarTurno() {
+        controlador.pasarTurno();
         reiniciarOpciones();
         //TODO pasarle los datos a la barra lateral! numero de jugador, poblacion, etc.
-        //EntidadDTO jugadorNuevo = Controlador.obtenerJugador();
+        JugadorDTO jugadorNuevo = controlador.obtenerJugadorActual();
         //jugadorNuevo.mostrarInformacion();
     }
 }

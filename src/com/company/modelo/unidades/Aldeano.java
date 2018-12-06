@@ -95,7 +95,11 @@ public class Aldeano extends Unidad {
         estadoActual.actualizar();
     }
 
-    public void actualizar() throws Exception {
-        estadoActual = estadoActual.actualizar();
+    public void actualizar()  {
+        try {
+            estadoActual = estadoActual.actualizar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
