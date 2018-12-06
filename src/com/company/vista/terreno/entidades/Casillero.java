@@ -1,10 +1,16 @@
 package com.company.vista.terreno.entidades;
 
 import com.company.DTO.EntidadDTO;
+import com.company.vista.gui.eventos.selecciones.GestorDeSelecciones;
 import com.company.vista.terreno.Mapa;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.logging.Logger;
 
 public class Casillero extends Rectangle {
 
@@ -12,6 +18,7 @@ public class Casillero extends Rectangle {
     private Integer fila;
     private String nombre = "";
     private Mapa mapa;
+    private Logger logger = Logger.getLogger(this.getClass().toString());
 
     public Casillero(Integer x, Integer y, Float dimension, Mapa mapa, EntidadDTO entidad){
         this.mapa = mapa;
@@ -30,6 +37,21 @@ public class Casillero extends Rectangle {
             }
             nombre = entidad.getNombre();
         }
+
+        Casillero casillero = this;
+        this.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent t) {
+                Integer x = casillero.getColumna();
+                Integer y = casillero.getFila();
+                if(t.getButton() == MouseButton.SECONDARY){
+                    GestorDeSelecciones.seleccionarCasilleroDestino(x, y);
+                } else {
+                    GestorDeSelecciones.seleccionarCasilleroOrigen(x, y);
+                }
+
+            }
+        });
     }
 
     public Integer getColumna(){
