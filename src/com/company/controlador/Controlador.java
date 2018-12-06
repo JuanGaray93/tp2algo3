@@ -90,7 +90,7 @@ public class Controlador {
     }
 
     public void pasarTurno(){
-
+        partida.pasarTurno();
     }
 
     public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) {
