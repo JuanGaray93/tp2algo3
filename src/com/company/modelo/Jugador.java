@@ -26,7 +26,7 @@ public class Jugador {
         this.numeroDeJugador = jugadoresCreados;
         poblacion = new ArrayList<Unidad>();
         edificios = new ArrayList<Edificio>();
-        
+
         // TODO donde inicializar entidades iniciales
         /*try {
             crearEntidadesIniciales();

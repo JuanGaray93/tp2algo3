@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Partida;
 import com.company.vista.gui.ContenedorPrincipal;
 import com.company.vista.terreno.MapaView;
@@ -10,7 +12,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws CasilleroNoExistenteException, CasilleroLlenoException {
         primaryStage.setTitle("AOE2");
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage);
 
