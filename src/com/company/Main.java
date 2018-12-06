@@ -37,7 +37,6 @@ public class Main extends Application {
         primaryStage.show();
 
         MapaView mapa = MapaView.getMapa();
-        mapa.actualizarCasilleros();
     }
 
     public static void main(String[] args) {

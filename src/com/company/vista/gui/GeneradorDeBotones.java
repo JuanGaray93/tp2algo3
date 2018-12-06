@@ -1,6 +1,8 @@
 package com.company.vista.gui;
 
 import com.company.DTO.Accion;
+import com.company.vista.gui.eventos.CambiarTurnoHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -17,9 +19,12 @@ public class GeneradorDeBotones {
 
     private ContenedorPrincipal contenedorPrincipal;
 
+    private GeneradorDeBotones(){
+        controles.setSpacing(10);
+        controles.setPadding(new Insets(15));
+    }
+
     public static GeneradorDeBotones getGenerador() {
-
-
         if(instancia == null){
             instancia = new GeneradorDeBotones();
         }
@@ -28,6 +33,7 @@ public class GeneradorDeBotones {
 
     public void establecerContenedor(ContenedorPrincipal contenedorPrincipal) {
         this.contenedorPrincipal = contenedorPrincipal;
+        contenedorPrincipal.setLeft(controles);
     }
 
     private Label getLabel(){
@@ -40,20 +46,32 @@ public class GeneradorDeBotones {
 
     public void generarBotones(ArrayList<Accion> acciones) {
         controles.getChildren().clear();
+        generarBotonPasarTurno();
         controles.getChildren().add(getLabel());
         for(Accion accion :acciones){
-            Button boton = new Button();
-            boton.setText(accion.getDescripcion());
-            boton.setOnAction(accion.getHandlerDelBoton());
-            boton.setStyle("-fx-base: #394867");
-            boton.setTextFill(Color.WHITE);
+            Button boton = generarBoton(accion);
             controles.getChildren().add(boton);
         }
-        contenedorPrincipal.setLeft(controles);
+    }
+
+    public Button generarBoton(Accion accion){
+        Button boton = new Button();
+        boton.setText(accion.getDescripcion());
+        boton.setOnAction(accion.getHandlerDelBoton());
+        boton.setStyle("-fx-base: #394867");
+        boton.setTextFill(Color.WHITE);
+        return boton;
     }
 
     public void limpiarBotonera(){
         controles.getChildren().clear();
         contenedorPrincipal.setLeft(controles);
+        generarBotonPasarTurno();
+    }
+
+    public void generarBotonPasarTurno(){
+        Button botonCambiarTurno = new Button("Pasar turno");
+        botonCambiarTurno.setOnAction(new CambiarTurnoHandler());
+        controles.getChildren().add(botonCambiarTurno);
     }
 }

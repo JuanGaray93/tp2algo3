@@ -61,13 +61,16 @@ public class PantallaInicial extends VBox {
         OpcionSalirEventHandler botonSalirHandler = new OpcionSalirEventHandler();
         botonSalir.setOnAction(botonSalirHandler);
 
+        try{
+            Image inicio= new Image(getClass().getResourceAsStream("AlgoEmpires.jpg"));
+            BackgroundSize backgroundSize = new BackgroundSize(50, 50, true, true, true, false);
+            BackgroundImage fondoImPantallaInicial = new BackgroundImage(inicio, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+            Background fondoPantallaInicial = new Background(fondoImPantallaInicial);
+            this.setBackground(fondoPantallaInicial);
+        } catch (Exception e){
+            this.setBackground(new Background(new BackgroundFill(Color.BROWN, new CornerRadii(2), null)));
+        }
 
-        Image inicio= new Image(getClass().getResourceAsStream("AlgoEmpires.jpg"));
-
-        BackgroundSize backgroundSize = new BackgroundSize(50, 50, true, true, true, false);
-        BackgroundImage fondoImPantallaInicial = new BackgroundImage(inicio, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-        Background fondoPantallaInicial = new Background(fondoImPantallaInicial);
-        this.setBackground(fondoPantallaInicial);
 
         BotonEntrarEventHandler botonEntrarHandler = new BotonEntrarEventHandler(stage, proximaEscena/*,mediaPlayer,mediaPlayerBatalla*/);
         botonEntrar.setOnAction(botonEntrarHandler);
