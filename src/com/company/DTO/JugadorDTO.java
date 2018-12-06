@@ -12,6 +12,6 @@ public class JugadorDTO {
         this.oro = jugador.getOro();
         this.numeroDeJugador = jugador.getNumeroDeJugador();
         this.poblacionCorriente = jugador.getPoblacion().size();
-        this.poblacionMaxima = 50; // TODO ALTO HARDCODE
+        this.poblacionMaxima = jugador.getLimitePoblacional();
     }
 }
