@@ -15,6 +15,7 @@ import com.company.modelo.edificios.PlazaCentral;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.*;
 import com.company.vista.gui.eventos.*;
+import com.company.vista.gui.eventos.ejecutadores.*;
 
 import java.util.ArrayList;
 
@@ -103,11 +104,11 @@ public class Controlador {
         ArrayList<Accion> acciones = new ArrayList<Accion>();
 
         if (nombrePosicionable.equals("Aldeano")){
-            Accion accion1 = new Accion("mover unidad aqui", MoverHandler);
-            Accion accion2 = new Accion("reparar este edificio", RepararHandler);
+            Accion accion1 = new Accion("mover unidad aqui",new MoverHandler(), new Movedor());
+            Accion accion2 = new Accion("reparar este edificio",new RepararHandler(), new Reparador());
             // un handler para construccion? o dos?
-            Accion accion3 = new Accion("construir cuartel", ConstruirCuartelHandler);
-            Accion accion4 = new Accion("construir plaza central", ConstruirPlazaCentralHandler);
+            Accion accion3 = new Accion("construir cuartel", new ConstruirCuartelHandler(), new ConstructorDeCuartel());
+            Accion accion4 = new Accion("construir plaza central", new ConstruirPlazaCentralHandler(), new ConstructorDePlazaCentral());
 
             acciones.add(accion1);
             acciones.add(accion2);
@@ -116,18 +117,18 @@ public class Controlador {
         }
 
         if (nombrePosicionable.equals("Espadachin") || nombrePosicionable.equals("Arquero")){
-            Accion accion1 = new Accion("mover unidad aqui", MoverHandler);
-            Accion accion2 = new Accion("atacar", AtacarHandler);
+            Accion accion1 = new Accion("mover unidad aqui", new MoverHandler(), new Movedor() );
+            Accion accion2 = new Accion("atacar", new AtacarHandler(), new Atacador());
 
             acciones.add(accion1);
             acciones.add(accion2);
         }
 
         if(nombrePosicionable.equals("ArmaAsedio")){
-            Accion accion1 = new Accion("mover unidad aqui", MoverHandler);
-            Accion accion2 = new Accion("atacar", AtacarHandler);
-            Accion accion3 = new Accion("montar", MontarHandler);
-            Accion accion4 = new Accion("desmontar", DesmontarHandler);
+            Accion accion1 = new Accion("mover unidad aqui", new MoverHandler(), new Movedor() );
+            Accion accion2 = new Accion("atacar", new AtacarHandler(), new Atacador() );
+            Accion accion3 = new Accion("montar", new MontarHandler(), new Montador() );
+            Accion accion4 = new Accion("desmontar", new DesmontarHandler(), new Desmontador() );
 
             acciones.add(accion1);
             acciones.add(accion2);
@@ -136,21 +137,21 @@ public class Controlador {
         }
 
         if (nombrePosicionable.equals("Castillo")){
-            Accion accion1 = new Accion("crear arma de asedio", CrearArmaDeAsedioHandler);
+            Accion accion1 = new Accion("crear arma de asedio", new CrearArmaDeAsedioHandler(), new CreadorDeArmaDeAsedio() );
 
             acciones.add(accion1);
         }
 
         if (nombrePosicionable.equals("Cuartel")){
-            Accion accion1 = new Accion("crear espadachin", CrearEspadachinHandler);
-            Accion accion2 = new Accion("crear arquero", CrearArqueroHandler);
+            Accion accion1 = new Accion("crear espadachin", new CrearEspadachinHandler(), new CreadorDeEspadachin() );
+            Accion accion2 = new Accion("crear arquero", new CrearArqueroHandler(), new CreadorDeArquero());
 
             acciones.add(accion1);
             acciones.add(accion2);
         }
 
         if (nombrePosicionable.equals("PlazaCentral")){
-            Accion accion1 = new Accion("crear aldeano", CrearAldeanoHandler);
+            Accion accion1 = new Accion("crear aldeano", new CrearAldeanoHandler(), new CreadorDeAldeano() );
 
             acciones.add(accion1);
         }
