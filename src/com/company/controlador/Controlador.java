@@ -97,7 +97,7 @@ public class Controlador {
         }
         EntidadDTO entidad = null;
         if (posicionable != null) {
-            String nombrePosicionable = posicionable.getClass().getSimpleName();
+            String nombrePosicionable = posicionable.getClass().getSimpleName().substring(0, 2);
             Jugador jugador = posicionable.getJugador();
             Integer numeroJugador = jugador.getNumeroDeJugador();
             ArrayList<Accion> acciones = devolverAcciones(nombrePosicionable);
