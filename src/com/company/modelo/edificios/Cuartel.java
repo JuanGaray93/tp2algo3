@@ -14,7 +14,7 @@ import com.company.modelo.unidades.Espadachin;
 import com.company.modelo.unidades.Unidad;
 
 public class Cuartel extends Edificio {
-    
+
     public Cuartel(Jugador jugador) {
         super(jugador);
         MONTO_DE_REPARACION = 50;

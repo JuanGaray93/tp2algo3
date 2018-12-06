@@ -24,6 +24,8 @@ public class Main extends Application {
 
 
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage);
+        //generadorDeBotones.establecerContenedor(contenedorPrincipal);
+
 
         Scene escena = new Scene(contenedorPrincipal,1200, 600);
         primaryStage.setScene(escena);

@@ -1,6 +1,7 @@
 package com.company.vista.gui.eventos.selecciones;
 
 import com.company.DTO.Accion;
+import com.company.DTO.EntidadDTO;
 import com.company.controlador.Controlador;
 import com.company.excepciones.ArmaDesmontadaException;
 import com.company.excepciones.ArmaMontadaException;
@@ -17,8 +18,8 @@ public class GestorDeSelecciones {
     private static Accion accionAEjecutar;
 
     public static void seleccionarCasilleroOrigen(Integer x, Integer y){
-        //EntidadDTO entidad= controlador.obtenerEntidad(x, y);
-        //entidad.generarBotones();
+        EntidadDTO entidad= controlador.buscarContenidoDelCasillero(x, y);
+        entidad.generarBotones();
         xDelCasilleroDeOrigen = x;
         yDelCasilleroDeOrigen = y;
     }
@@ -47,10 +48,11 @@ public class GestorDeSelecciones {
         xDelCasilleroDeOrigen = -1;
         yDelCasilleroDeOrigen = -1;
         accionAEjecutar = null;
+        //generadorDeBotones.
     }
 
     public static void pasarTurno(){
-        //  TODO  controlador.pasarTurno();
+        //controlador.pasarTurno();
         reiniciarOpciones();
         //TODO pasarle los datos a la barra lateral! numero de jugador, poblacion, etc.
         //EntidadDTO jugadorNuevo = Controlador.obtenerJugador();
