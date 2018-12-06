@@ -24,7 +24,7 @@ public class GestorDeSelecciones {
 
     public static void seleccionarCasilleroDestino(Integer x, Integer y){
         try{
-            //accionAEjecutar.llamarAccion(xDelCasilleroDeOrigen, yDelCasilleroDeOrigen, x, y);
+            accionAEjecutar.llamarAccion(xDelCasilleroDeOrigen, yDelCasilleroDeOrigen, x, y);
             xDelCasilleroDeOrigen = -1;
             yDelCasilleroDeOrigen = -1;
             accionAEjecutar = null;
