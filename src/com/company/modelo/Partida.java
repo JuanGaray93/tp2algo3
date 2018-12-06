@@ -11,9 +11,7 @@ public class Partida {
 
     private Turno turno;
     private static Integer NUMERO_DE_JUGADORES = 2;
-    private Mapa mapa;
     private ArrayList<Jugador> jugadores = new ArrayList<>();
-    private boolean comenzada;
 
     public Partida() throws CasilleroNoExistenteException, CasilleroLlenoException {
         turno = new Turno();
@@ -27,7 +25,7 @@ public class Partida {
         for (Jugador jugador : jugadores) { jugador.crearEntidadesIniciales(); }
 
         Controlador controlador = Controlador.getControlador();
-        //controlador.setPartida(this);
+        controlador.setPartida(this);
     }
     public void correr() throws Exception{
         Jugador jugadorCorriente = turno.obtenerJugadorCorriente();
