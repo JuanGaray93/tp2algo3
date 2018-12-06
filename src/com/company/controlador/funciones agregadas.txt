@@ -1,0 +1,36 @@
+funciones controlador: 
+-buscarContenidoDelCasillero
+-devolverAcciones
+-atacar
+-mover
+-reparar
+-construirCuartel
+-construirPlazaCentral
+-crearArmaAsedio
+-crearAldeano
+-crearArquero
+-crearEspadachin
+-montar
+-desmontar
+
+MoverHandler
+RepararHandler
+ConstruirCuartelHandler
+ContruirPlazaCentralHandler
+AtacarHandler
+CrearArmaDeAsedioHandler
+CrearArqueroHandler
+CrearEspadachinHandler
+CrearAldeanoHandler
+MontarHandler
+DesmontarHandler
+
+funciones que agregue:
+-en posicionable: getJugador
+-en jugador: getNumeroJugador
+
+problemas:
+-atacar (no se puede atacarA posicionable)
+-crear (manejo excepciones)
+-montar (manejo excepciones)
+-desmontar (manejo excepciones)

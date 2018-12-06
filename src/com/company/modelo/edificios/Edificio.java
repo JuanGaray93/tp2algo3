@@ -29,11 +29,8 @@ public abstract class Edificio extends Posicionable {
     protected Jugador jugador;
 
     public Edificio(Jugador jugador){
-
         posiciones = new ArrayList<>();
-
         this.jugador = jugador;
-
         this.estado = new EstadoPorConstruir(VIDA_MAXIMA,VIDA_MAXIMA,COSTO);
     }
 
@@ -52,7 +49,11 @@ public abstract class Edificio extends Posicionable {
         jugador.cobrar(this.COSTO);
         this.ubicar(posicionHorizontal, posicionVertical);
 
-        estado = estado.construir(quienLoConstruye);
+        try{
+            estado = estado.construir(quienLoConstruye);
+        }catch(RuntimeException e){
+            return;
+        }
         jugador.agregarAEdificios(this);
     }
 
@@ -78,7 +79,6 @@ public abstract class Edificio extends Posicionable {
     }
 
     public Integer getVida() throws Exception {
-
         return this.estado.getVidaActual();
     }
 
@@ -89,7 +89,10 @@ public abstract class Edificio extends Posicionable {
     }
     
     public void reparar(Aldeano reparador) throws Exception, EdificioEnConstruccionException {
-        this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
+        try{
+            this.estado = this.estado.reparar(reparador, MONTO_DE_REPARACION);
+        }catch(RuntimeException  e){
+        }
     }
 
     public void eliminar() {

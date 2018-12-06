@@ -43,6 +43,10 @@ public class Jugador {
         return this.oro;
     }
 
+    public Integer getNumeroDeJugador(){
+        return jugadoresCreados;
+    }
+
     public void agregarAPoblacion(Unidad unidad) {
 
         if (poblacion.size() == LIMITE_POBLACIONAL) {

@@ -18,5 +18,9 @@ public abstract class Posicionable {
             throws Exception, EdificioEnConstruccionException, EdificioDestruidoExcepcion, UnidadMuertaException;
 
     public abstract Integer getVida() throws Exception;
+
+    public Jugador getJugador(){
+        return this.jugador;
+    }
 }
 

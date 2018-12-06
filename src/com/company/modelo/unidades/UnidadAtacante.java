@@ -24,7 +24,6 @@ public abstract class UnidadAtacante extends Unidad {
     }
 
     public void atacarA(Edificio enemigo) throws EnemigoInvalidoException, ArmaDesmontadaException {
-
         this.atacar(enemigo, this.danioAEdificio);
     }
 
