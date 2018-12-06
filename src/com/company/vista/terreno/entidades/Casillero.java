@@ -49,7 +49,6 @@ public class Casillero extends Rectangle {
                 } else {
                     GestorDeSelecciones.seleccionarCasilleroOrigen(x, y);
                 }
-
             }
         });
     }

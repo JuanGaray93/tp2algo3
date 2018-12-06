@@ -1,5 +1,6 @@
 package com.company.DTO;
 
+import com.company.vista.gui.eventos.HandlerDeAccion;
 import com.company.vista.gui.eventos.ejecutadores.Ejecutador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,10 +11,11 @@ public class Accion {
     private EventHandler<ActionEvent> handlerDelBoton;
     private Ejecutador ejecutador;
 
-    public Accion(String descripcion, EventHandler<ActionEvent> handlerDelBoton, Ejecutador ejecutador){
+    public Accion(String descripcion, HandlerDeAccion handlerDelBoton, Ejecutador ejecutador){
         this.descripcion = descripcion;
         this.handlerDelBoton = handlerDelBoton;
         this.ejecutador = ejecutador;
+        handlerDelBoton.setearAccion(this);
     }
 
     public String getDescripcion(){
@@ -22,6 +24,10 @@ public class Accion {
 
     public EventHandler<ActionEvent> getHandlerDelBoton(){
         return handlerDelBoton;
+    }
+
+    public Ejecutador getEjecutador(){
+        return ejecutador;
     }
 
     public void llamarAccion(Integer xOrigen, Integer yOrigen, Integer xDestino, Integer yDestino){
