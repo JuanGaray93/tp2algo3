@@ -19,8 +19,8 @@ public class Iniciador {
     }
 
     public void crearEntidadesIniciales() throws CasilleroNoExistenteException, CasilleroLlenoException {
-        Integer posicionInicialX = 0;
-		Integer posicionInicialY = 0;
+        Integer posicionInicialX;
+		Integer posicionInicialY;
 
 		if(cantidadDeJugadores == 1){
 			posicionInicialX = 5;

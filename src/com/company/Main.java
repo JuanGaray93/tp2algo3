@@ -14,18 +14,22 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws CasilleroNoExistenteException, CasilleroLlenoException {
         primaryStage.setTitle("AOE2");
-        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage);
 
-        Scene escena = new Scene(contenedorPrincipal,1200, 600);
-        primaryStage.setScene(escena);
-
-        primaryStage.show();
         Partida partida = new Partida();
         try {
             partida.correr();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage);
+
+        Scene escena = new Scene(contenedorPrincipal,1200, 600);
+        primaryStage.setScene(escena);
+
+        primaryStage.show();
+
 
         MapaView mapa = MapaView.getMapa();
         mapa.actualizarCasilleros();
