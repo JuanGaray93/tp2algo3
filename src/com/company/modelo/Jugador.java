@@ -26,15 +26,6 @@ public class Jugador {
         this.numeroDeJugador = jugadoresCreados;
         poblacion = new ArrayList<Unidad>();
         edificios = new ArrayList<Edificio>();
-
-        // TODO donde inicializar entidades iniciales
-        /*try {
-            crearEntidadesIniciales();
-        } catch (CasilleroNoExistenteException e) {
-            e.printStackTrace();
-        } catch (CasilleroLlenoException e) {
-            e.printStackTrace();
-        }*/
     }
 	/*
 	 *No creo que sea necesario ver que pasa si el casillero esta lleno, la view podria mostrar en verde los casilleros
@@ -49,6 +40,10 @@ public class Jugador {
 
     public Integer getOro() {
         return this.oro;
+    }
+
+    public Integer getLimitePoblacional(){
+        return LIMITE_POBLACIONAL;
     }
 
     public void agregarAPoblacion(Unidad unidad) {
@@ -115,6 +110,7 @@ public class Jugador {
         // TODO
         ArrayList<Posicionable> posicionables = new ArrayList<>();
         posicionables.addAll(poblacion);
+        posicionables.addAll(edificios);
         for(Posicionable posicionable : posicionables){
 
             if(posicionable instanceof Aldeano){
@@ -124,7 +120,7 @@ public class Jugador {
             } else if(posicionable instanceof Castillo){
                 Castillo castillo;
                 castillo = ( Castillo ) posicionable ;
-                //castillo.actualizar(); TODO
+                castillo.actualizar();
             }
 
         }
