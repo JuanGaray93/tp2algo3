@@ -70,7 +70,7 @@ public class GeneradorDeBotones {
     }
 
     public void generarBotonPasarTurno(){
-        Button botonCambiarTurno = new Button("Pasar turno");
+        Button botonCambiarTurno = new Button("~ ~ Pasar este turno ~ ~");
         botonCambiarTurno.setOnAction(new CambiarTurnoHandler());
         controles.getChildren().add(botonCambiarTurno);
     }

@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws CasilleroNoExistenteException, CasilleroLlenoException {
-        primaryStage.setTitle("AOE2");
+        primaryStage.setTitle("Algo of Empires II");
 
         Partida partida = new Partida();
 

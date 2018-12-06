@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.logging.Logger;
 
-public class Casillero extends Rectangle {
+public class CasilleroView extends Rectangle {
 
     private Integer columna;
     private Integer fila;
@@ -20,7 +20,7 @@ public class Casillero extends Rectangle {
     private MapaView mapa;
     private Logger logger = Logger.getLogger(this.getClass().toString());
 
-    public Casillero(Integer x, Integer y, Float dimension, MapaView mapa, EntidadDTO entidad){
+    public CasilleroView(Integer x, Integer y, Float dimension, MapaView mapa, EntidadDTO entidad){
         this.mapa = mapa;
         this.columna = x;
         this.fila = y;
@@ -38,7 +38,7 @@ public class Casillero extends Rectangle {
             nombre = entidad.getNombre();
         }
 
-        Casillero casillero = this;
+        CasilleroView casillero = this;
         this.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent t) {

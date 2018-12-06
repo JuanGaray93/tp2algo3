@@ -124,8 +124,8 @@ public class Controlador {
         ArrayList<Accion> acciones = new ArrayList<Accion>();
 
         if (nombrePosicionable.equals("Aldeano")){
-            Accion accion1 = new Accion("mover unidad aqui", new Movedor());
-            Accion accion2 = new Accion("reparar este edificio", new Reparador());
+            Accion accion1 = new Accion("mover unidad a", new Movedor());
+            Accion accion2 = new Accion("reparar edificio", new Reparador());
             Accion accion3 = new Accion("construir cuartel",  new ConstructorDeCuartel());
             Accion accion4 = new Accion("construir plaza central",  new ConstructorDePlazaCentral());
 
@@ -134,13 +134,13 @@ public class Controlador {
             acciones.add(accion3);
             acciones.add(accion4);
         } else if (nombrePosicionable.equals("Espadachin") || nombrePosicionable.equals("Arquero")){
-            Accion accion1 = new Accion("mover unidad aqui", new Movedor() );
+            Accion accion1 = new Accion("mover unidad a", new Movedor() );
             Accion accion2 = new Accion("atacar",  new Atacador());
 
             acciones.add(accion1);
             acciones.add(accion2);
         } else if(nombrePosicionable.equals("ArmaAsedio")){
-            Accion accion1 = new Accion("mover unidad aqui",  new Movedor() );
+            Accion accion1 = new Accion("mover unidad a",  new Movedor() );
             Accion accion2 = new Accion("atacar",  new Atacador() );
             Accion accion3 = new Accion("montar",  new Montador() );
             Accion accion4 = new Accion("desmontar",  new Desmontador() );
