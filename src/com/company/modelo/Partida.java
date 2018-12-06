@@ -1,5 +1,6 @@
 package com.company.modelo;
 
+import com.company.controlador.Controlador;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.terreno.Mapa;
@@ -24,17 +25,21 @@ public class Partida {
         }
 
         for (Jugador jugador : jugadores) { jugador.crearEntidadesIniciales(); }
+
+        Controlador controlador = Controlador.getControlador();
+        //controlador.setPartida(this);
     }
     public void correr() throws Exception{
         Jugador jugadorCorriente = turno.obtenerJugadorCorriente();
-
-        /*TODO
-
-        Acá podríamos recibir del controller un objeto acción - no sé bien cómo hacer.
-
-        */
-         turno.pasar();
+        turno.pasar();
     }
 
+    public void pasarTurno(){
+        turno.pasar();
+    }
+
+    public Jugador obtenerJugadorCorriente(){
+        return turno.obtenerJugadorCorriente();
+    }
 
 }

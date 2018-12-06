@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.controlador.Controlador;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Partida;
@@ -16,6 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("AOE2");
 
         Partida partida = new Partida();
+
         try {
             partida.correr();
         } catch (Exception e) {
