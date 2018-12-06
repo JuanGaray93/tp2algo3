@@ -1,6 +1,7 @@
 package com.company.vista.gui.eventos.selecciones;
 
 import com.company.DTO.Accion;
+import com.company.controlador.Controlador;
 import com.company.excepciones.ArmaDesmontadaException;
 import com.company.excepciones.ArmaMontadaException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
@@ -9,7 +10,7 @@ import javafx.scene.control.Alert;
 
 public class GestorDeSelecciones {
 
-    //private static Controlador controlador = Controlador.getControlador();
+    private static Controlador controlador = Controlador.getControlador();
     //private static GeneradorDeBotones generadorDeBotones = GeneradorDeBotones.getGenerador();
     private static Integer xDelCasilleroDeOrigen;
     private static Integer yDelCasilleroDeOrigen;
@@ -49,7 +50,7 @@ public class GestorDeSelecciones {
     }
 
     public static void pasarTurno(){
-        //Controlador.pasarTurno();
+        //  TODO  controlador.pasarTurno();
         reiniciarOpciones();
         //TODO pasarle los datos a la barra lateral! numero de jugador, poblacion, etc.
         //EntidadDTO jugadorNuevo = Controlador.obtenerJugador();
