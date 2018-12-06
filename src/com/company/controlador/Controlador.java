@@ -88,12 +88,11 @@ public class Controlador {
         armaAsedio.montar();
     }
 
-    public void desmontar(ArmaAsedio armaAsedio) throws ArmaDesmontadaException {
+    public void desmontar(ArmaAsedio armaAsedio) throws ArmaMontadaException, ArmaDesmontadaException {
         armaAsedio.desmontar();
     }
 
-    public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical)
-             {
+    public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) {
         Posicionable posicionable = null;
         try{
             posicionable = mapa.conseguirOcupante(posicionHorizontal, posicionVertical);
@@ -170,5 +169,4 @@ public class Controlador {
 
         return acciones;
     }
-
 }

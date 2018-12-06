@@ -35,7 +35,5 @@ public class ContenedorPrincipal extends BorderPane {
         contenedorVertical.setPadding(new Insets(15));
 
         this.setLeft(contenedorVertical);
-
     }
-
 }

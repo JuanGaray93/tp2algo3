@@ -17,11 +17,11 @@ import java.util.ArrayList;
 
 public abstract class Edificio extends Posicionable {
 
-    protected static Integer VIDA_MAXIMA;
-    protected static Integer COSTO;
-    protected static Integer MONTO_DE_REPARACION;
-    protected static Integer BLOQUES_DE_ANCHO ;
-    protected static Integer BLOQUES_DE_ALTO;
+    protected Integer VIDA_MAXIMA;
+    protected Integer COSTO;
+    protected Integer MONTO_DE_REPARACION;
+    protected Integer BLOQUES_DE_ANCHO;
+    protected Integer BLOQUES_DE_ALTO;
     final Integer SIN_VIDA = 0;
 
     protected ArrayList<Posicion> posiciones;

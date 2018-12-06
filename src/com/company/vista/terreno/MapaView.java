@@ -22,17 +22,13 @@ public class MapaView extends GridPane {
     }
 
     public void actualizarCasilleros(){
-        for(Integer y = 0; y < CASILLEROS_DE_ALTO; y++){
-            for(Integer x = 0; x < CASILLEROS_DE_ANCHO; x++){
-                try {
-                    EntidadDTO entidad = controlador.buscarContenidoDelCasillero(x,y);
-                    Casillero casilleroNuevo = new Casillero(x, y, dimensionCasillero, this,
-                            entidad);
-                    establecerCasillero(casilleroNuevo);
-                    casilleroNuevo.mostrarEtiqueta();
-                } catch (CasilleroNoExistenteException e) {
-                    e.printStackTrace();
-                }
+        for(Integer x = 0; x < CASILLEROS_DE_ANCHO; x++){
+            for(Integer y = 0; y < CASILLEROS_DE_ALTO; y++){
+                EntidadDTO entidad = controlador.buscarContenidoDelCasillero(x,y);
+                Casillero casilleroNuevo = new Casillero(x, y, dimensionCasillero, this,
+                        entidad);
+                establecerCasillero(casilleroNuevo);
+                casilleroNuevo.mostrarEtiqueta();
             }
         }
     }

@@ -5,25 +5,20 @@ import com.company.DTO.EntidadDTO;
 import com.company.controlador.Controlador;
 import com.company.excepciones.ArmaDesmontadaException;
 import com.company.excepciones.ArmaMontadaException;
-import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioNoDisponibleException;
-import com.company.vista.gui.GeneradorDeBotones;
 import javafx.scene.control.Alert;
 
 public class GestorDeSelecciones {
 
     private static Controlador controlador = Controlador.getControlador();
-    private static GeneradorDeBotones generadorDeBotones = GeneradorDeBotones.getGenerador();
     private static Integer xDelCasilleroDeOrigen;
     private static Integer yDelCasilleroDeOrigen;
     private static Accion accionAEjecutar;
 
-    public static void seleccionarCasilleroOrigen(Integer x, Integer y)
-            {
-
-        EntidadDTO entidad = controlador.buscarContenidoDelCasillero(x, y);
-
+    public static void seleccionarCasilleroOrigen(Integer x, Integer y){
+        EntidadDTO entidad= controlador.buscarContenidoDelCasillero(x, y);
+        entidad.generarBotones();
         xDelCasilleroDeOrigen = x;
         yDelCasilleroDeOrigen = y;
     }
