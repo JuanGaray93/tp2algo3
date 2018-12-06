@@ -55,6 +55,26 @@ public class CastilloTest {
         assertTrue(mapa.estaOcupado(8, 6));
         assertTrue(mapa.estaOcupado(8, 7));
         assertTrue(mapa.estaOcupado(8, 8));
+
+        assertEquals(mapa.conseguirOcupante(5, 5), castillo);
+        assertEquals(mapa.conseguirOcupante(5, 6), castillo);
+        assertEquals(mapa.conseguirOcupante(5, 7), castillo);
+        assertEquals(mapa.conseguirOcupante(5, 8), castillo);
+
+        assertEquals(mapa.conseguirOcupante(6, 5), castillo);
+        assertEquals(mapa.conseguirOcupante(6, 6), castillo);
+        assertEquals(mapa.conseguirOcupante(6, 7), castillo);
+        assertEquals(mapa.conseguirOcupante(6, 8), castillo);
+
+        assertEquals(mapa.conseguirOcupante(7, 5), castillo);
+        assertEquals(mapa.conseguirOcupante(7, 6), castillo);
+        assertEquals(mapa.conseguirOcupante(7, 7), castillo);
+        assertEquals(mapa.conseguirOcupante(7, 8), castillo);
+
+        assertEquals(mapa.conseguirOcupante(8, 5), castillo);
+        assertEquals(mapa.conseguirOcupante(8, 6), castillo);
+        assertEquals(mapa.conseguirOcupante(8, 7), castillo);
+        assertEquals(mapa.conseguirOcupante(8, 8), castillo);
     }
 
     @Test
