@@ -88,7 +88,13 @@ public class Controlador {
     }
 
     public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
-        Posicionable posicionable = mapa.conseguirOcupante(posicionHorizontal, posicionVertical);
+        Posicionable posicionable = null;
+        try{
+            posicionable = mapa.conseguirOcupante(posicionHorizontal, posicionVertical);
+        }
+        catch (Exception e){
+            //
+        }
         EntidadDTO entidad = null;
         if (posicionable != null) {
             String nombrePosicionable = posicionable.getClass().getSimpleName();
