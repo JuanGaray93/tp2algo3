@@ -27,9 +27,8 @@ public class Partida {
         Controlador controlador = Controlador.getControlador();
         controlador.setPartida(this);
     }
-    public void correr() throws Exception{
-        Jugador jugadorCorriente = turno.obtenerJugadorCorriente();
-        turno.pasar();
+    public void correr() {
+        pasarTurno();
     }
 
     public void pasarTurno(){
