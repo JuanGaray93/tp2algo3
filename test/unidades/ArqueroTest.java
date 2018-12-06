@@ -22,9 +22,9 @@ public class ArqueroTest {
 
     @Before
     public void resetMapa() {
+        jugador = new Jugador();
         mapa.destruir();
         mapa = Mapa.getMapa();
-        jugador = new Jugador();
         cuartel = new Cuartel(jugador);
         peon = new Aldeano(jugador);
         arquero = new Arquero(jugador);

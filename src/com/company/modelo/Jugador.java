@@ -27,6 +27,14 @@ public class Jugador {
         poblacion = new ArrayList<Unidad>();
         edificios = new ArrayList<Edificio>();
 
+        // TODO donde inicializar entidades iniciales
+        /*try {
+            crearEntidadesIniciales();
+        } catch (CasilleroNoExistenteException e) {
+            e.printStackTrace();
+        } catch (CasilleroLlenoException e) {
+            e.printStackTrace();
+        }*/
     }
 	/*
 	 *No creo que sea necesario ver que pasa si el casillero esta lleno, la view podria mostrar en verde los casilleros
@@ -112,37 +120,9 @@ public class Jugador {
     public void crearEntidadesIniciales() throws CasilleroNoExistenteException, CasilleroLlenoException {
         Iniciador iniciador = new Iniciador(this);
         iniciador.crearEntidadesIniciales();
-
-        /*Integer posicionInicialX = 0;
-        Integer posicionInicialY = 0;
-
-        if (this.numeroDeJugador == 1) {
-            posicionInicialX = 1;
-            posicionInicialY = 1;
-        } else {
-            posicionInicialX = 80;
-            posicionInicialY = 80;
-        }
-
-        poblacion.add(new Aldeano(this));
-        poblacion.add(new Aldeano(this));
-        poblacion.add(new Aldeano(this));
-
-        poblacion.get(0).establecerCoordenadasDeNacimiento(5 +
-                posicionInicialX, +posicionInicialY);
-        poblacion.get(1).establecerCoordenadasDeNacimiento(6 +
-                posicionInicialX, +posicionInicialY);
-        poblacion.get(2).establecerCoordenadasDeNacimiento(7 +
-                posicionInicialX, +posicionInicialY);
-
-        Castillo castillo = new Castillo(this);
-        PlazaCentral plaza = new PlazaCentral(this);
-
-        // castillo.construir((Aldeano) poblacion.get(0), 5 + posicionInicialX, 5 + posicionInicialY);
-        // plaza.construir((Aldeano) poblacion.get(1), 5 + posicionInicialX, 10 + posicionInicialY);
-
-        edificios.add(castillo);
-        edificios.add(plaza);*/
     }
 
+    public Integer getNumeroDeJugador(){
+        return numeroDeJugador;
+    }
 }

@@ -1,20 +1,39 @@
 package com.company;
 
+import com.company.excepciones.CasilleroLlenoException;
+import com.company.excepciones.CasilleroNoExistenteException;
 import com.company.modelo.Partida;
+import com.company.vista.gui.ContenedorPrincipal;
+import com.company.vista.terreno.MapaView;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws CasilleroNoExistenteException, CasilleroLlenoException {
+        primaryStage.setTitle("AOE2");
+        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage);
+
+        Scene escena = new Scene(contenedorPrincipal,1200, 600);
+        primaryStage.setScene(escena);
+
+        primaryStage.show();
+        Partida partida = new Partida();
+        try {
+            partida.correr();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        MapaView mapa = MapaView.getMapa();
+        mapa.actualizarCasilleros();
+    }
 
     public static void main(String[] args) {
-        try {
-
-            Partida partida = new Partida();
-
-            while (true) {
-                partida.correr();
-            }
-
-        } catch (Exception e) {
-            // Terminar programa
-        }
+        Application.launch(args);
     }
+
+
 }

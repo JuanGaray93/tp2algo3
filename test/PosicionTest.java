@@ -27,8 +27,8 @@ public class PosicionTest {
 
     @Before
     public void inicializar() {
-        mapa = Mapa.getMapa();
         jugador = new Jugador();
+        mapa = Mapa.getMapa();
         aldeano = new Aldeano(jugador);
     }
 
@@ -58,7 +58,5 @@ public class PosicionTest {
 		aldeano.ubicar(3,4);
 
 		Assert.assertTrue(mapa.estaOcupado(3,4));
-		
 	}
-
 }
