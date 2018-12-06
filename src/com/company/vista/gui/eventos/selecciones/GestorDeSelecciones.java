@@ -25,9 +25,7 @@ public class GestorDeSelecciones {
     public static void seleccionarCasilleroDestino(Integer x, Integer y){
         try{
             accionAEjecutar.llamarAccion(xDelCasilleroDeOrigen, yDelCasilleroDeOrigen, x, y);
-            xDelCasilleroDeOrigen = -1;
-            yDelCasilleroDeOrigen = -1;
-            accionAEjecutar = null;
+            reiniciarOpciones();
         } catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Atencion!");
@@ -35,5 +33,17 @@ public class GestorDeSelecciones {
             alert.setContentText(e.getMessage());
             alert.show();
         }
+    }
+
+    private static void reiniciarOpciones(){
+        xDelCasilleroDeOrigen = -1;
+        yDelCasilleroDeOrigen = -1;
+        accionAEjecutar = null;
+    }
+
+    public static void pasarTurno(){
+        //Controlador.pasarTurno();
+        reiniciarOpciones();
+        //TODO pasarle los datos a la barra lateral!
     }
 }
