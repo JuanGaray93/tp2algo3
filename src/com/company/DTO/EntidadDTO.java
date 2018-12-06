@@ -25,4 +25,12 @@ public class EntidadDTO {
     public Integer getJugador(){
         return jugador;
     }
+
+    public void generarBotones(){
+        for (Accion accion : acciones){
+            //crear boton
+            // setearle nombre: accion.getDescripcion();
+            // setearle handler: accion.getHandlerDelBoton();
+        }
+    }
 }

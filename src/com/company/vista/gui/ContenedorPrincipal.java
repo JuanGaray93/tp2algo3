@@ -1,10 +1,8 @@
 package com.company.vista.gui;
 
 import com.company.vista.gui.eventos.CambiarTurnoHandler;
-import com.company.vista.terreno.Mapa;
+import com.company.vista.terreno.MapaView;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -13,10 +11,10 @@ import javafx.stage.Stage;
 public class ContenedorPrincipal extends BorderPane {
 
     BarraDeMenu menuBar;
-    Mapa mapa;
+    MapaView mapa;
 
     public ContenedorPrincipal(Stage stage){
-        Mapa mapa = Mapa.getMapa();
+        MapaView mapa = MapaView.getMapa();
         setCenter(mapa);
         setMenu(stage);
         setBotonera();

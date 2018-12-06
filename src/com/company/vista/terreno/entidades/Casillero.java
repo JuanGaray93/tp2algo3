@@ -2,7 +2,7 @@ package com.company.vista.terreno.entidades;
 
 import com.company.DTO.EntidadDTO;
 import com.company.vista.gui.eventos.selecciones.GestorDeSelecciones;
-import com.company.vista.terreno.Mapa;
+import com.company.vista.terreno.MapaView;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
@@ -17,10 +17,10 @@ public class Casillero extends Rectangle {
     private Integer columna;
     private Integer fila;
     private String nombre = "";
-    private Mapa mapa;
+    private MapaView mapa;
     private Logger logger = Logger.getLogger(this.getClass().toString());
 
-    public Casillero(Integer x, Integer y, Float dimension, Mapa mapa, EntidadDTO entidad){
+    public Casillero(Integer x, Integer y, Float dimension, MapaView mapa, EntidadDTO entidad){
         this.mapa = mapa;
         this.columna = x;
         this.fila = y;
@@ -49,7 +49,6 @@ public class Casillero extends Rectangle {
                 } else {
                     GestorDeSelecciones.seleccionarCasilleroOrigen(x, y);
                 }
-
             }
         });
     }

@@ -104,11 +104,11 @@ public class Controlador {
         ArrayList<Accion> acciones = new ArrayList<Accion>();
 
         if (nombrePosicionable.equals("Aldeano")){
-            Accion accion1 = new Accion("mover unidad aqui",new MoverHandler(), new Movedor());
-            Accion accion2 = new Accion("reparar este edificio",new RepararHandler(), new Reparador());
+            Accion accion1 = new Accion("mover unidad aqui",new HandlerDeAccion(), new Movedor());
+            Accion accion2 = new Accion("reparar este edificio",new HandlerDeAccion(), new Reparador());
             // un handler para construccion? o dos?
-            Accion accion3 = new Accion("construir cuartel", new ConstruirCuartelHandler(), new ConstructorDeCuartel());
-            Accion accion4 = new Accion("construir plaza central", new ConstruirPlazaCentralHandler(), new ConstructorDePlazaCentral());
+            Accion accion3 = new Accion("construir cuartel", new HandlerDeAccion(), new ConstructorDeCuartel());
+            Accion accion4 = new Accion("construir plaza central", new HandlerDeAccion(), new ConstructorDePlazaCentral());
 
             acciones.add(accion1);
             acciones.add(accion2);

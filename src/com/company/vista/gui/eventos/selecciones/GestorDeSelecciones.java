@@ -23,9 +23,12 @@ public class GestorDeSelecciones {
     }
 
     public static void seleccionarCasilleroDestino(Integer x, Integer y){
-        try{
+        try {
             accionAEjecutar.llamarAccion(xDelCasilleroDeOrigen, yDelCasilleroDeOrigen, x, y);
             reiniciarOpciones();
+        } catch (NullPointerException npe){
+            System.out.println("No se selecciono ningun casillero");
+            return;
         } catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Atencion!");
@@ -44,6 +47,8 @@ public class GestorDeSelecciones {
     public static void pasarTurno(){
         //Controlador.pasarTurno();
         reiniciarOpciones();
-        //TODO pasarle los datos a la barra lateral!
+        //TODO pasarle los datos a la barra lateral! numero de jugador, poblacion, etc.
+        //EntidadDTO jugadorNuevo = Controlador.obtenerJugador();
+        //jugadorNuevo.mostrarInformacion();
     }
 }
