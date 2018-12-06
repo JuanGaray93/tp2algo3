@@ -18,13 +18,15 @@ import com.company.vista.gui.eventos.*;
 import com.company.vista.gui.eventos.ejecutadores.*;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Controlador {
 
     private static Controlador instancia = new Controlador();
 
-    Mapa mapa = Mapa.getMapa();
+    private Mapa mapa = Mapa.getMapa();
 
+    private Logger logger = Logger.getLogger(getClass().toString());
 
     public static Controlador getControlador(){
         if (instancia == null){
@@ -92,8 +94,8 @@ public class Controlador {
         try{
             posicionable = mapa.conseguirOcupante(posicionHorizontal, posicionVertical);
         }
-        catch (Exception e){
-            //
+        catch (CasilleroNoExistenteException e){
+            logger.info(e.getMessage());
         }
         EntidadDTO entidad = null;
         if (posicionable != null) {
