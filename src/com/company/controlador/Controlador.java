@@ -7,6 +7,7 @@ import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioEnReparacionException;
 import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.modelo.Jugador;
+import com.company.modelo.Partida;
 import com.company.modelo.Posicionable;
 import com.company.modelo.edificios.Castillo;
 import com.company.modelo.edificios.Cuartel;
@@ -23,9 +24,8 @@ import java.util.logging.Logger;
 public class Controlador {
 
     private static Controlador instancia = new Controlador();
-
+    private Partida partida;
     private Mapa mapa = Mapa.getMapa();
-
     private Logger logger = Logger.getLogger(getClass().toString());
 
     public static Controlador getControlador(){
@@ -83,6 +83,14 @@ public class Controlador {
 
     public void desmontar(ArmaAsedio armaAsedio) throws ArmaMontadaException, ArmaDesmontadaException {
         armaAsedio.desmontar();
+    }
+
+    public void setPartida(Partida nuevaPartida){
+        this.partida = nuevaPartida;
+    }
+
+    public void pasarTurno(){
+
     }
 
     public EntidadDTO buscarContenidoDelCasillero(Integer posicionHorizontal, Integer posicionVertical) {
