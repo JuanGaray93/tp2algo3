@@ -3,15 +3,15 @@ package com.company.vista.terreno;
 import com.company.vista.terreno.entidades.Casillero;
 import javafx.scene.layout.GridPane;
 
-public class Mapa extends GridPane {
+public class MapaView extends GridPane {
 
-    private static Mapa instancia = new Mapa();
+    private static MapaView instancia = new MapaView();
 
     private final Integer CASILLEROS_DE_ANCHO = 25;
     private final Integer CASILLEROS_DE_ALTO = 25;
     private Float dimensionCasillero = 25.0F;
 
-    private Mapa(){
+    private MapaView(){
         this.actualizarCasilleros();
         this.setHgap(dimensionCasillero / 20);
         this.setVgap(dimensionCasillero / 20);
@@ -35,9 +35,9 @@ public class Mapa extends GridPane {
         this.getChildren().addAll(casilleroNuevo);
     }
 
-    public static Mapa getMapa(){
+    public static MapaView getMapa(){
         if(instancia == null){
-            instancia = new Mapa();
+            instancia = new MapaView();
         }
         return instancia;
     }
