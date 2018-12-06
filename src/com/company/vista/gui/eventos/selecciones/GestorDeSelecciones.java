@@ -32,7 +32,6 @@ public class GestorDeSelecciones {
     public static void seleccionarCasilleroDestino(Integer x, Integer y) {
         try {
             accionAEjecutar.llamarAccion(xDelCasilleroDeOrigen, yDelCasilleroDeOrigen, x, y);
-            reiniciarOpciones();
             pasarTurno();
         } catch (NullPointerException npe){
             System.out.println("No se selecciono ningun casillero");
