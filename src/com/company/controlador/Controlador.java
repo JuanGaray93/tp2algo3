@@ -52,10 +52,14 @@ public class Controlador {
         aldeano.construir(plazaCentral,posicionHorizontal,posicionVertical);
     }
 
-    public void atacar(UnidadAtacante unidad, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException {
+    public void atacar(UnidadAtacante unidad, Integer posicionHorizontal, Integer posicionVertical) throws CasilleroNoExistenteException, ArmaDesmontadaException, EnemigoInvalidoException {
         Posicionable enemigo = mapa.conseguirOcupante(posicionHorizontal,posicionVertical);
-        // TODO no puedo atacar a posicionable
-        unidad.atacarA(enemigo);
+        if(enemigo instanceof Unidad){
+            unidad.atacarA((Unidad) enemigo);
+        }
+        if(enemigo instanceof Edificio) {
+            unidad.atacarA((Edificio) enemigo);
+        }
     }
 
     public void crearArmaDeAsedio(Castillo castillo, ArmaAsedio armaAsedio) throws CasilleroNoExistenteException, UnidadErroneaException, CasilleroLlenoException, MapaLlenoException {
