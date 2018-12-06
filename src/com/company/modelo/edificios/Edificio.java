@@ -26,7 +26,6 @@ public abstract class Edificio extends Posicionable {
 
     protected ArrayList<Posicion> posiciones;
     protected EstadoEdificio estado;
-    protected Jugador jugador;
 
     public Edificio(Jugador jugador){
 
