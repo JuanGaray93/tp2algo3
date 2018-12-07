@@ -68,6 +68,6 @@ public class GestorDeSelecciones {
         MapaView.getMapa().actualizarCasilleros();
         //TODO pasarle los datos a la barra lateral! numero de jugador, poblacion, etc.
         JugadorDTO jugadorNuevo = controlador.obtenerJugadorActual();
-        //jugadorNuevo.mostrarInformacion();
+        jugadorNuevo.mostrarInformacion();
     }
 }

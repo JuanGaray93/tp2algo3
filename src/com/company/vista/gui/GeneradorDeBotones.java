@@ -1,6 +1,7 @@
 package com.company.vista.gui;
 
 import com.company.DTO.Accion;
+import com.company.DTO.JugadorDTO;
 import com.company.vista.gui.eventos.CambiarTurnoHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -15,13 +16,14 @@ import java.util.ArrayList;
 public class GeneradorDeBotones {
 
     private static GeneradorDeBotones instancia;
-    private VBox controles = new VBox();
-
     private ContenedorPrincipal contenedorPrincipal;
+    private VBox controlesIzquierdos = new VBox();
+    private VBox informacionDerecha = new VBox();
+
 
     private GeneradorDeBotones(){
-        controles.setSpacing(10);
-        controles.setPadding(new Insets(15));
+        controlesIzquierdos.setSpacing(10);
+        controlesIzquierdos.setPadding(new Insets(15));
     }
 
     public static GeneradorDeBotones getGenerador() {
@@ -33,7 +35,8 @@ public class GeneradorDeBotones {
 
     public void establecerContenedor(ContenedorPrincipal contenedorPrincipal) {
         this.contenedorPrincipal = contenedorPrincipal;
-        contenedorPrincipal.setLeft(controles);
+        contenedorPrincipal.setLeft(controlesIzquierdos);
+        contenedorPrincipal.setRight(informacionDerecha);
     }
 
     private Label getLabel(){
@@ -45,12 +48,12 @@ public class GeneradorDeBotones {
     }
 
     public void generarBotones(ArrayList<Accion> acciones) {
-        controles.getChildren().clear();
+        controlesIzquierdos.getChildren().clear();
         generarBotonPasarTurno();
-        controles.getChildren().add(getLabel());
+        controlesIzquierdos.getChildren().add(getLabel());
         for(Accion accion :acciones){
             Button boton = generarBoton(accion);
-            controles.getChildren().add(boton);
+            controlesIzquierdos.getChildren().add(boton);
         }
     }
 
@@ -64,14 +67,31 @@ public class GeneradorDeBotones {
     }
 
     public void limpiarBotonera(){
-        controles.getChildren().clear();
-        contenedorPrincipal.setLeft(controles);
+        controlesIzquierdos.getChildren().clear();
+        contenedorPrincipal.setLeft(controlesIzquierdos);
         generarBotonPasarTurno();
     }
 
     public void generarBotonPasarTurno(){
         Button botonCambiarTurno = new Button("~ ~ Pasar este turno ~ ~");
         botonCambiarTurno.setOnAction(new CambiarTurnoHandler());
-        controles.getChildren().add(botonCambiarTurno);
+        controlesIzquierdos.getChildren().add(botonCambiarTurno);
+    }
+
+    private Label conseguirLabelInfoJugador(String info){
+        Label etiqueta = new Label();
+        etiqueta.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
+        etiqueta.setText(info);
+        etiqueta.setTextFill(Color.web("#66A7C5"));
+        return etiqueta;
+    }
+
+    public void mostrarInformacion(JugadorDTO jugador){
+        informacionDerecha.getChildren().clear();
+        Label numero = conseguirLabelInfoJugador("Turno del jugador " + jugador.getNumeroDeJugador());
+        Label poblacion = conseguirLabelInfoJugador("Poblacion: " + jugador.getPoblacionCorriente() + "/" + jugador.getPoblacionMaxima());
+        Label oro = conseguirLabelInfoJugador("Oro: " + jugador.getOro());
+        informacionDerecha.getChildren().addAll(numero, poblacion, oro);
+
     }
 }
