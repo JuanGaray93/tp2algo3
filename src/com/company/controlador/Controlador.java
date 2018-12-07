@@ -92,6 +92,7 @@ public class Controlador {
 
     public void pasarTurno(){
         partida.pasarTurno();
+        obtenerJugadorActual().mostrarInformacion();
     }
 
     public JugadorDTO obtenerJugadorActual(){

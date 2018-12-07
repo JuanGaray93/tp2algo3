@@ -2,14 +2,13 @@ package com.company.vista.gui.eventos.selecciones;
 
 import com.company.DTO.Accion;
 import com.company.DTO.EntidadDTO;
-import com.company.DTO.JugadorDTO;
 import com.company.controlador.Controlador;
 import com.company.excepciones.ArmaDesmontadaException;
 import com.company.excepciones.ArmaMontadaException;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioNoDisponibleException;
-import com.company.modelo.terreno.Mapa;
 import com.company.vista.gui.GeneradorDeBotones;
+import com.company.vista.gui.eventos.ejecutadores.Movedor;
 import com.company.vista.terreno.MapaView;
 import javafx.scene.control.Alert;
 
@@ -18,7 +17,7 @@ public class GestorDeSelecciones {
     private static Controlador controlador = Controlador.getControlador();
     private static Integer xDelCasilleroDeOrigen;
     private static Integer yDelCasilleroDeOrigen;
-    private static Accion accionAEjecutar;
+    private static Accion accionAEjecutar = null;
     private static GeneradorDeBotones generadorDeBotones = GeneradorDeBotones.getGenerador();
 
     public static void seleccionarCasilleroOrigen(Integer x, Integer y){
@@ -31,6 +30,7 @@ public class GestorDeSelecciones {
         }
         xDelCasilleroDeOrigen = x;
         yDelCasilleroDeOrigen = y;
+        accionAEjecutar = new Accion("", new Movedor());
     }
 
     public static void seleccionarAccion(Accion accion){
@@ -63,11 +63,7 @@ public class GestorDeSelecciones {
     }
 
     public static void pasarTurno() {
-        controlador.pasarTurno();
         reiniciarOpciones();
         MapaView.getMapa().actualizarCasilleros();
-        //TODO pasarle los datos a la barra lateral! numero de jugador, poblacion, etc.
-        JugadorDTO jugadorNuevo = controlador.obtenerJugadorActual();
-        jugadorNuevo.mostrarInformacion();
     }
 }

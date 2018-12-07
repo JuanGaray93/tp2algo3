@@ -7,6 +7,7 @@ import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.excepciones.Edificio.EdificioNoDisponibleException;
 import com.company.modelo.terreno.Mapa;
 import com.company.modelo.unidades.Unidad;
+import com.company.vista.gui.eventos.selecciones.GestorDeSelecciones;
 
 public class Movedor implements Ejecutador {
     @Override
@@ -15,5 +16,6 @@ public class Movedor implements Ejecutador {
         Mapa mapa = Mapa.getMapa();
         Unidad unidad = (Unidad) mapa.conseguirOcupante(xOrigen,yOrigen);
         controlador.mover(unidad, xDestino, yDestino);
+        controlador.pasarTurno();
     }
 }

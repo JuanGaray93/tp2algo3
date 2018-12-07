@@ -27,9 +27,6 @@ public class Partida {
         Controlador controlador = Controlador.getControlador();
         controlador.setPartida(this);
     }
-    public void correr() {
-        pasarTurno();
-    }
 
     public void pasarTurno(){
         turno.pasar();

@@ -20,12 +20,6 @@ public class Main extends Application {
 
         Partida partida = new Partida();
 
-        try {
-            partida.correr();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         GeneradorDeBotones generadorDeBotones =  GeneradorDeBotones.getGenerador();
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(primaryStage);
         generadorDeBotones.establecerContenedor(contenedorPrincipal);

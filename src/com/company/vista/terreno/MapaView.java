@@ -18,6 +18,7 @@ public class MapaView extends GridPane {
         this.actualizarCasilleros();
         this.setHgap(dimensionCasillero / 20);
         this.setVgap(dimensionCasillero / 20);
+        controlador.obtenerJugadorActual().mostrarInformacion();
     }
 
     public void actualizarCasilleros(){
