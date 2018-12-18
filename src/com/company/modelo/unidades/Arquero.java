@@ -16,4 +16,13 @@ public class Arquero extends UnidadAtacante {
         this.danioAUnidad = 15;
     }
 
+    @Override
+    public Integer getVidaMaxima() {
+        return VIDA_MAXIMA;
+    }
+
+    @Override
+    public void actualizar() {
+        //no se actualiza
+    }
 }

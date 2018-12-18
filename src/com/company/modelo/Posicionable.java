@@ -1,10 +1,7 @@
 package com.company.modelo;
 
-import com.company.excepciones.CasilleroLlenoException;
-import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.*;
 import com.company.excepciones.Edificio.EdificioEnConstruccionException;
-import com.company.excepciones.EdificioDestruidoExcepcion;
-import com.company.excepciones.UnidadMuertaException;
 
 public abstract class Posicionable {
 
@@ -19,8 +16,12 @@ public abstract class Posicionable {
 
     public abstract Integer getVida() throws Exception;
 
+    public abstract Integer getVidaMaxima();
+
     public Jugador getJugador(){
         return jugador;
     }
+
+    public abstract void actualizar() throws CastilloDestruidoExcecption;
 }
 

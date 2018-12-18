@@ -97,7 +97,6 @@ public class Jugador {
         return poblacion.contains(unidad);
     }
 
-
     public ArrayList<Edificio> getEdificios() {
         return edificios;
     }
@@ -106,24 +105,13 @@ public class Jugador {
         return poblacion;
     }
 
-    public void ejecutarAcciones(){
-        // TODO
+    public void ejecutarAcciones() throws CastilloDestruidoExcecption {
         ArrayList<Posicionable> posicionables = new ArrayList<>();
         posicionables.addAll(poblacion);
         posicionables.addAll(edificios);
-        for(Posicionable posicionable : posicionables){
 
-            if(posicionable instanceof Aldeano){
-                Aldeano aldeano;
-                aldeano = ( Aldeano ) posicionable ;
-                aldeano.actualizar();
-            } else if(posicionable instanceof Castillo){
-                Castillo castillo;
-                castillo = ( Castillo ) posicionable ;
-                castillo.actualizar();
-            }
+        for(Posicionable posicionable : posicionables)  posicionable.actualizar();
 
-        }
     }
 
     public void crearEntidadesIniciales() throws CasilleroNoExistenteException, CasilleroLlenoException {

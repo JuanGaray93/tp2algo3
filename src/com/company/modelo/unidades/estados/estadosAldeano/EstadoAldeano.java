@@ -26,16 +26,17 @@ public abstract class EstadoAldeano extends EstadoUnidad {
     }
 
     public EstadoAldeano recibirDanio(Integer montoDeDanio) throws Exception, EdificioEnConstruccionException {
+        this.vidaActual -= montoDeDanio;
 
-        if (montoDeDanio >= vidaActual) {
+        if (this.vidaActual <= 0) {
             vidaActual = 0;
             edificioATrabajar.suspender();
 
             edificioATrabajar = null;
+            throw new UnidadMuertaException("El aldeano murio");
 
         }
 
-        this.vidaActual -= montoDeDanio;
         return this;
     }
 

@@ -1,6 +1,7 @@
 package com.company.modelo.edificios;
 
 import com.company.excepciones.*;
+import com.company.excepciones.Edificio.EdificioEnConstruccionException;
 import com.company.modelo.Ataque;
 import com.company.modelo.Jugador;
 import com.company.modelo.Posicionable;
@@ -43,7 +44,6 @@ public class Castillo extends Edificio {
         }
 
         posiciones.get(1).colocarEnCasilleroLibreMasCercano(unidad);
-
         jugador.cobrar(this.COSTO);
         jugador.agregarAPoblacion(unidad);
     }
@@ -58,11 +58,32 @@ public class Castillo extends Edificio {
         ataque.atacarATodos(unDanio);
     }
 
-    public void actualizar(){
+    @Override
+    public Integer getVidaMaxima() {
+        return VIDA_MAXIMA;
+    }
+
+    @Override
+    public void actualizar() throws CastilloDestruidoExcecption {
         try {
-            this.atacar(20); //a todos les saca la misma vida
-        } catch (EnemigoInvalidoException e) {
+            if( estado.getVidaActual() <= 0 ) throw new CastilloDestruidoExcecption();
+            try {
+                this.atacar(20); //a todos les saca la misma vida
+            } catch (EnemigoInvalidoException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void recibirDanio(Integer unDanio)
+            throws EdificioEnConstruccionException {
+        try {
+            estado = estado.recibirDanio(unDanio);
+        }catch(EdificioDestruidoExcepcion e){
+            return;
         }
     }
 

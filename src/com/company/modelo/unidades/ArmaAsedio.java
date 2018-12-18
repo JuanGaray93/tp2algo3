@@ -25,7 +25,12 @@ public class ArmaAsedio extends UnidadAtacante {
 
 	}
 
-    @Override
+	@Override
+	public Integer getVidaMaxima() {
+		return VIDA_MAXIMA;
+	}
+
+	@Override
 	public void atacarA(Unidad enemigo) throws EnemigoInvalidoException {
 			throw new EnemigoInvalidoException("El arma asedio no puede atacar unidades");
 	}
@@ -39,7 +44,12 @@ public class ArmaAsedio extends UnidadAtacante {
 	public void ubicar(Integer posicionHorizontal, Integer posicionVertical) {
 
 	}
-	
+
+	@Override
+	public void actualizar() {
+		//no se actualiza
+	}
+
 	//toma 1 turno montar/desmontar, si esta montada puede atacar pero no moverse.
 	
 	public void montar() throws ArmaMontadaException {

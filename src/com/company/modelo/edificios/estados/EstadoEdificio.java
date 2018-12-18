@@ -63,8 +63,7 @@ public abstract class EstadoEdificio {
 
     public abstract EstadoEdificio suspender() throws Exception, EdificioEnConstruccionException;
 
-    public Integer getVidaActual() throws Exception{
-
+    public Integer getVidaActual() throws Exception {
             return vidaActual;
 
     }

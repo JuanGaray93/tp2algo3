@@ -31,6 +31,11 @@ public class Aldeano extends Unidad {
     }
 
     @Override
+    public Integer getVidaMaxima() {
+        return vida_Maxima;
+    }
+
+    @Override
     public void moverA(Integer posicionHorizontal, Integer posicionVertical)
             throws CasilleroNoExistenteException,
             CasilleroLlenoException, MovimientoInvalidoException {
@@ -56,7 +61,6 @@ public class Aldeano extends Unidad {
 
         }
     }
-
 
     public void construir(Edificio edificio, Integer x, Integer y)
             throws Exception, EdificioEnConstruccionException {

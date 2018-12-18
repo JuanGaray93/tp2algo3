@@ -17,8 +17,7 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
     @Override
     public EstadoEdificio crear(Unidad unidad, Posicion posicion)
             throws EdificioEnConstruccionException {
-        throw new EdificioEnConstruccionException("No es posible crear unidades " +
-                "                                    edificio construyendose");
+        throw new EdificioEnConstruccionException("No es posible crear unidades, edificio construyendose");
     }
 
     @Override
@@ -29,8 +28,8 @@ public class EstadoEdificioEnConstruccion extends EstadoEdificio {
     }
 
     @Override
-    public Integer getVidaActual() {
-        return vidaActual;
+    public Integer getVidaActual() throws Exception {
+        throw new Exception("Este edificio aun no existe");
     }
 
     @Override

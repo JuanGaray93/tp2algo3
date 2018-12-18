@@ -48,16 +48,26 @@ public class Cuartel extends Edificio {
             throws EdificioNoDisponibleException, UnidadErroneaException,
             CasilleroNoExistenteException, CasilleroLlenoException, MapaLlenoException {
 
-		if( !(estado instanceof EstadoEdificioInactivo) )
+		if( !(estado instanceof EstadoEdificioInactivo) ) {
 		    throw new EdificioNoDisponibleException("El edificio no esta disponible");
+        }
 
-		if( !( unidad instanceof Espadachin) && !( unidad instanceof Arquero) ) {
+		if( !( unidad instanceof Espadachin) && !( unidad instanceof Arquero) )
 			throw new UnidadErroneaException("Imposible crear ese tipo de unidad");
-		}
+
 
 		posiciones.get(0).colocarEnCasilleroLibreMasCercano(unidad);
         jugador.cobrar(unidad.getCosto());
 		jugador.agregarAPoblacion(unidad);
 	}
 
+    @Override
+    public Integer getVidaMaxima() {
+        return VIDA_MAXIMA;
+    }
+
+    @Override
+    public void actualizar() {
+        //no se actualiza
+    }
 }

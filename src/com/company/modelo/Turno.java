@@ -1,5 +1,7 @@
 package com.company.modelo;
 
+import com.company.excepciones.CastilloDestruidoExcecption;
+
 import java.util.ArrayList;
 
 public class Turno {
@@ -17,7 +19,7 @@ public class Turno {
 		jugadores.add(nuevoJugador);
 	}
 
-	public void pasar(){
+	public void pasar() throws CastilloDestruidoExcecption {
 
 		turnoActual = (turnoActual + 1) % jugadores.size();
 		jugadores.get(turnoActual).ejecutarAcciones();

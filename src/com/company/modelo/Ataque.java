@@ -30,8 +30,7 @@ public class Ataque {
             unEnemigo.recibirDanio(unDanio);
             return;
 
-        } catch (Exception | EdificioEnConstruccionException
-                | EdificioDestruidoExcepcion ignored) {
+        } catch (Exception | EdificioDestruidoExcepcion | EdificioEnConstruccionException ignored) {
         }
     }
 
@@ -49,8 +48,7 @@ public class Ataque {
 
             try{
                 unEnemigo.recibirDanio(unDanio);
-            } catch (Exception | EdificioEnConstruccionException
-                    | EdificioDestruidoExcepcion ignored) {
+            } catch (Exception | EdificioDestruidoExcepcion | EdificioEnConstruccionException ignored) {
             }
 
         }

@@ -3,6 +3,7 @@ package com.company.modelo;
 import com.company.controlador.Controlador;
 import com.company.excepciones.CasilleroLlenoException;
 import com.company.excepciones.CasilleroNoExistenteException;
+import com.company.excepciones.CastilloDestruidoExcecption;
 import com.company.modelo.terreno.Mapa;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Partida {
         controlador.setPartida(this);
     }
 
-    public void pasarTurno(){
+    public void pasarTurno() throws CastilloDestruidoExcecption {
         turno.pasar();
     }
 

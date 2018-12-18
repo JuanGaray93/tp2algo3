@@ -12,13 +12,9 @@ public class EstadoArmaAsedioMontada extends EstadoArmaAsedio {
 
     public EstadoArmaAsedioMontada(ArmaAsedio armaAsedio,Integer vidaActual) {
         super(armaAsedio,vidaActual);
-
-
-
     }
 
     public EstadoArmaAsedioDesmontada desmontar() {
-
         return new EstadoArmaAsedioDesmontada(maquinaAsedio,vidaActual);
     }
 
