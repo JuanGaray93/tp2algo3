@@ -90,7 +90,7 @@ public class Controlador {
         this.partida = nuevaPartida;
     }
 
-    public void pasarTurno(){
+    public void pasarTurno() throws CastilloDestruidoExcecption {
         partida.pasarTurno();
         obtenerJugadorActual().mostrarInformacion();
     }
