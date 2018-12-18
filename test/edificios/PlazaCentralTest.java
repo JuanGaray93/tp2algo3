@@ -54,7 +54,7 @@ public class PlazaCentralTest {
 
         try {
             central.crear(new Aldeano(jugador));
-        } catch (MapaLlenoException | EdificioEnConstruccionException | EdificioEnReparacionException | EdificioNoDisponibleException | UnidadErroneaException ignored) {
+        } catch (MapaLlenoException | EdificioNoDisponibleException | UnidadErroneaException ignored) {
         }
 
         assertTrue(mapa.estaOcupado(16, 21));
@@ -124,7 +124,7 @@ public class PlazaCentralTest {
 
         try {
             central.crear(new Aldeano(jugador));
-        } catch (EdificioEnReparacionException | EdificioNoDisponibleException ignored) {
+        } catch (EdificioNoDisponibleException ignored) {
         }
 
     }
