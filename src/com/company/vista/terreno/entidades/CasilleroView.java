@@ -31,9 +31,9 @@ public class CasilleroView extends Rectangle {
             setFill(Color.GREEN);
         } else {
             if(entidad.getJugador() == 1){
-                setFill(Color.BLUE);
+                setFill(Color.ORANGE);
             } else {
-                setFill(Color.RED);
+                setFill(Color.SKYBLUE);
             }
             nombre = entidad.getNombre();
         }

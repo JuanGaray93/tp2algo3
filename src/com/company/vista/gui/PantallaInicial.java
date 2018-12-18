@@ -10,10 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 import static javafx.scene.input.KeyCode.ENTER;
 
@@ -36,7 +40,7 @@ public class PantallaInicial extends VBox {
         etiqueta.setFont(Font.font("Arial Black", FontWeight.BOLD, 50));
 
         etiqueta.setText("ALGO EMPIRES");
-        etiqueta.setTextFill(Color.rgb(150, 100, 20));
+        etiqueta.setTextFill(Color.rgb(95, 2, 31)); // anterior 150, 100, 20
 
 
         Button botonEntrar = new Button();
@@ -56,18 +60,29 @@ public class PantallaInicial extends VBox {
         OpcionSalirEventHandler botonSalirHandler = new OpcionSalirEventHandler();
         botonSalir.setOnAction(botonSalirHandler);
 
-        try{
-            Image inicio= new Image(getClass().getResourceAsStream("AlgoEmpires.jpg"));
+        String imagen = "AlgoEmpires.jpg";
+        Image imagenInicio = new Image(new File(imagen).toURI().toString());
+        BackgroundSize backgroundSize = new BackgroundSize(50, 50, true, true, true, false);
+        BackgroundImage fondoImPantallaInicial = new BackgroundImage(imagenInicio, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background fondoPantallaInicial = new Background(fondoImPantallaInicial);
+        this.setBackground(fondoPantallaInicial);
+        /*try{
+            Image inicio = new Image(getClass().getResourceAsStream("AlgoEmpires.jpg"));
             BackgroundSize backgroundSize = new BackgroundSize(50, 50, true, true, true, false);
             BackgroundImage fondoImPantallaInicial = new BackgroundImage(inicio, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
             Background fondoPantallaInicial = new Background(fondoImPantallaInicial);
             this.setBackground(fondoPantallaInicial);
         } catch (Exception e){
             this.setBackground(new Background(new BackgroundFill(Color.BROWN, new CornerRadii(2), null)));
-        }
+        }*/
 
+        String archivoDeMusica = "ThemeSong.mp3";
+        Media archivo = new Media(new File(archivoDeMusica).toURI().toString());
+        MediaPlayer reproductorInicial = new MediaPlayer(archivo);
+        reproductorInicial.setAutoPlay(true);
+        reproductorInicial.setCycleCount(MediaPlayer.INDEFINITE);
 
-        BotonEntrarEventHandler botonEntrarHandler = new BotonEntrarEventHandler(stage, proximaEscena/*,mediaPlayer,mediaPlayerBatalla*/);
+        BotonEntrarEventHandler botonEntrarHandler = new BotonEntrarEventHandler(stage, proximaEscena, reproductorInicial);
         botonEntrar.setOnAction(botonEntrarHandler);
 
 

@@ -2,6 +2,9 @@ package com.company.vista.gui;
 
 import com.company.DTO.Accion;
 import com.company.DTO.JugadorDTO;
+import com.company.modelo.edificios.Edificio;
+import com.company.modelo.unidades.ArmaAsedio;
+import com.company.modelo.unidades.Unidad;
 import com.company.vista.gui.eventos.CambiarTurnoHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -86,12 +89,44 @@ public class GeneradorDeBotones {
         return etiqueta;
     }
 
+    private void mostrarInformacionDePoblacion(JugadorDTO jugador){
+
+        for( Unidad unaUnidad : jugador.getPoblacion() ){
+            Integer vidaMaxima = unaUnidad.getVidaMaxima();
+            Integer vidaActual = unaUnidad.getVida();
+            String nombreUnidad = unaUnidad.getClass().getSimpleName();
+            String formato = String.format("%s: %d/%d", nombreUnidad, vidaActual, vidaMaxima);
+            Label unidad = conseguirLabelInfoJugador(formato);
+            informacionDerecha.getChildren().add(unidad);
+        }
+
+    }
+
+    private void mostrarInformacionDeEdificios(JugadorDTO jugador) {
+
+        for( Edificio unEdificio : jugador.getEdificios() ){
+            Integer vidaMaxima = unEdificio.getVidaMaxima();
+            Integer vidaActual = 0;
+            try {
+                vidaActual = unEdificio.getVida();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String nombreEdificio = unEdificio.getClass().getSimpleName();
+            String formato = String.format("%s: %d/%d", nombreEdificio, vidaActual, vidaMaxima);
+            Label edificio = conseguirLabelInfoJugador(formato);
+            informacionDerecha.getChildren().add(edificio);
+        }
+
+    }
+
     public void mostrarInformacion(JugadorDTO jugador){
         informacionDerecha.getChildren().clear();
         Label numero = conseguirLabelInfoJugador("Turno del jugador " + jugador.getNumeroDeJugador());
         Label poblacion = conseguirLabelInfoJugador("Poblacion: " + jugador.getPoblacionCorriente() + "/" + jugador.getPoblacionMaxima());
         Label oro = conseguirLabelInfoJugador("Oro: " + jugador.getOro());
         informacionDerecha.getChildren().addAll(numero, poblacion, oro);
-
+        mostrarInformacionDePoblacion(jugador);
+        mostrarInformacionDeEdificios(jugador);
     }
 }
